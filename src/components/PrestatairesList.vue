@@ -53,20 +53,44 @@ export default{
 }
 .prestataires-cards{
     width: auto;
-    display: block;
 }
 .prestataires-card{
-    display: inline;
+    display: inline-block;
     width: 25%;
-    height: 100px;
-    margin-left: 4%;
-    margin-right: 4%;
-    border: 2px solid black;
+    height: 250px;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: darkblue;
 }
-.prestataires-card img{
-    display: block;
+.prestataires-photo{
     width: 100%;
-    max-width: fit-content;
+    height: 100px;
+    position: relative;
+    
+}
+.prestataires-photo img{
+    max-width: 100%;
+    height: 100px;
+}
+.prestataires-description{
+    width: 100%;
+    height: 150px;
+    position: relative;
+}
+.prestataires-tag{
+    display: inline-block;
+    padding: 1px;
+    width: auto;
+    height: 20px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: darkblue;
+    background-color: lightslategrey;
+    color: white;
+    margin-left: 1px;
+    margin-right: 1px;
 }
 .prestataires-chips{
     display: block;
