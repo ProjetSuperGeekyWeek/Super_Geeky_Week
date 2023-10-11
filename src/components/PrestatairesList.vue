@@ -5,7 +5,7 @@
             <div class="prestataires-cards">
                 <div class="prestataires-card" v-for="prestataire in prestataires" :key="prestataire.id">
                     <div class="prestataires-photo">
-                        <img src="../assets/logo.png" alt="">
+                        <img src="../assets/main_logo.png" alt="">
                     </div>
                     <div class="prestataires-description">
                         <div class="prestataires-tag" v-for="tag in prestataire.tags" :key="tag.libelle">
@@ -63,6 +63,7 @@ export default{
     border-radius: 10px;
     border-style: solid;
     border-color: darkblue;
+    background-color: rgb(132, 13, 243);
 }
 .prestataires-photo{
     width: 100%;
