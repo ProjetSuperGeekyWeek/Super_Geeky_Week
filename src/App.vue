@@ -2,8 +2,9 @@
   <div id="app">
     <span id="nav-filler"></span>
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Acceuil</router-link>
+      <router-link to="/billets">Billets</router-link>
+      <router-link to="/services">Services</router-link>
     </nav>
     <router-view/>
   </div>
@@ -28,17 +29,29 @@
   height: 30px;
 }
 nav {
-  padding: 30px;
   background-color: rgb(112, 16, 156);
   position: fixed;
   top: 0px;
   z-index: 100;
   width: 100%;
+  display: flex;
 }
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #42f316;
+  text-decoration: none;
+  width: 20%;
+  height: 30px;
+  text-align: center;
+  padding-top: 15px;
+  border-right: #baee00 3px solid;
+}
+
+nav a:hover {
+  color: #baee00;
+  background-color: #2c3e50;
+  transition: 0.3s;
 }
 
 nav a.router-link-exact-active {
