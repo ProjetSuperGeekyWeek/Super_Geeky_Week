@@ -62,7 +62,7 @@ export default {
 }
 #nav-filler {
   display: block;
-  height: 50px;
+  height: 75px;
 }
 nav {
   background-color: rgb(112, 16, 156);
