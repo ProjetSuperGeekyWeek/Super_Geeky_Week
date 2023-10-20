@@ -1,5 +1,21 @@
 <template>
     <div class="billet">
-        <h1>This is the billet shop</h1>
+        <Forfait/>
     </div>
 </template>
+
+<script>
+import Forfait from '@/components/ForfaitView.vue'
+export default {
+        name: 'BilletsView',
+        components: {
+          Forfait
+        }
+    }
+</script>
+
+<style scoped>
+.billet{
+    padding-top: 50px; /*pour ne pas cacher le titre par la barre de navigation a modif plus tard*/
+}
+</style>
