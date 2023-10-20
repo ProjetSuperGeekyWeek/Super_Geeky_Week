@@ -9,7 +9,7 @@
           <img src="../src/assets/images_drapeaux_langues/drapeau_france.png" alt="fr" v-show="francais">
           <img src="../src/assets/images_drapeaux_langues/drapeau_angleterre.png" alt="en" v-show="!francais">
         </button>
-        <div class="authentification droite">
+        <div class="authentification-nav droite">
           <router-link to="/authentification"><img src="../src/assets/image_authentification.png" alt="authent"></router-link>
         </div>
     </nav>
@@ -107,7 +107,7 @@ nav a, nav div {
   text-align: right;
 }
 
-.authentification img{
+.authentification-nav img{
   width: 75px;
   height: 75px;
   filter: drop-shadow(0px 0px 5px #baee00);
@@ -119,7 +119,7 @@ nav .gauche:hover {
   transition: 0.3s;
 }
 
-.authentification:hover {
+.authentification-nav:hover {
   filter: drop-shadow(0px 0px 10px #fa3636);
 }
 
@@ -127,7 +127,7 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 
-.authentification a.router-link-exact-active {
+.authentification-nav a.router-link-exact-active {
   filter: drop-shadow(0px 0px 10px #99e96a);
 }
 </style>
