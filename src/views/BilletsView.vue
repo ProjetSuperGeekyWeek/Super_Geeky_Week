@@ -16,6 +16,6 @@ export default {
 
 <style scoped>
 .billet{
-    padding-top: 50px; /*pour ne pas cacher le titre par la barre de navigation a modif plus tard*/
+  border: 1px purple solid;
 }
 </style>
