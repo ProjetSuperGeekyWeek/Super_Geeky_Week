@@ -4,6 +4,7 @@
         <input type="email" name="email" id="email" required @change="verifEmail">
         <label for="password">Mot de passe</label>
         <input type="password" name="password" id="password" required @change="verifPassword">
+        <span id="incorrectPassword"></span>
         <button id="valide-authentification" @click="submitForm">Soumettre</button>
     </div>
 </template>
@@ -54,9 +55,11 @@ export default {
             if(regexPassword.test(password)) {
                 this.correctPassword = true;
                 this.colorVert(document.getElementById('password'));
+                this.clearMdpIncorrect();
             } else {
                 this.correctPassword = false;
                 this.colorRouge(document.getElementById('password'));
+                this.mdpIncorrect();
             }
         },
         colorRouge(element){
@@ -64,6 +67,12 @@ export default {
         },
         colorVert(element){
             element.style.backgroundColor = 'lightgreen';
+        },
+        mdpIncorrect() {
+            document.getElementById('incorrectPassword').innerHTML = 'Mot de passe incorrect ! Votre mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial';
+        },
+        clearMdpIncorrect() {
+            document.getElementById('incorrectPassword').innerHTML = '';
         }
     }
 }
@@ -74,11 +83,48 @@ export default {
     width: 50%;
     height: 100%;
     margin-left: 25%;
-    display: flex;
 }
 
-.formulaire-authentification label {
+label {
     display: block;
+    margin-top: 10px;
+}
+
+input {
+    width: 90%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+
+input:focus {
+    filter: drop-shadow(0 0 0.2rem purple);
+}
+
+/* select input there are not focus only when one other input is focus */
+input:not(:focus) {
+    filter: blur(0.07rem);
+}
+
+
+#incorrectPassword {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+button {
+    width: 30%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    background-color: rgb(238, 103, 250);
+    cursor: pointer;
+    border-color: rgb(238, 103, 250);
+    color: rgb(88, 3, 88);
 }
 
 </style>
