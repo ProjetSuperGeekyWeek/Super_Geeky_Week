@@ -6,7 +6,9 @@
     -->
     <div class="authentification">
         <div class="cadre-authentification">
-            <img id="image-authentification" src="" alt="Image authentification">
+            <div class="cadre-image">
+                <img id="image-authentification" src="../assets/image_connexion.jpg" alt="Image authentification">
+            </div>
             <FormulaireAuthentification/>
         </div>
     </div>
@@ -54,10 +56,11 @@
     filter: drop-shadow(0 0 10rem palevioletred);
 }
 
-.image-authentification {
-    height: 50%;
-    width: 50%;
-    margin-top: 10vh;
+#image-authentification {
+    border-radius: 10px 10px 0 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 </style>
