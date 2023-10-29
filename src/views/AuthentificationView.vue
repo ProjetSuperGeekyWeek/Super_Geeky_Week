@@ -5,7 +5,7 @@
         quand authentifié, redirection vers page d'accueil
     -->
     <div class="authentification">
-        <div class="cadre-authentification">
+        <div class="cadre-authentification" v-show="!authentifier">
             <div class="cadre-image">
                 <img id="image-authentification" src="../assets/image_connexion.jpg" alt="Image authentification">
             </div>
@@ -19,6 +19,13 @@
 
     export default {
         name: 'AuthentificationView',
+        data() {
+            return {
+                email: '',
+                password: '',
+                authentifier: false
+            }
+        },
         components: {
             FormulaireAuthentification
         },
@@ -49,11 +56,18 @@
 .cadre-authentification {
     background-color: mediumpurple;
     border-radius: 10px;
-    height: 50vh;
+    height: 70vh;
     width: 50vw;
     margin: auto;
     border: 2px solid palevioletred;
     filter: drop-shadow(0 0 10rem palevioletred);
+}
+
+.cadre-image {
+    border-radius: 10px 10px 0 0;
+    height: 70%;
+    width: 100%;
+    overflow: hidden;
 }
 
 #image-authentification {
