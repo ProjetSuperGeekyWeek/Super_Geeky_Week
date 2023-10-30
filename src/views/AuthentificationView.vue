@@ -15,30 +15,23 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     import FormulaireAuthentification from '@/components/FormulaireAuthentification.vue';
 
     export default {
         name: 'AuthentificationView',
         data() {
             return {
-                email: '',
-                password: '',
-                authentifier: false
             }
         },
         components: {
             FormulaireAuthentification
         },
         methods: {
-            authentification() {
-                this.email = FormulaireAuthentification.email;
-                this.password = FormulaireAuthentification.password;
-            }
+            
         },
         computed: {
-            function : () => {
-                this.authentification();
-            }
+            ...mapState(['authentifier', 'admin'])
         }
     }
 </script>

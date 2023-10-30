@@ -10,33 +10,60 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
     name: 'FormulaireAuthentification',
     data() {
         return {
-            email: '',
-            password: '',
             correctEmail: false,
-            correctPassword: false
+            correctPassword: false,
         }
     },
     methods: {
+        authentification(email, password) {
+            this.$store.commit('setAuthentifier', this.enregistrer(email, password));
+            if(this.authentifier) {
+                this.$store.commit('setAdmin', this.verifAdmin(email, password));
+                if(this.admin) {
+                    // this.$router.push('/admin');
+                    this.$router.push('/services');
+                } else {
+                    this.$router.push('/');
+                }
+            }
+            else{
+                this.clearMdp();
+                this.$store.commit('setAuthentifier', false);
+                alert('Email ou mot de passe incorrect');
+            }
+        },
+        enregistrer(email, password) {
+            let authentifier = false;
+            if((email === 'user@gmail.com' && password === 'User1234&') || (email === 'admin@gmail.com' && password === 'Admin1234&'))
+                authentifier = true;
+            return authentifier;
+        },
+        verifAdmin(email, password) {
+            let admin = false;
+            if(email === 'admin@gmail.com' && password === 'Admin1234&')
+                admin = true;
+            return admin;
+        },
         submitForm() {
             if(this.correctEmail && this.correctPassword){
-                let emailForm = document.getElementById('email').nodeValue;
+                let emailForm = document.getElementById('email').value;
                 let passwordForm = document.getElementById('password').value;
-                this.setEmail(emailForm);
-                this.setPassword(passwordForm);
+                this.authentification(emailForm, passwordForm);
             }
             else {
+                this.clearMdp();
+                this.$store.commit('setAuthentifier', false);
                 alert('Veuillez remplir correctement les champs');
             }
         },
-        setEmail(email) {
-            this.email = email;
-        },
-        setPassword(password) {
-            this.password = password;
+        clearMdp() {
+            document.getElementById('password').value = '';
         },
         verifEmail() {
             let email = document.getElementById('email').value;
@@ -74,6 +101,9 @@ export default {
         clearMdpIncorrect() {
             document.getElementById('incorrectPassword').innerHTML = '';
         }
+    },
+    computed: {
+        ...mapState(['authentifier', 'admin']),
     }
 }
 </script>
