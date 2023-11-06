@@ -2,7 +2,7 @@
   <div id="app">
     <span id="nav-filler"></span>
     <nav>
-        <router-link to="/" class="gauche"><h2>Accueuil</h2></router-link>
+        <router-link to="/" class="gauche"><h2>Accueil</h2></router-link>
         <router-link to="/billets" class="gauche"><h2>Billets</h2></router-link>
         <router-link to="/services" class="gauche"><h2>Services</h2></router-link>
         <button id="box-langue" @click="changeLangue()">
@@ -75,14 +75,14 @@ nav {
 
 nav a, nav div {
   font-weight: bold;
-  color: #42f316;
+  color: #50f3f3;
   text-decoration: none;
   height: 50px;
   text-align: center;
 }
 
 .gauche{
-  border-right: #baee00 5px solid;
+  border-right: #50f3f3 5px solid;
   width: 20%;
   padding-top: 25px;
 }
@@ -110,24 +110,24 @@ nav a, nav div {
 .authentification-nav img{
   width: 75px;
   height: 75px;
-  filter: drop-shadow(0px 0px 5px #baee00);
+  filter: drop-shadow(0px 0px 5px #1e65cf);
 }
 
 nav .gauche:hover {
-  color: #baee00;
-  background-color: #2c3e50;
+  color: #50f3f3;
+  background-color: #2c4c50;
   transition: 0.3s;
 }
 
 .authentification-nav:hover {
-  filter: drop-shadow(0px 0px 10px #fa3636);
+  filter: drop-shadow(0px 0px 10px #36d3fa);
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #47e2e7;
 }
 
 .authentification-nav a.router-link-exact-active {
-  filter: drop-shadow(0px 0px 10px #99e96a);
+  filter: drop-shadow(0px 0px 10px #7affed);
 }
 </style>

@@ -149,7 +149,7 @@ button {
     width: 30%;
     height: 30px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid;
     margin-bottom: 10px;
     background-color: rgb(238, 103, 250);
     cursor: pointer;
