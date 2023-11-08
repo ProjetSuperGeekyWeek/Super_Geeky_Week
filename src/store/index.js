@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     authentifier: false,
-    admin: false
+    admin: false,
+    nom: 'Invité ',
   },
   getters: {
   },
