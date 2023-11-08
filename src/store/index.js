@@ -12,6 +12,7 @@ export default new Vuex.Store({
     lang: 'fr',
     en: en.data(),
     fr: fr.data(),
+    nom: 'Invité',
   },
   getters: {
   },
