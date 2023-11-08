@@ -2,13 +2,17 @@
   <div id="app">
     <span id="nav-filler"></span>
     <nav>
-        <router-link to="/" class="gauche"><h2>Accueil</h2></router-link>
-        <router-link to="/billets" class="gauche"><h2>Billets</h2></router-link>
-        <router-link to="/services" class="gauche"><h2>Services</h2></router-link>
-        <button id="box-langue" @click="changeLangue()">
+        <router-link to="/" class="gauche"><h2>{{ translate('nav_home') }}</h2></router-link>
+        <router-link to="/billets" class="gauche"><h2>{{ translate('nav_ticket') }}</h2></router-link>
+        <router-link to="/services" class="gauche"><h2>{{ translate('nav_service') }}</h2></router-link>
+        <button id="box-langue">
           <img src="../src/assets/images_drapeaux_langues/drapeau_france.png" alt="fr" v-show="francais">
           <img src="../src/assets/images_drapeaux_langues/drapeau_angleterre.png" alt="en" v-show="!francais">
         </button>
+        <select name="lang" v-model="langue" @change="langSet">
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+        </select>
         <div class="authentification-nav droite">
           <router-link to="/authentification"><img src="../src/assets/image_authentification.png" alt="authent"></router-link>
         </div>
@@ -19,29 +23,33 @@
 
 
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: 'App',
   data () {
     return {
       francais: true,
+      langue: 'fr',
     }
   },
   methods: {
-    changeLangue(){
-      this.changeImageLangue();
-      this.changeTexteLangue();
-    },
     changeImageLangue(){
       this.francais = !this.francais;
     },
-    changeTexteLangue(){
-      //TODO
-      if(this.francais){
-        //changer les textes en anglais
-      }else{
-        //changer les textes en francais
+    langSet(){
+      console.log("1");
+      if(this.langue !== this.lang){
+        this.changeImageLangue();
       }
-    }
+      this.$store.commit('setLang', this.langue);
+    },
+    translate(prop){
+      return this[this.lang][this.lang][prop];
+    },
+  },
+  computed: {
+    ...mapState(['lang','en','fr']),
   }
 }
 </script>
