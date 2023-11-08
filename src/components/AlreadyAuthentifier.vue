@@ -1,5 +1,5 @@
 <template>
-    <div id="formulaire-authentification">
+    <div id="authentifier">
         <h4 id="nom-authentifier">Bienvenue {{ nom }}</h4><br>
         <h5>Vous êtes déjà connecté</h5>
         <div>
