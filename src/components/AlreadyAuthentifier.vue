@@ -10,11 +10,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
     name: 'AlreadyAuthentifier',
     data() {
         return {
-            nom : 'Invité',
         }
     },
     methods: {
@@ -22,6 +22,9 @@ export default {
             this.$store.commit('setAuthentifier', false);
             this.$store.commit('setAdmin', false);
         },
+    },
+    computed: {
+        ...mapState(['admin', 'nom']),
     },
 }
 </script>
