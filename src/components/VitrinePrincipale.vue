@@ -2,20 +2,24 @@
     <div class="vitrine-principale">
         <img src="../assets/main_banniere.jpg" alt="Image principale">
         <div id="titre-box">
-            <h1>{{ titre }}</h1>
+            <h1>{{ translate('title') }}</h1>
         </div>
     </div>
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
-    name: 'VitrinePrincipale',
-    props: {
-        titre: {
-            type: String,
-            default: 'Super Geeky Week'
-        }
-    }
+  name: 'VitrinePrincipale',
+  methods:{
+    translate(prop){
+      return this[this.lang][this.lang][prop];
+    },
+  },
+  computed: {
+    ...mapState(['lang','en','fr']),
+  }
 }
 </script>
 
