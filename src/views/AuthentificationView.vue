@@ -5,11 +5,14 @@
         quand authentifié, redirection vers page d'accueil
     -->
     <div class="authentification">
-        <div class="cadre-authentification" v-show="!authentifier">
+        <div class="cadre-authentification" v-if="!authentifier">
             <div class="cadre-image">
                 <img id="image-authentification" src="../assets/image_connexion.jpg" alt="Image authentification">
             </div>
             <FormulaireAuthentification/>
+        </div>
+        <div v-if="authentifier">
+            <AlreadyAuthentifier/>
         </div>
     </div>
 </template>
@@ -17,6 +20,7 @@
 <script>
     import { mapState } from 'vuex';
     import FormulaireAuthentification from '@/components/FormulaireAuthentification.vue';
+    import AlreadyAuthentifier from '@/components/AlreadyAuthentifier.vue';
 
     export default {
         name: 'AuthentificationView',
@@ -25,7 +29,8 @@
             }
         },
         components: {
-            FormulaireAuthentification
+            FormulaireAuthentification,
+            AlreadyAuthentifier
         },
         methods: {
             
