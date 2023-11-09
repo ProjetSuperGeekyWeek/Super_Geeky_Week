@@ -1,5 +1,12 @@
 <template>
-    <p>Hello World</p>
+    <div id="page-paiement">
+        <div id="facture">
+
+        </div>
+        <div id="formulaire-paiement">
+
+        </div>
+    </div>
 </template>
 
 <script>
@@ -20,6 +27,9 @@ export default {
         listeQuantite : Array,
     },
     methods: {
+        generationCommandeTotal(){
+            
+        }
     },
     computed: {
         ...mapState(['nom']),
