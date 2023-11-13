@@ -27,6 +27,11 @@ const routes = [
     path: '/authentification',
     name: 'authentification',
     component: () => import('../views/AuthentificationView.vue')
+  },
+  {
+    path: '/paiement',
+    name: 'paiement',
+    component: () => import('../views/PaiementView.vue')
   }
 ]
 
