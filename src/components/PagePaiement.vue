@@ -15,7 +15,7 @@
             </div>
             <div id="total-facture">
                 <span>Total : </span>
-                <!-- <span>{{ prixTotal }}</span> -->
+                <span>{{ prixTotal }}</span>
             </div>
         </div>
         <div id="formulaire-paiement">
@@ -102,10 +102,10 @@ export default {
     computed: {
         ...mapState(['nom']),
 
-        prixTotal : function () {
-            let total = 0;
-            for (var i = 0; i < listeCart.length; i++) {
-                total += listeCart[i].prix * listeCart[i].quantite;
+        prixTotal : function(){
+            var total = 0;
+            for (let i = 0; i < this.listeCart.length; i++) {
+                total += this.listeCart[i].prix * this.listeCart[i].quantite;
             }
             return total;
         },
