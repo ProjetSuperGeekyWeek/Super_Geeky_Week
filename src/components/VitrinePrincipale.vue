@@ -36,17 +36,18 @@ img {
     transform: translate(-50%, -50%);
     width: 40%;
     height: 25%;
-    background-color: rgba(100, 11, 173);
-    border-radius: 10px;
+    background-color: rgba(247, 85, 186, 0.89);
+    border-radius: 5px;
     border-style: solid;
-    border-color: darkblue;
+    border-color: #312bbd;
+    opacity: 75%;
 }
 h1 {
     position: relative;
     padding: 0;
     margin: 0;
-    text-shadow: 0px 0px 8px #37e9cb;
-    color: #dd31dd;
+    text-shadow: 0px 0px 8px #6a95f1;
+    color: #312bbd;
     font-size: 4rem;
     font-family: 'Roboto', sans-serif;
     text-transform: uppercase;
