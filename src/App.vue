@@ -73,24 +73,25 @@ export default {
   height: 75px;
 }
 nav {
-  background-color: rgb(112, 16, 156);
+  background-color: rgba(60, 42, 185, 0.86);
   position: fixed;
   top: 0px;
   z-index: 100;
   width: 100%;
   display: flex;
+  opacity: 85%;
 }
 
 nav a, nav div {
   font-weight: bold;
-  color: #50f3f3;
+  color: #65d8eb;
   text-decoration: none;
   height: 50px;
   text-align: center;
 }
 
 .gauche{
-  border-right: #50f3f3 5px solid;
+  border-right: #65d8eb 5px solid;
   width: 20%;
   padding-top: 25px;
 }
@@ -118,24 +119,24 @@ nav a, nav div {
 .authentification-nav img{
   width: 75px;
   height: 75px;
-  filter: drop-shadow(0px 0px 5px #1e65cf);
+  filter: drop-shadow(0px 0px 5px #3782c0);
 }
 
 nav .gauche:hover {
-  color: #50f3f3;
-  background-color: #2c4c50;
+  color: #312bbd;
+  background-color: #608ecc;
   transition: 0.3s;
 }
 
 .authentification-nav:hover {
-  filter: drop-shadow(0px 0px 10px #36d3fa);
+  filter: drop-shadow(0px 0px 10px rgb(101, 216, 235));
 }
 
 nav a.router-link-exact-active {
-  color: #47e2e7;
+  color: #83fffb;
 }
 
 .authentification-nav a.router-link-exact-active {
-  filter: drop-shadow(0px 0px 10px #7affed);
+  filter: drop-shadow(0px 0px 10px #65d8eb);
 }
 </style>
