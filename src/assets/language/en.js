@@ -5,7 +5,7 @@ export default {
                 nav_home: "Home",
                 nav_ticket: "Ticket",
                 nav_service: "Service",
-                title: "traduit anglais",
+                title: "Super Geeky Week",
             },
         };
     },
