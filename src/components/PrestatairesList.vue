@@ -1,6 +1,5 @@
 <template>
   <div class="prestataires">
-    <h1>Prestataires</h1>
     <div id="filtrePresta">
       <button @click="toggleDivs" class="filtreBtn">Filtre</button>
       <div v-show="showDivs">
@@ -106,7 +105,7 @@ export default {
 <style scoped>
 .prestataires {
   text-align: center;
-  background-color: #ff46ec;
+  background-color: darkblue;
   padding: 20px;
 }
 
@@ -183,7 +182,8 @@ export default {
 .prestataires-photo img {
   width: 100%;
   height: 150px;
-  object-fit: cover;
+  object-fit:cover;
+  border-radius: 8px 8px 0 0
 }
 
 .prestataires-description {
