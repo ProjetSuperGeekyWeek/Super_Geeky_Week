@@ -71,6 +71,7 @@ export default {
 #nav-filler {
   display: block;
   height: 75px;
+  background-color: #2c3e50;
 }
 nav {
   background-color: rgba(60, 42, 185, 0.86);
