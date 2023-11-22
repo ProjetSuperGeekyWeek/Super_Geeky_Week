@@ -5,9 +5,9 @@
         <router-link to="/"><img src="../assets/image/logo/logo.png" alt="" class="logoGrand"></router-link>
       </div>
       <div class="nav_gauche_bas">
-        <a href="#"><img src="../assets/image/logo/facebook.png" alt="" class="logo"></a>
-        <a href="#"><img src="../assets/image/logo/instagram.png" alt="" class="logo"></a>
-        <a href="#" ><img src="../assets/image/logo/twitter.png" alt="" class="logo"></a>
+        <a href="#"><img src="../assets/image/logo/facebook.png" alt="facebook" class="logo"></a>
+        <a href="#"><img src="../assets/image/logo/instagram.png" alt="insta" class="logo"></a>
+        <a href="#" ><img src="../assets/image/logo/twitter.png" alt="X" class="logo"></a>
       </div>
     </div>
     <div class="nav_droite">
@@ -22,6 +22,9 @@
           <option value="fr">Français</option>
           <option value="en">English</option>
         </select>
+        <div>
+          <router-link to="/panier"><img src="../assets/image/logo/panier.png" alt="panier" class="logo"></router-link>
+        </div>
         <div class="logo_auth">
           <router-link to="/authentification"><img src="../assets/image/image_authentification.png" alt="authent" class="logo2_auth"></router-link>
         </div>
@@ -108,7 +111,7 @@ hr{
 }
 
 .logo2_auth{
-  width: 100%;
+  width: 80%;
 }
 
 .logoGrand{
