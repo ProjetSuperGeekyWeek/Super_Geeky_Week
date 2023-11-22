@@ -105,8 +105,9 @@ export default {
 <style scoped>
 .prestataires {
   text-align: center;
-  background-color: darkblue;
+  background-color: black;
   padding: 20px;
+  border-radius: 20px 0 0 20px;
 }
 
 .filtreBtn {
