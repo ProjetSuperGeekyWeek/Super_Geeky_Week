@@ -26,18 +26,19 @@
             </div>
             <div id="card-inscription-formulaire" v-show="inscription">
                 <h2>{{ titre }}</h2>
-                <select name="seance" id="seance">
+                <select name="seance" id="seance" v-model="inscritSeance">
                     <option v-for="horaire in horaires" :key="horaire" :value="horaire.jour">
                         {{ horaire.jour }} {{ horaire.heureDebut }}-{{ horaire.heureFin }}
                     </option>
                 </select>
                 <div id="card-inscription-formulaire-infos">
-                    <input type="text" name="nom" id="nom" placeholder="nom">
-                    <input type="text" name="prenom" id="prenom" placeholder="prenom">
+                    <input type="text" name="nom" id="nom" placeholder="nom" v-model="inscritNom">
+                    <input type="text" name="prenom" id="prenom" placeholder="prenom" v-model="inscritPrenom">
                 </div>
+                <textarea name="description" id="description" cols="30" rows="10" placeholder="description" v-model="inscritDescription"></textarea>
                 <div id="card-inscription-formulaire-btn">
-                    <button @click="inscription = !inscription">Retour</button>
-                    <button>Valider</button>
+                    <button id="btn-retour" @click="inscription = !inscription">Retour</button>
+                    <button id="btn-valider">Valider</button>
                 </div>
             </div>
         </div>
@@ -72,6 +73,10 @@ export default {
             image : "https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg",
             alreadyInscrit : false,
             inscription : false,
+            inscritNom : '',
+            inscritPrenom : '',
+            inscritSeance : '',
+            inscritDescription : ''
         }
     },
     methods: {
@@ -171,7 +176,7 @@ export default {
     margin-bottom: 1rem;
 }
 
-#card-inscription-tarif button, #card-inscription-formulaire-btn button {
+#card-inscription-tarif button{
     font-size: 1rem;
     padding: 0.5rem 1rem;
     border: 2px solid #000;
@@ -180,14 +185,116 @@ export default {
     cursor: pointer;
 }
 
-#card-inscription-tarif button:hover, #card-inscription-formulaire-btn button:hover {
+#card-inscription-tarif button:hover{
     background-color: #000;
     color: #fff;
 }
 
+#card-inscription-infos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#card-inscription-infos h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+#card-inscription-formulaire-infos {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+#card-inscription-formulaire-infos input {
+    width: 45%;
+    height: 2rem;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+#card-inscription-formulaire-infos input:focus {
+    outline: none;
+}
+
+#card-inscription-formulaire-infos input:hover {
+    border-color: darkblue;
+}
+
+#card-inscription-formulaire-infos input:focus {
+    border : 3px solid darkblue;
+}
+
+#card-inscription-formulaire textarea {
+    width: 100%;
+    max-width: max-content;
+    height: 5rem;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    resize: none;
+}
+
+#card-inscription-formulaire textarea:focus {
+    outline: none;
+    border: 3px solid darkblue;
+}
+
+#card-inscription-formulaire textarea:hover {
+    border-color: darkblue;
+}
+
+#card-inscription-formulaire-btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+#card-inscription-formulaire-btn button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#btn-retour {
+    border: 2px solid #f84646;
+    background-color: lightsalmon;
+}
+
+#btn-retour:hover {
+    background-color: #f84646;
+    color: #fff;
+}
+
+#btn-valider {
+    border: 2px solid rgb(38, 180, 38);
+    background-color: lightgreen;
+}
+
+#btn-valider:hover {
+    background-color: rgb(38, 180, 38);
+    color: #fff;
+}
+
 #seance{
-    border: 1px solid black;
-    background-color: aquamarine;
+    width: 100%;
+    max-width: min-content;
+    height: 3rem;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+#seance:focus {
+    outline: none;
 }
 
 </style>
