@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     langSet() {
-      console.log("1");
+      console.log(this.langue);
       this.$store.commit('setLang', this.langue);
     },
     translate(prop) {
@@ -59,7 +59,7 @@ export default {
 }
 window.addEventListener("scroll", function(){
   let header = document.querySelector("nav");
-  header.classList.toggle("sticky", window.scrollY > 0);
+  header.classList.toggle("sticky", window.scrollY > 30);
 });
 </script>
 
@@ -89,6 +89,7 @@ nav{
   width: 100%;
   transition: var(--transition);
   transform: translate(0, 0%);
+  height: 25%;
 
 }
 
