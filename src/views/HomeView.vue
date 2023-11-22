@@ -22,7 +22,7 @@
       </div>
       <div class="home-droite">
         <h2>
-          Au programme de nombreuses activitées diverses et variées tel que des spectacles sur scène,
+          Un programme qui plaira à tous les fans de l'univers geek. Au rendez-vous des spectacles sur scène,
           des rencontres avec des invités iconiques, des tournois de jeux vidéos et cosplays et bien d'autres !
           Tu pourras également te restaurer directement sur place via des foodtrucks et des stands de nourriture.
           Il y aura même de nombreux stands de goodies pour ramener chez toi un souvenir de ce Week-end inoubliable !

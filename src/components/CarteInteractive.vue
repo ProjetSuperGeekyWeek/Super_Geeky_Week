@@ -1,9 +1,8 @@
 <template>
     <div id="carte">
-        <button @click="colorEachPathDifferentColor()"></button>
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="100%" viewBox="0 0 1080 1080" enable-background="new 0 0 1080 1080" xml:space="preserve">
-<path id="fond-principal" fill="#E2E2E2" opacity="1.000000" stroke="none" 
+	width="100%" viewBox="0 0 1080 1080" enable-background="new 0 0 1080 1080" xml:space="preserve">
+<path id="fond-principal" class="fond" fill="#E2E2E2" opacity="1.000000" stroke="none" 
 	d="
 M1.000000,382.000000 
 	C1.000000,255.069809 1.000000,128.139618 1.000000,1.000000 
@@ -421,7 +420,7 @@ M266.869202,854.896912
 	C48.717560,854.988770 96.435120,854.977539 145.086365,854.981567 
 	C186.303101,854.963501 226.586151,854.930237 266.869202,854.896912 
 z"/>
-<path id="fond-entree" fill="#E2E2E2" opacity="1.000000" stroke="none" 
+<path id="fond-entree" class="fond" fill="#E2E2E2" opacity="1.000000" stroke="none" 
 	d="
 M306.858795,924.830383 
 	C306.904388,965.260376 306.952606,1005.690369 306.993866,1046.120361 
@@ -435,7 +434,7 @@ M306.858795,924.830383
 	C183.830811,925.000000 216.129608,925.019836 248.428375,924.992676 
 	C267.905212,924.976257 287.381989,924.886902 306.858795,924.830383 
 z"/>
-<path id="fond-auxiliaires" fill="#E2E2E2" opacity="1.000000" stroke="none" 
+<path id="fond-auxiliaires" class="fond" fill="#E2E2E2" opacity="1.000000" stroke="none" 
 	d="
 M1081.000000,354.531342 
 	C1027.101685,354.999298 973.203186,354.931122 919.305481,355.109711 
@@ -1017,7 +1016,7 @@ M697.039734,630.000000
 	C696.350952,584.834045 697.130615,586.261353 697.096191,589.567810 
 	C696.957764,602.877258 697.039368,616.189087 697.039734,630.000000 
 z"/>
-<path id="exterieur-2" fill="#FEFEFE" opacity="1.000000" stroke="none" 
+<path id="exterieur-2" class="exterieur" fill="#FEFEFE" opacity="1.000000" stroke="none" 
 	d="
 M912.947693,194.376923 
 	C911.576416,194.867218 910.227356,194.902634 908.476440,194.885132 
@@ -1035,7 +1034,7 @@ M306.885864,924.375977
 	C198.905121,857.273865 252.524429,857.273865 306.912933,857.273865 
 	C306.912933,879.752441 306.912933,901.836975 306.885864,924.375977 
 z"/>
-</svg>
+        </svg>
     </div>
 </template>
 
@@ -1063,5 +1062,18 @@ export default {
     width: 100%;
     height: 100%;
     overflow: hidden;
+}
+svg path{
+    stroke: black;
+    transition: fill 0.3s ease;
+}
+svg path:hover{
+    fill: #0e45ac;
+}
+.exterieur:hover{
+    fill: #FEFEFE;
+}
+.fond:hover{
+    fill: #E2E2E2;
 }
 </style>
