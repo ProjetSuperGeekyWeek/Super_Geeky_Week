@@ -34,5 +34,14 @@ export default {
 </script>
 
 <style>
-
+:root{
+  --paragraph: #991e2e;/**/
+  --bg: #e2e2e2;/*9d1f2d*/
+  --title: #f2202f;
+  --bg-button: #ff8906;
+  --bg-button2: #e53170;
+  --secondary: #f25f4c;
+  --transition: 0.5s;
+  --bg2: #f1f1f2;/*f44d48*/
+}
 </style>

@@ -105,7 +105,7 @@ export default {
 <style scoped>
 .prestataires {
   text-align: center;
-  background-color: black;
+  background-color: var(--bg);
   padding: 20px;
   border-radius: 20px 0 0 20px;
 }
