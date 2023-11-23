@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <VitrinePrincipale/>
+    <!--<VitrinePrincipale/>
 
     <h1 id="accroche">
       {{ translate('accroche') }}
@@ -20,6 +20,28 @@
         <PrestatairesList/>
       </div>
       <div class="home-droite">
+        <h2>{{ translate('home_text_2') }}</h2>
+      </div>
+    </div>-->
+    <VitrinePrincipale/>
+    <h1 id="accroche">
+      {{ translate('accroche') }}
+    </h1>
+
+    <div class="section">
+      <div class="text_home">
+        <h2>{{ translate('home_text_1') }}</h2>
+      </div>
+      <div class="carte">
+        <CarteInteractive/>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="prestataire">
+        <PrestatairesList/>
+      </div>
+      <div class="text_home">
         <h2>{{ translate('home_text_2') }}</h2>
       </div>
     </div>
@@ -60,9 +82,13 @@ export default {
   text-decoration: none;
 }
 .home{
+  //border: 1px solid red;
   background-color: var(--bg2);
-  /* background-color: #312bbd; */
   padding-bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 #accroche{
 //border: 1px solid red;
@@ -72,49 +98,44 @@ export default {
   margin-top: 2%;
   margin-bottom: 2%;
 }
-#section-carte{
-//border: 1px solid yellow;
+.section{
+  //border: 1px solid green;
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-bottom: 5%;
-}
-#section-prestataires{
-//border: 1px solid green;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-bottom: 5%;
-}
-
-.home-gauche2, .home-gauche{
-//border: 1px solid blue;
-  width: 40%;
-  border-radius: 20px 0 0 20px;
-}
-
-.home-gauche{
-  display: flex;
-  align-items: center;
+  width: 95%;
+  gap: 5%;
   background-color: var(--bg);
+  border-radius: 20px;
 }
 
-.home-droite{
-//border: 1px solid purple;
-  width: 50%;
-  display: flex;
-  align-items: center;
-  background-color: var(--bg);
-  padding-left: 10%;
-  border-radius: 0 20px 20px 0;
-}
 h2{
   text-align: center;
   color: var(--paragraph);
-  width: 90%;
 }
 
-.home-gauche  h2{
-  margin-left:5%;
+.text_home{
+  //border: 1px solid red;
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carte{
+  //border: 1px solid blue;
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prestataire{
+  //border: 1px solid green;
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
