@@ -39,7 +39,7 @@ export default {
   components: {
     VitrinePrincipale,
     PrestatairesList,
-    CarteInteractive
+    CarteInteractive,
   },
   methods: {
     translate(prop) {
