@@ -1062,24 +1062,6 @@ export default {
             var valeurTest = ('stand-selected' in classStand);
             alert(valeurTest);
         },
-        resetAllClicked(){
-            var map = document.getElementById('carte');
-            var paths = map.getElementsByTagName('path');
-            for (var i = 0; i < paths.length; i++) {
-                paths[i].setAttribute('class', 'stand');
-            }
-        },
-        verifyNoClick(){
-            var map = document.getElementById('carte');
-            var paths = map.getElementsByTagName('path');
-            var noClicked = true;
-            for (var i = 0; i < paths.length; i++) {
-                if(paths[i].classList.contains('stand-selected')){
-                    noClicked = false;
-                }
-            }
-            return noClicked;
-        },
         addMapListener(){
             var map = document.getElementById('carte');
             var paths = map.getElementsByTagName('path');
