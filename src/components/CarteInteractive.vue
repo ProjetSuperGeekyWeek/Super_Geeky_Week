@@ -1062,6 +1062,24 @@ export default {
             var valeurTest = ('stand-selected' in classStand);
             alert(valeurTest);
         },
+        resetAllClicked(){
+            var map = document.getElementById('carte');
+            var paths = map.getElementsByTagName('path');
+            for (var i = 0; i < paths.length; i++) {
+                paths[i].setAttribute('class', 'stand');
+            }
+        },
+        verifyNoClick(){
+            var map = document.getElementById('carte');
+            var paths = map.getElementsByTagName('path');
+            var noClicked = true;
+            for (var i = 0; i < paths.length; i++) {
+                if(paths[i].classList.contains('stand-selected')){
+                    noClicked = false;
+                }
+            }
+            return noClicked;
+        },
         addMapListener(){
             var map = document.getElementById('carte');
             var paths = map.getElementsByTagName('path');
@@ -1069,7 +1087,18 @@ export default {
             for (var i = 0; i < paths.length; i++) {
                 paths[i].addEventListener('mouseenter', function(){
                     var stand = this;
-                    if(stand.classList.contains('stand')){
+                    function verifyNoClicked() {
+                        var map = document.getElementById('carte');
+                        var paths = map.getElementsByTagName('path');
+                        var noClicked = true;
+                        for (var i = 0; i < paths.length; i++) {
+                            if(paths[i].classList.contains('stand-selected')){
+                                noClicked = false;
+                            }
+                        }
+                        return noClicked;
+                    }
+                    if(stand.classList.contains('stand') && verifyNoClicked()){
                         stand.setAttribute('class', 'stand stand-hover');
                     }
                 });
@@ -1077,6 +1106,29 @@ export default {
                     var stand = this;
                     if(stand.classList.contains('stand-hover')){
                         stand.setAttribute('class', 'stand');
+                    }
+                });
+                paths[i].addEventListener('click', function(){
+                    var stand = this;
+                    function resetAllClicked(){
+                        var map = document.getElementById('carte');
+                        var paths = map.getElementsByTagName('path');
+                        for (var i = 0; i < paths.length; i++) {
+                            if(paths[i].classList.contains('stand-selected')){
+                                paths[i].setAttribute('class', 'stand');
+                            }
+                        }
+                    }
+                    if(stand.classList.contains('stand-selected') && stand.classList.contains('stand')){
+                        setTimeout(function(){
+                            stand.setAttribute('class', 'stand stand-hover');
+                        }, 100);
+                    }
+                    else if(stand.classList.contains('stand')){
+                        resetAllClicked();
+                        setTimeout(function(){
+                            stand.setAttribute('class', 'stand stand-selected');
+                        }, 100);
                     }
                 });
             }
