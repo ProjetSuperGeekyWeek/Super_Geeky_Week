@@ -12,7 +12,7 @@
     </div>
     <div class="nav_droite">
       <div class="nav_droite_haut">
-        <h1 id="accroche">{{ translate('accroche') }}</h1>
+        <h1 id="accroche">{{ translate('title') }}</h1>
       </div>
       <hr>
       <div class="nav_droite_bas">
@@ -59,20 +59,11 @@ export default {
 }
 window.addEventListener("scroll", function(){
   let header = document.querySelector("nav");
-  header.classList.toggle("sticky", window.scrollY > 30);
+  header.classList.toggle("sticky", window.scrollY > 0);// ou 30
 });
 </script>
 
 <style>
-:root{
-  --paragraph: #a7a9be;
-  --bg: #0f0e17;
-  --title: #fffffe;
-  --bg-button: #ff8906;
-  --bg-button2: #e53170;
-  --secondary: #f25f4c;
-  --transition: 0.5s
-}
 *{
   margin: 0;
   padding: 0;
@@ -83,7 +74,7 @@ nav{
 //border: 1px solid grey;
   display: flex;
   justify-content: space-between;
-  background-color: rgb(5.9,5.5,9,0.80);
+  background-color: rgba(255, 255, 255, 0.6);
   position: fixed;
   z-index: 100000;
   width: 100%;
@@ -95,7 +86,7 @@ nav{
 
 hr{
   width: 80%;
-  border: 1px solid var(--secondary);
+  border: 1px solid var(--paragraph);
   margin-left: 10%
 }
 
@@ -184,11 +175,6 @@ hr{
   width: 100%;
 }
 
-#accroche:hover{
-  color: var(--secondary);
-  filter: drop-shadow(0px 0px 10px var(--secondary));
-}
-
 .test{
   border: 1px solid red;
 }
@@ -202,23 +188,23 @@ hr{
 }
 
 .nav_titre, .deco_select{
-  color: var(--title);
+  color: var(--paragraph);
   text-decoration: none;
   background-color: transparent;
   border-radius: 5px;
   font-size: 1.5em;
   padding: 0.3em;
-  filter: drop-shadow(0px 0px 20px var(--title));
+  filter: drop-shadow(0px 0px 20px var(--paragraph));
 
 }
 
 .nav_titre:hover, .deco_select:hover{
-  background-color: var(--secondary);
+  background-color: var(--title);
   transition: 0.3s;
-  border: 2px solid var(--secondary);
+  border: 2px solid var(--title);
   color: var(--bg);
   cursor: pointer;
-  filter: drop-shadow(0px 0px 20px var(--secondary));
+  filter: drop-shadow(0px 0px 20px var(--title));
 }
 
 

@@ -53,17 +53,6 @@ export default {
 </script>
 
 <style>
-:root{
-  --paragraph: #a7a9be;
-  --bg: #0f0e17;
-  --title: #fffffe;
-  --bg-button: #ff8906;
-  --bg-button2: #e53170;
-  --secondary: #f25f4c;
-  --transition: 0.5s;
-  --bg2: #04042EFF;
-}
-
 *{
   margin: 0;
   padding: 0;
@@ -107,7 +96,7 @@ export default {
 .home-gauche{
   display: flex;
   align-items: center;
-  background-color: black;
+  background-color: var(--bg);
 }
 
 .home-droite{
@@ -115,13 +104,13 @@ export default {
   width: 50%;
   display: flex;
   align-items: center;
-  background-color: black;
+  background-color: var(--bg);
   padding-left: 10%;
   border-radius: 0 20px 20px 0;
 }
 h2{
   text-align: center;
-  color: aliceblue;
+  color: var(--paragraph);
   width: 90%;
 }
 

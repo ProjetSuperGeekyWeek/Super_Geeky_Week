@@ -1,9 +1,6 @@
 <template>
     <div class="vitrine-principale">
-        <img src="../assets/main_banniere.jpg" alt="Image principale">
-        <div id="titre-box">
-            <h1>{{ translate('title') }}</h1>
-        </div>
+        <img src="../assets/image/fond_ecran/bg_home.png" alt="Image principale">
     </div>
 </template>
 
@@ -27,7 +24,6 @@ export default {
 <style scoped>
 img {
     width: 100%;
-    filter: blur(2px);
 }
 #titre-box {
     position: absolute;
