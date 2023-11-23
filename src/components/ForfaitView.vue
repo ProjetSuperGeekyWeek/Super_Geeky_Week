@@ -40,6 +40,7 @@ export default {
 }
 
 .forfait{
+  padding-top: 12%;
   background-color: #9049bf;
   color: #6cbad9;
 }

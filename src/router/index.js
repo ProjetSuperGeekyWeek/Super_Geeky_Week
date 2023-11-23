@@ -37,6 +37,11 @@ const routes = [
     path: '/inscriptions',
     name: 'inscriptions',
     component: () => import('../views/InscriptionsView.vue')
+  },
+  {
+    path: '/panier',
+    name: 'panier',
+    component: () => import('../views/PanierView.vue')
   }
 ]
 

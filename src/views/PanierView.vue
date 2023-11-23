@@ -1,17 +1,18 @@
 <template>
-    <div class="billet">
-        <Forfait/>
-    </div>
+  <div class="panier">
+    <h1>Panier</h1>
+  </div>
 </template>
 
 <script>
-import Forfait from '@/components/ForfaitView.vue'
 export default {
-        name: 'BilletsView',
-        components: {
-          Forfait
-        }
-    }
+  name: 'PanierView',
+  data() {
+    return {};
+  },
+  components: {
+  }
+}
 </script>
 
 <style>
@@ -24,7 +25,9 @@ export default {
   --secondary: #f25f4c;
   --transition: 0.5s
 }
-.billet{
-  border: 1px var(--bg) solid;
+
+.panier{
+  background-color: var(--bg);
+  color: var(--title);
 }
 </style>
