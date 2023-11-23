@@ -1,5 +1,6 @@
 <template>
     <div id="carte" @mouseover="addMapListener()">
+        <button @click="test()">ici</button>
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	width="100%" viewBox="0 0 1080 1080" enable-background="new 0 0 1080 1080" xml:space="preserve">
 <path id="fond-principal" class="fond" fill="#E2E2E2" opacity="1.000000" stroke="none" 
@@ -1048,29 +1049,34 @@ export default {
         }
     },
     methods: {
+        test(){
+            alert('test');
+            alert('test2');
+            var stand = document.getElementById('stand-1');
+            alert('test3');
+            stand.setAttribute('class', 'stand-selected stand-hover');
+            var classStand = stand.getAttribute('class');
+            classStand = this.separeClassNames(classStand);
+            alert('test4');
+            alert(classStand[0]);
+            var valeurTest = ('stand-selected' in classStand);
+            alert(valeurTest);
+        },
         addMapListener(){
             var map = document.getElementById('carte');
             var paths = map.getElementsByTagName('path');
             
             for (var i = 0; i < paths.length; i++) {
-                paths[i].addEventListener('click', function(e){
-                    var id = this.id;
-                    var stand = document.getElementById(id);
-                    var standClass = stand.getAttribute('class');
-                    if(standClass == 'stand' || standClass == 'stand-hover'){
-                        alert('Vous avez cliqué sur le stand ' + id);
-                        stand.setAttribute('class', 'stand-selected');
-                    }if (standClass == 'stand-selected') {
-                        stand.setAttribute('class', 'stand');
+                paths[i].addEventListener('mouseenter', function(){
+                    var stand = this;
+                    if(stand.classList.contains('stand')){
+                        stand.setAttribute('class', 'stand stand-hover');
                     }
                 });
-                paths[i].addEventListener('mouseover', function(e){
-                    var id = this.id;
-                    var stand = document.getElementById(id);
-                    var standClass = stand.getAttribute('class');
-                    if(standClass == 'stand'){
-                        alert('Vous avez survolé le stand ' + id);
-                        stand.setAttribute('class', 'stand-hover');
+                paths[i].addEventListener('mouseleave', function(){
+                    var stand = this;
+                    if(stand.classList.contains('stand-hover')){
+                        stand.setAttribute('class', 'stand');
                     }
                 });
             }
@@ -1089,14 +1095,21 @@ svg path{
     stroke: black;
     transition: fill 0.3s ease;
 }
-svg path:hover{
+/* svg path:hover{
     fill: #0e45ac;
-}
+} */
 .exterieur:hover{
     fill: #FEFEFE;
 }
 .fond:hover{
     fill: #E2E2E2;
+}
+.stand-hover{
+    fill: #ac5a0e;
+}
+.stand-selected{
+    /* fill: #ac0e0e; */
+    stroke: none;
 }
 
 </style>
