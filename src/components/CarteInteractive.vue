@@ -1,5 +1,5 @@
 <template>
-    <div id="carte" @mouseover="addMapListener()">
+    <div id="carte-interactive" @mouseover="addMapListener()">
         <button @click="test()">ici</button>
 		<!-- alt + w -->
         <svg id="carte" data-name="carte" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 756.73 757.44">
@@ -68,17 +68,51 @@ export default {
         }
     },
     methods: {
+		styleInfoBulle(infoBulle){
+			infoBulle.style.position = "absolute";
+			infoBulle.style.width = "15vh";
+			infoBulle.style.height = "10vh";
+			infoBulle.style.backgroundColor = "blue";
+			infoBulle.style.color = "yellow";
+			infoBulle.style.padding = "0.5rem";
+			infoBulle.style.border = "darkblue 2px solid";
+			infoBulle.style.borderRadius = "10px";
+			infoBulle.style.fontSize = "1.2rem";
+			infoBulle.style.fontWeight = "bold";
+			infoBulle.style.textAlign = "center";
+			infoBulle.style.zIndex = "100";
+		},
+		createInfoBulle(stand){
+			//création
+			var infoBulle = document.createElement("div");
+			infoBulle.setAttribute("class", "info-bulle");
+			infoBulle.setAttribute("id", stand.id + "-infobulle");
+			//style
+			this.styleInfoBulle(infoBulle);
+			//infos
+			infoBulle.innerHTML = stand.id;
+			return infoBulle;
+		},
+		infobulle(stand){
+			var infoBulle = this.createInfoBulle(stand);
+			var carte = document.getElementById("carte-interactive");
+			carte.appendChild(infoBulle);
+			//position
+			var widthBulle = infoBulle.getBoundingClientRect().width;
+			var heightBulle = infoBulle.getBoundingClientRect().height;
+			var widthStand = stand.getBoundingClientRect().width;
+			var ajustementX = (widthStand - widthBulle) / 2;
+			var ajustementY = -(heightBulle + 10);
+			infoBulle.style.top = ((stand.getBoundingClientRect().top + window.pageYOffset) + ajustementY )+ "px";
+			infoBulle.style.left = ((stand.getBoundingClientRect().left + window.pageXOffset) + ajustementX )+ "px";
+		},
         test(){
-			alert("test");
 			var map = document.getElementById("carte");
 			var polygons = map.getElementsByTagName("polygon");
 			var rects = map.getElementsByTagName("rect");
 			var paths = [...polygons, ...rects];
-			alert(paths);
-			all.forEach(element => {
-				element.setAttribute("class", "test-hover");
-			});
-			alert("fin")
+			this.infobulle(paths[1]);
+			paths[1].setAttribute("class", "stand stand-hover");
 		},
 		addMapListener(){
 			var map = document.getElementById("carte");
@@ -141,13 +175,14 @@ export default {
 </script>
 
 <style scoped>
-#carte {
+#carte-interactive {
 	width: 100%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: white;
+	z-index: 1;
 }
 
 #carte svg {
