@@ -2,6 +2,7 @@
     <div id="carte-interactive" @mouseover="addMapListener()">
         <button @click="test()">ici</button>
 		<!-- alt + w -->
+		<InfobulleCarte nom_prestataire="nom" nom_stand="stand" id="infobulle" class="infobulle-hidden"/>
         <svg id="carte" data-name="carte" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 756.73 757.44">
 			<rect id="exterieur" class="exterieur" fill="#ccc" x="631.71" y="248.09" width="125.02" height="349.62"/>
 			<polygon id="fond-principal" class="fond" fill="#b3b3b3" points="0 0 0 597.71 215.5 597.71 631.71 597.71 631.71 248.09 631.71 .07 0 0"/>
@@ -59,60 +60,19 @@
 </template>
 
 <script>
+import InfobulleCarte from '@/components/InfobulleCarte.vue'
 
 export default {
     name: 'CarteInteractive',
-    data() {
-        return{
-
-        }
-    },
+	components: {
+		InfobulleCarte,
+	},
     methods: {
-		styleInfoBulle(infoBulle){
-			infoBulle.style.position = "absolute";
-			infoBulle.style.width = "15vh";
-			infoBulle.style.height = "10vh";
-			infoBulle.style.backgroundColor = "blue";
-			infoBulle.style.color = "yellow";
-			infoBulle.style.padding = "0.5rem";
-			infoBulle.style.border = "darkblue 2px solid";
-			infoBulle.style.borderRadius = "10px";
-			infoBulle.style.fontSize = "1.2rem";
-			infoBulle.style.fontWeight = "bold";
-			infoBulle.style.textAlign = "center";
-			infoBulle.style.zIndex = "100";
-		},
-		createInfoBulle(stand){
-			//création
-			var infoBulle = document.createElement("div");
-			infoBulle.setAttribute("class", "info-bulle");
-			infoBulle.setAttribute("id", stand.id + "-infobulle");
-			//style
-			this.styleInfoBulle(infoBulle);
-			//infos
-			infoBulle.innerHTML = stand.id;
-			return infoBulle;
-		},
-		infobulle(stand){
-			var infoBulle = this.createInfoBulle(stand);
-			var carte = document.getElementById("carte-interactive");
-			carte.appendChild(infoBulle);
-			//position
-			var widthBulle = infoBulle.getBoundingClientRect().width;
-			var heightBulle = infoBulle.getBoundingClientRect().height;
-			var widthStand = stand.getBoundingClientRect().width;
-			var ajustementX = (widthStand - widthBulle) / 2;
-			var ajustementY = -(heightBulle + 10);
-			infoBulle.style.top = ((stand.getBoundingClientRect().top + window.pageYOffset) + ajustementY )+ "px";
-			infoBulle.style.left = ((stand.getBoundingClientRect().left + window.pageXOffset) + ajustementX )+ "px";
-		},
         test(){
 			var map = document.getElementById("carte");
 			var polygons = map.getElementsByTagName("polygon");
 			var rects = map.getElementsByTagName("rect");
 			var paths = [...polygons, ...rects];
-			this.infobulle(paths[1]);
-			paths[1].setAttribute("class", "stand stand-hover");
 		},
 		addMapListener(){
 			var map = document.getElementById("carte");
@@ -135,13 +95,28 @@ export default {
                         }
                         return noClicked;
                     }
+					function infoBulle(stand){
+						var infoBulle = document.getElementById("infobulle");
+						infobulle.setAttribute('class', 'infobulle');
+						//position
+						var widthBulle = infoBulle.getBoundingClientRect().width;
+						var heightBulle = infoBulle.getBoundingClientRect().height;
+						var widthStand = stand.getBoundingClientRect().width;
+						var ajustementX = (widthStand - widthBulle) / 2;
+						var ajustementY = -(heightBulle + 10);
+						infoBulle.style.top = ((stand.getBoundingClientRect().top + window.pageYOffset) + ajustementY )+ "px";
+						infoBulle.style.left = ((stand.getBoundingClientRect().left + window.pageXOffset) + ajustementX )+ "px";
+					}
                     if(stand.classList.contains('stand') && verifyNoClicked()){
                         stand.setAttribute('class', 'stand stand-hover');
+						infoBulle(stand);
                     }
                 });
                 stand.addEventListener('mouseleave', function(){
                     if(stand.classList.contains('stand-hover')){
                         stand.setAttribute('class', 'stand');
+						var infoBulle = document.getElementById("infobulle");
+						infobulle.setAttribute('class', 'infobulle-hidden');
                     }
                 });
                 stand.addEventListener('click', function(){
@@ -201,12 +176,18 @@ svg polygon{
 }
 
 .stand-hover{
-    fill: #ac5a0e;
+    fill: #cc4027;
 }
 .stand-selected{
     /* fill: #ac0e0e; */
     stroke: none;
 }
 
+.infobulle{
+	display: block;
+}
+.infobulle-hidden{
+	display: none;
+}
 
 </style>
