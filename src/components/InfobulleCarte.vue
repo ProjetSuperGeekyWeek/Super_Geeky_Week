@@ -15,19 +15,16 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
     name: 'InfobulleCarte',
-    props: {
-        nom_prestataire: String,
-        nom_stand: String,
-    },
     data() {
         return {
-                
         }
     },
-    methods: {
-
+    computed: {
+        ...mapState(['nom_prestataire', 'nom_stand']),
     },
 }
 </script>

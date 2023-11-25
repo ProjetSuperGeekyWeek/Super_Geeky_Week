@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
 import InfobulleCarte from '@/components/InfobulleCarte.vue'
 
 export default {
@@ -79,6 +80,7 @@ export default {
 			var polygones = map.getElementsByTagName("polygon");
 			var rects = map.getElementsByTagName("rect");
 			var paths = [...polygones, ...rects];
+			var vue = this;
 
 			paths.forEach(stand => {
 				stand.addEventListener('mouseenter', function(){
@@ -95,9 +97,11 @@ export default {
                         }
                         return noClicked;
                     }
-					function infoBulle(stand){
+					function infoBulle(stand, vue){
 						var infoBulle = document.getElementById("infobulle");
 						infobulle.setAttribute('class', 'infobulle');
+						vue.$store.commit('setNomPrestataire', 'nom '+stand.id);
+						vue.$store.commit('setNomStand', stand.id);
 						//position
 						var widthBulle = infoBulle.getBoundingClientRect().width;
 						var heightBulle = infoBulle.getBoundingClientRect().height;
@@ -109,7 +113,7 @@ export default {
 					}
                     if(stand.classList.contains('stand') && verifyNoClicked()){
                         stand.setAttribute('class', 'stand stand-hover');
-						infoBulle(stand);
+						infoBulle(stand, vue);
                     }
                 });
                 stand.addEventListener('mouseleave', function(){
@@ -146,6 +150,9 @@ export default {
 			});
 		}
 	},
+	computed: {
+		...mapState(['nom_prestataire', 'nom_stand'])
+	},
 }
 </script>
 
@@ -176,7 +183,9 @@ svg polygon{
 }
 
 .stand-hover{
-    fill: #cc4027;
+    fill: #fc3816;
+	filter: drop-shadow(0px 0px 30px #fc8873);
+	stroke: none;
 }
 .stand-selected{
     /* fill: #ac0e0e; */

@@ -13,6 +13,8 @@ export default new Vuex.Store({
     en: en.data(),
     fr: fr.data(),
     nom: 'Invité',
+    nom_stand : 'nom stand',
+    nom_prestataire : 'nom prestataire',
   },
   getters: {
   },
@@ -25,6 +27,12 @@ export default new Vuex.Store({
     },
     setLang(state, payload) {
       state.lang = payload
+    },
+    setNomStand(state, payload) {
+      state.nom_stand = payload
+    },
+    setNomPrestataire(state, payload) {
+      state.nom_prestataire = payload
     },
   },
   actions: {
