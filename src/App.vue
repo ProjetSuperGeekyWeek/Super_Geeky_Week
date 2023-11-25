@@ -44,4 +44,21 @@ export default {
   --transition: 0.5s;
   --bg2: #f1f1f2;/*f44d48*/
 }
+
+.gras{
+  font-weight: bold;
+}
+.titre{
+  padding-top: 2%;
+  padding-bottom: 1%;
+}
+.tres_grand{
+  font-size: xxx-large;
+}
+.grand{
+  font-size: x-large;
+}
+.grand_moins{
+  font-size: large;
+}
 </style>

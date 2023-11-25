@@ -1,28 +1,5 @@
 <template>
   <div class="home">
-    <!--<VitrinePrincipale/>
-
-    <h1 id="accroche">
-      {{ translate('accroche') }}
-    </h1>
-
-    <div id="section-carte">
-      <div class="home-gauche">
-        <h2>{{ translate('home_text_1') }}</h2>
-      </div>
-      <div class="home-droite">
-        <CarteInteractive/>
-      </div>
-    </div>
-
-    <div id="section-prestataires">
-      <div class="home-gauche2">
-        <PrestatairesList/>
-      </div>
-      <div class="home-droite">
-        <h2>{{ translate('home_text_2') }}</h2>
-      </div>
-    </div>-->
     <VitrinePrincipale/>
     <h1 id="accroche">
       {{ translate('accroche') }}

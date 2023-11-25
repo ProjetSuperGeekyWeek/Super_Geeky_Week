@@ -10,7 +10,7 @@
           <p>Forfait numéro {{ forfaits.id_forfait }}</p>
           <p>Prix : {{ forfaits.prix }}€</p>
           <p>Prioritaire : {{ forfaits.prioriter }}</p>
-          <input type="button" value="Acheter" class="bouton grand_moins">
+          <router-link to="/panier"><input type="button" value="Acheter" class="bouton grand_moins"></router-link>
         </div>
       </div>
       <hr>
@@ -88,18 +88,7 @@ export default {
 .forfait_card p{
   margin-bottom: 10%;
 }
-.tres_grand{
-  font-size: xxx-large;
-}
-.grand{
-  font-size: xx-large;
-}
-.grand_moins{
-  font-size: large;
-}
-.gras{
-  font-weight: bold;
-}
+
 .titre{
   padding-top: 2%;
   padding-bottom: 1%;
