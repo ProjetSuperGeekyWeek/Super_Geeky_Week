@@ -2,27 +2,29 @@
     <div id="carte-interactive" @mouseover="addMapListener()">
         <button @click="test()">ici</button>
 		<!-- alt + w -->
-		<div id="bandeau-selected">
-			<div id="haut-selected">
-				<router-link id="image-selected" to="/services">
-					<img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" alt="Image du tournoi">
-				</router-link>
-				<h4 id="titre-selected">
-					{{ nom_prestataire }}
-				</h4>
-				<div id="tags-selected">
-					<h6>Tag 1</h6>
-					<h6>Tag 2</h6>
-					<h6>Tag 3</h6>
+		<div style="width: 20%;height: 80%;">
+			<div id="bandeau-selected">
+				<div id="haut-selected">
+					<router-link id="image-selected" to="/services">
+						<img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" alt="Image du tournoi">
+					</router-link>
+					<h4 id="titre-selected">
+						{{ nom_prestataire }}
+					</h4>
+					<div id="tags-selected">
+						<h6>Tag 1</h6>
+						<h6>Tag 2</h6>
+						<h6>Tag 3</h6>
+					</div>
+					<h6 id="description-selected">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis ultricies nisl nisl eget nisl. Sed euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis ultricies nisl nisl eget nisl.
+					</h6>
 				</div>
-				<h6 id="description-selected">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis ultricies nisl nisl eget nisl. Sed euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis ultricies nisl nisl eget nisl.
-				</h6>
-			</div>
-			<div id="bas-selected">
-				<h5 id="stand-selected">
-					{{ nom_stand }}
-				</h5>
+				<div id="bas-selected">
+					<h5 id="stand-selected">
+						{{ nom_stand }}
+					</h5>
+				</div>
 			</div>
 		</div>
         <svg id="carte" data-name="carte" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 756.73 757.44">
@@ -114,7 +116,7 @@ export default {
 		},
 		bandeauSelected(stand){
 			var bandeau = document.getElementById("bandeau-selected");
-			bandeau.style.maxWidth = "20%";
+			bandeau.style.maxWidth = "100%";
 			this.$store.commit('setNomPrestataire', 'nom '+stand.id);
 			this.$store.commit('setNomStand', stand.id);
 		},
@@ -199,7 +201,6 @@ export default {
 	justify-content: center;
 	align-items: center;
 	background-color: white;
-	z-index: 1;
 }
 
 #carte{
