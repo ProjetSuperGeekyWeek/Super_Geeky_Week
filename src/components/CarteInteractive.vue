@@ -2,6 +2,31 @@
     <div id="carte-interactive" @mouseover="addMapListener()">
         <button @click="test()">ici</button>
 		<!-- alt + w -->
+		<div style="width: 20%;height: 80%;">
+			<div id="bandeau-selected">
+				<div id="haut-selected">
+					<router-link id="image-selected" to="/services">
+						<img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" alt="Image du tournoi">
+					</router-link>
+					<h4 id="titre-selected">
+						{{ nom_prestataire }}
+					</h4>
+					<div id="tags-selected">
+						<h6>Tag 1</h6>
+						<h6>Tag 2</h6>
+						<h6>Tag 3</h6>
+					</div>
+					<h6 id="description-selected">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis ultricies nisl nisl eget nisl. Sed euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis ultricies nisl nisl eget nisl.
+					</h6>
+				</div>
+				<div id="bas-selected">
+					<h5 id="stand-selected">
+						{{ nom_stand }}
+					</h5>
+				</div>
+			</div>
+		</div>
         <svg id="carte" data-name="carte" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 756.73 757.44">
 			<rect id="exterieur" class="exterieur" fill="#ccc" x="631.71" y="248.09" width="125.02" height="349.62"/>
 			<polygon id="fond-principal" class="fond" fill="#b3b3b3" points="0 0 0 597.71 215.5 597.71 631.71 597.71 631.71 248.09 631.71 .07 0 0"/>
@@ -55,48 +80,31 @@
 			<rect id="stand-34" class="stand" fill="#666" x="103.66" y="547.93" width="85.26" height="50.22"/>
 			<rect id="accueil" class="stand" fill="#666" x="103.66" y="598.15" width="111.84" height="48.55"/>
 		</svg>
+		<InfobulleCarte nom_prestataire="nom" nom_stand="stand" id="infobulle" class="infobulle-hidden"/>
     </div>
 </template>
 
 <script>
+import {mapState} from "vuex";
+import InfobulleCarte from '@/components/InfobulleCarte.vue'
 
 export default {
     name: 'CarteInteractive',
-    data() {
-        return{
-
-        }
-    },
+	components: {
+    InfobulleCarte,
+},
     methods: {
-		styleInfoBulle(infoBulle){
-			infoBulle.style.position = "absolute";
-			infoBulle.style.width = "15vh";
-			infoBulle.style.height = "10vh";
-			infoBulle.style.backgroundColor = "blue";
-			infoBulle.style.color = "yellow";
-			infoBulle.style.padding = "0.5rem";
-			infoBulle.style.border = "darkblue 2px solid";
-			infoBulle.style.borderRadius = "10px";
-			infoBulle.style.fontSize = "1.2rem";
-			infoBulle.style.fontWeight = "bold";
-			infoBulle.style.textAlign = "center";
-			infoBulle.style.zIndex = "100";
+        test(){
+			var map = document.getElementById("carte");
+			var polygons = map.getElementsByTagName("polygon");
+			var rects = map.getElementsByTagName("rect");
+			var paths = [...polygons, ...rects];
 		},
-		createInfoBulle(stand){
-			//création
-			var infoBulle = document.createElement("div");
-			infoBulle.setAttribute("class", "info-bulle");
-			infoBulle.setAttribute("id", stand.id + "-infobulle");
-			//style
-			this.styleInfoBulle(infoBulle);
-			//infos
-			infoBulle.innerHTML = stand.id;
-			return infoBulle;
-		},
-		infobulle(stand){
-			var infoBulle = this.createInfoBulle(stand);
-			var carte = document.getElementById("carte-interactive");
-			carte.appendChild(infoBulle);
+		infoBulle(stand){
+			var infoBulle = document.getElementById("infobulle");
+			infobulle.setAttribute('class', 'infobulle');
+			this.$store.commit('setNomPrestataire', 'nom '+stand.id);
+			this.$store.commit('setNomStand', stand.id);
 			//position
 			var widthBulle = infoBulle.getBoundingClientRect().width;
 			var heightBulle = infoBulle.getBoundingClientRect().height;
@@ -106,70 +114,81 @@ export default {
 			infoBulle.style.top = ((stand.getBoundingClientRect().top + window.pageYOffset) + ajustementY )+ "px";
 			infoBulle.style.left = ((stand.getBoundingClientRect().left + window.pageXOffset) + ajustementX )+ "px";
 		},
-        test(){
-			var map = document.getElementById("carte");
-			var polygons = map.getElementsByTagName("polygon");
-			var rects = map.getElementsByTagName("rect");
-			var paths = [...polygons, ...rects];
-			this.infobulle(paths[1]);
-			paths[1].setAttribute("class", "stand stand-hover");
+		bandeauSelected(stand){
+			var bandeau = document.getElementById("bandeau-selected");
+			bandeau.style.maxWidth = "100%";
+			this.$store.commit('setNomPrestataire', 'nom '+stand.id);
+			this.$store.commit('setNomStand', stand.id);
+		},
+		resetAllClicked(){
+			var map = document.getElementById('carte');
+			var polygones = map.getElementsByTagName('polygon');
+			var rects = map.getElementsByTagName('rect');
+			var paths = [...polygones, ...rects];
+			for (var i = 0; i < paths.length; i++) {
+				if(paths[i].classList.contains('stand-selected')){
+					paths[i].setAttribute('class', 'stand');
+				}
+			}
+		},
+		verifyNoClicked() {
+			var map = document.getElementById('carte');
+			var polygones = map.getElementsByTagName('polygon');
+			var rects = map.getElementsByTagName('rect');
+			var paths = [...polygones, ...rects];
+			var noClicked = true;
+			for (var i = 0; i < paths.length; i++) {
+				if(paths[i].classList.contains('stand-selected')){
+					noClicked = false;
+				}
+			}
+			return noClicked;
 		},
 		addMapListener(){
 			var map = document.getElementById("carte");
 			var polygones = map.getElementsByTagName("polygon");
 			var rects = map.getElementsByTagName("rect");
 			var paths = [...polygones, ...rects];
+			var vue = this;
 
 			paths.forEach(stand => {
 				stand.addEventListener('mouseenter', function(){
-                    function verifyNoClicked() {
-                        var map = document.getElementById('carte');
-                        var polygones = map.getElementsByTagName('polygon');
-						var rects = map.getElementsByTagName('rect');
-						var paths = [...polygones, ...rects];
-                        var noClicked = true;
-                        for (var i = 0; i < paths.length; i++) {
-                            if(paths[i].classList.contains('stand-selected')){
-                                noClicked = false;
-                            }
-                        }
-                        return noClicked;
-                    }
-                    if(stand.classList.contains('stand') && verifyNoClicked()){
+                    if(stand.classList.contains('stand') && vue.verifyNoClicked()){
                         stand.setAttribute('class', 'stand stand-hover');
+						vue.infoBulle(stand);
                     }
                 });
                 stand.addEventListener('mouseleave', function(){
                     if(stand.classList.contains('stand-hover')){
                         stand.setAttribute('class', 'stand');
+						var infoBulle = document.getElementById("infobulle");
+						infobulle.setAttribute('class', 'infobulle-hidden');
                     }
                 });
                 stand.addEventListener('click', function(){
-                    function resetAllClicked(){
-                        var map = document.getElementById('carte');
-                        var polygones = map.getElementsByTagName('polygon');
-						var rects = map.getElementsByTagName('rect');
-						var paths = [...polygones, ...rects];
-                        for (var i = 0; i < paths.length; i++) {
-                            if(paths[i].classList.contains('stand-selected')){
-                                paths[i].setAttribute('class', 'stand');
-                            }
-                        }
-                    }
                     if(stand.classList.contains('stand-selected') && stand.classList.contains('stand')){
                         setTimeout(function(){
                             stand.setAttribute('class', 'stand stand-hover');
                         }, 100);
+						vue.infoBulle(stand);
+						var bandeau = document.getElementById("bandeau-selected");
+						bandeau.style.maxWidth = "0%";
                     }
                     else if(stand.classList.contains('stand')){
-                        resetAllClicked();
+                        vue.resetAllClicked();
                         setTimeout(function(){
                             stand.setAttribute('class', 'stand stand-selected');
                         }, 100);
-                    }
+						var infoBulle = document.getElementById("infobulle");
+						infobulle.setAttribute('class', 'infobulle-hidden');
+						vue.bandeauSelected(stand);
+					}
                 });
 			});
-		}
+		},
+	},
+	computed: {
+		...mapState(['nom_prestataire', 'nom_stand'])
 	},
 }
 </script>
@@ -182,11 +201,10 @@ export default {
 	justify-content: center;
 	align-items: center;
 	background-color: white;
-	z-index: 1;
 }
 
-#carte svg {
-	width: 100%;
+#carte{
+	max-width: 80%;
 	height: 100%;
 }
 
@@ -201,12 +219,93 @@ svg polygon{
 }
 
 .stand-hover{
-    fill: #ac5a0e;
+    fill: #fc3816;
+	filter: drop-shadow(0px 0px 30px #fc8873);
+	stroke: none;
 }
 .stand-selected{
     /* fill: #ac0e0e; */
     stroke: none;
 }
 
+.infobulle{
+	display: block;
+}
+.infobulle-hidden{
+	display: none;
+}
+
+#bandeau-selected{
+	position: relative;
+	max-width: 0%;
+	height: 100%;
+	background-color: #fff;
+	border: 3px solid #000;
+	border-radius: 10px 0px 0px 10px;
+	transition: all 0.3s ease;
+}
+
+#bandeau-selected #haut-selected{
+	width: 100%;
+	height: 80%;
+	border-radius: 7px 0px 0px 0px;
+	border-bottom: 4px solid #000;
+}
+
+#haut-selected #image-selected{
+	width: 100%;
+	height: 30%;
+	overflow: hidden;
+}
+#image-selected img{
+	width: 100%;
+	height: 30%;
+	border-bottom: 1px solid black;
+	border-radius: 7px 0px 0px 0px;
+}
+#haut-selected #titre-selected{
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-align: center;
+	color: red;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+#haut-selected #tags-selected{
+	width: 100%;
+	height: 10%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+#tags-selected h6{
+	font-size: 1rem;
+	margin-left: 1%;
+	margin-right: 1%;
+}
+#haut-selected #description-selected{
+	font-size: 1rem;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+
+#bandeau-selected #bas-selected{
+	width: 100%;
+	height: 20%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#bas-selected #stand-selected{
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-align: center;
+	color: red;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
 
 </style>

@@ -6,7 +6,7 @@
     </h1>
 
     <div class="section">
-      <div class="text_home">
+      <div class="text_home texte-carte">
         <h2>{{ translate('home_text_1') }}</h2>
       </div>
       <div class="carte">
@@ -102,7 +102,7 @@ h2{
 
 .carte{
   //border: 1px solid blue;
-  width: 45%;
+  width: 55%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,5 +114,9 @@ h2{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.texte-carte{
+  width: 35%;
 }
 </style>
