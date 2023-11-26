@@ -2,7 +2,7 @@
     <div id="carte-interactive" @mouseover="addMapListener()">
         <button @click="test()">ici</button>
 		<!-- alt + w -->
-		<div style="width: 20%;height: 80%;">
+		<div style="width: 20%;height: 100%;">
 			<div id="bandeau-selected">
 				<div id="haut-selected">
 					<router-link id="image-selected" to="/services">
@@ -198,13 +198,11 @@ export default {
 	width: 100%;
 	height: 100%;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: white;
+	background-color: blue;
 }
 
 #carte{
-	max-width: 80%;
+	width: 100%;
 	height: 100%;
 }
 
@@ -243,11 +241,12 @@ svg polygon{
 	border: 3px solid #000;
 	border-radius: 10px 0px 0px 10px;
 	transition: all 0.3s ease;
+	overflow: hidden;
 }
 
 #bandeau-selected #haut-selected{
 	width: 100%;
-	height: 80%;
+	height: 90%;
 	border-radius: 7px 0px 0px 0px;
 	border-bottom: 4px solid #000;
 }
@@ -285,16 +284,15 @@ svg polygon{
 	margin-right: 1%;
 }
 #haut-selected #description-selected{
-	font-size: 1rem;
+	font-size: 0.8rem;
 	margin-top: 1%;
 	margin-bottom: 1%;
+	overflow-y: scroll;
 }
 
 #bandeau-selected #bas-selected{
 	width: 100%;
-	height: 20%;
-	display: flex;
-	flex-direction: column;
+	height: 10%;
 	justify-content: center;
 	align-items: center;
 }
