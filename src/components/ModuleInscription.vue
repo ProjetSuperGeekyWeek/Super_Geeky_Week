@@ -21,24 +21,26 @@
                     <button @click="inscription = !inscription">{{ tarif }}</button>
                 </div>
                 <div v-if="alreadyInscrit" id="card-inscription-infos">
-                    <h4>Vous etes bien inscrit monsieur John Doe à 14h30</h4>
+                    <h4>Vous etes bien inscrit {{ inscritPrenom }} {{ inscritNom }} à la séance de {{ inscritSeance }}</h4>
+                    <button @click="alreadyInscrit = false">Désinscrire</button>
                 </div>
             </div>
             <div id="card-inscription-formulaire" v-show="inscription">
                 <h2>{{ titre }}</h2>
                 <select name="seance" id="seance" v-model="inscritSeance">
-                    <option v-for="horaire in horaires" :key="horaire" :value="horaire.jour">
+                    <option v-for="horaire in horaires" :key="horaire" :value="horaire.jour+' à '+horaire.heureDebut+'-'+horaire.heureFin">
                         {{ horaire.jour }} {{ horaire.heureDebut }}-{{ horaire.heureFin }}
                     </option>
                 </select>
                 <div id="card-inscription-formulaire-infos">
-                    <input type="text" name="nom" id="nom" placeholder="nom" v-model="inscritNom">
-                    <input type="text" name="prenom" id="prenom" placeholder="prenom" v-model="inscritPrenom">
+                    <input type="text" name="nom" id="nom" placeholder="nom" v-model="inscritNom" @change="verifNom()">
+                    <input type="text" name="prenom" id="prenom" placeholder="prenom" v-model="inscritPrenom" @change="verifPrenom()">
                 </div>
                 <textarea name="description" id="description" cols="30" rows="10" placeholder="description" v-model="inscritDescription"></textarea>
+                <p id="message-erreur"></p>
                 <div id="card-inscription-formulaire-btn">
                     <button id="btn-retour" @click="inscription = !inscription">Retour</button>
-                    <button id="btn-valider">Valider</button>
+                    <button id="btn-valider" @click="inscrire()">Valider</button>
                 </div>
             </div>
         </div>
@@ -50,8 +52,8 @@ export default {
     name: 'ModuleInscriptions',
     data() {
         return {
-            titre : "Tournoi super smash bros. ultimate",
-            description : "Venez vous affronter sur le dernier opus de la série Super Smash Bros. ! Avec finale sur scène et cashPrize à la clef !",
+            titre : "Tournoi super smash bros ultimate",
+            description : "Venez vous affronter sur le dernier opus de la série Super Smash Bros ! Avec finale sur scène et cashPrize à la clef !",
             horaires : [
                 {
                     jour : "Vendredi",
@@ -80,7 +82,55 @@ export default {
         }
     },
     methods: {
-
+        turnErreur(element,message){
+            if(element != null){
+                element.style.filter = "drop-shadow(0px 0px 5px red)";
+                element.style.borderColor = "red";
+            }
+            document.getElementById("message-erreur").innerHTML = message;
+        },
+        turnValidate(element){
+            element.style.filter = "drop-shadow(0px 0px 5px green)";
+            element.style.borderColor = "green";
+        },
+        verifNom(){
+            let nom = document.getElementById("nom");
+            let regexNom = new RegExp("^[a-zA-Z]{3,}$");
+            if(!regexNom.test(nom.value)){
+                this.turnErreur(nom, "Le nom doit contenir au moins 3 caractères et ne doit contenir aucun de chiffres");
+                return false;
+            }else{
+                this.turnValidate(nom);
+                return true;
+            }
+        },
+        verifPrenom(){
+            let prenom = document.getElementById("prenom");
+            let regexPrenom = new RegExp("^[a-zA-Z]{3,}$");
+            if(!regexPrenom.test(prenom.value)){
+                this.turnErreur(prenom, "Le prenom doit contenir au moins 3 caractères et ne doit contenir aucun de chiffres");
+                return false;
+            }else{
+                this.turnValidate(prenom);
+                return true;
+            }
+        },
+        verifSeance(){
+            let seance = document.getElementById("seance");
+            if(seance.value == null || seance.value == ""){
+                this.turnErreur(seance, "Veuillez choisir une séance");
+                return false;
+            }else{
+                this.turnValidate(seance);
+                return true;
+            }
+        },
+        inscrire() {
+            if(this.verifNom() && this.verifPrenom() && this.verifSeance()){
+                this.alreadyInscrit = true;
+                this.inscription = false;
+            }
+        }
     },
     mounted() {
 
@@ -218,16 +268,13 @@ export default {
     font-size: 1rem;
 }
 
+#card-inscription-formulaire-infos input:hover {
+    border-color: darkred;
+}
+
 #card-inscription-formulaire-infos input:focus {
     outline: none;
-}
-
-#card-inscription-formulaire-infos input:hover {
-    border-color: darkblue;
-}
-
-#card-inscription-formulaire-infos input:focus {
-    border : 3px solid darkblue;
+    border : 3px solid darkred;
 }
 
 #card-inscription-formulaire textarea {
@@ -243,11 +290,19 @@ export default {
 
 #card-inscription-formulaire textarea:focus {
     outline: none;
-    border: 3px solid darkblue;
+    border: 3px solid darkred;
 }
 
 #card-inscription-formulaire textarea:hover {
-    border-color: darkblue;
+    border-color: darkred;
+}
+
+#card-inscription-formulaire #message-erreur {
+    display: block;
+    color: red;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
 }
 
 #card-inscription-formulaire-btn {
@@ -255,19 +310,19 @@ export default {
     justify-content: space-between;
 }
 
-#card-inscription-formulaire-btn button {
+#card-inscription-formulaire-btn button, #card-inscription-infos button {
     font-size: 1rem;
     padding: 0.5rem 1rem;
     border-radius: 10px;
     cursor: pointer;
 }
 
-#btn-retour {
+#btn-retour, #card-inscription-infos button {
     border: 2px solid #f84646;
     background-color: lightsalmon;
 }
 
-#btn-retour:hover {
+#btn-retour:hover, #card-inscription-infos button:hover {
     background-color: #f84646;
     color: #fff;
 }
