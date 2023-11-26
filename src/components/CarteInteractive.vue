@@ -1,8 +1,8 @@
 <template>
     <div id="carte-interactive" @mouseover="addMapListener()">
-        <button @click="test()">ici</button>
 		<!-- alt + w -->
-		<div style="width: 20%;height: 100%;">
+		<!-- manque correctif bug hover grande scene -->
+		<div id="bandeau-container">
 			<div id="bandeau-selected">
 				<div id="haut-selected">
 					<router-link id="image-selected" to="/services">
@@ -94,12 +94,6 @@ export default {
     InfobulleCarte,
 },
     methods: {
-        test(){
-			var map = document.getElementById("carte");
-			var polygons = map.getElementsByTagName("polygon");
-			var rects = map.getElementsByTagName("rect");
-			var paths = [...polygons, ...rects];
-		},
 		infoBulle(stand){
 			var infoBulle = document.getElementById("infobulle");
 			infobulle.setAttribute('class', 'infobulle');
@@ -117,6 +111,7 @@ export default {
 		bandeauSelected(stand){
 			var bandeau = document.getElementById("bandeau-selected");
 			bandeau.style.maxWidth = "100%";
+			bandeau.style.border = "3px solid #000";
 			this.$store.commit('setNomPrestataire', 'nom '+stand.id);
 			this.$store.commit('setNomStand', stand.id);
 		},
@@ -173,6 +168,7 @@ export default {
 						vue.infoBulle(stand);
 						var bandeau = document.getElementById("bandeau-selected");
 						bandeau.style.maxWidth = "0%";
+						bandeau.style.border = "none";
                     }
                     else if(stand.classList.contains('stand')){
                         vue.resetAllClicked();
@@ -198,7 +194,6 @@ export default {
 	width: 100%;
 	height: 100%;
 	display: flex;
-	background-color: blue;
 }
 
 #carte{
@@ -222,23 +217,30 @@ svg polygon{
 	stroke: none;
 }
 .stand-selected{
-    /* fill: #ac0e0e; */
-    stroke: none;
+    fill: #be2105;
+	filter: drop-shadow(0px 0px 30px #ee6149);
+	stroke: none;
 }
 
 .infobulle{
-	display: block;
+	display: inline;
 }
 .infobulle-hidden{
 	display: none;
 }
 
-#bandeau-selected{
+#bandeau-container{
+	width: 20%;
+	max-height: fit-content;
+	display: flex;
+	justify-content: flex-end;
 	position: relative;
+}
+
+#bandeau-selected{
 	max-width: 0%;
-	height: 100%;
+	max-height: 100%;
 	background-color: #fff;
-	border: 3px solid #000;
 	border-radius: 10px 0px 0px 10px;
 	transition: all 0.3s ease;
 	overflow: hidden;
@@ -249,6 +251,7 @@ svg polygon{
 	height: 90%;
 	border-radius: 7px 0px 0px 0px;
 	border-bottom: 4px solid #000;
+	overflow-y: scroll;
 }
 
 #haut-selected #image-selected{
@@ -295,15 +298,11 @@ svg polygon{
 	height: 10%;
 	justify-content: center;
 	align-items: center;
-}
-
-#bas-selected #stand-selected{
 	font-size: 1.5rem;
 	font-weight: bold;
 	text-align: center;
-	color: red;
-	margin-top: 1%;
-	margin-bottom: 1%;
+	color: rgb(158, 12, 12);
+	background-color: lightcoral;
 }
 
 </style>
