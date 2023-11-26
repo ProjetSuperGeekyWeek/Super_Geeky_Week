@@ -223,7 +223,7 @@ svg polygon{
 }
 
 .infobulle{
-	display: inline;
+	display: block;
 }
 .infobulle-hidden{
 	display: none;
