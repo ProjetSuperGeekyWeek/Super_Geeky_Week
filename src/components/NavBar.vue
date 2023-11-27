@@ -76,6 +76,7 @@ nav{
   justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.6);
   position: fixed;
+  top: 0;
   z-index: 100000;
   width: 100%;
   transition: var(--transition);
