@@ -42,7 +42,13 @@ const routes = [
     path: '/panier',
     name: 'panier',
     component: () => import('../views/PanierView.vue')
+  },
+  {
+    path: '/qrcode',
+    name: 'qrcode',
+    component: () => import('../views/QrcodeView.vue')
   }
+
 ]
 
 const router = new VueRouter({
