@@ -51,6 +51,7 @@ button {
     border-radius: 5px;
     border: 1px solid black;
     padding: 10px;
+    margin-top:12%;
 }
 
 @media screen and (orientation: portrait) {
