@@ -18,7 +18,7 @@
                 </div>
                 <div id="card-inscription-tarif" v-if="!alreadyInscrit">
                     <h3>Inscription</h3>
-                    <button @click="inscription = !inscription">{{ tarif }}</button>
+                    <button @click="formulaireInscrire()">{{ tarif }}</button>
                 </div>
                 <div v-if="alreadyInscrit" id="card-inscription-infos">
                     <h4>Vous etes bien inscrit {{ inscritPrenom }} {{ inscritNom }} à la séance de {{ inscritSeance }}</h4>
@@ -93,6 +93,21 @@ export default {
             element.style.filter = "drop-shadow(0px 0px 5px green)";
             element.style.borderColor = "green";
         },
+        allNeutral(){
+            let nom = document.getElementById("nom");
+            let prenom = document.getElementById("prenom");
+            let seance = document.getElementById("seance");
+            nom.style.filter = "none";
+            nom.style.borderColor = "#000";
+            prenom.style.filter = "none";
+            prenom.style.borderColor = "#000";
+            seance.style.filter = "none";
+            seance.style.borderColor = "#000";
+        },
+        formulaireInscrire(){
+            this.allNeutral();
+            this.inscription = true;
+        },
         verifNom(){
             let nom = document.getElementById("nom");
             let regexNom = new RegExp("^[a-zA-Z]{3,}$");
@@ -132,9 +147,6 @@ export default {
             }
         }
     },
-    mounted() {
-
-    }
 }
 
 </script>

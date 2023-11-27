@@ -10,8 +10,8 @@
         <br>
         <div class="tabactivite">
           <ModuleInscriptions />
-          <Module-inscriptions />
-          <Module-inscriptions />
+          <ModuleInscriptions />
+          <ModuleInscriptions />
 
         </div>
       </div>
