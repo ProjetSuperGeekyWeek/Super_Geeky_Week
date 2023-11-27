@@ -21,37 +21,59 @@ export default {
         }
     },
     methods: {
-        authentification(email, password) {
-            this.$store.commit('setAuthentifier', this.enregistrer(email, password));
-            if(this.authentifier) {
-                this.$store.commit('setAdmin', this.verifAdmin(email, password));
-                if(this.admin) {
-                    // this.$router.push('/admin');
-                    this.$router.push('/services');
-                } else {
-                    this.$router.push('/');
-                }
-            }
-            else{
-                this.clearMdp();
-                this.$store.commit('setAuthentifier', false);
-                alert('Email ou mot de passe incorrect');
-            }
-        },
-        enregistrer(email, password) {
-            let authentifier = false;
-            if((email === 'user@gmail.com' && password === 'User1234&') || (email === 'admin@gmail.com' && password === 'Admin1234&'))
-                authentifier = true;
-            return authentifier;
-        },
-        verifAdmin(email, password) {
+      authentification(email, password) {
+        const prestataireInfo = this.enregistrer(email, password);
+        this.$store.commit('setAuthentifier', prestataireInfo.authentifier);
+
+        if (prestataireInfo.authentifier) {
+          this.$store.commit('setAdmin', this.verifAdmin(email, password));
+
+          // Mettez à jour cette partie pour utiliser les informations du prestataire
+          const prestataire = {
+            prenom: 'Jean',
+            nom: 'Dupont',
+            email: 'jean.dupont@example.com',
+            description: 'Gérant des tournois de super smash bros',
+            image: require ('../assets/main_logo.png'),
+            service : 'Tournois de super smash bros',
+          };
+
+          this.$store.commit('setPrestataire', prestataire);
+
+          if (this.$store.state.admin) {
+            this.$router.push('/services');
+          } else {
+            this.$router.push('/');
+          }
+        } else {
+          this.clearMdp();
+          this.$store.commit('setAuthentifier', false);
+          alert('Email ou mot de passe incorrect');
+        }
+      },
+      enregistrer(email, password) {
+        let authentifier = false;
+        let admin = false;
+
+        if ((email === 'user@gmail.com' && password === 'User1234&') || (email === 'admin@gmail.com' && password === 'Admin1234&')) {
+          authentifier = true;
+          admin = this.verifAdmin(email, password);
+        }
+
+        return {
+          authentifier: authentifier,
+          admin: admin
+        };
+      },
+
+      verifAdmin(email, password) {
             let admin = false;
-            if(email === 'admin@gmail.com' && password === 'Admin1234&')
+            if (email === 'admin@gmail.com' && password === 'Admin1234&')
                 admin = true;
             return admin;
         },
         submitForm() {
-            if(this.correctEmail && this.correctPassword){
+            if (this.correctEmail && this.correctPassword) {
                 let emailForm = document.getElementById('email').value;
                 let passwordForm = document.getElementById('password').value;
                 this.authentification(emailForm, passwordForm);
@@ -68,7 +90,7 @@ export default {
         verifEmail() {
             let email = document.getElementById('email').value;
             let regexEmail = new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$');
-            if(regexEmail.test(email)) {
+            if (regexEmail.test(email)) {
                 this.correctEmail = true;
                 this.colorVert(document.getElementById('email'));
             } else {
@@ -79,7 +101,7 @@ export default {
         verifPassword() {
             let password = document.getElementById('password').value;
             let regexPassword = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})');
-            if(regexPassword.test(password)) {
+            if (regexPassword.test(password)) {
                 this.correctPassword = true;
                 this.colorVert(document.getElementById('password'));
                 this.clearMdpIncorrect();
@@ -89,10 +111,10 @@ export default {
                 this.mdpIncorrect();
             }
         },
-        colorRouge(element){
+        colorRouge(element) {
             element.style.backgroundColor = 'tomato';
         },
-        colorVert(element){
+        colorVert(element) {
             element.style.backgroundColor = 'lightgreen';
         },
         mdpIncorrect() {
@@ -156,5 +178,4 @@ button {
     border-color: rgb(238, 103, 250);
     color: rgb(88, 3, 88);
 }
-
 </style>

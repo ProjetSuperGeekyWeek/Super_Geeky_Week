@@ -1,6 +1,6 @@
 <template>
   <div class="button_acheter">
-    <router-link to="#"><input type="button" value="Acheter" class="bouton grand_moins"></router-link>
+    <router-link to="/qrcode"><input type="button" value="Acheter" class="bouton grand_moins"></router-link>
   </div>
 </template>
 
