@@ -13,26 +13,30 @@ export default new Vuex.Store({
     en: en.data(),
     fr: fr.data(),
     nom: 'Invité',
-    nom_stand : 'nom stand',
-    nom_prestataire : 'nom prestataire',
+    prestataire: {
+      prenom: 'Jean',
+      nom: 'Dupont',
+      email: 'jean.dupont@example.com',
+      description: 'Gérant des tournois de super smash bros',
+      image: '../assets/main_logo.png',
+      service: 'Tournois de super smash bros',
+
+    },
   },
   getters: {
   },
   mutations: {
     setAuthentifier(state, payload) {
-      state.authentifier = payload
+      state.authentifier = payload;
     },
     setAdmin(state, payload) {
-      state.admin = payload
+      state.admin = payload;
     },
     setLang(state, payload) {
-      state.lang = payload
+      state.lang = payload;
     },
-    setNomStand(state, payload) {
-      state.nom_stand = payload
-    },
-    setNomPrestataire(state, payload) {
-      state.nom_prestataire = payload
+    setPrestataire(state, payload) {
+      state.prestataire = payload;
     },
   },
   actions: {
