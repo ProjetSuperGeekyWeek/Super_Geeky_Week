@@ -22,6 +22,8 @@ export default new Vuex.Store({
       service: 'Tournois de super smash bros',
 
     },
+    nom_prestataire: '',
+    nom_stand: '',
   },
   getters: {
   },
@@ -37,6 +39,12 @@ export default new Vuex.Store({
     },
     setPrestataire(state, payload) {
       state.prestataire = payload;
+    },
+    setNomPrestataire(state, payload) {
+      state.nom_prestataire = payload;
+    },
+    setNomStand(state, payload) {
+      state.nom_stand = payload;
     },
   },
   actions: {
