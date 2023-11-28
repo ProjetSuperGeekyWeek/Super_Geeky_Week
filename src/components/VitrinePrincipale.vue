@@ -1,7 +1,10 @@
 <template>
-    <div class="vitrine-principale">
-        <img src="../assets/image/fond_ecran/bg_home.png" alt="Image principale">
-    </div>
+  <div class="home">
+    <video autoplay loop muted>
+      <source src="../assets/vidéo/testvidéo.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la balise vidéo.
+    </video>
+  </div>
 </template>
 
 <script>
@@ -49,5 +52,16 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     text-align: center;
+}
+.home {
+  //margin-top: 100px; /* Ajoutez cette ligne pour déplacer la vidéo vers le bas de 15 pixels */
+  width: 100%;
+  height: calc(100vh - 15px); /* Ajustez la hauteur pour compenser le déplacement */
+  overflow: hidden;
+}
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Assurez-vous que la vidéo couvre tout l'espace disponible */
 }
 </style>
