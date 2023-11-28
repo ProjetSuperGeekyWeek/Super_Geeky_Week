@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Forfait from '@/components/ForfaitView.vue'
+import Forfait from '@/Front/Client/Boutique/components/ForfaitView.vue'
 export default {
         name: 'BilletsView',
         components: {

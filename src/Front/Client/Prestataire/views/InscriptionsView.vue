@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ModuleInscriptions from '@/components/ModuleInscription.vue';
+import ModuleInscriptions from '@/Front/Client/Prestataire/components/ModuleInscription.vue';
 
 export default {
     name: 'InscriptionsView',

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Qrcode from '@/components/Qrcodeg.vue';
+import Qrcode from '@/Front/Client/Panier/components/Qrcodeg.vue';
 
 export default{
   name: 'QrcodeView',

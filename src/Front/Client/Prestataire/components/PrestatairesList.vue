@@ -21,7 +21,7 @@
         <div v-if="filteredPrestataires.length > 0">
           <div class="prestataires-card" v-for="prestataire in filteredPrestataires" :key="prestataire.id">
             <div class="prestataires-photo">
-              <img src="../assets/main_logo.png" alt="">
+              <img src="@/assets/image/logo/main_logo.png" alt="">
             </div>
             <div class="prestataires-description">
               <div class="prestataires-tag" v-for="tag in prestataire.tags" :key="tag">

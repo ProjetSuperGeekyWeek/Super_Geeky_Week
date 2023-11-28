@@ -8,7 +8,7 @@
 
 <script>
 import {mapState} from "vuex";
-import NavBar from "@/components/NavBar.vue";
+import NavBar from "@/Front/NavBar.vue";
 
 export default {
   name: 'App',

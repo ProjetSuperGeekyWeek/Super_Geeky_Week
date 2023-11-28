@@ -34,7 +34,7 @@ export default {
             nom: 'Dupont',
             email: 'jean.dupont@example.com',
             description: 'Gérant des tournois de super smash bros',
-            image: require ('../assets/main_logo.png'),
+            image: require ('@/assets/image/logo/main_logo.png'),
             service : 'Tournois de super smash bros',
           };
 

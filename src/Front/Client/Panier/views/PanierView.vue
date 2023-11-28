@@ -17,8 +17,8 @@
 
 <script>
 import {mapState} from "vuex";
-import TableauPanier from "@/components/TableauPanier.vue";
-import ButtonAcheter from "@/components/ButtonAcheter.vue";
+import TableauPanier from "@/Front/Client/Panier/components/TableauPanier.vue";
+import ButtonAcheter from "@/Front/Client/Panier/components/ButtonAcheter.vue";
 
 export default {
   name: 'PanierView',

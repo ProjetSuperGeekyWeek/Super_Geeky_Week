@@ -86,7 +86,7 @@
 
 <script>
 import {mapState} from "vuex";
-import InfobulleCarte from '@/components/InfobulleCarte.vue'
+import InfobulleCarte from '@/Front/Client/Carte/components/InfobulleCarte.vue'
 
 export default {
     name: 'CarteInteractive',

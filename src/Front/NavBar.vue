@@ -26,7 +26,7 @@
           <router-link to="/panier"><img src="../assets/image/logo/panier.png" alt="panier" class="logo"></router-link>
         </div>
         <div class="logo_auth">
-          <router-link to="/authentification"><img src="../assets/image/image_authentification.png" alt="authent" class="logo2_auth"></router-link>
+          <router-link to="/authentification"><img src="../assets/image/fond_ecran/image_authentification.png" alt="authent" class="logo2_auth"></router-link>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PagePaiement from '@/components/PagePaiement.vue';
+import PagePaiement from '@/Front/Client/Panier/components/PagePaiement.vue';
 
 export default{
     name: 'PaiementView',

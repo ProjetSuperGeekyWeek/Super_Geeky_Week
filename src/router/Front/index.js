@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/Front/Client/Accueil/views/HomeView.vue'
 
 Vue.use(VueRouter)
 
@@ -16,37 +16,37 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/BilletsView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../../Front/Client/Boutique/views/BilletsView.vue')
   },
   {
     path: '/services',
     name: 'services',
-    component: () => import('../views/ServicesView.vue')
+    component: () => import('@/Front/Client/Prestataire/views/ServicesView.vue')
   },
   {
     path: '/authentification',
     name: 'authentification',
-    component: () => import('../views/AuthentificationView.vue')
+    component: () => import('@/Front/Connexion/Authentification/views/AuthentificationView.vue')
   },
   {
     path: '/paiement',
     name: 'paiement',
-    component: () => import('../views/PaiementView.vue')
+    component: () => import('../../Front/Client/Panier/views/PaiementView.vue')
   },
   {
     path: '/inscriptions',
     name: 'inscriptions',
-    component: () => import('../views/InscriptionsView.vue')
+    component: () => import('../../Front/Client/Prestataire/views/InscriptionsView.vue')
   },
   {
     path: '/panier',
     name: 'panier',
-    component: () => import('../views/PanierView.vue')
+    component: () => import('../../Front/Client/Panier/views/PanierView.vue')
   },
   {
     path: '/qrcode',
     name: 'qrcode',
-    component: () => import('../views/QrcodeView.vue')
+    component: () => import('../../Front/Client/Panier/views/QrcodeView.vue')
   }
 
 ]
