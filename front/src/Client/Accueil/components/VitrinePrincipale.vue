@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <video autoplay loop muted>
-      <source src="../../.././assets/vidéo/testvidéo.mp4" type="video/mp4">
+      <source src="../../.././assets/vidéo/AFTERMOVIE - GEEK UNCHAINED 2023 (1).mp4" type="video/mp4">
       Votre navigateur ne supporte pas la balise vidéo.
     </video>
   </div>
