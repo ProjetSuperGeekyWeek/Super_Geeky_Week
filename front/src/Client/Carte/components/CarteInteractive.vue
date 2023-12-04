@@ -97,7 +97,7 @@ export default {
     infoBulle(stand){
       var infoBulle = document.getElementById("infobulle");
       infoBulle.setAttribute('class', 'infobulle');
-      this.$store.commit('setNomPrestataire', 'nom '+stand.id);
+      this.$store.commit('setNomPrestataire', 'nom prestataire');
       this.$store.commit('setNomStand', stand.id);
       //position
       var widthBulle = infoBulle.getBoundingClientRect().width;
@@ -264,6 +264,7 @@ svg polygon{
   height: 30%;
   border-bottom: 1px solid black;
   border-radius: 7px 0px 0px 0px;
+  object-fit: cover;
 }
 #haut-selected #titre-selected{
   font-size: 1.5rem;

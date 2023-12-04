@@ -63,6 +63,7 @@ export default {
     height : 100%;
     border-radius : 50%;
     border: 1px solid black;
+    object-fit: cover;
 }
 
 #infobulle #haut #titre{

@@ -7,7 +7,8 @@
 
     <div class="section">
       <div class="text_home texte-carte">
-        <h2>{{ translate('home_text_1') }}</h2>
+        <h2>{{ translate('home_titre_1') }}</h2>
+        <h3>{{ translate('home_text_1') }}</h3>
       </div>
       <div class="carte">
         <CarteInteractive/>
@@ -19,7 +20,8 @@
         <PrestatairesList/>
       </div>
       <div class="text_home">
-        <h2>{{ translate('home_text_2') }}</h2>
+        <h2>{{ translate('home_titre_2') }}</h2>
+        <h3>{{ translate('home_text_2') }}</h3>
       </div>
     </div>
 
@@ -59,7 +61,6 @@ export default {
   text-decoration: none;
 }
 .home{
-  //border: 1px solid red;
   background-color: var(--bg2);
   padding-bottom: 5%;
   display: flex;
@@ -68,7 +69,6 @@ export default {
   align-items: center;
 }
 #accroche{
-//border: 1px solid red;
   color: var(--title);
   font-size: 2em;
   filter: drop-shadow(0px 0px 20px var(--title));
@@ -76,7 +76,6 @@ export default {
   margin-bottom: 2%;
 }
 .section{
-  //border: 1px solid green;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -87,13 +86,12 @@ export default {
   border-radius: 20px;
 }
 
-h2{
+h3{
   text-align: center;
   color: var(--paragraph);
 }
 
 .text_home{
-  //border: 1px solid red;
   width: 45%;
   display: flex;
   justify-content: center;
@@ -101,7 +99,6 @@ h2{
 }
 
 .carte{
-  //border: 1px solid blue;
   width: 55%;
   display: flex;
   justify-content: center;
@@ -109,7 +106,6 @@ h2{
 }
 
 .prestataire{
-  //border: 1px solid green;
   width: 45%;
   display: flex;
   justify-content: center;
