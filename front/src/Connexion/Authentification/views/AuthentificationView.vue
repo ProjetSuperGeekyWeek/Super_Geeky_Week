@@ -47,7 +47,7 @@
     background-color: rgb(48, 15, 65);
     height: 100vh;
     width: 100vw;
-    padding-top: 10vh;
+    padding-top: 25vh;
     backdrop-filter: blur(0.5rem);
 }
 

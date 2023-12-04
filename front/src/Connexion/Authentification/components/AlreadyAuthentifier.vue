@@ -33,7 +33,7 @@ export default {
 
 button {
     width: 30%;
-    height: 30px;
+    height: 3em;
     font-size: 1em;
     border-radius: 5px;
     border: 1px solid;
@@ -42,6 +42,12 @@ button {
     cursor: pointer;
     border-color: rgb(238, 103, 250);
     color: rgb(88, 3, 88);
+    transition: ease-in-out 0.15s;
+}
+
+button:hover {
+    background-color: rgb(88, 3, 88);
+    color: rgb(238, 103, 250);
 }
 
 #authentifier {
@@ -51,17 +57,21 @@ button {
     background-color: mediumpurple;
     border-radius: 5px;
     padding: 10px;
-    margin-top:12%;
+    margin-top:6%;
     border: 2px solid palevioletred;
     filter: drop-shadow(0 0 10rem palevioletred);
 }
 
 #nom-authentifier {
     text-align: center;
+    margin-bottom: 5%;
+    font-size: 1.5em;
 }
 
 h5 {
     text-align: center;
+    margin-bottom: 5%;
+    font-size: 1.2em;
 }
 
 #btn-box{

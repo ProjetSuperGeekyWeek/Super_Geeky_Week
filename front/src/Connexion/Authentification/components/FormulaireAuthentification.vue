@@ -140,18 +140,21 @@ export default {
 label {
     display: block;
     margin-top: 10px;
+    text-align: center;
 }
 
 input {
-    width: 90%;
+    width: 60%;
     height: 30px;
     border-radius: 5px;
     border: 1px solid black;
     margin-bottom: 10px;
+    margin-left: 20%;
 }
 
 input:focus {
-    filter: drop-shadow(0 0 0.2rem purple);
+    outline: none;
+    filter: drop-shadow(0 0 0.4rem rgb(240, 38, 105));
 }
 
 #incorrectPassword {
@@ -167,9 +170,16 @@ button {
     border-radius: 5px;
     border: 1px solid;
     margin-bottom: 10px;
+    margin-left: 35%;
     background-color: rgb(238, 103, 250);
     cursor: pointer;
-    border-color: rgb(238, 103, 250);
+    border-color: rgb(88, 3, 88);
     color: rgb(88, 3, 88);
+    transition: ease-in-out 0.15s;
+}
+
+button:hover {
+    background-color: rgb(88, 3, 88);
+    color: rgb(238, 103, 250);
 }
 </style>
