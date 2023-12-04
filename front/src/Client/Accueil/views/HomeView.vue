@@ -70,10 +70,10 @@ export default {
 }
 #accroche{
   color: var(--title);
-  font-size: 2em;
+  font-size: 3em;
   filter: drop-shadow(0px 0px 20px var(--title));
-  margin-top: 2%;
-  margin-bottom: 2%;
+  margin-top: 1%;
+  margin-bottom: 4%;
 }
 .section{
   display: flex;
@@ -86,14 +86,24 @@ export default {
   border-radius: 20px;
 }
 
-h3{
+h2{
+  font-size: 2em;
+  padding: 2%;
   text-align: center;
+  color: var(--title);
+}
+
+h3{
+  font-size: 1.5em;
+  padding: 2%;
+  text-align: justify;
   color: var(--paragraph);
 }
 
 .text_home{
   width: 45%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
