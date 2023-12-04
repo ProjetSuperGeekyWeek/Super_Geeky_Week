@@ -34,6 +34,7 @@ export default {
 button {
     width: 30%;
     height: 30px;
+    font-size: 1em;
     border-radius: 5px;
     border: 1px solid;
     margin-bottom: 10px;
@@ -44,14 +45,29 @@ button {
 }
 
 #authentifier {
-    width: 50%;
+    width: 30%;
     height: 100%;
-    margin-left: 25%;
-    background-color: rgb(103, 250, 213);
+    margin-left: 35%;
+    background-color: mediumpurple;
     border-radius: 5px;
-    border: 1px solid black;
     padding: 10px;
     margin-top:12%;
+    border: 2px solid palevioletred;
+    filter: drop-shadow(0 0 10rem palevioletred);
+}
+
+#nom-authentifier {
+    text-align: center;
+}
+
+h5 {
+    text-align: center;
+}
+
+#btn-box{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5%;
 }
 
 @media screen and (orientation: portrait) {
@@ -61,6 +77,8 @@ button {
 
     #btn-box{
         align-items: center;
+        display: flex;
+        flex-direction: column;
     }
 }
 

@@ -45,6 +45,10 @@ export default {
   --bg2: #f1f1f2;/*f44d48*/
 }
 
+h1,h2,h3,h4,h5,h6,p{
+  font-family: 'Poppins', sans-serif;
+}
+
 .gras{
   font-weight: bold;
 }

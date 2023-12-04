@@ -154,12 +154,6 @@ input:focus {
     filter: drop-shadow(0 0 0.2rem purple);
 }
 
-/* select input there are not focus only when one other input is focus */
-input:not(:focus) {
-    filter: blur(0.07rem);
-}
-
-
 #incorrectPassword {
     color: red;
     font-size: 12px;

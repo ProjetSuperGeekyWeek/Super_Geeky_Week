@@ -26,7 +26,10 @@
           <router-link to="/panier"><img src="./assets/image/logo/panier.png" alt="panier" class="logo"></router-link>
         </div>
         <div class="logo_auth">
-          <router-link to="/authentification"><img src="./assets/image/fond_ecran/image_authentification.png" alt="authent" class="logo2_auth"></router-link>
+          <router-link to="/authentification">
+            <img v-if="authentifier" src="./assets/image/logo/main_logo.png" alt="" class="logo2_auth">
+            <img v-if="!authentifier" src="./assets/image/fond_ecran/image_authentification.png" alt="authent" class="logo2_auth">
+          </router-link>
         </div>
       </div>
     </div>
@@ -54,7 +57,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['authentifier','lang', 'en', 'fr']),
   }
 }
 window.addEventListener("scroll", function(){
@@ -71,7 +74,6 @@ window.addEventListener("scroll", function(){
   text-decoration: none;
 }
 nav{
-//border: 1px solid grey;
   display: flex;
   justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.6);
@@ -116,20 +118,17 @@ hr{
 
 .nav_droite{
   width: 50%;
-//border: 1px solid red;
   display: flex;
   flex-direction: column;
 }
 
 .nav_gauche{
   width: 50%;
-//border: 1px solid yellow;
   display: flex;
   flex-direction: column;
 }
 
 .nav_droite_haut{
-//border: 1px solid blue;
   display: flex;
   justify-content: center;
   gap: 5%;
@@ -139,7 +138,6 @@ hr{
 }
 
 .nav_gauche_haut{
-//border: 1px solid pink;
   display: flex;
   justify-content: center;
   height: 50%;
@@ -150,7 +148,6 @@ hr{
 }
 
 .nav_droite_bas{
-//border: 1px solid wheat;
   display: flex;
   justify-content: space-evenly;
   height: 50%;
@@ -158,7 +155,6 @@ hr{
 }
 
 .nav_gauche_bas{
-//border: 1px solid orange;
   display: flex;
   justify-content: center;
   gap: 5%;
