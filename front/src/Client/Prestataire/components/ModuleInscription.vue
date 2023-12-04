@@ -154,11 +154,10 @@ export default {
 <style scoped>
 
 #module-inscriptions {
-    width: 40%;
-    height: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 800px;
 }
 
 #card-inscription {
@@ -185,7 +184,6 @@ export default {
 }
 
 #card-inscription-body, #card-inscription-formulaire{
-    max-width: fit-content;
     width: 100%;
     height: 60%;
     padding: 1rem;

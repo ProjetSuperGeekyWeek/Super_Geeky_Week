@@ -10,9 +10,6 @@
         <br>
         <div class="tabactivite">
           <ModuleInscriptions />
-          <ModuleInscriptions />
-          <ModuleInscriptions />
-
         </div>
       </div>
     </template>
@@ -69,14 +66,7 @@ export default {
 }
 
 .tabactivite {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   margin-top: 10px;
-}
-
-.tabactivite div {
 }
 
 .infoperso {
