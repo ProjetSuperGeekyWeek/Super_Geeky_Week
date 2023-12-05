@@ -17,7 +17,8 @@
       <hr>
       <div class="nav_droite_bas">
         <router-link to="/billets"><p class="nav_titre">{{ translate('nav_ticket') }}</p></router-link>
-        <router-link to="/services"><p class="nav_titre">{{ translate('nav_service') }}</p></router-link>
+        <router-link to="/services" v-if="authentifier"><p class="nav_titre">{{ translate('nav_espace_perso') }}</p></router-link>
+        <router-link to="/services" v-if="!authentifier"><p class="nav_titre">{{ translate('nav_exposants') }}</p></router-link>
         <select name="lang" v-model="langue" @change="langSet" class="test deco_select">
           <option value="fr">Français</option>
           <option value="en">English</option>

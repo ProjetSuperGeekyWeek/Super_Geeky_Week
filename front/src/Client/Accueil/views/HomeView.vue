@@ -74,6 +74,8 @@ export default {
   filter: drop-shadow(0px 0px 20px var(--title));
   margin-top: 1%;
   margin-bottom: 4%;
+  width: 50%;
+  text-align: center;
 }
 .section{
   display: flex;

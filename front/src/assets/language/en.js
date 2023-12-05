@@ -4,7 +4,8 @@ export default {
             en: {
                 nav_home: "Home",
                 nav_ticket: "Ticket",
-                nav_service: "Service",
+                nav_espace_perso: "My Page",
+                nav_exposants: "Exhibitors",
                 title: "Super Geeky Week",
 
                 accroche: "Welcome to the first geek event in Franche-Comté !",
