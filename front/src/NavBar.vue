@@ -12,7 +12,7 @@
     </div>
     <div class="nav_droite">
       <div class="nav_droite_haut">
-        <h1 id="accroche">{{ translate('title') }}</h1>
+        <h1 id="accroche" class="">{{ translate('title') }}</h1>
       </div>
       <hr>
       <div class="nav_droite_bas">

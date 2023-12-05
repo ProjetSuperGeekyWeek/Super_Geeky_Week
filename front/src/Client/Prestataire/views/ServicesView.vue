@@ -6,7 +6,7 @@
         <br>
         <div class="service-content" v-html="getServicePageText"></div>
         <br>
-        <h1 class="intro">Vos activitées :</h1>
+        <h1 class="intro">Vos activités :</h1>
         <br>
         <div class="tabactivite">
           <ModuleInscriptions />
