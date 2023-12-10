@@ -40,11 +40,6 @@ CREATE TABLE tag (
                      libele_tag VARCHAR(50)
 );
 
-CREATE TABLE qrcode (
-                        id_qrcode SERIAL PRIMARY KEY,
-                        lien VARCHAR(50)
-);
-
 CREATE TABLE jour (
                       id_jour SERIAL PRIMARY KEY,
                       horaire_fin TIME,
@@ -86,14 +81,20 @@ CREATE TABLE non_attribuer (
                                FOREIGN KEY (id_personne) REFERENCES personne (id_personne)
 );
 
-CREATE TABLE acheteur (
-                          id_acheteur SERIAL PRIMARY KEY,
-                          non_acheteur VARCHAR(50),
-                          prenom_acheteur VARCHAR(50),
-                          tel_acheteur VARCHAR(50),
-                          email_acheteur VARCHAR(50),
-                          id_qrcode INT NOT NULL,
-                          FOREIGN KEY (id_qrcode) REFERENCES qrcode (id_qrcode)
+CREATE TABLE acheteur
+(
+    id_acheteur     SERIAL PRIMARY KEY,
+    non_acheteur    VARCHAR(50),
+    prenom_acheteur VARCHAR(50),
+    tel_acheteur    VARCHAR(50),
+    email_acheteur  VARCHAR(50)
+);
+
+CREATE TABLE qrcode (
+                        id_qrcode SERIAL PRIMARY KEY,
+                        lien VARCHAR(50),
+                        id_acheteur1 INT,
+                        FOREIGN KEY(id_acheteur1) REFERENCES acheteur(id_acheteur)
 );
 
 CREATE TABLE associer_a (
