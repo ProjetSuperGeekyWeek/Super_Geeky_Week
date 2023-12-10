@@ -1,17 +1,19 @@
 const express = require('express');
 const dotenv = require("dotenv");
-dotenv.config();
-const carteRouter = require('./routes/carteRouter');
 const app = express();
 const cors = require('cors');
-/*const listeRoutes = require('./liste.router.js');*/
+dotenv.config();
+
+const carteRouter = require('./routes/carteRouter');
+const clientRouter = require('./routes/clientRouter');
+
 app.use(cors({
     origin : '*'
 }));
 
 app.use(express.json());
-/*app.use("/api/liste", );*/
 app.use('/api/carte_interactive', carteRouter);
+app.use('/api/client', clientRouter);
 
 
 app.listen(process.env.PORT, () => {
