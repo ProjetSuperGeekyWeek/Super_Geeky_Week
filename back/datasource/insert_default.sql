@@ -6,8 +6,8 @@ INSERT INTO role (libelle) VALUES
 
 -- Insert data into service table
 INSERT INTO service (libelle) VALUES
-                                  ('Electricity'),
-                                  ('Internet'),
+                                  ('Billets'),
+                                  ('Concours'),
                                   ('Catering');
 
 -- Insert data into emplacement_carte table
@@ -85,8 +85,8 @@ INSERT INTO jour(horaire_debut, horaire_fin, num_jour) VALUES ('10:00:00', '17:0
 
 -- Insert data into personne table
 INSERT INTO personne (nom, prenom, email, num_tel, id_role) VALUES
-                                                                ('Doe', 'John', 'john.doe@example.com', 123456789, 1),
-                                                                ('Smith', 'Alice', 'alice.smith@example.com', 987654321, 2),
+                                                                ('Admin', 'Admin', 'admin@admin.com', 123456789, 1),
+                                                                ('pre', 'pre', 'pre@pre.com', 987654321, 2),
                                                                 ('Johnson', 'Bob', 'bob.johnson@example.com', 555123456, 3);
 
 -- Insert data into stand table
