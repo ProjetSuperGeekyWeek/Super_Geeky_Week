@@ -47,6 +47,11 @@ const routes = [
     path: '/qrcode',
     name: 'qrcode',
     component: () => import('@/Client/Panier/views/QrcodeView.vue')
+  },
+  {
+    path: '/carte_admin',
+    name: 'carte_admin',
+    component: () => import('@/Admin/Carte/views/CarteAdminView.vue')
   }
 
 ]
