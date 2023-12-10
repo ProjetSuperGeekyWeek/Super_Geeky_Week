@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CarteInteractiveAdmin from '@/components/CarteInteractiveAdmin.vue'
+import CarteInteractiveAdmin from '@/Admin/Carte/components/CarteInteractiveAdmin.vue'
 
 export default {
     name: 'CarteAdminView',
