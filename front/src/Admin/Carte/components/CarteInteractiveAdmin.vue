@@ -6,6 +6,32 @@
             <div id="bandeau-selected">
                 <div id="haut-selected">
                     <!-- form -->
+                    <div id="nom_prestataire">
+                        <p>{{ nom_prestataire }}</p>
+                    </div>
+                    <div id="selection" v-show="neutre">
+                        <div id="buttons">
+                            <button id="button-stand" @click="ajoute()">Ajouter</button>
+                            <button id="button-stand" @click="modif()">Modifier</button>
+                            <button id="button-stand" @click="deleteStand(nom_stand,nom_prestataire)">Supprimer</button>
+                        </div>
+                    </div>
+                    <div id="ajouter" v-show="ajout">
+                        <div id="liste-prestataire-ajout">
+                            <select id="prestataire-ajout">
+                                <option :value="prestataire_ajout">Prestataire</option>
+                            </select>
+                            <button id="button-stand" @click="setStand(nom_stand,prestataire_ajout)">Ajouter</button>
+                        </div>
+                    </div>
+                    <div id="modifier" v-show="modification">
+                        <div id="liste-prestataire-modif">
+                            <select id="prestataire-modif">
+                                <option value="prestataire">{{ prestataire_ajout }}</option>
+                            </select>
+                            <button id="button-stand" @click="updateStand(nom_stand,prestataire_ajout)">Modifier</button>
+                        </div>
+                    </div>
                 </div>
                 <div id="bas-selected">
                     <h5 id="stand-selected">
@@ -81,15 +107,42 @@ export default {
     components: {
     InfobulleCarte,
     },
+    data() {
+        return {
+            ajout: false,
+            modification: false,
+            neutre: true,
+            prestataire_ajout: "prestataire",
+        }
+    },
     methods: {
-        setStand(){
-            // TODO
+        ajoute(){
+            this.ajout = true;
+            this.modification = false;
+            this.neutre = false;
         },
-        updateStand(){
-            // TODO
+        modif(){
+            this.ajout = false;
+            this.modification = true;
+            this.neutre = false;
         },
-        deleteStand(){
+        setStand(id,prestataire){
             // TODO
+            this.ajout = false;
+            this.modification = false;
+            this.neutre = true;
+            alert("stand ajouté id : " + id + " prestataire : " + prestataire);
+        },
+        updateStand(id,prestataire){
+            // TODO
+            this.ajout = false;
+            this.modification = false;
+            this.neutre = true;
+            alert("stand modifié id : " + id + " prestataire : " + prestataire);
+        },
+        deleteStand(id,prestataire){
+            // TODO
+            alert("stand supprimé id : " + id + " prestataire : " + prestataire);
         },
         async infoBulle(stand){
             var infoBulle = document.getElementById("infobulle");
@@ -106,8 +159,7 @@ export default {
             infoBulle.style.left = ((stand.getBoundingClientRect().left + window.pageXOffset) + ajustementX )+ "px";
         },
         async bandeauSelected(stand){
-            var result = null;
-            this.$store.commit('setNomPrestataire', result.data.nom);
+            this.$store.commit('setNomPrestataire', "nom");
             this.$store.commit('setNomStand', stand.id);
             var bandeau = document.getElementById("bandeau-selected");
             bandeau.style.maxWidth = "100%";
