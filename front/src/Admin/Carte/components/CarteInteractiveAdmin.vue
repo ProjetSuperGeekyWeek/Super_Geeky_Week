@@ -4,13 +4,14 @@
     <!-- manque correctif bug hover grande scene -->
         <div id="bandeau-container-formulaire">
             <div id="bandeau-selected">
-            <div id="haut-selected">
-                <!-- form -->
-            <div id="bas-selected">
-                <h5 id="stand-selected">
-                {{ nom_stand }}
-                </h5>
-            </div>
+                <div id="haut-selected">
+                    <!-- form -->
+                </div>
+                <div id="bas-selected">
+                    <h5 id="stand-selected">
+                    {{ nom_stand }}
+                    </h5>
+                </div>
             </div>
         </div>
         <svg id="carte" data-name="carte" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 756.73 757.44">
