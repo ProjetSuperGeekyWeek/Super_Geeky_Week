@@ -104,7 +104,6 @@ export default {
         if (result.error === 0 ){
           this.$store.commit('setNomPrestataire', result.data.nom);
           this.$store.commit('setNomStand', stand.id);
-          infoBulle.innerHTML = result.data.nom;
           //position
           var widthBulle = infoBulle.getBoundingClientRect().width;
           var heightBulle = infoBulle.getBoundingClientRect().height;
@@ -115,6 +114,9 @@ export default {
           infoBulle.style.left = ((stand.getBoundingClientRect().left + window.pageXOffset) + ajustementX )+ "px";
         } else {
           console.log(result.data);
+          alert("test")
+          alert(result.error);
+          alert("nom : " + result.data + " id : " + stand.id);
           this.$store.commit('setNomPrestataire', "nom");
         }
       } catch (error) {

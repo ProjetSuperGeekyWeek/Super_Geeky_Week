@@ -5,6 +5,7 @@ dotenv.config();
 const pool = require("../database/db.js");
 
 exports.getInfobulle = async (id) => {
+    console.log("id", id);
     try {
         const query = `
         SELECT * FROM personne 
@@ -13,6 +14,7 @@ exports.getInfobulle = async (id) => {
         `;
         const values = [id];
         const result = await pool.query(query, values);
+        console.log("nom", result.rows[0].nom);
         return result.rows[0];
     } catch (e) {
         throw e;
