@@ -1,6 +1,6 @@
 <template>
   <div id="Qrcodeg">
-    <p id="accroched">Rentrez vos informations </p>
+    <p id="accroched">{{ infoPrompt }}</p>
     <form v-if="!showQRCode" @submit.prevent="onFormSubmit">
       <label id="clo" for="name">  Prénom : </label>
       <input type="text" id="name" v-model="name">
@@ -20,10 +20,7 @@
       <p v-if="phoneNumberError" class="error-message">Entrer un numéro de téléphone</p>
     </form>
 
-    <!-- Adjust the prop name if needed -->
-
-    <qrcode-vue v-if="showQRCode" :value="qrCodeURL" :size="300" level="H" />
-
+    <qrcode-vue v-if="showQRCode" :value="qrCodeValue" :size="300" level="H" />
 
     <div v-if="showQRCode" class="info-section">
       <h3>Informations : </h3>
@@ -32,9 +29,7 @@
       <p><strong>Numéro de téléphone : </strong> {{ phoneNumber }}</p>
 
       <h3>QR Code URL:</h3>
-      <p>{{ qrCodeURL }}</p>
-
-
+      <p>{{ qrCodeValue }}</p>
     </div>
   </div>
 </template>
@@ -50,30 +45,53 @@ export default {
       familyName: '',
       phoneNumber: '',
       showQRCode: false,
-      qrCodeURL: '',
       phoneNumberError: false,
+      dataLoaded: false,
+      infoPrompt: 'Rentrez vos informations',
     };
+  },
+  computed: {
+    qrCodeValue() {
+      return `http://localhost:8080/qrcode/?name=${encodeURIComponent(this.name)}&familyName=${encodeURIComponent(this.familyName)}&phoneNumber=${encodeURIComponent(this.phoneNumber)}`;
+    },
+  },
+  mounted() {
+    if (!this.dataLoaded) {
+      const { name, familyName, phoneNumber } = this.$route.query;
+      if (name && familyName && phoneNumber) {
+        this.name = decodeURIComponent(name);
+        this.familyName = decodeURIComponent(familyName);
+        this.phoneNumber = decodeURIComponent(phoneNumber);
+
+        this.validateAndGenerateQRCode();
+      }
+      this.dataLoaded = true;
+    } else {
+      if (!this.showQRCode) {
+        this.$router.replace({ path: '/' });
+      }
+    }
   },
   methods: {
     validateAndGenerateQRCode() {
-      // Use a regular expression to validate phone number format
-      const phoneNumberRegex = /^\d{10}$/; // Change the regex pattern as needed
+      const phoneNumberRegex = /^\d{10}$/;
 
-      // Check if the entered phone number matches the regex pattern
       if (!phoneNumberRegex.test(this.phoneNumber)) {
-        // Set error flag to true
         this.phoneNumberError = true;
         return;
       }
 
-      // Reset the error flag
       this.phoneNumberError = false;
-
-      // Concatenate the values into a URL
-      // Update the QR code URL and show the QR code
-      this.qrCodeURL = `http://localhost:8080/qrcode/?name=${encodeURIComponent(this.name)}&familyName=${encodeURIComponent(this.familyName)}&phoneNumber=${encodeURIComponent(this.phoneNumber)}.com`;
       this.showQRCode = true;
 
+      const routeParams = {
+        name: encodeURIComponent(this.name),
+        familyName: encodeURIComponent(this.familyName),
+        phoneNumber: encodeURIComponent(this.phoneNumber),
+      };
+
+      this.$router.push({ query: routeParams });
+      this.infoPrompt = 'Qrcode';
     },
     onFormSubmit() {
       // Prevent the default form submission behavior
@@ -99,7 +117,7 @@ export default {
   font-size: 2rem;
   font-weight: bold;
   color: var(--title);
-  padding-top: 20%;
+  padding-top: 15%;
   padding-bottom: 2%;
   filter: drop-shadow(0px 0px 20px var(--title));
 }
@@ -123,11 +141,11 @@ export default {
 
 .info-section h3 {
   margin-bottom: 10px;
-  color: var(--paragraph); /* Apply custom color */
+  color: var(--paragraph);
 }
 
 .info-section p {
   margin: 5px 0;
-  color: var(--paragraph); /* Apply custom color */
+  color: var(--paragraph);
 }
 </style>
