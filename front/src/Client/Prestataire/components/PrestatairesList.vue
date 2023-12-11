@@ -3,12 +3,14 @@
     <div id="filtrePresta">
       <button @click="toggleDivs" class="filtreBtn">Filtre</button>
       <div v-show="showDivs">
-        <!-- Utilisez des boutons pour les filtres -->
         <button v-for="(filter, index) in filters" :key="index" @click="addFilter(filter)" class="filtreBtn2">{{ filter }}</button>
       </div>
     </div>
 
-    <!-- Filtres sélectionnés -->
+    <div class="search-bar">
+      <input type="text" v-model="keyword" placeholder="Rechercher par mot-clé" @input="applyKeywordFilter">
+    </div>
+
     <div class="selected-filters" v-show="filtersSelected">
       <div v-for="(selectedFilter, index) in selectedFiltersArray" :key="index" class="selected-filter">
         {{ selectedFilter }}
@@ -25,14 +27,10 @@
             </div>
             <div class="prestataires-description">
               <div class="prestataires-tag" v-for="tag in prestataire.tags" :key="tag">
-                <span>
-                  {{ tag }}
-                </span>
+                <span>{{ tag }}</span>
               </div>
               <div class="prestataires-info">
-                <p>
-                  {{ prestataire.info }}
-                </p>
+                <p>{{ prestataire.info }}</p>
               </div>
             </div>
           </div>
@@ -52,34 +50,28 @@ export default {
     return {
       showDivs: false,
       filters: ["Filter 1", "Filter 2", "Filter 3", "Filter 4"],
-      selectedFiltersArray: [], // Utilisez un tableau pour les filtres sélectionnés
+      selectedFiltersArray: [],
       filtersSelected: false,
+      keyword: '',
       prestataires: [
-        { nom: 'Prestataire 1', id: 1, info: 'Je suis un Prestataire investi et sérieux', tags: ['Filter 1', 'Filter 2'] },
-        { nom: 'Prestataire 2', id: 2, info: 'Je suis un Prestataire investi et sérieux', tags: ['Filter 1', 'Filter 3'] },
-        { nom: 'Prestataire 3', id: 3, info: 'Je suis un Prestataire investi et sérieux', tags: ['Filter 2', 'Filter 3'] }
+        { nom: 'Prestataire 1', id: 1, info: 'Ji suis un Prestataire investi et sérieux', tags: ['Filter 1', 'Filter 2'], image: '@/assets/image/logo/main_logo.png' },
+        { nom: 'Prestataire 2', id: 2, info: 'Je suis un Prestataire investi et sérieux', tags: ['Filter 1', 'Filter 3'], image: '@/assets/image/logo/main_logo.png' },
+        { nom: 'Prestataire 3', id: 3, info: 'Ju suis un Prestataire investi et sérieux', tags: ['Filter 2', 'Filter 3'], image: '@/assets/image/logo/main_logo.png' }
       ]
     };
   },
 
   computed: {
     filteredPrestataires() {
-      if (this.selectedFiltersArray.length === 0) {
-        return this.prestataires; // Si aucun filtre sélectionné, affichez tous les prestataires
-      } else {
-        return this.prestataires.filter((prestataire) => {
-          return this.selectedFiltersArray.every((filter) => {
-            return prestataire.tags.includes(filter);
-          });
-        });
-      }
-    }
+      return this.filterPrestatairesByKeyword(this.prestataires, this.keyword.toLowerCase(), this.selectedFiltersArray);
+    },
   },
 
   methods: {
     toggleDivs() {
       this.showDivs = !this.showDivs;
     },
+
     addFilter(filter) {
       if (!this.selectedFiltersArray.includes(filter)) {
         this.selectedFiltersArray.push(filter);
@@ -95,10 +87,26 @@ export default {
       if (this.selectedFiltersArray.length === 0) {
         this.filtersSelected = false;
       }
-    }
-  }
+    },
+
+    filterPrestatairesByKeyword(prestataires, keyword, selectedFiltersArray) {
+      return prestataires.filter((prestataire) => {
+        const includesKeyword = prestataire.nom.toLowerCase().includes(keyword) || prestataire.info.toLowerCase().includes(keyword);
+        const includesCategory = prestataire.tags.some(tag => selectedFiltersArray.includes(tag.toLowerCase()));
+
+        return includesKeyword || includesCategory;
+      });
+    },
+
+    applyKeywordFilter() {
+      this.selectedFiltersArray = [];
+      this.filteredPrestataires = this.filterPrestatairesByKeyword(this.prestataires, this.keyword.toLowerCase(), this.selectedFiltersArray);
+      this.filtersSelected = true;
+    },
+  },
 };
 </script>
+
 
 <style scoped>
 .prestataires {
