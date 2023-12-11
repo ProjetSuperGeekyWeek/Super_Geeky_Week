@@ -1,7 +1,7 @@
 const carteController = require('../controllers/carteController');
 const express = require('express');
 
-const router = express.Router();
+var router = express.Router();
 
 // affichage 
 router.get('/getInfoBulle/:id', carteController.getInfobulle);
