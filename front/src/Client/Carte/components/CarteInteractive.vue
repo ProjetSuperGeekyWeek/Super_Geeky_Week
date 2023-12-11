@@ -4,7 +4,7 @@
     <!-- manque correctif bug hover grande scene -->
     <div id="bandeau-container">
       <div id="bandeau-selected">
-        <div id="haut-selected">
+        <div v-if="!admin" id="haut-selected">
           <router-link id="image-selected" to="/services">
             <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" alt="Image du tournoi">
           </router-link>
@@ -19,6 +19,57 @@
           <h6 id="description-selected">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis ultricies nisl nisl eget nisl. Sed euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis ultricies nisl nisl eget nisl.
           </h6>
+        </div>
+        <div v-if="admin">
+          <div id="carte-config-prestataire">
+            <div id="carte-config-image">
+              <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" alt="Image du tournoi">
+            </div>
+            <div id="carte-config-nom">
+              <h4 id="titre-selected">
+                {{ nom_prestataire }}
+              </h4>
+            </div>
+          </div>
+          <div v-show="neutre">
+            <button @click="ajout = true; neutre = false; modif = false">
+              Ajouter
+            </button>
+            <button @click="modif = true; neutre = false; ajout = false">
+              Modifier
+            </button>
+            <button @click="deleteStand(idStand)">
+              Supprimer
+            </button>
+          </div>
+          <div v-show="ajout">
+            <select name="prestataire-ajout" id="select-prestataire-ajout">
+              <!-- TODO back avec allPresta -->
+              <option value="">Prestataire 1</option>
+              <option value="">Prestataire 2</option>
+              <option value="">Prestataire 3</option>
+            </select>
+            <button @click="ajout = false; neutre = true">
+              Retour
+            </button>
+            <button @click="addStand(idStand,idPresta)">
+              Ajouter
+            </button>
+          </div>
+          <div v-show="modif">
+            <select name="prestataire-modif" id="select-prestataire-modif">
+              <!-- TODO back avec allPresta -->
+              <option value="">Prestataire 1</option>
+              <option value="">Prestataire 2</option>
+              <option value="">Prestataire 3</option>
+            </select>
+            <button @click="modif = false; neutre = true">
+              Retour
+            </button>
+            <button @click="modifStand(idStand,idPresta)">
+              Modifier
+            </button>
+          </div>
         </div>
         <div id="bas-selected">
           <h5 id="stand-selected">
@@ -94,24 +145,43 @@ export default {
   components: {
     InfobulleCarte,
   },
+  data() {
+    return {
+      standHoverId: null,
+      neutre: true,
+      ajout: false,
+      modif: false,
+    }
+  },
   methods: {
+    deleteStand(idStand){
+      // TODO back
+      console.log("delete stand " + idStand);
+    },
+    addStand(idStand,idPresta){
+      // TODO back
+      console.log("add stand " + idStand + " " + idPresta);
+    },
+    modifStand(idStand,idPresta){
+      // TODO back
+      console.log("modif stand " + idStand + " " + idPresta);
+    },
     async infoBulle(stand){
       var infoBulle = document.getElementById("infobulle");
       infoBulle.setAttribute('class', 'infobulle');
       var result = null;
       try {
         result = await getInfoBulle(stand.id);
-        console.log(result, 3)
-          this.$store.commit('setNomPrestataire', result.nom);
-          this.$store.commit('setNomStand', stand.id);
-          //position
-          var widthBulle = infoBulle.getBoundingClientRect().width;
-          var heightBulle = infoBulle.getBoundingClientRect().height;
-          var widthStand = stand.getBoundingClientRect().width;
-          var ajustementX = (widthStand - widthBulle) / 2;
-          var ajustementY = -(heightBulle + 10);
-          infoBulle.style.top = ((stand.getBoundingClientRect().top + window.pageYOffset) + ajustementY )+ "px";
-          infoBulle.style.left = ((stand.getBoundingClientRect().left + window.pageXOffset) + ajustementX )+ "px";
+        this.$store.commit('setNomPrestataire', result.nom);
+        this.$store.commit('setNomStand', stand.id);
+        //position
+        var widthBulle = infoBulle.getBoundingClientRect().width;
+        var heightBulle = infoBulle.getBoundingClientRect().height;
+        var widthStand = stand.getBoundingClientRect().width;
+        var ajustementX = (widthStand - widthBulle) / 2;
+        var ajustementY = -(heightBulle + 10);
+        infoBulle.style.top = ((stand.getBoundingClientRect().top + window.pageYOffset) + ajustementY )+ "px";
+        infoBulle.style.left = ((stand.getBoundingClientRect().left + window.pageXOffset) + ajustementX )+ "px";
       } catch (error) {
         console.log("Cas Anormal dans GetInfoBulle");
       }
@@ -120,15 +190,11 @@ export default {
       var result = null;
       try {
         result = await getInfoPanel(stand.id);
-        if (result.error === 0 ){
-          this.$store.commit('setNomPrestataire', result.data.nom);
-          this.$store.commit('setNomStand', stand.id);
-          var bandeau = document.getElementById("bandeau-selected");
-          bandeau.style.maxWidth = "100%";
-          bandeau.style.border = "3px solid #000";
-        } else {
-          console.log(result.data);
-        }
+        this.$store.commit('setNomPrestataire', result.nom);
+        this.$store.commit('setNomStand', stand.id);
+        var bandeau = document.getElementById("bandeau-selected");
+        bandeau.style.maxWidth = "100%";
+        bandeau.style.border = "3px solid #000";
       } catch (error) {
         console.log("Cas anormal dans GetInfoPanel");
       }
@@ -166,9 +232,10 @@ export default {
 
       paths.forEach(stand => {
         stand.addEventListener('mouseenter', function(){
-          if(stand.classList.contains('stand') && vue.verifyNoClicked()){
+          if(stand.classList.contains('stand') && vue.verifyNoClicked() && stand.id !== vue.standHoverId){
             stand.setAttribute('class', 'stand stand-hover');
             vue.infoBulle(stand);
+            vue.standHoverId = stand.id;
           }
         });
         stand.addEventListener('mouseleave', function(){
@@ -176,6 +243,7 @@ export default {
             stand.setAttribute('class', 'stand');
             var infoBulle = document.getElementById("infobulle");
             infoBulle.setAttribute('class', 'infobulle-hidden');
+            vue.standHoverId = null;
           }
         });
         stand.addEventListener('click', function(){
@@ -202,7 +270,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['nom_prestataire', 'nom_stand'])
+    ...mapState(['nom_prestataire', 'nom_stand', 'admin'])
   },
 }
 </script>
