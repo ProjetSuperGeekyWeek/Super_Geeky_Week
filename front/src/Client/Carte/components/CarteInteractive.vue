@@ -117,6 +117,7 @@ export default {
           alert("test")
           alert(result.error);
           alert("nom : " + result.data + " id : " + stand.id);
+          alert(result)
           this.$store.commit('setNomPrestataire', "nom");
         }
       } catch (error) {
