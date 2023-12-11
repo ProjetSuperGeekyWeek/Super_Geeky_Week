@@ -113,7 +113,7 @@ export default {
           infoBulle.style.top = ((stand.getBoundingClientRect().top + window.pageYOffset) + ajustementY )+ "px";
           infoBulle.style.left = ((stand.getBoundingClientRect().left + window.pageXOffset) + ajustementX )+ "px";
       } catch (error) {
-        console.log("Cas anormal dans GetInfoBulle");
+        console.log("Cas Anormal dans GetInfoBulle");
       }
     },
     async bandeauSelected(stand){
