@@ -6,59 +6,59 @@ INSERT INTO role (libelle) VALUES
 
 -- Insert data into service table
 INSERT INTO service (libelle) VALUES
-                                  ('Electricity'),
-                                  ('Internet'),
+                                  ('Billets'),
+                                  ('Concours'),
                                   ('Catering');
 
 -- Insert data into emplacement_carte table
 INSERT INTO emplacement_carte (id_emplacement_carte) VALUES
-    (1),
-    (2),
-    (3),
-    (4),
-    (5),
-    (6),
-    (7),
-    (8),
-    (9),
-    (10),
-    (11),
-    (12),
-    (13),
-    (14),
-    (15),
-    (16),
-    (17),
-    (18),
-    (19),
-    (20),
-    (21),
-    (22),
-    (23),
-    (24),
-    (25),
-    (26),
-    (27),
-    (28),
-    (29),
-    (30),
-    (31),
-    (32),
-    (33),
-    (34),
-    (35),
-    (36),
-    (37),
-    (38),
-    (39),
-    (40),
-    (41),
-    (42),
-    (43),
-    (44),
-    (45),
-    (46),
-    (47);
+                                                         (1),
+                                                         (2),
+                                                         (3),
+                                                         (4),
+                                                         (5),
+                                                         (6),
+                                                         (7),
+                                                         (8),
+                                                         (9),
+                                                         (10),
+                                                         (11),
+                                                         (12),
+                                                         (13),
+                                                         (14),
+                                                         (15),
+                                                         (16),
+                                                         (17),
+                                                         (18),
+                                                         (19),
+                                                         (20),
+                                                         (21),
+                                                         (22),
+                                                         (23),
+                                                         (24),
+                                                         (25),
+                                                         (26),
+                                                         (27),
+                                                         (28),
+                                                         (29),
+                                                         (30),
+                                                         (31),
+                                                         (32),
+                                                         (33),
+                                                         (34),
+                                                         (35),
+                                                         (36),
+                                                         (37),
+                                                         (38),
+                                                         (39),
+                                                         (40),
+                                                         (41),
+                                                         (42),
+                                                         (43),
+                                                         (44),
+                                                         (45),
+                                                         (46),
+                                                         (47);
 
 -- Insert data into ressource table
 INSERT INTO ressource (nb_ressource, libelle_ressource) VALUES
@@ -78,10 +78,15 @@ INSERT INTO qrcode (lien) VALUES
                               ('https://example.com/qrcode2'),
                               ('https://example.com/qrcode3');
 
+-- Insert into jour table
+INSERT INTO jour(horaire_debut, horaire_fin, num_jour) VALUES ('09:00:00', '18:00:00', 1);
+INSERT INTO jour(horaire_debut, horaire_fin, num_jour) VALUES ('10:00:00', '17:00:00', 2);
+
+
 -- Insert data into personne table
 INSERT INTO personne (nom, prenom, email, num_tel, id_role) VALUES
-                                                                ('Doe', 'John', 'john.doe@example.com', 123456789, 1),
-                                                                ('Smith', 'Alice', 'alice.smith@example.com', 987654321, 2),
+                                                                ('Admin', 'Admin', 'admin@admin.com', 123456789, 1),
+                                                                ('pre', 'pre', 'pre@pre.com', 987654321, 2),
                                                                 ('Johnson', 'Bob', 'bob.johnson@example.com', 555123456, 3);
 
 -- Insert data into stand table
@@ -134,10 +139,13 @@ INSERT INTO stand (nom_stand, id_emplacement_carte, id_service) VALUES
                                                                     ('foodtruck 3', 46, 1),
                                                                     ('accueil', 47, 1);
 
--- Insert data into non_attribuer table
-INSERT INTO non_attribuer (prix, description, nb, id_personne) VALUES
-                                                                   (50.00, 'Unused chairs', 20, 2),
-                                                                   (100.00, 'Extra tables', 10, 3);
+-- Insert into non_attribuer table (unassigned spaces)
+INSERT INTO non_attribuer(prix, description, nb, prioritaire, id_service, id_jour, id_personne) VALUES (15.00, 'Forfait normal', 5, FALSE, 1, 1, 1);
+INSERT INTO non_attribuer(prix, description, nb, prioritaire, id_service, id_jour, id_personne) VALUES (25.00, 'Forfait prioritaire', 5, TRUE, 1, 1, 1);
+INSERT INTO non_attribuer(prix, description, nb, prioritaire, id_service, id_jour, id_personne) VALUES (15.00, 'Forfait handicapé', 5, TRUE, 1, 1, 1);
+INSERT INTO non_attribuer(prix, description, nb, prioritaire, id_service, id_jour, id_personne) VALUES (15.00, 'Forfait normal', 5, FALSE, 1, 2, 1);
+INSERT INTO non_attribuer(prix, description, nb, prioritaire, id_service, id_jour, id_personne) VALUES (25.00, 'Forfait prioritaire', 5, TRUE, 1, 2, 1);
+INSERT INTO non_attribuer(prix, description, nb, prioritaire, id_service, id_jour, id_personne) VALUES (15.00, 'Forfait handicapé', 5, TRUE, 1, 2, 1);
 
 -- Insert data into acheteur table
 INSERT INTO acheteur (non_acheteur, prenom_acheteur, tel_acheteur, email_acheteur, id_qrcode) VALUES
