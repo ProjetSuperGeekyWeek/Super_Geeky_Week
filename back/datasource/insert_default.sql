@@ -145,17 +145,62 @@ INSERT INTO non_attribuer(prix, description, nb, prioritaire, id_service, id_jou
 INSERT INTO non_attribuer(prix, description, nb, prioritaire, id_service, id_jour, id_personne) VALUES (15.00, 'Forfait handicapé', 5, TRUE, 1, 1, 1);
 INSERT INTO non_attribuer(prix, description, nb, prioritaire, id_service, id_jour, id_personne) VALUES (15.00, 'Forfait normal', 5, FALSE, 1, 2, 1);
 INSERT INTO non_attribuer(prix, description, nb, prioritaire, id_service, id_jour, id_personne) VALUES (25.00, 'Forfait prioritaire', 5, TRUE, 1, 2, 1);
-INSERT INTO non_attribuer(prix, description, nb, prioritaire, id_service, id_jour, id_personne) VALUES (15.00, 'Forfait handicapé', 5, TRUE, 1, 2, 1);
+INSERT INTO associer_a (id_personne, id_stand) VALUES
+                                                   (1,1),
+                                                   (2,2),
+                                                   (3,3),
+                                                   (1, 4),
+                                                   (2,5),
+                                                   (3,6),
+                                                   (1,7),
+                                                   (2,8),
+                                                   (3,9),
+                                                   (1,10),
+                                                   (1,11),
+                                                   (1,12),
+                                                   (1,13),
+                                                   (1,14),
+                                                   (1,15),
+                                                   (1,16),
+                                                   (1,17),
+                                                   (1,18),
+                                                   (1,19),
+                                                   (1,20),
+                                                   (1,21),
+                                                   (1,22),
+                                                   (1,23),
+                                                   (1,24),
+                                                   (1,25),
+                                                   (1,26),
+                                                   (1,27),
+                                                   (1,28),
+                                                   (1,29),
+                                                   (1,30),
+                                                   (1,31),
+                                                   (1,32),
+                                                   (1,33),
+                                                   (1,34),
+                                                   (1,35),
+                                                   (1,36),
+                                                   (1,37),
+                                                   (1,38),
+                                                   (1,39),
+                                                   (1,40),
+                                                   (1, 41),
+                                                   (1, 42),
+                                                   (1, 43),
+                                                   (1,44),
+                                                   (1,45),
+                                                   (1,46),
+                                                   (1,47);
 
 -- Insert data into acheteur table
-INSERT INTO acheteur (non_acheteur, prenom_acheteur, tel_acheteur, email_acheteur, id_qrcode) VALUES
-                                                                                                  ('Visitor1', 'Alice', '111222333', 'visitor1@example.com', 1),
-                                                                                                  ('Visitor2', 'Bob', '444555666', 'visitor2@example.com', 2);
+INSERT INTO non_attribuer(prix, description, nb, prioritaire, id_service, id_jour, id_personne) VALUES (15.00, 'Forfait handicapé', 5, TRUE, 1, 2, 1);
 
 -- Insert data into associer_a table
-INSERT INTO associer_a (id_personne, id_stand) VALUES
-                                                   (2, 1),
-                                                   (3, 2);
+INSERT INTO acheteur (non_acheteur, prenom_acheteur, tel_acheteur, email_acheteur) VALUES
+                                                                                       ('Visitor1', 'Alice', '111222333', 'visitor1@example.com'),
+                                                                                       ('Visitor2', 'Bob', '444555666', 'visitor2@example.com');
 
 -- Insert data into ressource_alouer table
 INSERT INTO ressource_alouer (id_emplacement_carte, id_ressource) VALUES

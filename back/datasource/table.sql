@@ -1,19 +1,19 @@
 -- Drop table if exists
-DROP TABLE IF EXISTS associer;
-DROP TABLE IF EXISTS tag_stand;
-DROP TABLE IF EXISTS ressource_alouer;
-DROP TABLE IF EXISTS associer_a;
-DROP TABLE IF EXISTS non_attribuer;
-DROP TABLE IF EXISTS stand;
-DROP TABLE IF EXISTS personne;
-DROP TABLE IF EXISTS jour;
-DROP TABLE IF EXISTS qrcode;
-DROP TABLE IF EXISTS acheteur;
-DROP TABLE IF EXISTS tag;
-DROP TABLE IF EXISTS ressource;
-DROP TABLE IF EXISTS emplacement_carte;
-DROP TABLE IF EXISTS service;
-DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS associer CASCADE;
+DROP TABLE IF EXISTS tag_stand CASCADE;
+DROP TABLE IF EXISTS ressource_alouer CASCADE;
+DROP TABLE IF EXISTS associer_a CASCADE;
+DROP TABLE IF EXISTS non_attribuer CASCADE;
+DROP TABLE IF EXISTS stand CASCADE;
+DROP TABLE IF EXISTS personne CASCADE;
+DROP TABLE IF EXISTS jour CASCADE;
+DROP TABLE IF EXISTS qrcode CASCADE;
+DROP TABLE IF EXISTS acheteur CASCADE;
+DROP TABLE IF EXISTS tag CASCADE;
+DROP TABLE IF EXISTS ressource CASCADE;
+DROP TABLE IF EXISTS emplacement_carte CASCADE;
+DROP TABLE IF EXISTS service CASCADE;
+DROP TABLE IF EXISTS role CASCADE;
 
 CREATE TABLE role (
                       id_role SERIAL PRIMARY KEY,
@@ -26,7 +26,7 @@ CREATE TABLE service (
 );
 
 CREATE TABLE emplacement_carte (
-    id_emplacement_carte SERIAL PRIMARY KEY
+                                   id_emplacement_carte SERIAL PRIMARY KEY
 );
 
 CREATE TABLE ressource (
