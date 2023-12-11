@@ -102,8 +102,8 @@ export default {
       try {
         result = await getInfoBulle(stand.id);
         console.log(result, 3)
-        if (result.error === 0 ){
-          this.$store.commit('setNomPrestataire', result.data.nom);
+        if (result !== null && result !== undefined){
+          this.$store.commit('setNomPrestataire', result.nom);
           this.$store.commit('setNomStand', stand.id);
           //position
           var widthBulle = infoBulle.getBoundingClientRect().width;
@@ -114,7 +114,7 @@ export default {
           infoBulle.style.top = ((stand.getBoundingClientRect().top + window.pageYOffset) + ajustementY )+ "px";
           infoBulle.style.left = ((stand.getBoundingClientRect().left + window.pageXOffset) + ajustementX )+ "px";
         } else {
-          console.log(result.data, 1);
+          console.log(result, 1);
           //alert("test")
           //alert(result.error);
           //alert("nom : " + result.data + " id : " + stand.id);
