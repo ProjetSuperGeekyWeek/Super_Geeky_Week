@@ -13,9 +13,10 @@ async function getInfobulleFromAPI(id){
     const client = await pool.connect();
     try {
         const query = `
-        SELECT * FROM personne 
-        INNER JOIN associer_a ON personne.id_personne = associer_a.id_personne
-        WHERE id_stand = $1
+        SELECT nom_personne AS nom, prenom_personne AS prenom,
+            image_personne AS image FROM personne 
+        INNER JOIN stand ON personne.id_personne = stand.id_personne
+        WHERE id_emplacement = $1
         `;
         const values = [id];
         const result = await client.query(query, values);
@@ -41,9 +42,10 @@ async function getInfoPanelFromAPI(id){
     const client = await pool.connect();
     try {
         const query = `
-        SELECT * FROM personne 
-        INNER JOIN associer_a ON personne.id_personne = associer_a.id_personne
-        WHERE id_stand = $1
+        SELECT nom_personne AS nom, prenom_personne AS prenom,
+            image_personne AS image FROM personne 
+        INNER JOIN stand ON personne.id_personne = stand.id_personne
+        WHERE id_emplacement = $1
         `;
         const values = [id];
         const result = await client.query(query, values);
@@ -63,14 +65,14 @@ const saveStand = (id, id_prestataire,callback) => {
     });
 }
 
-async function saveStandFromAPI(id, id_prestataire){
+async function saveStandFromAPI(id_emplacement, id_prestataire){
     const client = await pool.connect();
     try {
         const query = `
-        INSERT INTO associer_a (id_stand, id_personne)
+        INSERT INTO stand (id_emplacement, id_personne)
         VALUES ($1, $2)
         `;
-        const values = [id, id_prestataire];
+        const values = [id_emplacement, id_prestataire];
         const result = await client.query(query, values);
         return result.rows[0];
     } catch (e) {
@@ -80,23 +82,23 @@ async function saveStandFromAPI(id, id_prestataire){
     }
 }
 
-const updateStand = (id, id_prestataire,callback) => {
-    updateStandFromAPI(id, id_prestataire).then(res => {
+const updateStand = (id_emplacement, id_prestataire,callback) => {
+    updateStandFromAPI(id_emplacement, id_prestataire).then(res => {
         callback(null, res);
     }).catch(error => {
         callback(error, null);
     });
 }
 
-async function updateStandFromAPI(id, id_prestataire){
+async function updateStandFromAPI(id_emplacement, id_prestataire){
     const client = await pool.connect();
     try {
         const query = `
-        UPDATE associer_a
+        UPDATE stand
         SET id_personne = $2
-        WHERE id_stand = $1
+        WHERE id_emplacement = $1
         `;
-        const values = [id, id_prestataire];
+        const values = [id_emplacement, id_prestataire];
         const result = await client.query(query, values);
         return result.rows[0];
     } catch (e) {
@@ -106,22 +108,22 @@ async function updateStandFromAPI(id, id_prestataire){
     }
 }
 
-const deleteStand = (id,callback) => {
-    deleteStandFromAPI(id).then(res => {
+const deleteStand = (id_emplacement,callback) => {
+    deleteStandFromAPI(id_emplacement).then(res => {
         callback(null, res);
     }).catch(error => {
         callback(error, null);
     });
 }
 
-async function deleteStandFromAPI(id){
+async function deleteStandFromAPI(id_emplacement){
     const client = await pool.connect();
     try {
         const query = `
-        DELETE FROM associer_a
-        WHERE id_stand = $1
+        DELETE FROM stand
+        WHERE id_emplacement = $1
         `;
-        const values = [id];
+        const values = [id_emplacement];
         const result = await client.query(query, values);
         return result.rows[0];
     } catch (e) {
