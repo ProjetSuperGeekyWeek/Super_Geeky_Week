@@ -135,11 +135,12 @@ CREATE TABLE evenement (
 
 CREATE TABLE creneau (
     id_evenement INTEGER NOT NULL,
-    jour_evenement DATE NOT NULL,
+    id_calendrier INTEGER NOT NULL,
     heure_debut_evenement TIME NOT NULL,
     heure_fin_evenement TIME NOT NULL,
-    CONSTRAINT pk_creneau PRIMARY KEY (id_evenement, jour_evenement, heure_debut_evenement, heure_fin_evenement),
-    CONSTRAINT fk_evenement FOREIGN KEY (id_evenement) REFERENCES evenement(id_evenement)
+    CONSTRAINT pk_creneau PRIMARY KEY (id_evenement, id_calendrier, heure_debut_evenement, heure_fin_evenement),
+    CONSTRAINT fk_evenement FOREIGN KEY (id_evenement) REFERENCES evenement(id_evenement),
+    CONSTRAINT fk_calendrier FOREIGN KEY (id_calendrier) REFERENCES calendrier(id_calendrier)
 );
 
 
