@@ -182,10 +182,18 @@ export default {
       console.log("add stand " + this.idStand + " " + this.idPresta);
       await saveStand(this.idStand,this.idNouveauPresta);
       await this.updateCarte();
+      this.idPresta = this.idNouveauPresta;
+      this.idNouveauPresta = null;
+      this.neutre = true;
+      this.ajout = false;
     },
     async modifStand(){
       await updateStand(this.idStand,this.idNouveauPresta);
       await this.updateCarte();
+      this.idPresta = this.idNouveauPresta;
+      this.idNouveauPresta = null;
+      this.neutre = true;
+      this.modif = false;
     },
     async updateCarte(){
       var result = null;
