@@ -38,7 +38,7 @@
             <button @click="modif = true; neutre = false; ajout = false">
               Modifier
             </button>
-            <button @click="deleteStand(idStand)">
+            <button @click="deleteStand()">
               Supprimer
             </button>
           </div>
@@ -52,7 +52,7 @@
             <button @click="ajout = false; neutre = true">
               Retour
             </button>
-            <button @click="addStand(idStand,idPresta)">
+            <button @click="addStand()">
               Ajouter
             </button>
           </div>
@@ -66,7 +66,7 @@
             <button @click="modif = false; neutre = true">
               Retour
             </button>
-            <button @click="modifStand(idStand,idPresta)">
+            <button @click="modifStand()">
               Modifier
             </button>
           </div>
@@ -138,7 +138,7 @@
 <script>
 import {mapState} from "vuex";
 import InfobulleCarte from '@/Client/Carte/components/InfobulleCarte.vue'
-import { getInfoBulle, getInfoPanel } from '@/../../back/axiosFunctions/carteAxios.js'
+import { getInfoBulle, getInfoPanel, getAllStandsTaken, getInfoPanelNoTake } from '@/../../back/axiosFunctions/carteAxios.js'
 
 export default {
   name: 'CarteInteractive',
@@ -147,24 +147,35 @@ export default {
   },
   data() {
     return {
+      alreadyEvent: false,
+      idAllStandsTaken: [],
       standHoverId: null,
       neutre: true,
       ajout: false,
       modif: false,
+      idPresta: null,
+      idStand: null,
     }
   },
   methods: {
-    deleteStand(idStand){
+    deleteStand(){
       // TODO back
-      console.log("delete stand " + idStand);
+      console.log("delete stand " + this.idStand);
+      // await deleteStand(idStand);
     },
-    addStand(idStand,idPresta){
+    addStand(){
       // TODO back
-      console.log("add stand " + idStand + " " + idPresta);
+      alert("add 1")
+      alert("idStand : " + this.idStand)
+      alert("idPresta : " + this.idPresta)
+      alert("add 2")
+      console.log("add stand " + this.idStand + " " + this.idPresta);
+      // await saveStand(idStand,idPresta);
     },
-    modifStand(idStand,idPresta){
+    modifStand(){
       // TODO back
-      console.log("modif stand " + idStand + " " + idPresta);
+      console.log("modif stand " + this.idStand + " " + this.idPresta);
+      // await updateStand(idStand,idPresta);
     },
     async infoBulle(stand){
       var infoBulle = document.getElementById("infobulle");
@@ -172,8 +183,8 @@ export default {
       var result = null;
       try {
         result = await getInfoBulle(stand.id);
-        this.$store.commit('setNomPrestataire', result.nom);
-        this.$store.commit('setNomStand', stand.id);
+        this.$store.commit('setNomPrestataire', result.nom + " " + result.prenom);
+        this.$store.commit('setNomStand', result.nomstand);
         //position
         var widthBulle = infoBulle.getBoundingClientRect().width;
         var heightBulle = infoBulle.getBoundingClientRect().height;
@@ -188,16 +199,27 @@ export default {
     },
     async bandeauSelected(stand){
       var result = null;
-      try {
-        result = await getInfoPanel(stand.id);
-        this.$store.commit('setNomPrestataire', result.nom);
-        this.$store.commit('setNomStand', stand.id);
-        var bandeau = document.getElementById("bandeau-selected");
-        bandeau.style.maxWidth = "100%";
-        bandeau.style.border = "3px solid #000";
-      } catch (error) {
-        console.log("Cas anormal dans GetInfoPanel");
+      if(!this.verifyTaken(stand)){
+        this.$store.commit('setNomPrestataire', "Aucun prestataire");
+        try {
+          result = await getInfoPanelNoTake(stand.id);
+        } catch (error) {
+          console.log("Cas anormal dans GetInfoPanelNoTake");
+        }
+      } else {
+        try {
+          result = await getInfoPanel(stand.id);
+          this.$store.commit('setNomPrestataire', result.nom + " " + result.prenom);
+          this.idPresta = result.idpresta;
+        } catch (error) {
+          console.log("Cas anormal dans GetInfoPanel");
+        }
       }
+      this.idStand = stand.id;
+      this.$store.commit('setNomStand', result.nomstand);
+      var bandeau = document.getElementById("bandeau-selected");
+      bandeau.style.maxWidth = "100%";
+      bandeau.style.border = "3px solid #000";
     },
     resetAllClicked(){
       var map = document.getElementById('carte');
@@ -223,50 +245,70 @@ export default {
       }
       return noClicked;
     },
-    addMapListener(){
-      var map = document.getElementById("carte");
-      var polygones = map.getElementsByTagName("polygon");
-      var rects = map.getElementsByTagName("rect");
-      var paths = [...polygones, ...rects];
-      var vue = this;
+    verifyTaken(stand){
+      for (var i = 0; i < this.idAllStandsTaken.length; i++) {
+        if(stand.id == this.idAllStandsTaken[i]){
+          return true;
+        }
+      }
+      return false;
+    },
+    async addMapListener(){
+      if(this.alreadyEvent === false){
+        var result = null;
+        try {
+          result = await getAllStandsTaken();
+          for (var i = 0; i < result.length; i++) {
+            this.idAllStandsTaken.push(result[i].id_emplacement);
+          }
+        } catch (error) {
+          console.log("Cas anormal dans getAllStandsTaken");
+        }
+        var map = document.getElementById("carte");
+        var polygones = map.getElementsByTagName("polygon");
+        var rects = map.getElementsByTagName("rect");
+        var paths = [...polygones, ...rects];
+        var vue = this;
 
-      paths.forEach(stand => {
-        stand.addEventListener('mouseenter', function(){
-          if(stand.classList.contains('stand') && vue.verifyNoClicked() && stand.id !== vue.standHoverId){
-            stand.setAttribute('class', 'stand stand-hover');
-            vue.infoBulle(stand);
-            vue.standHoverId = stand.id;
-          }
-        });
-        stand.addEventListener('mouseleave', function(){
-          if(stand.classList.contains('stand-hover')){
-            stand.setAttribute('class', 'stand');
-            var infoBulle = document.getElementById("infobulle");
-            infoBulle.setAttribute('class', 'infobulle-hidden');
-            vue.standHoverId = null;
-          }
-        });
-        stand.addEventListener('click', function(){
-          if(stand.classList.contains('stand-selected') && stand.classList.contains('stand')){
-            setTimeout(function(){
+        paths.forEach(stand => {
+          stand.addEventListener('mouseenter', function(){
+            if(stand.classList.contains('stand') && vue.verifyNoClicked() && stand.id !== vue.standHoverId && vue.verifyTaken(stand)){
               stand.setAttribute('class', 'stand stand-hover');
-            }, 100);
-            vue.infoBulle(stand);
-            var bandeau = document.getElementById("bandeau-selected");
-            bandeau.style.maxWidth = "0%";
-            bandeau.style.border = "none";
-          }
-          else if(stand.classList.contains('stand')){
-            vue.resetAllClicked();
-            setTimeout(function(){
-              stand.setAttribute('class', 'stand stand-selected');
-            }, 100);
-            var infoBulle = document.getElementById("infobulle");
-            infoBulle.setAttribute('class', 'infobulle-hidden');
-            vue.bandeauSelected(stand);
-          }
+              vue.infoBulle(stand);
+              vue.standHoverId = stand.id;
+            }
+          });
+          stand.addEventListener('mouseleave', function(){
+            if(stand.classList.contains('stand-hover')){
+              stand.setAttribute('class', 'stand');
+              var infoBulle = document.getElementById("infobulle");
+              infoBulle.setAttribute('class', 'infobulle-hidden');
+              vue.standHoverId = null;
+            }
+          });
+          stand.addEventListener('click', function(){
+            if(stand.classList.contains('stand-selected') && stand.classList.contains('stand')){
+              setTimeout(function(){
+                stand.setAttribute('class', 'stand stand-hover');
+              }, 100);
+              vue.infoBulle(stand);
+              var bandeau = document.getElementById("bandeau-selected");
+              bandeau.style.maxWidth = "0%";
+              bandeau.style.border = "none";
+            }
+            else if(stand.classList.contains('stand') && (vue.admin || vue.verifyTaken(stand))){
+              vue.resetAllClicked();
+              vue.bandeauSelected(stand);
+              setTimeout(function(){
+                stand.setAttribute('class', 'stand stand-selected');
+              }, 100);
+              var infoBulle = document.getElementById("infobulle");
+              infoBulle.setAttribute('class', 'infobulle-hidden');
+            }
+          });
         });
-      });
+        this.alreadyEvent = true;
+      }
     },
   },
   computed: {

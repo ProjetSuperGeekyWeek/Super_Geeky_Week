@@ -14,9 +14,11 @@ async function getInfobulleFromAPI(id){
     try {
         const query = `
         SELECT nom_personne AS nom, prenom_personne AS prenom,
-            image_personne AS image FROM personne 
+            image_personne AS image, emplacement.nom_emplacement AS nomStand
+            FROM personne 
         INNER JOIN stand ON personne.id_personne = stand.id_personne
-        WHERE id_emplacement = $1
+        INNER JOIN emplacement ON stand.id_emplacement = emplacement.id_emplacement
+        WHERE stand.id_emplacement = $1
         `;
         const values = [id];
         const result = await client.query(query, values);
@@ -43,13 +45,65 @@ async function getInfoPanelFromAPI(id){
     try {
         const query = `
         SELECT nom_personne AS nom, prenom_personne AS prenom,
-            image_personne AS image FROM personne 
+            image_personne AS image, emplacement.nom_emplacement AS nomStand, 
+            personne.id_personne AS idPresta FROM personne 
         INNER JOIN stand ON personne.id_personne = stand.id_personne
-        WHERE id_emplacement = $1
+        INNER JOIN emplacement ON stand.id_emplacement = emplacement.id_emplacement
+        WHERE stand.id_emplacement = $1
         `;
         const values = [id];
         const result = await client.query(query, values);
         return result.rows[0];
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
+const getInfoPanelNoTake = (id,callback) => {
+    getInfoPanelNoTakeFromAPI(id).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function getInfoPanelNoTakeFromAPI(id){
+    const client = await pool.connect();
+    try {
+        const query = `
+        SELECT emplacement.nom_emplacement AS nomStand FROM emplacement
+        WHERE emplacement.id_emplacement = $1
+        `;
+        const values = [id];
+        const result = await client.query(query, values);
+        return result.rows[0];
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
+const getAllStandsTaken = (callback) => {
+    getAllStandsTakenFromAPI().then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function getAllStandsTakenFromAPI(){
+    const client = await pool.connect();
+    console.log("stands");
+    try {
+        const query = `
+        SELECT id_emplacement FROM stand
+        `;
+        const result = await client.query(query);
+        console.log("result", result.rows);
+        return result.rows;
     } catch (e) {
         throw e;
     } finally {
@@ -135,6 +189,7 @@ async function deleteStandFromAPI(id_emplacement){
 module.exports = { 
     getInfobulle,
     getInfoPanel,
+    getAllStandsTaken,
     saveStand,
     updateStand,
     deleteStand

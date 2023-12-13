@@ -26,6 +26,31 @@ exports.getInfoPanel = async (req, res) => {
     });
 }
 
+exports.getInfoPanelNoTake = async (req, res) => {
+    const id = req.params.id;
+    carteService.getInfoPanelNoTake(id, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving infopanel."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
+
+exports.getAllStandsTaken = async (req, res) => {
+    carteService.getAllStandsTaken((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving stands taken."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
+
 exports.saveStand = async (req, res) => {
     const id = req.params.id;
     const id_prestataire = req.query.id_prestataire;
