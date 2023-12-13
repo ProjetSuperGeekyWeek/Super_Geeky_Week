@@ -139,6 +139,7 @@
 import {mapState} from "vuex";
 import InfobulleCarte from '@/Client/Carte/components/InfobulleCarte.vue'
 import { getInfoBulle, getInfoPanel, getAllStandsTaken, getInfoPanelNoTake } from '@/../../back/axiosFunctions/carteAxios.js'
+// import { getAllPrestataires } from '@/../../back/axiosFunctions/prestataireAxios.js'
 
 export default {
   name: 'CarteInteractive',

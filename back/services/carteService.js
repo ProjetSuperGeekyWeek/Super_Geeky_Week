@@ -102,7 +102,6 @@ async function getAllStandsTakenFromAPI(){
         SELECT id_emplacement FROM stand
         `;
         const result = await client.query(query);
-        console.log("result", result.rows);
         return result.rows;
     } catch (e) {
         throw e;

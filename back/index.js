@@ -5,6 +5,7 @@ const cors = require('cors');
 dotenv.config();
 
 const carteRouter = require('./routes/carteRouter');
+const prestataireRouter = require('./routes/prestataireRouter');
 const clientRouter = require('./routes/clientRouter');
 
 app.use(cors({
@@ -13,6 +14,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use('/api/carte_interactive', carteRouter);
+app.use('/api/prestataire', prestataireRouter);
 app.use('/api/client', clientRouter);
 
 
