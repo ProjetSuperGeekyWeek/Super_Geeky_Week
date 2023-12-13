@@ -45,7 +45,8 @@ async function getInfoPanelFromAPI(id){
     try {
         const query = `
         SELECT nom_personne AS nom, prenom_personne AS prenom,
-            image_personne AS image, emplacement.nom_emplacement AS nomStand, 
+            image_personne AS image, emplacement.nom_emplacement AS nomStand,
+            description_personne AS description,
             personne.id_personne AS idPresta FROM personne 
         INNER JOIN stand ON personne.id_personne = stand.id_personne
         INNER JOIN emplacement ON stand.id_emplacement = emplacement.id_emplacement
@@ -188,6 +189,7 @@ async function deleteStandFromAPI(id_emplacement){
 module.exports = { 
     getInfobulle,
     getInfoPanel,
+    getInfoPanelNoTake,
     getAllStandsTaken,
     saveStand,
     updateStand,

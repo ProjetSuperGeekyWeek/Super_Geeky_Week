@@ -1,4 +1,4 @@
-const prestataireSerices = require('../services/prestataireServices');
+const prestataireSerices = require('../services/prestataireService');
 
 exports.getAllPrestataires = async (req, res) => {
     prestataireSerices.getAllPrestataires((err, data) => {

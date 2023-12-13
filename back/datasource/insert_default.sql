@@ -5,10 +5,11 @@ INSERT INTO role (nom_role) VALUES
     ('Visitor');
 
 -- Insert data into personne table
-INSERT INTO personne (nom_personne, prenom_personne, mail_personne, mdp_personne, image_personne, id_role) VALUES
-    ('Admin', 'Admin', 'admin@admin.com', 'Admin1234&', 'random.png', 1),
-    ('Jean', 'Pierre', 'jean@gmail.com', 'User1234&', 'random.png', 2),
-    ('Bob', 'Lennon', 'bob@gmail.com', 'User1234&', 'random.png', 3);
+INSERT INTO personne (nom_personne, prenom_personne, mail_personne, 
+    mdp_personne, image_personne, description_personne, id_role) VALUES
+        ('Admin', 'Admin', 'admin@admin.com', 'Admin1234&', 'random.png','Je suis un Admin', 1),
+        ('Jean', 'Pierre', 'jean@gmail.com', 'User1234&', 'random.png','Je suis un super prestataire qui dance', 2),
+        ('Bob', 'Lennon', 'bob@gmail.com', 'User1234&', 'random.png','Je suis un prestataire prestigieux qui aime l or', 3);
 
 
 -- Insert data into emplacement_carte table

@@ -30,6 +30,7 @@ CREATE TABLE personne (
     mail_personne VARCHAR(100) NOT NULL,
     mdp_personne VARCHAR(50) NOT NULL,
     image_personne VARCHAR(100) NOT NULL,
+    description_personne VARCHAR(255) NOT NULL,
     id_role INTEGER NOT NULL,
     CONSTRAINT fk_role FOREIGN KEY (id_role) REFERENCES role(id_role)
 );

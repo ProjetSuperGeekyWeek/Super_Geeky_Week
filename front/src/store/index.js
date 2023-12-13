@@ -23,6 +23,7 @@ export default new Vuex.Store({
 
     },
     nom_prestataire: '',
+    prenom_prestataire: '',
     nom_stand: '',
   },
   getters: {
@@ -42,6 +43,9 @@ export default new Vuex.Store({
     },
     setNomPrestataire(state, payload) {
       state.nom_prestataire = payload;
+    },
+    setPrenomPrestataire(state, payload) {
+      state.prenom_prestataire = payload;
     },
     setNomStand(state, payload) {
       state.nom_stand = payload;

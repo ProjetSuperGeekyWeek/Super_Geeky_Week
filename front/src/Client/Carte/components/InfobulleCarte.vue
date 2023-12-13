@@ -5,7 +5,7 @@
                 <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" alt="Image du tournoi">
             </div>
             <h4 id="titre">
-                {{ nom_prestataire }}
+                {{ nom_prestataire }} {{ prenom_prestataire }}
             </h4>
         </div>
         <div id="bas">
@@ -24,7 +24,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(['nom_prestataire', 'nom_stand']),
+        ...mapState(['nom_prestataire', 'prenom_prestataire', 'nom_stand']),
     },
 }
 </script>
