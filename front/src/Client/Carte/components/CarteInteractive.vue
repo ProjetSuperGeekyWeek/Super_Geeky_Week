@@ -206,6 +206,7 @@ export default {
         console.log("Cas anormal dans getAllStandsTaken");
       }
       this.changeColorNoTaken();
+      await this.bandeauSelected(document.getElementById(this.idStand));
     },
     async infoBulle(stand){
       var infoBulle = document.getElementById("infobulle");
