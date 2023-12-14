@@ -196,6 +196,9 @@ export default {
       this.modif = false;
     },
     async updateCarte(){
+      var bandeau = document.getElementById("bandeau-selected");
+      bandeau.style.maxWidth = "0%";
+      bandeau.style.border = "none";
       var result = null;
       try {
         result = await getAllStandsTaken();
