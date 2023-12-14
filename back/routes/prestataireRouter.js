@@ -5,6 +5,9 @@ var router = express.Router();
 
 // affichage
 router.get('/', prestataireController.getAllPrestataires);
+router.get('/:id', prestataireController.getPrestataireById);
+router.get('/nom/:nom', prestataireController.getPrestataireByNom);
+router.get('/:id/tags', prestataireController.getPrestataireTags);
 
 
 module.exports = router;

@@ -4,7 +4,22 @@ async function getAllPrestataires() {
     return await getRequest("/api/prestataire", "GETALLPRESTATAIRES");
 }
 
+async function getPrestataireById(id) {
+    return await getRequest(`/api/prestataire/${id}`, "GETPRESTATAIREBYID");
+}
+
+async function getPrestataireByNom(nom) {
+    return await getRequest(`/api/prestataire/nom/${nom}`, "GETPRESTATAIREBYNOM");
+}
+
+async function getPrestataireTags(id) {
+    return await getRequest(`/api/prestataire/${id}/tags`, "GETPRESTATAIRETAGS");
+}
+
 
 export { 
-    getAllPrestataires 
+    getAllPrestataires ,
+    getPrestataireById,
+    getPrestataireByNom,
+    getPrestataireTags
 };

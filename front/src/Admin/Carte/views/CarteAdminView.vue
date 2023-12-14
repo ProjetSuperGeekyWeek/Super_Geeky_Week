@@ -1,16 +1,16 @@
 <template>
     <div id="view-carte-admin">
-        <CarteInteractiveAdmin/>
+        <CarteInteractive/>
     </div>
 </template>
 
 <script>
-import CarteInteractiveAdmin from '@/Admin/Carte/components/CarteInteractiveAdmin.vue'
+import CarteInteractive from '@/Client/Carte/components/CarteInteractive.vue'
 
 export default {
     name: 'CarteAdminView',
     components: {
-        CarteInteractiveAdmin
+        CarteInteractive
     }
 }
 
