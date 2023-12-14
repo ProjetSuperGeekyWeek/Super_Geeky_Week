@@ -172,16 +172,14 @@ export default {
     async deleteStand(){
       await deleteStand(this.idStand);
       await this.updateCarte();
+      var stand = document.getElementById(this.idStand);
+      stand.setAttribute('class', 'no-stand stand-selected');
     },
     async addStand(){
-      alert("add 1")
-      alert("idStand : " + this.idStand)
-      alert("idPresta : " + this.idPresta)
-      alert("idNouveauPresta : " + this.idNouveauPresta)
-      alert("add 2")
-      console.log("add stand " + this.idStand + " " + this.idPresta);
       await saveStand(this.idStand,this.idNouveauPresta);
       await this.updateCarte();
+      var stand = document.getElementById(this.idStand);
+      stand.setAttribute('class', 'no-stand stand-selected');
       this.idPresta = this.idNouveauPresta;
       this.idNouveauPresta = null;
       this.neutre = true;
@@ -190,6 +188,8 @@ export default {
     async modifStand(){
       await updateStand(this.idStand,this.idNouveauPresta);
       await this.updateCarte();
+      var stand = document.getElementById(this.idStand);
+      stand.setAttribute('class', 'no-stand stand-selected');
       this.idPresta = this.idNouveauPresta;
       this.idNouveauPresta = null;
       this.neutre = true;
@@ -201,6 +201,7 @@ export default {
       bandeau.style.border = "none";
       var result = null;
       try {
+        this.idAllStandsTaken = [];
         result = await getAllStandsTaken();
         for (var i = 0; i < result.length; i++) {
           this.idAllStandsTaken.push(result[i].id_emplacement);
