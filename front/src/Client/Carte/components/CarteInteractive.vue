@@ -12,9 +12,9 @@
             {{ nom_prestataire }}
           </h4>
           <div id="tags-selected">
-            <h6>Tag 1</h6>
-            <h6>Tag 2</h6>
-            <h6>Tag 3</h6>
+            <h6 v-for="tag in listeTags" :key="tag">
+              {{ tag }}
+            </h6>
           </div>
           <h6 id="description-selected">
             {{ description }}
@@ -139,8 +139,9 @@
 <script>
 import {mapState} from "vuex";
 import InfobulleCarte from '@/Client/Carte/components/InfobulleCarte.vue'
-import { getInfoBulle, getInfoPanel, getAllStandsTaken, getInfoPanelNoTake, saveStand, updateStand, deleteStand } from '@/../../back/axiosFunctions/carteAxios.js'
-import { getAllPrestataires } from '@/../../back/axiosFunctions/prestataireAxios.js'
+import { getInfoBulle, getInfoPanel, getAllStandsTaken, getInfoPanelNoTake, saveStand, 
+  updateStand, deleteStand } from '@/../../back/axiosFunctions/carteAxios.js'
+import { getAllPrestataires, getPrestataireTags } from '@/../../back/axiosFunctions/prestataireAxios.js'
 
 export default {
   name: 'CarteInteractive',
@@ -152,6 +153,7 @@ export default {
       alreadyEvent: false,
       idAllStandsTaken: [],
       listePrestataires: [],
+      listeTags: [],
       standHoverId: null,
       neutre: true,
       ajout: false,
@@ -235,6 +237,7 @@ export default {
     },
     async bandeauSelected(stand){
       var result = null;
+      this.listeTags = [];
       if(!this.verifyTaken(stand.id)){
         this.$store.commit('setNomPrestataire', "Aucun");
         this.$store.commit('setPrenomPrestataire', "prestataire");
@@ -251,6 +254,10 @@ export default {
           this.$store.commit('setPrenomPrestataire', result.prenom);
           this.description = result.description;
           this.idPresta = result.idpresta;
+          var resultTags = await getPrestataireTags(result.idpresta);
+          for (var i = 0; i < resultTags.length; i++) {
+            this.listeTags.push(resultTags[i].nom_tag);
+          }
         } catch (error) {
           console.log("Cas anormal dans GetInfoPanel");
         }
