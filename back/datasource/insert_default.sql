@@ -5,8 +5,7 @@ INSERT INTO role (nom_role) VALUES
     ('Visitor');
 
 -- Insert data into personne table
-INSERT INTO personne (nom_personne, prenom_personne, mail_personne, 
-    mdp_personne, image_personne, description_personne, id_role) VALUES
+INSERT INTO personne (nom_personne, prenom_personne, mail_personne, mdp_personne, image_personne, description_personne, id_role) VALUES
         ('Admin', 'Admin', 'admin@admin.com', 'Admin1234&', 'random.png','Je suis un Admin', 1),
         ('Jean', 'Pierre', 'jean@gmail.com', 'User1234&', 'random.png','Je suis un super prestataire qui dance', 2),
         ('Bob', 'Lennon', 'bob@gmail.com', 'User1234&', 'random.png','Je suis un prestataire prestigieux qui aime l or', 3);
@@ -109,9 +108,9 @@ INSERT INTO stand (id_emplacement, id_personne) VALUES
     (47, 1);
 
 -- Insert data into calendrier table
-INSERT INTO calendrier (date_calendrier) VALUES
-    ('2024-03-25'),
-    ('2024-03-26');
+INSERT INTO calendrier (date_calendrier,horaire_debut,horaire_fin) VALUES
+    ('2024-03-25', '09:00', '18:30'),
+    ('2024-03-26', '08:30', '18:00');
 
 -- Insert data into panier table
 INSERT INTO panier (id_panier) VALUES
@@ -122,10 +121,10 @@ INSERT INTO panier (id_panier) VALUES
     (5);
 
 -- Insert data into item table
-INSERT INTO item (nom_item, stock_item, prix_item,
-    image_item, description_item, id_personne, id_calendrier) VALUES
-        ('billet classique J1',50,1000,'random.png','je suis un billet classique',1,1),
-        ('billet classique J2',50,1000,'random.png','je suis un billet classique',1,2),
+INSERT INTO item (nom_item, stock_item, prix_item,image_item, description_item, id_personne, id_calendrier) VALUES
+        ('Forfait Normal',50,15,'random.png','je suis un forfait normal',1,1),('Forfait Normal',50,15,'random.png','je suis un forfait normal',1,2),
+        ('Forfait Priorité',50,25,'random.png','je suis un forfait prioritaire',1,1),('Forfait Priorité',50,25,'random.png','je suis un forfait prioritaire',1,2),
+        ('Forfait Handicapé',50,15,'random.png','je suis un forfait handicapé',1,1),('Forfait Handicapé',50,15,'random.png','je suis un forfait handicapé',1,2),
         ('Super truc',100,1000000,'random.png','je suis le super truc mega cher de Bob',3,1);
 
 -- Insert data into ligne_panier table
@@ -172,8 +171,7 @@ INSERT INTO personne_tag (id_personne, id_tag) VALUES
     (3,6);
 
 -- Insert data evenement tag table
-INSERT INTO evenement (nom_evenement, description_evenement, nb_place,
-    image_evenement, id_personne, id_emplacement) VALUES
+INSERT INTO evenement (nom_evenement, description_evenement, nb_place,image_evenement, id_personne, id_emplacement) VALUES
         ('Tournoi Smash Bros Ultimate', 'Un tournoi smash bros sympa', 16, 'random.png', 2, 42),
         ('Tournoi Smash Bros Ultimate', 'Un tournoi smash bros sympa', 16, 'random.png', 2, 42),
         ('Tournoi Smash Bros Ultimate', 'Un tournoi smash bros sympa', 16, 'random.png', 3, 43),
@@ -181,8 +179,7 @@ INSERT INTO evenement (nom_evenement, description_evenement, nb_place,
         ('Concours cosplay', 'Venez déguisés !', 128, 'random.png', 3, 42);
 
 -- Insert data into personne_tag table
-INSERT INTO creneau (id_evenement, id_calendrier,
-    heure_debut_evenement, heure_fin_evenement) VALUES
+INSERT INTO creneau (id_evenement, id_calendrier,heure_debut_evenement, heure_fin_evenement) VALUES
         (1,1,'12:00:00','14:30:00'),
         (2,1,'9:00:00','10:00:00'),
         (3,1,'12:00:00','14:00:00'),

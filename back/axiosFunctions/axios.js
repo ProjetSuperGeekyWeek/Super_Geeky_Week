@@ -82,7 +82,7 @@ async function getRequest(uri, name) {
     let response = null
     try {
         response = await axiosAgent.get(uri)
-        console.log("4");
+        //console.log("4");
     } catch (err) {
         // le catch se fait si le serveur répond avec une erreur type 4XX, 5XX, ou bien si le serveur est off
         // dans ce cas, on appelle la méthode pour traiter ces types d'erreurs et on met le résutlat dans response.

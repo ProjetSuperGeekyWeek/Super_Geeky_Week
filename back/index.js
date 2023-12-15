@@ -7,6 +7,8 @@ dotenv.config();
 const carteRouter = require('./routes/carteRouter');
 const prestataireRouter = require('./routes/prestataireRouter');
 const clientRouter = require('./routes/clientRouter');
+const boutiqueRouter = require('./routes/boutiqueRouter');
+const calendrierRouter = require('./routes/calendrierRouter');
 
 app.use(cors({
     origin : '*'
@@ -16,6 +18,8 @@ app.use(express.json());
 app.use('/api/carte_interactive', carteRouter);
 app.use('/api/prestataire', prestataireRouter);
 app.use('/api/client', clientRouter);
+app.use('/api/boutique', boutiqueRouter);
+app.use('/api/calendrier', calendrierRouter);
 
 
 app.listen(process.env.PORT, () => {

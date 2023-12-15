@@ -64,7 +64,9 @@ CREATE TABLE stand (
 
 CREATE TABLE calendrier (
     id_calendrier SERIAL PRIMARY KEY,
-    date_calendrier DATE NOT NULL
+    date_calendrier DATE NOT NULL,
+    horaire_debut TIME NOT NULL,
+    horaire_fin TIME NOT NULL
 );
 
 CREATE TABLE panier (

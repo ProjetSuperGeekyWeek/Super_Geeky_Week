@@ -2,14 +2,14 @@
   <div class="forfait">
     <p class="tres_grand gras titre">Billetterie</p>
     <p class="text_pres">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce turpis felis, vulputate vitae massa ac, efficitur accumsan ex. Phasellus lobortis hendrerit leo. Maecenas pellentesque feugiat tellus, eu pulvinar ex mattis varius. Sed nec nulla a massa maximus posuere. Curabitur diam dui, luctus efficitur mi vel, lacinia dignissim ex. Quisque at.</p>
-    <div class="jour" v-for="temps in Forfait" :key="temps.jour">
-      <p class="grand gras titre">Jour {{ temps.jour }} / Horaire de {{ temps.horaire }}</p>
-      <div class="forfait_jour">
-        <div class="forfait_card" v-for="forfaits in temps.forfait" :key="forfaits.id_forfait">
-          <p>{{ forfaits.libelle_forfait }}</p>
-          <p>Forfait numéro {{ forfaits.id_forfait }}</p>
-          <p>Prix : {{ forfaits.prix }}€</p>
-          <p>Prioritaire : {{ forfaits.prioriter }}</p>
+    <div class="jour" v-for="jour in listCalendrier" :key="jour.id_calendrier">
+      <p class="grand gras titre">Jour {{ jour.id_calendrier }} / Horaire de {{ jour.horaire_debut }} a {{ jour.horaire_fin }}</p>
+      <div class="forfait_jour" v-if="listCalendrier.id_calendrier = listItems.id_calendrier">
+        <div class="forfait_card" v-for="item in listCalendrier" :key="item.id_item">
+          <p>{{ item.nom_item }}</p>
+          <p>Description {{ item.description_item }}</p>
+          <p>Prix : {{ item.prix_item }}€</p>
+          <p>Stock : {{ item.stock_item }}</p>
           <router-link to="/panier"><input type="button" value="Acheter" class="bouton grand_moins"></router-link>
         </div>
       </div>
@@ -19,17 +19,37 @@
 </template>
 
 <script>
+import {getAllItems} from '@/../../back/axiosFunctions/boutiqueAxios'
+import {getAllCalendrier} from '@/../../back/axiosFunctions/calendrierAxios'
 export default {
-        name: 'ForfaitView',
-        props: {
-          Forfait: {
-            type: Array,
-            default: () => [
-              {jour:'1', horaire:'9H00 a 18H30', forfait:[{id_forfait:'1', prix:'15', prioriter:false, libelle_forfait:'Forfait normal'}, {id_forfait:'2', prix:'25', prioriter:true, libelle_forfait:'Forfait Prioritaire'}, {id_forfait:'3', prix:'15', prioriter:true, libelle_forfait:'Forfait handicapé'}]},
-              {jour:'2', horaire:'9H00 a 18H30', forfait:[{id_forfait:'4', prix:'15', prioriter:false, libelle_forfait:'Forfait normal'}, {id_forfait:'5', prix:'25', prioriter:true, libelle_forfait:'Forfait Prioritaire'}, {id_forfait:'6', prix:'15', prioriter:true, libelle_forfait:'Forfait handicapé'}]}]
-          }
-        }
+  name: 'ForfaitView',
+  data() {
+    return {
+      listItems: [],
+      listCalendrier: [],
     }
+  },
+  methods: {
+    async fillListeItems(){
+      var result = await getAllItems();
+      for (var i = 0; i < result.length; i++) {
+        this.listItems.push(result[i]);
+      }
+      //console.log(this.listItems)
+    },
+    async fillListCalendrier(){
+      var result = await getAllCalendrier();
+      for (var i = 0; i < result.length; i++) {
+        this.listCalendrier.push(result[i]);
+      }
+      console.log(this.listCalendrier)
+    }
+  },
+  created() {
+    this.fillListeItems();
+    this.fillListCalendrier();
+  }
+}
 </script>
 
 <style scoped>
