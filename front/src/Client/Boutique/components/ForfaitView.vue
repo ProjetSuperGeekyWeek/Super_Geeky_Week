@@ -80,6 +80,7 @@ export default {
 .forfait_card{
   display: flex;
   flex-direction: column;
+  text-align: center;
   align-items: center;
   flex-wrap: wrap;
   width: 20%;
