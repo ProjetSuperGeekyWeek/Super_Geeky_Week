@@ -1,27 +1,27 @@
 <template>
   <div class="prestataires">
     <div id="filtrePresta">
-      <button @click="toggleDivs" class="filtreBtn">Filtre</button>
+      <button @click="!showDivs" class="filtreBtn">Filtre</button>
       <div v-show="showDivs">
-        <button v-for="(filter, index) in filters" :key="index" @click="addFilter(filter)" class="filtreBtn2">{{ filter }}</button>
+        <button v-for="tag in tags" :key="tag.idtag" @click="addTag(tag)" class="filtreBtn2">{{ tag.nom }}</button>
       </div>
     </div>
 
-    <div class="search-bar">
-      <input type="text" v-model="keyword" placeholder="Rechercher par mot-clé" @input="applyKeywordFilter">
+    <div v-show="showDivs" class="search-bar">
+      <input id="search" type="text" v-model="keyword" placeholder="Rechercher par mot-clé" @input="filterPresta">
     </div>
 
-    <div class="selected-filters" v-show="filtersSelected">
-      <div v-for="(selectedFilter, index) in selectedFiltersArray" :key="index" class="selected-filter">
-        {{ selectedFilter }}
-        <button @click="removeFilter(selectedFilter)">X</button>
+    <div class="selected-filters" v-show="filterTagOn">
+      <div v-for="(selectedTag, index) in selectedTags" :key="index" class="selected-filter">
+        {{ selectedTag }}
+        <button @click="removeTag(selectedTag)">X</button>
       </div>
     </div>
 
     <div class="prestataires-box">
       <div class="prestataires-cards">
-        <div v-if="filteredPrestataires.length > 0">
-          <div class="prestataires-card" v-for="prestataire in filteredPrestataires" :key="prestataire.id">
+        <div v-if="prestataires.length > 0">
+          <div class="prestataires-card" v-for="prestataire in prestataires" :key="prestataire.idpresta">
             <div class="prestataires-photo">
               <img src="@/assets/image/logo/main_logo.png" alt="">
             </div>
@@ -48,62 +48,94 @@ export default {
   name: 'PrestatairesList',
   data() {
     return {
-      showDivs: false,
-      filters: ["Filter 1", "Filter 2", "Filter 3", "Filter 4"],
-      selectedFiltersArray: [],
-      filtersSelected: false,
+      selectedTags: [],
+      tags: [
+        {nom:"Filter 1", idtag: 1}, 
+        {nom:"Filter 2", idtag: 2}, 
+        {nom:"Filter 3", idtag: 3}, 
+        {nom:"Filter 4", idtag: 4}
+      ],
       keyword: '',
       prestataires: [
-        { nom: 'Prestataire 1', id: 1, info: 'Ji suis un Prestataire investi et sérieux', tags: ['Filter 1', 'Filter 2'], image: '@/assets/image/logo/main_logo.png' },
-        { nom: 'Prestataire 2', id: 2, info: 'Je suis un Prestataire investi et sérieux', tags: ['Filter 1', 'Filter 3'], image: '@/assets/image/logo/main_logo.png' },
-        { nom: 'Prestataire 3', id: 3, info: 'Ju suis un Prestataire investi et sérieux', tags: ['Filter 2', 'Filter 3'], image: '@/assets/image/logo/main_logo.png' }
-      ]
+        { nom: 'Prestataire 1', idpresta: 1, info: 'Ji suis un Prestataire investi et sérieux', tags: ['Filter 1', 'Filter 2'], image: '@/assets/image/logo/main_logo.png' },
+        { nom: 'Prestataire 2', idpresta: 2, info: 'Je suis un Prestataire investi et sérieux', tags: ['Filter 1', 'Filter 3'], image: '@/assets/image/logo/main_logo.png' },
+        { nom: 'Prestataire 3', idpresta: 3, info: 'Ju suis un Prestataire investi et sérieux', tags: ['Filter 2', 'Filter 3'], image: '@/assets/image/logo/main_logo.png' }
+      ],
+      filterOn: false,
+      filterTagOn: false,
+      filterNameOn: false,
+      showDivs: false,
     };
   },
 
   computed: {
-    filteredPrestataires() {
-      return this.filterPrestatairesByKeyword(this.prestataires, this.keyword.toLowerCase(), this.selectedFiltersArray);
-    },
+    // TODO tags = route allTags;
+    // TODO prestataires = route allPresta;
   },
 
   methods: {
-    toggleDivs() {
-      this.showDivs = !this.showDivs;
-    },
-
-    addFilter(filter) {
-      if (!this.selectedFiltersArray.includes(filter)) {
-        this.selectedFiltersArray.push(filter);
+    addTag(tag){
+      if (!this.selectedTags.includes(tag)) {
+        this.selectedTags.push(tag);
       }
-      this.filtersSelected = true;
+      this.filterTagOn = true;
     },
-
-    removeFilter(filter) {
-      const index = this.selectedFiltersArray.indexOf(filter);
-      if (index !== -1) {
-        this.selectedFiltersArray.splice(index, 1);
+    removeTag(tag){
+      for(let i=0; i<this.selectedTags.length; i++){
+        if(this.selectedTags[i] == tag){
+          this.selectedTags.splice(i,1);
+        }
       }
-      if (this.selectedFiltersArray.length === 0) {
-        this.filtersSelected = false;
+      if (this.selectedTags.length <= 0) {
+        this.filterTagOn = false;
       }
     },
-
-    filterPrestatairesByKeyword(prestataires, keyword, selectedFiltersArray) {
-      return prestataires.filter((prestataire) => {
-        const includesKeyword = prestataire.nom.toLowerCase().includes(keyword) || prestataire.info.toLowerCase().includes(keyword);
-        const includesCategory = prestataire.tags.some(tag => selectedFiltersArray.includes(tag.toLowerCase()));
-
-        return includesKeyword || includesCategory;
-      });
+    async filterByTags(){
+      var resultTag; //TODO route filtreTag;
+      return resultTag;
     },
-
-    applyKeywordFilter() {
-      this.selectedFiltersArray = [];
-      this.filteredPrestataires = this.filterPrestatairesByKeyword(this.prestataires, this.keyword.toLowerCase(), this.selectedFiltersArray);
-      this.filtersSelected = true;
+    async filterByName(){
+      var resultName; //TODO route filtreName;
+      return resultName;
     },
-  },
+    async allPresta(){
+      var resultAll; //TODO route allPresta;
+      return resultAll;
+    },
+    async filterPresta(){
+      this.verifFiltreOn();
+      if(this.filterTagOn || this.filterNameOn){
+        var resultTag;
+        var resultName;
+        if(this.filterTagOn)
+          resultTag = await this.filterByTags();
+        if(this.filterNameOn)
+          resultName = await this.filterByName();
+        this.prestataires = [];
+        for(prestataire in resultTag){
+          this.prestataires.push(prestataire);
+        }
+        for(prestataire in resultName){
+          if(!(this.prestataires.includes(prestataire)))
+            this.prestataires.push(prestataire);
+        }
+      }
+      else{
+        var resultPresta = await this.allPresta();
+        this.prestataires = [];
+        for(prestataire in resultPresta){
+          this.prestataires.push(prestataire);
+        }
+      }
+    },
+    verifFiltreOn(){
+      let searchValue = document.getElementById('search').value;
+      if(searchValue != '' || searchValue != null || searchValue != NaN) 
+        this.filterNameOn = true;
+      else
+        this.filterNameOn = false;
+    }
+  }
 };
 </script>
 
