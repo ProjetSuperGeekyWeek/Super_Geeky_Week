@@ -14,7 +14,8 @@ async function getAllPrestatairesFromAPI(){
         const query = `
         SELECT nom_personne AS nom, prenom_personne AS prenom,
             image_personne AS image, personne.id_personne AS idPresta 
-            FROM personne 
+            FROM personne
+        ORDER BY nom_personne ASC, prenom_personne ASC
         `;
         const result = await client.query(query);
         return result.rows;
@@ -71,6 +72,7 @@ async function getPrestataireByNomFromAPI(nom){
             description_personne AS description
             FROM personne
         WHERE nom_personne LIKE $1
+        ORDER BY nom_personne ASC, prenom_personne ASC
         `;
         var filtreNom = '%'.concat(nom.concat('%'))
         const result = await client.query(query, [filtreNom]);
