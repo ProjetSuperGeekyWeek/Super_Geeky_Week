@@ -16,6 +16,6 @@ export default {
 
 <style>
 .billet{
-  border: 1px var(--bg) solid;
+  //border: 1px var(--bg) solid;
 }
 </style>

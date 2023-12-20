@@ -43,6 +43,7 @@ export default {
   --secondary: #f25f4c;
   --transition: 0.5s;
   --bg2: #f1f1f2;/*f44d48*/
+  --padding-top-navBar: 13%;
 }
 
 *{
