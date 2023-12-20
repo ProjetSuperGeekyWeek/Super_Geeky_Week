@@ -13,7 +13,8 @@ async function getAllPrestatairesFromAPI(){
     try {
         const query = `
         SELECT nom_personne AS nom, prenom_personne AS prenom,
-            image_personne AS image, personne.id_personne AS idPresta 
+            image_personne AS image, personne.id_personne AS idPresta, 
+            description_personne AS description
             FROM personne
         ORDER BY nom_personne ASC, prenom_personne ASC
         `;
@@ -46,7 +47,7 @@ async function getPrestataireByIdFromAPI(id){
         WHERE id_personne = $1
         `;
         const result = await client.query(query, [id]);
-        return result.rows;
+        return result.rows[0];
     } catch (e) {
         throw e;
     } finally {
@@ -76,6 +77,36 @@ async function getPrestataireByNomFromAPI(nom){
         `;
         var filtreNom = '%'.concat(nom.concat('%'))
         const result = await client.query(query, [filtreNom]);
+        return result.rows;
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
+const getPrestataireByTag = (tag, callback) => {
+    getPrestataireByTagFromAPI(tag).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function getPrestataireByTagFromAPI(tag){
+    const client = await pool.connect();
+    try {
+        const query = `
+        SELECT nom_personne AS nom, prenom_personne AS prenom,
+            image_personne AS image, personne.id_personne AS idPresta,
+            mail_personne AS mail, mdp_personne AS mdp, 
+            description_personne AS description
+            FROM personne
+        INNER JOIN personne_tag ON personne.id_personne = personne_tag.id_personne
+        WHERE personne_tag.id_tag = $1
+        ORDER BY nom_personne ASC, prenom_personne ASC
+        `;
+        const result = await client.query(query, [tag]);
         return result.rows;
     } catch (e) {
         throw e;
@@ -114,5 +145,6 @@ module.exports = {
     getAllPrestataires,
     getPrestataireById,
     getPrestataireByNom,
+    getPrestataireByTag,
     getPrestataireTags
 };

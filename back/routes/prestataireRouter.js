@@ -7,6 +7,7 @@ var router = express.Router();
 router.get('/', prestataireController.getAllPrestataires);
 router.get('/:id', prestataireController.getPrestataireById);
 router.get('/nom/:nom', prestataireController.getPrestataireByNom);
+router.get('/tag/:tag', prestataireController.getPrestataireByTag);
 router.get('/:id/tags', prestataireController.getPrestataireTags);
 
 

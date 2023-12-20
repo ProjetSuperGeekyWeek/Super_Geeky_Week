@@ -12,6 +12,10 @@ async function getPrestataireByNom(nom) {
     return await getRequest(`/api/prestataire/nom/${nom}`, "GETPRESTATAIREBYNOM");
 }
 
+async function getPrestataireByTag(tag) {
+    return await getRequest(`/api/prestataire/tag/${tag}`, "GETPRESTATAIREBYTAG");
+}
+
 async function getPrestataireTags(id) {
     return await getRequest(`/api/prestataire/${id}/tags`, "GETPRESTATAIRETAGS");
 }
@@ -21,5 +25,6 @@ export {
     getAllPrestataires ,
     getPrestataireById,
     getPrestataireByNom,
+    getPrestataireByTag,
     getPrestataireTags
 };

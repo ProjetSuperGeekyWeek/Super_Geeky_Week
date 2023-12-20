@@ -36,6 +36,18 @@ exports.getPrestataireByNom = async (req, res) => {
     });
 }
 
+exports.getPrestataireByTag = async (req, res) => {
+    prestataireSerices.getPrestataireByTag(req.params.tag, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving prestataire."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
+
 exports.getPrestataireTags = async (req, res) => {
     prestataireSerices.getPrestataireTags(req.params.id, (err, data) => {
         if (err) {

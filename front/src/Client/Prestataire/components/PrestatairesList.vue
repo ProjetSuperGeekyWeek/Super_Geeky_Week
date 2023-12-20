@@ -1,7 +1,7 @@
 <template>
   <div class="prestataires">
     <div id="filtrePresta">
-      <button @click="!showDivs" class="filtreBtn">Filtre</button>
+      <button @click="showDivs = !showDivs" class="filtreBtn">Filtre</button>
       <div v-show="showDivs">
         <button v-for="tag in tags" :key="tag.idtag" @click="addTag(tag)" class="filtreBtn2">{{ tag.nom }}</button>
       </div>
@@ -12,8 +12,8 @@
     </div>
 
     <div class="selected-filters" v-show="filterTagOn">
-      <div v-for="(selectedTag, index) in selectedTags" :key="index" class="selected-filter">
-        {{ selectedTag }}
+      <div v-for="selectedTag in selectedTags" :key="selectedTag.idtag" class="selected-filter">
+        {{ selectedTag.nom }}
         <button @click="removeTag(selectedTag)">X</button>
       </div>
     </div>
@@ -30,7 +30,7 @@
                 <span>{{ tag }}</span>
               </div>
               <div class="prestataires-info">
-                <p>{{ prestataire.info }}</p>
+                <p>{{ prestataire.description }}</p>
               </div>
             </div>
           </div>
@@ -44,6 +44,10 @@
 </template>
 
 <script>
+import { getAllPrestataires, getPrestataireByTag, getPrestataireByNom, 
+  getPrestataireTags } from '@/../../back/axiosFunctions/prestataireAxios';
+
+
 export default {
   name: 'PrestatairesList',
   data() {
@@ -56,21 +60,19 @@ export default {
         {nom:"Filter 4", idtag: 4}
       ],
       keyword: '',
-      prestataires: [
-        { nom: 'Prestataire 1', idpresta: 1, info: 'Ji suis un Prestataire investi et sérieux', tags: ['Filter 1', 'Filter 2'], image: '@/assets/image/logo/main_logo.png' },
-        { nom: 'Prestataire 2', idpresta: 2, info: 'Je suis un Prestataire investi et sérieux', tags: ['Filter 1', 'Filter 3'], image: '@/assets/image/logo/main_logo.png' },
-        { nom: 'Prestataire 3', idpresta: 3, info: 'Ju suis un Prestataire investi et sérieux', tags: ['Filter 2', 'Filter 3'], image: '@/assets/image/logo/main_logo.png' }
-      ],
+      // prestataires: [],
       filterOn: false,
       filterTagOn: false,
       filterNameOn: false,
-      showDivs: false,
+      showDivs: true
     };
   },
 
   computed: {
     // TODO tags = route allTags;
-    // TODO prestataires = route allPresta;
+    prestataires() {
+      return this.allPresta();
+    },
   },
 
   methods: {
@@ -91,15 +93,37 @@ export default {
       }
     },
     async filterByTags(){
-      var resultTag; //TODO route filtreTag;
+      var resultTag;
+      var tempPrestaTag = [];
+      resultTag = await getPrestataireByTag(this.selectedTags[0].idtag);
+      if(this.selectedTags.length > 1){
+        for(let i=1; i<this.selectedTags.length; i++){
+          tempPrestaTag = await getPrestataireByTag(this.selectedTags[i].idtag);
+          for(let j=0; j<resultTag.length; j++){
+            if(!(tempPrestaTag.includes(resultTag[j])))
+            resultTag.splice(j,1);
+          }
+        }
+      }
       return resultTag;
     },
     async filterByName(){
-      var resultName; //TODO route filtreName;
+      var resultName;
+      resultName = await getPrestataireByNom(this.keyword);
       return resultName;
     },
     async allPresta(){
-      var resultAll; //TODO route allPresta;
+      var resultAll;
+      resultAll = await getAllPrestataires();
+      console.log(resultAll[0]);
+      for(let i=0; i<resultAll.length; i++){
+        resultAll[i].tags = [];
+        var tempTags = await getPrestataireTags(resultAll[i].idpresta);
+        for(let j=0; j<tempTags.length; j++){
+          resultAll[i].tags.push(tempTags[j].nom);
+        }
+      }
+      console.log(resultAll[0].tags[0]);
       return resultAll;
     },
     async filterPresta(){
@@ -107,30 +131,46 @@ export default {
       if(this.filterTagOn || this.filterNameOn){
         var resultTag;
         var resultName;
-        if(this.filterTagOn)
+        if(this.filterTagOn && this.filterNameOn){
           resultTag = await this.filterByTags();
-        if(this.filterNameOn)
           resultName = await this.filterByName();
-        this.prestataires = [];
-        for(prestataire in resultTag){
-          this.prestataires.push(prestataire);
+          this.prestataires = [];
+          for(let i=0; i<resultTag.length; i++){
+            if(resultName.includes(resultTag[i]))
+              this.prestataires.push(resultTag[i]);
+          }
+          for (let i = 0; i < resultName.length; i++) {
+            if (!(this.prestataires.includes(resultName[i])))
+              this.prestataires.splice(resultName[i], 1);
+          }
         }
-        for(prestataire in resultName){
-          if(!(this.prestataires.includes(prestataire)))
-            this.prestataires.push(prestataire);
+        else if(this.filterTagOn){
+          resultTag = await this.filterByTags();
+          this.prestataires = [];
+          for(let i=0; i<resultTag.length; i++){
+            this.prestataires.push(resultTag[i]);
+          }
+        }
+        else{
+          resultName = await this.filterByName();
+          this.prestataires = [];
+          for(let i=0; i<resultName.length; i++){
+            this.prestataires.push(resultName[i]);
+          }
         }
       }
       else{
-        var resultPresta = await this.allPresta();
+        var resultPresta;
+        resultPresta = await this.allPresta();
         this.prestataires = [];
-        for(prestataire in resultPresta){
-          this.prestataires.push(prestataire);
+        for(let i=0; i<resultPresta.length; i++){
+          this.prestataires.push(resultPresta[i]);
         }
       }
     },
     verifFiltreOn(){
       let searchValue = document.getElementById('search').value;
-      if(searchValue != '' || searchValue != null || searchValue != NaN) 
+      if(searchValue != '' || searchValue != null || !isNaN(searchValue)) 
         this.filterNameOn = true;
       else
         this.filterNameOn = false;
