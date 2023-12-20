@@ -40,22 +40,22 @@
 </template>
 
 <script>
-import crudAcheter from "@/Admin/CRUD/components/crudAcheter.vue"
-import crudCalendrier from "@/Admin/CRUD/components/crudCalendrier.vue"
-import crudCreneau from "@/Admin/CRUD/components/crudCreneau.vue"
-import crudEmplacement from "@/Admin/CRUD/components/crudEmplacement.vue"
-import crudEmplacementRessource from "@/Admin/CRUD/components/crudEmplacementRessource.vue"
-import crudEvenement from "@/Admin/CRUD/components/crudEvenement.vue"
-import crudLignePanier from "@/Admin/CRUD/components/crudLignePanier.vue"
-import crudPanier from "@/Admin/CRUD/components/crudPanier.vue"
-import crudPersonne from "@/Admin/CRUD/components/crudPersonne.vue"
-import crudPersonneTag from "@/Admin/CRUD/components/crudPersonneTag.vue"
-import crudQrCode from "@/Admin/CRUD/components/crudQrCode.vue"
-import crudRessource from "@/Admin/CRUD/components/crudRessource.vue"
-import crudRole from "@/Admin/CRUD/components/crudRole.vue"
-import crudStand from "@/Admin/CRUD/components/crudStand.vue"
-import crudTag from "@/Admin/CRUD/components/crudTag.vue"
-import crudItem from "@/Admin/CRUD/components/crudItem.vue"
+import crudAcheter from "@/Admin/Crud/components/crudAcheter.vue"
+import crudCalendrier from "@/Admin/Crud/components/crudCalendrier.vue"
+import crudCreneau from "@/Admin/Crud/components/crudCreneau.vue"
+import crudEmplacement from "@/Admin/Crud/components/crudEmplacement.vue"
+import crudEmplacementRessource from "@/Admin/Crud/components/crudEmplacementRessource.vue"
+import crudEvenement from "@/Admin/Crud/components/crudEvenement.vue"
+import crudLignePanier from "@/Admin/Crud/components/crudLignePanier.vue"
+import crudPanier from "@/Admin/Crud/components/crudPanier.vue"
+import crudPersonne from "@/Admin/Crud/components/crudPersonne.vue"
+import crudPersonneTag from "@/Admin/Crud/components/crudPersonneTag.vue"
+import crudQrCode from "@/Admin/Crud/components/crudQrCode.vue"
+import crudRessource from "@/Admin/Crud/components/crudRessource.vue"
+import crudRole from "@/Admin/Crud/components/crudRole.vue"
+import crudStand from "@/Admin/Crud/components/crudStand.vue"
+import crudTag from "@/Admin/Crud/components/crudTag.vue"
+import crudItem from "@/Admin/Crud/components/crudItem.vue"
 export default {
   data() {
     return {

@@ -9,6 +9,7 @@ const prestataireRouter = require('./routes/prestataireRouter');
 const clientRouter = require('./routes/clientRouter');
 const boutiqueRouter = require('./routes/boutiqueRouter');
 const calendrierRouter = require('./routes/calendrierRouter');
+const crudRouter = require('./routes/crudRouter');
 
 app.use(cors({
     origin : '*'
@@ -20,6 +21,7 @@ app.use('/api/prestataire', prestataireRouter);
 app.use('/api/client', clientRouter);
 app.use('/api/boutique', boutiqueRouter);
 app.use('/api/calendrier', calendrierRouter);
+app.use('/api/crud', crudRouter);
 
 
 app.listen(process.env.PORT, () => {

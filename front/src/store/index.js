@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import en from '@/assets/language/en';
 import fr from '@/assets/language/fr';
+import {getAllRole,getAllAcheter,getAllCalendrier,getAllCreneau,getAllEmplacement,getAllEmplacementRessource,getAllEvenement,getAllItem,getAllLignePanier,getAllPanier,getAllPersonne,getAllPersonneTag,getAllQrCode,getAllRessource,getAllStand,getAllTag} from "@/../../back/axiosFunctions/crudAxios";
 
 Vue.use(Vuex)
 
@@ -27,6 +28,22 @@ export default new Vuex.Store({
     nom_stand: '',
   },
   getters: {
+    ...getAllRole,
+    ...getAllAcheter,
+    ...getAllCalendrier,
+    ...getAllCreneau,
+    ...getAllEmplacement,
+    ...getAllEmplacementRessource,
+    ...getAllEvenement,
+    ...getAllItem,
+    ...getAllLignePanier,
+    ...getAllPanier,
+    ...getAllPersonne,
+    ...getAllPersonneTag,
+    ...getAllQrCode,
+    ...getAllRessource,
+    ...getAllStand,
+    ...getAllTag,
   },
   mutations: {
     setAuthentifier(state, payload) {
