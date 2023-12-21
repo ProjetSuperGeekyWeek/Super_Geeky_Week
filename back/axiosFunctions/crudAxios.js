@@ -5,7 +5,7 @@ async function getAllRole() {
 }
 
 async function getAllAcheter() {
-    return await getRequest("/api/crud/getAllAcheter", "GETALL");
+    return await getRequest("/api/crud/getAllAcheter", "GETALLACHETER");
 }
 
 async function getAllCalendrier() {

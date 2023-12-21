@@ -7,7 +7,7 @@ exports.getAllAcheter = async (req, res) => {
                 message: err.message || "pb acheterController."
             });
         } else {
-            res.send(data);
+            res.status(200).send(data);
         }
     });
 }

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import en from '@/assets/language/en';
 import fr from '@/assets/language/fr';
-import {getAllRole,getAllAcheter,getAllCalendrier,getAllCreneau,getAllEmplacement,getAllEmplacementRessource,getAllEvenement,getAllItem,getAllLignePanier,getAllPanier,getAllPersonne,getAllPersonneTag,getAllQrCode,getAllRessource,getAllStand,getAllTag} from "@/../../back/axiosFunctions/crudAxios";
+import {getAllAcheter} from "@/../../back/axiosFunctions/crudAxios";
 
 Vue.use(Vuex)
 
@@ -26,24 +26,11 @@ export default new Vuex.Store({
     nom_prestataire: '',
     prenom_prestataire: '',
     nom_stand: '',
+
+    tabAllAcheters: [],
   },
   getters: {
-    ...getAllRole,
-    ...getAllAcheter,
-    ...getAllCalendrier,
-    ...getAllCreneau,
-    ...getAllEmplacement,
-    ...getAllEmplacementRessource,
-    ...getAllEvenement,
-    ...getAllItem,
-    ...getAllLignePanier,
-    ...getAllPanier,
-    ...getAllPersonne,
-    ...getAllPersonneTag,
-    ...getAllQrCode,
-    ...getAllRessource,
-    ...getAllStand,
-    ...getAllTag,
+    getAllAcheters: state => state.tabAllAcheters,
   },
   mutations: {
     setAuthentifier(state, payload) {
@@ -67,8 +54,19 @@ export default new Vuex.Store({
     setNomStand(state, payload) {
       state.nom_stand = payload;
     },
+    SET_ALL_ACHETER(state, payload){
+      state.tabAllAcheters = payload;
+    }
   },
   actions: {
+    async getAllAcheterStore({commit}){
+      try{
+        const acheter = await getAllAcheter();
+        await commit('SET_ALL_ACHETER', acheter);
+      } catch (err){
+        console.log(err);
+      }
+    }
   },
   modules: {
   }
