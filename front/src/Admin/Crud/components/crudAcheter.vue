@@ -5,7 +5,7 @@
         <v-container>
           <v-card>
             <v-card-title>
-              Notes
+              Acheter
               <v-spacer />
               <v-text-field
                   v-model="search"
@@ -30,16 +30,14 @@
               v-model="selected"
               :headers="acheter.headers"
               :items="acheter.stats"
-              :items-per-page="5"
+              :items-per-page="10"
               class="elevation-4"
               :search="search"
               show-select
-              item-key="id"
+              item-key="id_acheter"
               show-group-by
           >
           </v-data-table>
-
-          moyenne sélection: {{average}}
         </v-container>
       </v-main>
     </v-app>
@@ -60,23 +58,17 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getAllAcheters']),
-    ...mapActions(['getAllAcheterStore']),
-    average() {
-      if (this.selected.length === 0) {
-        return 0
-      }
-      let avg = 0
-      this.selected.forEach(e => { avg += e.ratings})
-      return avg/this.selected.length
-    },
-
+    ...mapGetters(['getAllAcheters','getAllAchetersColumn']),
+    ...mapActions(['getAllAcheterStore','getAllAcheterColumnStore']),
   },
   methods: {
     async loadData(){
       await this.getAllAcheterStore;
-      this.stats = await this.getAllAcheters;
-      console.log(this.stats,30)
+      await this.getAllAcheterColumnStore;
+      for(var i = 0; i<this.getAllAchetersColumn.length; i++){
+        this.acheter.headers.push({text: this.getAllAchetersColumn[i].column_name, value: this.getAllAchetersColumn[i].column_name, groupable: false});
+      }
+      this.acheter.stats = this.getAllAcheters;
     },
   },
   async mounted() {

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import en from '@/assets/language/en';
 import fr from '@/assets/language/fr';
-import {getAllAcheter} from "@/../../back/axiosFunctions/crudAxios";
+import {getAllAcheter,getAllAcheterColumn,getAllCalendrier,getAllCalendrierColumn} from "@/../../back/axiosFunctions/crudAxios";
 
 Vue.use(Vuex)
 
@@ -28,9 +28,16 @@ export default new Vuex.Store({
     nom_stand: '',
 
     tabAllAcheters: [],
+    tabAllAchetersColumn: [],
+
+    tabAllCalendrier: [],
+    tabAllCalendrierColumn: [],
   },
   getters: {
     getAllAcheters: state => state.tabAllAcheters,
+    getAllAchetersColumn: state => state.tabAllAchetersColumn,
+    getAllCalendrier: state => state.tabAllCalendrier,
+    getAllCalendrierColumn: state => state.tabAllCalendrierColumn,
   },
   mutations: {
     setAuthentifier(state, payload) {
@@ -56,6 +63,15 @@ export default new Vuex.Store({
     },
     SET_ALL_ACHETER(state, payload){
       state.tabAllAcheters = payload;
+    },
+    SET_ALL_ACHETER_COLUMN(state, payload){
+      state.tabAllAchetersColumn = payload;
+    },
+    SET_ALL_CALENDRIER(state, payload){
+      state.tabAllCalendrier = payload;
+    },
+    SET_ALL_CALENDRIER_COLUMN(state, payload){
+      state.tabAllCalendrierColumn = payload;
     }
   },
   actions: {
@@ -66,7 +82,31 @@ export default new Vuex.Store({
       } catch (err){
         console.log(err);
       }
-    }
+    },
+    async getAllAcheterColumnStore({commit}){
+      try{
+        const columnAcheter = await getAllAcheterColumn();
+        await commit('SET_ALL_ACHETER_COLUMN', columnAcheter);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async getAllCalendrierStore({commit}){
+      try{
+        const calendrier = await getAllCalendrier();
+        await commit('SET_ALL_CALENDRIER', calendrier);
+      } catch (err){
+        console.log(err);
+      }
+    },
+    async getAllCalendrierColumnStore({commit}){
+      try{
+        const columnCalendrier = await getAllCalendrierColumn();
+        await commit('SET_ALL_CALENDRIER_COLUMN', columnCalendrier);
+      } catch (e) {
+        console.log(e);
+      }
+    },
   },
   modules: {
   }

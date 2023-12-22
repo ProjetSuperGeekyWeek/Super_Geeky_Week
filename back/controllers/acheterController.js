@@ -11,3 +11,15 @@ exports.getAllAcheter = async (req, res) => {
         }
     });
 }
+
+exports.getAllAcheterColumn = async (req, res) => {
+    acheterService.getAllAcheterColumn((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb getAllAcheterColumn."
+            });
+        } else {
+            res.status(200).send(data);
+        }
+    });
+}
