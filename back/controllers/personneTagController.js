@@ -11,3 +11,15 @@ exports.getAllPersonneTag = async (req, res) => {
         }
     });
 }
+
+exports.getAllPersonneTagColumn = async (req, res) => {
+    personneTagService.getAllPersonneTagColumn((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Problème avec le contrôleur de personneTag."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

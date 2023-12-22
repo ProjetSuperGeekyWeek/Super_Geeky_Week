@@ -11,3 +11,15 @@ exports.getAllItem = async (req, res) => {
         }
     });
 }
+
+exports.getAllItemColumn = async (req, res) => {
+    itemService.getAllItemColumn((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Problème avec le contrôleur d'item."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

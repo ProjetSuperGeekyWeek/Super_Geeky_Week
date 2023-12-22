@@ -11,3 +11,15 @@ exports.getAllQrCode = async (req, res) => {
         }
     });
 }
+
+exports.getAllQrCodeColumn = async (req, res) => {
+    qrCodeService.getAllQrCodeColumn((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Problème avec le contrôleur de QrCode."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

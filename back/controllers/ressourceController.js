@@ -11,3 +11,15 @@ exports.getAllRessource = async (req, res) => {
         }
     });
 }
+
+exports.getAllRessourceColumn = async (req, res) => {
+    ressourceService.getAllRessourceColumn((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Problème avec le contrôleur de ressource."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

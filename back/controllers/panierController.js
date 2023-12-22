@@ -11,3 +11,15 @@ exports.getAllPanier = async (req, res) => {
         }
     });
 }
+
+exports.getAllPanierColumn = async (req, res) => {
+    panierService.getAllPanierColumn((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Problème avec le contrôleur de panier."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

@@ -11,3 +11,15 @@ exports.getAllEvenement = async (req, res) => {
         }
     });
 }
+
+exports.getAllEvenementColumn = async (req, res) => {
+    evenementService.getAllEvenementColumn((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Problème avec le contrôleur d'événement."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

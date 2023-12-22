@@ -11,3 +11,15 @@ exports.getAllEmplacementRessource = async (req, res) => {
         }
     });
 }
+
+exports.getAllEmplacementRessourceColumn = async (req, res) => {
+    emplacementRessourceService.getAllEmplacementRessourceColumn((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Problème avec le contrôleur d'emplacementRessource."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

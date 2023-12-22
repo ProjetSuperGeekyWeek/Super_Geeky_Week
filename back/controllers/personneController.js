@@ -11,3 +11,15 @@ exports.getAllPersonne = async (req, res) => {
         }
     });
 }
+
+exports.getAllPersonneColumn = async (req, res) => {
+    personneService.getAllPersonneColumn((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Problème avec le contrôleur de personne."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
