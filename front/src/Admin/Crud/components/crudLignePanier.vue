@@ -69,8 +69,6 @@ export default {
         this.lignePanier.headers.push({text: this.getAllLignePanierColumn[i].column_name, value: this.getAllLignePanierColumn[i].column_name, groupable: false});
       }
       this.lignePanier.stats = this.getAllLignePanier;
-      console.log(this.lignePanier.headers)
-      console.log(this.lignePanier.stats)
     },
   },
   async mounted() {

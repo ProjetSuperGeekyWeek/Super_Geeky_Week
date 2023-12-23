@@ -69,8 +69,6 @@ export default {
         this.personne.headers.push({text: this.getAllPersonneColumn[i].column_name, value: this.getAllPersonneColumn[i].column_name, groupable: false});
       }
       this.personne.stats = this.getAllPersonne;
-      console.log(this.personne.headers)
-      console.log(this.personne.stats)
     },
   },
   async mounted() {

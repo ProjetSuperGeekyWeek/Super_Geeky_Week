@@ -48,7 +48,7 @@
 import {mapActions, mapGetters} from "vuex";
 
 export default {
-  name: 'crudAcheter',
+  name: 'crudRole',
   data: () => ({
     selected: [],
     search: '',
@@ -69,8 +69,6 @@ export default {
         this.role.headers.push({text: this.getAllRoleColumn[i].column_name, value: this.getAllRoleColumn[i].column_name, groupable: false});
       }
       this.role.stats = this.getAllRole;
-      console.log(this.role.headers)
-      console.log(this.role.stats)
     },
   },
   async mounted() {

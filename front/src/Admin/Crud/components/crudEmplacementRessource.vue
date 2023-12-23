@@ -69,8 +69,6 @@ export default {
         this.role.headers.push({text: this.getAllEmplacementRessourceColumn[i].column_name, value: this.getAllEmplacementRessourceColumn[i].column_name, groupable: false});
       }
       this.role.stats = this.getAllEmplacementRessource;
-      console.log(this.role.headers)
-      console.log(this.role.stats)
     },
   },
   async mounted() {

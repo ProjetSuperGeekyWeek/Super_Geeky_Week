@@ -78,6 +78,9 @@ export default new Vuex.Store({
 
     tabAllTag: [],
     tabAllTagColumn: [],
+
+    /*tabAll: [],
+    tabAllColumn: [],*/
   },
   getters: {
     getAllAcheters: state => state.tabAllAcheters,
@@ -113,6 +116,8 @@ export default new Vuex.Store({
     getAllTag: state => state.tabAllTag,
     getAllTagColumn: state => state.tabAllTagColumn,
 
+    /*getAll: state => state.tabAll,
+    getAllColumn: state => state.tabAllColumn,*/
   },
   mutations: {
     setAuthentifier(state, payload) {
@@ -232,6 +237,13 @@ export default new Vuex.Store({
     SET_ALL_TAG_COLUMN(state, payload){
       state.tabAllTagColumn = payload;
     },
+
+    /*SET_ALL(state, payload){
+      state.tabAll = payload;
+    },
+    SET_ALL_COLUMN(state, payload){
+      state.tabAllColumn = payload;
+    },*/
 
   },
   actions: {
@@ -490,7 +502,91 @@ export default new Vuex.Store({
       } catch (e) {
         console.log(e);
       }
-    }
+    },
+    /*async getAllStore({commit}, params){
+      var responce;
+        try{
+          switch (params) {
+            case 'creneau':
+              responce = await getAllCreneau();
+              await commit('SET_ALL_CRENEAU', responce); break;
+            case 'evenement':
+              responce = await getAllEvenement(); break;
+            case 'personne_tag':
+              responce = await getAllPersonneTag(); break;
+            case 'tag':
+              responce = await getAllTag(); break;
+            case 'acheter':
+              responce = await getAllAcheter(); break;
+            case 'qr_code':
+              responce = await getAllQrCode(); break;
+            case 'ligne_panier':
+              responce = await getAllLignePanier(); break;
+            case 'item':
+              responce = await getAllItem(); break;
+            case 'panier':
+              responce = await getAllPanier(); break;
+            case 'calendrier':
+              responce = await getAllCalendrier(); break;
+            case 'stand':
+              responce = await getAllStand(); break;
+            case 'emplacement_ressource':
+              responce = await getAllEmplacementRessource(); break;
+            case 'ressource':
+              responce = await getAllRessource(); break;
+            case 'emplacement':
+              responce = await getAllEmplacement(); break;
+            case 'personne':
+              responce = await getAllPersonne(); break;
+            case 'role':
+              responce = await getAllRole(); break;
+          }
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async getAllColumnStore({commit}, params){
+      var responce;
+      try{
+        switch (params) {
+          case 'creneau':
+            responce = await getAllCreneauColumn(); break;
+          case 'evenement':
+            responce = await getAllEvenementColumn(); break;
+          case 'personne_tag':
+            responce = await getAllPersonneTagColumn(); break;
+          case 'tag':
+            responce = await getAllTagColumn(); break;
+          case 'acheter':
+            responce = await getAllAcheterColumn(); break;
+          case 'qr_code':
+            responce = await getAllQrCodeColumn(); break;
+          case 'ligne_panier':
+            responce = await getAllLignePanierColumn(); break;
+          case 'item':
+            responce = await getAllItemColumn(); break;
+          case 'panier':
+            responce = await getAllPanierColumn(); break;
+          case 'calendrier':
+            responce = await getAllCalendrierColumn(); break;
+          case 'stand':
+            responce = await getAllStandColumn(); break;
+          case 'emplacement_ressource':
+            responce = await getAllEmplacementRessourceColumn(); break;
+          case 'ressource':
+            responce = await getAllRessourceColumn(); break;
+          case 'emplacement':
+            responce = await getAllEmplacementColumn(); break;
+          case 'personne':
+            responce = await getAllPersonneColumn(); break;
+          case 'role':
+            responce = await getAllRoleColumn(); break;
+        }
+        await commit('SET_ALL_COLUMN', responce);
+      } catch (e) {
+        console.log(e);
+      }
+    }*/
   },
   modules: {
   }

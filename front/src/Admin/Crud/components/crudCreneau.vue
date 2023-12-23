@@ -65,8 +65,6 @@ export default {
     async loadData(){
       await this.getAllCreneauStore;
       await this.getAllCreneauColumnStore;
-      console.log(this.getAllCreneau,11)
-      console.log(this.getAllCreneauColumn,22)
       for(var i = 0; i<this.getAllCreneauColumn.length; i++){
         this.creneau.headers.push({text: this.getAllCreneauColumn[i].column_name, value: this.getAllCreneauColumn[i].column_name, groupable: false});
       }

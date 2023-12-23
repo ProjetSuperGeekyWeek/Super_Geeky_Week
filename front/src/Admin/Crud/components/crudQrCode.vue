@@ -69,8 +69,6 @@ export default {
         this.qrCode.headers.push({text: this.getAllQrCodeColumn[i].column_name, value: this.getAllQrCodeColumn[i].column_name, groupable: false});
       }
       this.qrCode.stats = this.getAllQrCode;
-      console.log(this.qrCode.headers)
-      console.log(this.qrCode.stats)
     },
   },
   async mounted() {

@@ -69,8 +69,6 @@ export default {
         this.ressource.headers.push({text: this.getAllRessourceColumn[i].column_name, value: this.getAllRessourceColumn[i].column_name, groupable: false});
       }
       this.ressource.stats = this.getAllRessource;
-      console.log(this.ressource.headers)
-      console.log(this.ressource.stats)
     },
   },
   async mounted() {

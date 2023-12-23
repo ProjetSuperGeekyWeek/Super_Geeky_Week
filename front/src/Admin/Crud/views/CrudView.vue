@@ -19,8 +19,8 @@
       <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('creneau')" name="menu" id="creneau" value="creneau"> <label for="creneau">Créneau</label></div>
     </div>
     <div class="menu_crud_emplacement">
-      <div v-show="selectedMenu === 'role'" class="crud_role"><crud-role/></div>
-      <div v-show="selectedMenu === 'personne'" class="crud_personne"><crud-personne/></div>
+      <div v-show="selectedMenu === 'role'" class="crud_role"><crudRole/></div>
+      <div v-show="selectedMenu === 'personne'" class="crud_personne"><crudPersonne/></div>
       <div v-show="selectedMenu === 'emplacement'" class="crud_emplacement"><crud-emplacement/></div>
       <div v-show="selectedMenu === 'ressource'" class="crud_ressource"><crud-ressource/></div>
       <div v-show="selectedMenu === 'emplacement_ressource'" class="crud_emplacement_ressource"><crud-emplacement-ressource/></div>
@@ -34,7 +34,7 @@
       <div v-show="selectedMenu === 'tag'" class="crud_tag"><crud-tag/></div>
       <div v-show="selectedMenu === 'personne_tag'" class="crud_personne_tag"><crud-personne-tag/></div>
       <div v-show="selectedMenu === 'evenement'" class="crud_evenement"><crud-evenement/></div>
-      <div v-show="selectedMenu === 'creneau'" class="crud_creneau"><crud-creneau/></div>
+      <div v-show="selectedMenu === 'creneau'" class="crud_creneau"><crudCreneau/></div>
     </div>
   </div>
 </template>
@@ -68,9 +68,9 @@ export default {
     }
   },
   components: {
-    crudAcheter,crudCalendrier,crudCreneau,crudEmplacement,crudEmplacementRessource,crudEvenement,
-    crudLignePanier,crudPanier,crudPersonne,crudPersonneTag,crudQrCode,crudRessource,crudRole,
-    crudStand,crudTag,crudItem
+    crudAcheter,crudCalendrier,crudEmplacement,crudEmplacementRessource,crudEvenement,
+    crudLignePanier,crudPanier,crudPersonneTag,crudQrCode,crudRessource,
+    crudStand,crudTag,crudItem,crudCreneau,crudPersonne,crudRole
   }
 };
 </script>

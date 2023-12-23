@@ -69,8 +69,6 @@ export default {
         this.calendrier.headers.push({text: this.getAllCalendrierColumn[i].column_name, value: this.getAllCalendrierColumn[i].column_name, groupable: false});
       }
       this.calendrier.stats = this.getAllCalendrier;
-      console.log(this.calendrier.headers)
-      console.log(this.calendrier.stats)
     },
   },
   async mounted() {

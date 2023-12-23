@@ -65,14 +65,10 @@ export default {
     async loadData(){
       await this.getAllPanierStore;
       await this.getAllPanierColumnStore;
-      console.log(this.getAllPanier,1)
-      console.log(this.getAllPanierColumn,2)
       for(var i = 0; i<this.getAllPanierColumn.length; i++){
         this.panier.headers.push({text: this.getAllPanierColumn[i].column_name, value: this.getAllPanierColumn[i].column_name, groupable: false});
       }
       this.panier.stats = this.getAllPanier;
-      console.log(this.panier.headers)
-      console.log(this.panier.stats)
     },
   },
   async mounted() {

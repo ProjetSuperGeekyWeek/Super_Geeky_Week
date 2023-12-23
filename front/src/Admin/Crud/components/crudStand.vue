@@ -69,8 +69,6 @@ export default {
         this.stand.headers.push({text: this.getAllStandColumn[i].column_name, value: this.getAllStandColumn[i].column_name, groupable: false});
       }
       this.stand.stats = this.getAllStand;
-      console.log(this.stand.headers)
-      console.log(this.stand.stats)
     },
   },
   async mounted() {

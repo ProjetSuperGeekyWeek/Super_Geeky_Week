@@ -69,8 +69,6 @@ export default {
         this.evenement.headers.push({text: this.getAllEvenementColumn[i].column_name, value: this.getAllEvenementColumn[i].column_name, groupable: false});
       }
       this.evenement.stats = this.getAllEvenement;
-      console.log(this.evenement.headers)
-      console.log(this.evenement.stats)
     },
   },
   async mounted() {

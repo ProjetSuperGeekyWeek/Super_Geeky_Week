@@ -5,7 +5,7 @@
         <v-container>
           <v-card>
             <v-card-title>
-              Item
+              {{ title }}
               <v-spacer />
               <v-text-field
                   v-model="search"
@@ -28,13 +28,13 @@
 
           <v-data-table
               v-model="selected"
-              :headers="item.headers"
-              :items="item.stats"
+              :headers="value.headers"
+              :items="value.stats"
               :items-per-page="10"
               class="elevation-4"
               :search="search"
               show-select
-              item-key="id_item"
+              item-key=""
               show-group-by
           >
           </v-data-table>
@@ -48,27 +48,33 @@
 import {mapActions, mapGetters} from "vuex";
 
 export default {
-  name: 'crudAcheter',
+  name: 'crudEntitie',
+  props: {
+    title: String,
+    forData: String,
+  },
   data: () => ({
     selected: [],
     search: '',
-    item: {
+    value: {
       headers: [],
       stats: []
-    }
+    },
   }),
   computed: {
-    ...mapGetters(['getAllItem','getAllItemColumn']),
-    ...mapActions(['getAllItemStore','getAllItemColumnStore']),
+    ...mapGetters(['getAll','getAllColumn']),
   },
   methods: {
+    ...mapActions(['getAllStore','getAllColumnStore']),
     async loadData(){
-      await this.getAllItemStore;
-      await this.getAllItemColumnStore;
-      for(var i = 0; i<this.getAllItemColumn.length; i++){
-        this.item.headers.push({text: this.getAllItemColumn[i].column_name, value: this.getAllItemColumn[i].column_name, groupable: false});
+      await this.getAllStore(this.forData);
+      await this.getAllColumnStore(this.forData);
+      for(var i = 0; i<this.getAllColumn.length; i++){
+        this.value.headers.push({text: this.getAllColumn[i].column_name, value: this.getAllColumn[i].column_name, groupable: false});
       }
-      this.item.stats = this.getAllItem;
+      this.value.stats = this.getAll;
+      console.log(this.value.headers, 90909090, this.title)
+      console.log(this.value.stats, 80808080, this.title)
     },
   },
   async mounted() {

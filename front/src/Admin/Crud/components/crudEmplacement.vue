@@ -69,8 +69,6 @@ export default {
         this.emplacement.headers.push({text: this.getAllEmplacementColumn[i].column_name, value: this.getAllEmplacementColumn[i].column_name, groupable: false});
       }
       this.emplacement.stats = this.getAllEmplacement;
-      console.log(this.emplacement.headers)
-      console.log(this.emplacement.stats)
     },
   },
   async mounted() {
