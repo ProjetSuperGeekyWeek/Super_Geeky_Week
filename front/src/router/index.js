@@ -56,7 +56,7 @@ const routes = [
   {
     path: '/admin/crud',
     name: 'admin_crud',
-    component: () => import('@/Admin/Crud/views/CrudView.vue')
+    component: () => import('@/Admin/Crud/views/ShowCrudView.vue')
   }
 
 ]

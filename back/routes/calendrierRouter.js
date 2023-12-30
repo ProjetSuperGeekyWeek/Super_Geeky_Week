@@ -1,4 +1,4 @@
-const calendrierController = require('../controllers/calendrierController');
+const calendrierController = require('../controllers/crud/calendrierController');
 const express = require('express');
 
 var router = express.Router();
