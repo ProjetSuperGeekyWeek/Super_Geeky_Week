@@ -1,17 +1,17 @@
 const pool = require("../database/db.js");
 
-const getAllCalendrier = (callback) => {
-    getAllCalendrierFromAPI().then(res => {
+const getAllStand = (callback) => {
+    getAllStandFromAPI().then(res => {
         callback(null, res);
     }).catch(error => {
         callback(error, null);
     });
 }
 
-async function getAllCalendrierFromAPI(){
+async function getAllStandFromAPI(){
     const client = await pool.connect();
     try {
-        const query = `SELECT * FROM calendrier`;
+        const query = `SELECT * FROM stand`;
         const result = await client.query(query);
         return result.rows;
     } catch (e) {
@@ -21,18 +21,18 @@ async function getAllCalendrierFromAPI(){
     }
 }
 
-const getAllCalendrierColumn = (callback) => {
-    getAllCalendrierColumnFromAPI().then(res => {
+const getAllStandColumn = (callback) => {
+    getAllStandColumnFromAPI().then(res => {
         callback(null, res);
     }).catch(error => {
         callback(error, null);
     });
 }
 
-async function getAllCalendrierColumnFromAPI(){
+async function getAllStandColumnFromAPI(){
     const client = await pool.connect();
     try {
-        const query = `SELECT column_name FROM information_schema.columns WHERE table_name = 'calendrier'`;
+        const query = `SELECT column_name FROM information_schema.columns WHERE table_name = 'stand'`;
         const result = await client.query(query);
         return result.rows;
     } catch (e) {
@@ -43,6 +43,6 @@ async function getAllCalendrierColumnFromAPI(){
 }
 
 module.exports = {
-    getAllCalendrier:getAllCalendrier,
-    getAllCalendrierColumn:getAllCalendrierColumn,
+    getAllStand:getAllStand,
+    getAllStandColumn:getAllStandColumn,
 };

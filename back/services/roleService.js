@@ -1,17 +1,17 @@
 const pool = require("../database/db.js");
 
-const getAllCalendrier = (callback) => {
-    getAllCalendrierFromAPI().then(res => {
+const getAllRole = (callback) => {
+    getAllRoleFromAPI().then(res => {
         callback(null, res);
     }).catch(error => {
         callback(error, null);
     });
 }
 
-async function getAllCalendrierFromAPI(){
+async function getAllRoleFromAPI(){
     const client = await pool.connect();
     try {
-        const query = `SELECT * FROM calendrier`;
+        const query = `SELECT * FROM role`;
         const result = await client.query(query);
         return result.rows;
     } catch (e) {
@@ -21,18 +21,18 @@ async function getAllCalendrierFromAPI(){
     }
 }
 
-const getAllCalendrierColumn = (callback) => {
-    getAllCalendrierColumnFromAPI().then(res => {
+const getAllRoleColumn = (callback) => {
+    getAllRoleColumnFromAPI().then(res => {
         callback(null, res);
     }).catch(error => {
         callback(error, null);
     });
 }
 
-async function getAllCalendrierColumnFromAPI(){
+async function getAllRoleColumnFromAPI(){
     const client = await pool.connect();
     try {
-        const query = `SELECT column_name FROM information_schema.columns WHERE table_name = 'calendrier'`;
+        const query = `SELECT column_name FROM information_schema.columns WHERE table_name = 'role'`;
         const result = await client.query(query);
         return result.rows;
     } catch (e) {
@@ -43,6 +43,6 @@ async function getAllCalendrierColumnFromAPI(){
 }
 
 module.exports = {
-    getAllCalendrier:getAllCalendrier,
-    getAllCalendrierColumn:getAllCalendrierColumn,
+    getAllRole:getAllRole,
+    getAllRoleColumn:getAllRoleColumn,
 };

@@ -52,6 +52,11 @@ const routes = [
     path: '/carte_admin',
     name: 'carte_admin',
     component: () => import('@/Admin/Carte/views/CarteAdminView.vue')
+  },
+  {
+    path: '/admin/crud',
+    name: 'admin_crud',
+    component: () => import('@/Admin/Crud/views/CrudView.vue')
   }
 
 ]
