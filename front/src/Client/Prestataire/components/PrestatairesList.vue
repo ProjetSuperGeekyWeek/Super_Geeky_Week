@@ -26,6 +26,9 @@
               <img src="@/assets/image/logo/main_logo.png" alt="">
             </div>
             <div class="prestataires-description">
+              <div class="prestataires-nom">
+                <p>{{ prestataire.nom }} {{ prestataire.prenom }}</p>
+              </div>
               <div class="prestataires-tag" v-for="tag in prestataire.tags" :key="tag">
                 <span>{{ tag }}</span>
               </div>
@@ -64,15 +67,15 @@ export default {
       filterOn: false,
       filterTagOn: false,
       filterNameOn: false,
-      showDivs: true
+      showDivs: false
     };
   },
 
   computed: {
     // TODO tags = route allTags;
-    computePresta() {
-      return this.allPresta();
-    },
+    // computePresta() {
+    //   return this.allPresta();
+    // },
   },
 
   methods: {
@@ -107,9 +110,37 @@ export default {
       }
       return resultTag;
     },
+    allCaseOfKeywordRecursive(keyword){
+      if(keyword.length == 1){
+        return [keyword.toUpperCase(), keyword.toLowerCase()];
+      }
+      else{
+        var result = [];
+        var tempResult = this.allCaseOfKeywordRecursive(keyword.substring(1));
+        for(let i=0; i<tempResult.length; i++){
+          result.push(keyword[0].toUpperCase() + tempResult[i]);
+          result.push(keyword[0].toLowerCase() + tempResult[i]);
+        }
+        return result;
+      }
+    },
+    async filterByNameAllCase(){
+      var resultName = [];
+      var tempResultName;
+      var tempKeyword = this.keyword;
+      var listKeyWordsCase = this.allCaseOfKeywordRecursive(tempKeyword);
+      for(let i=0; i<listKeyWordsCase.length; i++){
+        tempResultName = await getPrestataireByNom(listKeyWordsCase[i]);
+        for(let j=0; j<tempResultName.length; j++){
+          if(!(resultName.includes(tempResultName[j])))
+            resultName.push(tempResultName[j]);
+        }
+      }
+      return resultName;
+    },
     async filterByName(){
       var resultName;
-      resultName = await getPrestataireByNom(this.keyword);
+      resultName = await this.filterByNameAllCase();
       return resultName;
     },
     async allPresta(){
@@ -124,11 +155,9 @@ export default {
         }
       }
       this.prestataires = [];
-        for(let i=0; i<resultAll.length; i++){
-          this.prestataires.push(resultAll[i]);
-        }
-      console.log(resultAll[0].tags[0]);
-      return 0;
+      for(let i=0; i<resultAll.length; i++){
+        this.prestataires.push(resultAll[i]);
+      }
     },
     async filterPresta(){
       this.verifFiltreOn();
@@ -169,12 +198,15 @@ export default {
     },
     verifFiltreOn(){
       let searchValue = document.getElementById('search').value;
-      if(searchValue != '' || searchValue != null || !isNaN(searchValue)) 
+      if(isNaN(searchValue)) 
         this.filterNameOn = true;
       else
         this.filterNameOn = false;
     }
-  }
+  },
+  mounted() {
+    this.allPresta();
+  },
 };
 </script>
 
