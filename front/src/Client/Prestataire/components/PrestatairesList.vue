@@ -60,7 +60,7 @@ export default {
         {nom:"Filter 4", idtag: 4}
       ],
       keyword: '',
-      // prestataires: [],
+      prestataires: [],
       filterOn: false,
       filterTagOn: false,
       filterNameOn: false,
@@ -70,7 +70,7 @@ export default {
 
   computed: {
     // TODO tags = route allTags;
-    prestataires() {
+    computePresta() {
       return this.allPresta();
     },
   },
@@ -123,8 +123,12 @@ export default {
           resultAll[i].tags.push(tempTags[j].nom);
         }
       }
+      this.prestataires = [];
+        for(let i=0; i<resultAll.length; i++){
+          this.prestataires.push(resultAll[i]);
+        }
       console.log(resultAll[0].tags[0]);
-      return resultAll;
+      return 0;
     },
     async filterPresta(){
       this.verifFiltreOn();
@@ -160,12 +164,7 @@ export default {
         }
       }
       else{
-        var resultPresta;
-        resultPresta = await this.allPresta();
-        this.prestataires = [];
-        for(let i=0; i<resultPresta.length; i++){
-          this.prestataires.push(resultPresta[i]);
-        }
+        this.allPresta();
       }
     },
     verifFiltreOn(){
