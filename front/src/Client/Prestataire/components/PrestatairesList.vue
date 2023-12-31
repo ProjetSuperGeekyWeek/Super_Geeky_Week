@@ -70,6 +70,13 @@ export default {
     ...mapActions(['getAllTagStore']),
   },
   methods: {
+    includesId(array, id){
+      for(let i=0; i<array.length; i++){
+        if(array[i].idpresta == id)
+          return true;
+      }
+      return false;
+    },
     addTag(tag){
       if (!this.selectedTags.includes(tag)) {
         this.selectedTags.push(tag);
@@ -90,15 +97,17 @@ export default {
     },
     async filterByTags(){
       var resultTag;
+      var resultTagMany = [];
       var tempPrestaTag = [];
       resultTag = await getPrestataireByTag(this.selectedTags[0].id_tag);
       if(this.selectedTags.length > 1){
         for(let i=1; i<this.selectedTags.length; i++){
-          tempPrestaTag = await getPrestataireByTag(this.selectedTags[i].id_tag);
+          resultTagMany = await getPrestataireByTag(this.selectedTags[i].id_tag);
           for(let j=0; j<resultTag.length; j++){
-            if(!(tempPrestaTag.includes(resultTag[j])))
-            resultTag.splice(j,1);
+            if(this.includesId(resultTagMany,resultTag[j].idpresta))
+              tempPrestaTag.push(resultTag[j]);
           }
+          resultTag = tempPrestaTag;
         }
       }
       return resultTag;
@@ -118,14 +127,15 @@ export default {
       }
     },
     async filterByNameAllCase(){
-      var resultName = [];
-      var tempResultName;
+      var resultName;
+      var tempResultName = [];
       var tempKeyword = this.keyword;
       var listKeyWordsCase = this.allCaseOfKeywordRecursive(tempKeyword);
-      for(let i=0; i<listKeyWordsCase.length; i++){
+      resultName = await getPrestataireByNom(listKeyWordsCase[0]);
+      for(let i=1; i<listKeyWordsCase.length; i++){
         tempResultName = await getPrestataireByNom(listKeyWordsCase[i]);
         for(let j=0; j<tempResultName.length; j++){
-          if(!(resultName.includes(tempResultName[j])))
+          if(!(this.includesId(resultName,tempResultName[j].idpresta)))
             resultName.push(tempResultName[j]);
         }
       }
@@ -169,13 +179,13 @@ export default {
           resultTag = await this.filterByTags();
           resultName = await this.filterByName();
           this.prestataires = [];
+          var tempPresta = [];
           for(let i=0; i<resultTag.length; i++){
-            if(resultName.includes(resultTag[i]))
-              this.prestataires.push(resultTag[i]);
+            tempPresta.push(resultTag[i]);
           }
           for (let i = 0; i < resultName.length; i++) {
-            if (!(this.prestataires.includes(resultName[i])))
-              this.prestataires.splice(resultName[i], 1);
+            if (this.includesId(tempPresta,resultName[i].idpresta))
+              this.prestataires.push(resultName[i]);
           }
         }
         else if(this.filterTagOn){
