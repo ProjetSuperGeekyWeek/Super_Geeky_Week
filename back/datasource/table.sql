@@ -1,4 +1,7 @@
 -- Drop table if exists
+DROP TABLE IF EXISTS session_panier CASCADE;
+DROP TABLE IF EXISTS session_personne CASCADE;
+DROP TABLE IF EXISTS session CASCADE;
 DROP TABLE IF EXISTS creneau CASCADE;
 DROP TABLE IF EXISTS evenement CASCADE;
 DROP TABLE IF EXISTS personne_tag CASCADE;
@@ -144,6 +147,29 @@ CREATE TABLE creneau (
     CONSTRAINT pk_creneau PRIMARY KEY (id_evenement, id_calendrier, heure_debut_evenement, heure_fin_evenement),
     CONSTRAINT fk_evenement FOREIGN KEY (id_evenement) REFERENCES evenement(id_evenement),
     CONSTRAINT fk_calendrier FOREIGN KEY (id_calendrier) REFERENCES calendrier(id_calendrier)
+);
+
+CREATE TABLE session (
+    id_session SERIAL PRIMARY KEY,
+    uuid_session VARCHAR(255) NOT NULL,
+    date_session TIMESTAMP NOT NULL
+);
+
+CREATE TABLE session_personne (
+    id_session INTEGER NOT NULL,
+    id_personne INTEGER NOT NULL,
+    authentifier BOOLEAN NOT NULL,
+    CONSTRAINT pk_session_personne PRIMARY KEY (id_session, id_personne),
+    CONSTRAINT fk_session FOREIGN KEY (id_session) REFERENCES session(id_session),
+    CONSTRAINT fk_personne FOREIGN KEY (id_personne) REFERENCES personne(id_personne)
+);
+
+CREATE TABLE session_panier (
+    id_session INTEGER NOT NULL,
+    id_panier INTEGER NOT NULL,
+    CONSTRAINT pk_session_panier PRIMARY KEY (id_session, id_panier),
+    CONSTRAINT fk_session FOREIGN KEY (id_session) REFERENCES session(id_session),
+    CONSTRAINT fk_panier FOREIGN KEY (id_panier) REFERENCES panier(id_panier)
 );
 
 

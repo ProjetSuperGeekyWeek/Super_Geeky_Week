@@ -7,12 +7,14 @@ import {getAllAcheter,getAllAcheterColumn,getAllCalendrier,getAllCalendrierColum
   getAllEvenement,getAllEvenementColumn,getAllItem,getAllItemColumn,getAllLignePanier,getAllLignePanierColumn,getAllPanier,
   getAllPanierColumn,getAllPersonne,getAllPersonneColumn,getAllPersonneTag,getAllPersonneTagColumn,getAllQrCode,getAllQrCodeColumn,
   getAllRessource,getAllRessourceColumn,getAllStand,getAllStandColumn,getAllTag,getAllTagColumn} from "@/../../back/axiosFunctions/crudAxios";
+import {cleanSession,createSession,getIdSession,getAuthentifierSession,updateSessionTime,getAdmin,getIdPanier} from "@/../../back/axiosFunctions/sessionAxios";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     authentifier: false,
+    id_session: null, // id session dans bdd
     admin: false,
     lang: 'fr',
     en: en.data(),
@@ -25,8 +27,9 @@ export default new Vuex.Store({
       description: 'Gérant des tournois de super smash bros',
       image: '../assets/main_logo.png',
       service: 'Tournois de super smash bros',
-
     },
+    idPanier: null,
+
     nom_prestataire: '',
     prenom_prestataire: '',
     nom_stand: '',
@@ -118,6 +121,9 @@ export default new Vuex.Store({
 
     /*getAll: state => state.tabAll,
     getAllColumn: state => state.tabAllColumn,*/
+
+    //session
+    getIdSession: state => state.id_session,
   },
   mutations: {
     setAuthentifier(state, payload) {
@@ -245,6 +251,14 @@ export default new Vuex.Store({
       state.tabAllColumn = payload;
     },*/
 
+
+    //session
+    setIdSession(state, payload) {
+      state.id_session = payload;
+    },
+    setIdPanier(state, payload) {
+      state.idPanier = payload;
+    },
   },
   actions: {
     async getAllAcheterStore({commit}){
@@ -587,6 +601,60 @@ export default new Vuex.Store({
         console.log(e);
       }
     }*/
+    
+    //session
+    async cleanSession(){
+      try{
+        await cleanSession(); // doit faire ménage parmi sessions trop vieilles (plus de 24h)
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async setIdSessionStore({commit}){
+      try{
+        const oldSession = await getIdSession(); // vérifie session dans cookies (token uuid), si existe et dans cookies et bdd le retourne, sinon retourne false
+        if(oldSession === false){
+          alert("createSession")
+          try{
+            await createSession(); // crée session dans bdd et cookies (token uuid)
+            const newSession = await getIdSession();
+            await commit('setIdSession', newSession);
+          } catch (e) {
+            console.log(e);
+          }
+        }
+        else{
+          await updateSessionTime(oldSession); // met à jour la date de session dans bdd (24h)
+          await commit('setIdSession', oldSession);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async setAuthentifierStore({commit},id){
+      try{
+        const authentifier = await getAuthentifierSession(id); // si session non presta/admin return false, sinon return true
+        await commit('setAuthentifier', authentifier);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async setAdminStore({commit},id){
+      try{
+        const admin = await getAdmin(id); // si session non admin return false, sinon return true
+        await commit('setAdmin', admin);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async setIdPanierStore({commit},id){
+      try{
+        const panier = await getIdPanier(id); // si pas de panier lié return null
+        await commit('setIdPanier', panier);
+      } catch (e) {
+        console.log(e);
+      }
+    }
   },
   modules: {
   }

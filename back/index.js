@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieparser = require("cookie-parser");
 const dotenv = require("dotenv");
 const app = express();
 const cors = require('cors');
@@ -14,6 +15,8 @@ const crudRouter = require('./routes/crudRouter');
 app.use(cors({
     origin : '*'
 }));
+
+app.use(cookieparser());
 
 app.use(express.json());
 app.use('/api/carte_interactive', carteRouter);

@@ -11,6 +11,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { logoutSession } from '@/../../back/axiosFunctions/sessionAxios';
 export default {
     name: 'AlreadyAuthentifier',
     data() {
@@ -18,13 +19,18 @@ export default {
         }
     },
     methods: {
-        deconnect() {
-            this.$store.commit('setAuthentifier', false);
-            this.$store.commit('setAdmin', false);
+        async deconnect() {
+            try {
+                this.$store.commit('setAuthentifier', false);
+                this.$store.commit('setAdmin', false);
+                await logoutSession(this.id_session);
+            } catch (error) {
+                console.log(error);
+            }
         },
     },
     computed: {
-        ...mapState(['admin', 'nom']),
+        ...mapState(['admin', 'nom', 'id_session']),
     },
 }
 </script>

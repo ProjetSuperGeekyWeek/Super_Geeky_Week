@@ -9,7 +9,6 @@ const getInfobulle = (id,callback) => {
 }
 
 async function getInfobulleFromAPI(id){
-    console.log("id", id);
     const client = await pool.connect();
     try {
         const query = `
@@ -22,10 +21,8 @@ async function getInfobulleFromAPI(id){
         `;
         const values = [id];
         const result = await client.query(query, values);
-        console.log("nom", result.rows[0].nom);
         return result.rows[0];
     } catch (e) {
-        console.log("e", e);
         throw e;
     } finally {
         client.release();
@@ -97,7 +94,6 @@ const getAllStandsTaken = (callback) => {
 
 async function getAllStandsTakenFromAPI(){
     const client = await pool.connect();
-    console.log("stands");
     try {
         const query = `
         SELECT id_emplacement FROM stand

@@ -1,0 +1,26 @@
+const authentificationService = require('../services/authentificationService');
+
+// get
+exports.getPrestataireMailPassword = async (req, res) => {
+    authentificationService.getPrestataireMailPassword(req.params.mail, req.params.mdp, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving prestataire."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
+
+exports.adminVerif = async (req, res) => {
+    authentificationService.AdminVerif(req.params.id, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving prestataire."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

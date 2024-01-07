@@ -7,7 +7,7 @@
 
 
 <script>
-import {mapState} from "vuex";
+import {mapState, mapActions} from "vuex";
 import NavBar from "@/NavBar.vue";
 
 export default {
@@ -29,7 +29,15 @@ export default {
   },
   computed: {
     ...mapState(['lang','en','fr']),
-  }
+    ...mapActions(['cleanSession','setIdSessionStore','setAuthentifierStore','setAdminStore','setIdPanierStore']),
+  },
+  async mounted() {
+    await this.cleanSession;
+    await this.setIdSessionStore;
+    await this.setAuthentifierStore;
+    await this.setAdminStore;
+    await this.setIdPanierStore;
+  },
 }
 </script>
 
