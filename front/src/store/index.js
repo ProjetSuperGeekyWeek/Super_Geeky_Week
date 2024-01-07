@@ -21,6 +21,7 @@ export default new Vuex.Store({
     en: en.data(),
     fr: fr.data(),
     nom: 'Invité',
+    id_prestataire: null,
     prestataire: {
       prenom: 'Jean',
       nom: 'Dupont',
@@ -613,9 +614,9 @@ export default new Vuex.Store({
     },
     async setIdSessionStore({commit}){
       try{
+        // alert("getId")
         const oldSession = await getIdSession(); // vérifie session dans cookies (token uuid), si existe et dans cookies et bdd le retourne, sinon retourne false
         if(oldSession === false){
-          alert("createSession")
           try{
             await createSession(); // crée session dans bdd et cookies (token uuid)
             const newSession = await getIdSession();

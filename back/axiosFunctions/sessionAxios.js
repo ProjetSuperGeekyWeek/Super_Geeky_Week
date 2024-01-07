@@ -2,7 +2,6 @@ import { getRequest, deleteRequest, postRequest, putRequest } from "./axios";
 
 //get
 async function getIdSession() {
-    alert("getIdSession");
     return await getRequest(`/api/session`, "GETIDSESSION");
 }
 

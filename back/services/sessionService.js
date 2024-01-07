@@ -10,7 +10,6 @@ const getIdSession = (uuid, callback) => {
 }
 
 async function getIdSessionFromAPI(uuid){
-    console.log("getIdSessionFromAPI");
     const client = await pool.connect();
     try {
         const query = `
@@ -19,6 +18,8 @@ async function getIdSessionFromAPI(uuid){
         AND date_session > NOW() - INTERVAL '24 hours'
         `;
         const result = await client.query(query, [uuid]);
+        console.log("getId")
+        console.log(result.rows);
         return result.rows;
     } catch (e) {
         throw e;
@@ -123,6 +124,7 @@ async function createSessionFromAPI(uuid){
         RETURNING id_session
         `;
         const result = await client.query(query, [uuid]);
+        // console.log("create")
         return result.rows;
     } catch (e) {
         throw e;
