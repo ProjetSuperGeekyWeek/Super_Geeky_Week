@@ -7,7 +7,8 @@ import {getAllAcheter,getAllAcheterColumn,getAllCalendrier,getAllCalendrierColum
   getAllEvenement,getAllEvenementColumn,getAllItem,getAllItemColumn,getAllLignePanier,getAllLignePanierColumn,getAllPanier,
   getAllPanierColumn,getAllPersonne,getAllPersonneColumn,getAllPersonneTag,getAllPersonneTagColumn,getAllQrCode,getAllQrCodeColumn,
   getAllRessource,getAllRessourceColumn,getAllStand,getAllStandColumn,getAllTag,getAllTagColumn} from "@/../../back/axiosFunctions/crudAxios";
-import {cleanSession,createSession,getIdSession,getAuthentifierSession,updateSessionTime,getAdmin,getIdPanier} from "@/../../back/axiosFunctions/sessionAxios";
+import {cleanSession,createSession,getIdSession,getAuthentifierSession,updateSessionTime} from "@/../../back/axiosFunctions/sessionAxios";
+import {adminVerif} from "@/../../back/axiosFunctions/authentificationAxios";
 
 Vue.use(Vuex)
 
@@ -641,20 +642,20 @@ export default new Vuex.Store({
     },
     async setAdminStore({commit},id){
       try{
-        const admin = await getAdmin(id); // si session non admin return false, sinon return true
+        const admin = await adminVerif(id); // si session non admin return false, sinon return true
         await commit('setAdmin', admin);
       } catch (e) {
         console.log(e);
       }
     },
-    async setIdPanierStore({commit},id){
-      try{
-        const panier = await getIdPanier(id); // si pas de panier lié return null
-        await commit('setIdPanier', panier);
-      } catch (e) {
-        console.log(e);
-      }
-    }
+    // async setIdPanierStore({commit},id){
+    //   try{
+    //     const panier = await getIdPanier(id); // si pas de panier lié return null
+    //     await commit('setIdPanier', panier);
+    //   } catch (e) {
+    //     console.log(e);
+    //   }
+    // }
   },
   modules: {
   }
