@@ -14,7 +14,7 @@ exports.getPrestataireMailPassword = async (req, res) => {
 }
 
 exports.adminVerif = async (req, res) => {
-    authentificationService.AdminVerif(req.params.id, (err, data) => {
+    authentificationService.adminVerif(req.params.id, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving prestataire."

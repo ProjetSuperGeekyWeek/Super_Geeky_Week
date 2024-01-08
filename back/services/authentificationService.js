@@ -18,7 +18,7 @@ async function getPrestataireMailPasswordFromAPI(mail, mdp){
         AND mdp_personne = $2
         `;
         const result = await client.query(query, [mail, mdp]);
-        return result.rows;
+        return result.rows[0];
     } catch (e) {
         throw e;
     } finally {
@@ -38,13 +38,13 @@ async function adminVerifFromAPI(id){
     const client = await pool.connect();
     try {
         const query = `
-        SELECT id_personne FROM personne
+        SELECT * FROM personne
         INNER JOIN role ON personne.id_role = role.id_role
         WHERE id_personne = $1
         AND role.nom_role = 'Admin'
         `;
         const result = await client.query(query, [id]);
-        return result.rows;
+        return result.rows[0];
     } catch (e) {
         throw e;
     } finally {

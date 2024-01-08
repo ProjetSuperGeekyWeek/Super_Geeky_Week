@@ -431,7 +431,8 @@ export default {
     },
   },
   computed: {
-    ...mapState(['nom_prestataire', 'prenom_prestataire', 'nom_stand', 'admin'])
+    ...mapState(['nom_prestataire', 'prenom_prestataire', 'nom_stand']),
+    ...mapState('authentifierStore',['admin']),
   },
 }
 </script>
