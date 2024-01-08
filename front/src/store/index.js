@@ -518,7 +518,7 @@ export default new Vuex.Store({
         console.log(e);
       }
     },
-    /*async getAllStore({commit}, params){
+    /*async getAllStore({state,commit}, params){
       var responce;
         try{
           switch (params) {
