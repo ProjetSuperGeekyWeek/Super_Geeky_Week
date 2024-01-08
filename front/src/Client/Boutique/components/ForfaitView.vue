@@ -1,7 +1,7 @@
 <template>
   <div class="forfait">
     <p class="tres_grand gras titre">Billetterie</p>
-    <p class="text_pres">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce turpis felis, vulputate vitae massa ac, efficitur accumsan ex. Phasellus lobortis hendrerit leo. Maecenas pellentesque feugiat tellus, eu pulvinar ex mattis varius. Sed nec nulla a massa maximus posuere. Curabitur diam dui, luctus efficitur mi vel, lacinia dignissim ex. Quisque at.</p>
+    <p class="text_pres">Pour la Super Geeky Week, nous vous proposons trois types de forfaits pour rendre votre séjour encore plus agréable. Tout d'abord, le forfait standard vous permettra de profiter pleinement de tous les stands. Ensuite, nous vous offrons le forfait prioritaire qui vous garantit un accès plus rapide à nos services, vous permettant ainsi de maximiser votre temps et votre expérience. Enfin, pour assurer une accessibilité optimale, nous avons également le forfait dédié aux personnes en situation de handicap.</p>
     <div class="jour" v-for="jour in listCalendrier" :key="jour.id_calendrier">
       <p class="grand gras titre">Jour {{ jour.id_calendrier }} / Horaire de {{ jour.horaire_debut }} a {{ jour.horaire_fin }}</p>
       <div class="forfait_jour">

@@ -35,7 +35,7 @@
               :search="search"
               show-select
               single-select
-              :item-key="['id_personne', 'id_tag']"
+              item-key="id_personne"
               show-group-by
           >
           </v-data-table>
