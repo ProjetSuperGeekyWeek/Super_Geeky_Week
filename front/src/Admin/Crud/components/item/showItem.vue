@@ -7,6 +7,8 @@
             <v-card-title>
               Item
               <v-spacer />
+              <v-btn @click="navigateToAdd" color="primary">Ajouter</v-btn>
+              <v-spacer/>
               <v-text-field
                   v-model="search"
                   append-icon="mdi-magnify"
@@ -30,10 +32,11 @@
               v-model="selected"
               :headers="item.headers"
               :items="item.stats"
-              :items-per-page="10"
+              :items-per-page="5"
               class="elevation-4"
               :search="search"
               show-select
+              single-select
               item-key="id_item"
               show-group-by
           >
@@ -69,6 +72,9 @@ export default {
         this.item.headers.push({text: this.getAllItemColumn[i].column_name, value: this.getAllItemColumn[i].column_name, groupable: false});
       }
       this.item.stats = this.getAllItem;
+    },
+    async navigateToAdd() {
+      await this.$router.push('/admin/crud/item/add');
     },
   },
   async mounted() {

@@ -7,6 +7,8 @@
             <v-card-title>
               Personne
               <v-spacer />
+              <v-btn @click="navigateToAdd" color="primary">Ajouter</v-btn>
+              <v-spacer/>
               <v-text-field
                   v-model="search"
                   append-icon="mdi-magnify"
@@ -30,10 +32,11 @@
               v-model="selected"
               :headers="personne.headers"
               :items="personne.stats"
-              :items-per-page="10"
+              :items-per-page="5"
               class="elevation-4"
               :search="search"
               show-select
+              single-select
               item-key="id_personne"
               show-group-by
           >
@@ -70,6 +73,9 @@ export default {
       }
       this.personne.stats = this.getAllPersonne;
     },
+  },
+  async navigateToAdd() {
+    this.$router.push('/admin/crud/personne/add');
   },
   async mounted() {
     await this.loadData();

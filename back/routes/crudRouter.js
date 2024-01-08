@@ -68,7 +68,7 @@ router.get('/getAllTagColumn', tagController.getAllTagColumn);
 
 
 // ADD
-
+    router.patch('/addRole', roleController.addNewRole);
 // DELETE
 
 // UPDATE

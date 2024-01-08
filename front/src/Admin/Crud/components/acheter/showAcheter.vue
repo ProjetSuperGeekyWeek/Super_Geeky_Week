@@ -7,6 +7,8 @@
             <v-card-title>
               Acheter
               <v-spacer />
+              <v-btn @click="navigateToAdd" color="primary">Ajouter</v-btn>
+              <v-spacer />
               <v-text-field
                   v-model="search"
                   append-icon="mdi-magnify"
@@ -30,10 +32,11 @@
               v-model="selected"
               :headers="acheter.headers"
               :items="acheter.stats"
-              :items-per-page="10"
+              :items-per-page="5"
               class="elevation-4"
               :search="search"
               show-select
+              single-select
               item-key="id_acheter"
               show-group-by
           >
@@ -70,6 +73,9 @@ export default {
       }
       this.acheter.stats = this.getAllAcheters;
     },
+  },
+  async navigateToAdd() {
+    this.$router.push('/admin/crud/acheter/add');
   },
   async mounted() {
     await this.loadData();

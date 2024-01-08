@@ -6,7 +6,8 @@ import {getAllAcheter,getAllAcheterColumn,getAllCalendrier,getAllCalendrierColum
   getAllCreneauColumn,getAllEmplacement,getAllEmplacementColumn,getAllEmplacementRessource,getAllEmplacementRessourceColumn,
   getAllEvenement,getAllEvenementColumn,getAllItem,getAllItemColumn,getAllLignePanier,getAllLignePanierColumn,getAllPanier,
   getAllPanierColumn,getAllPersonne,getAllPersonneColumn,getAllPersonneTag,getAllPersonneTagColumn,getAllQrCode,getAllQrCodeColumn,
-  getAllRessource,getAllRessourceColumn,getAllStand,getAllStandColumn,getAllTag,getAllTagColumn} from "@/../../back/axiosFunctions/crudAxios";
+  getAllRessource,getAllRessourceColumn,getAllStand,getAllStandColumn,getAllTag,getAllTagColumn,
+  addNewRole} from "@/../../back/axiosFunctions/crudAxios";
 import {cleanSession,createSession,getIdSession,getAuthentifierSession,updateSessionTime,getAdmin,getIdPanier} from "@/../../back/axiosFunctions/sessionAxios";
 
 Vue.use(Vuex)
@@ -243,7 +244,6 @@ export default new Vuex.Store({
     SET_ALL_TAG_COLUMN(state, payload){
       state.tabAllTagColumn = payload;
     },
-
     /*SET_ALL(state, payload){
       state.tabAll = payload;
     },
@@ -517,6 +517,27 @@ export default new Vuex.Store({
         console.log(e);
       }
     },
+    async addNewRoleStore({commit}, nom_role){
+      let result = null
+      try{
+        result = await addNewRole(nom_role)
+        if (result.error === 0){
+          commit('SET_ALL_ROLE', result.data)
+        }else{
+          console.log(result.data)
+        }
+      }catch (err) {
+        console.log('anomalie dans addNewROleStore')
+      }
+    },
+    /*async addNewItemStore({commit}, nom_item, stock_item, prix_item, image_item, description_item,id_personne,id_calendrier){
+      let result = null;
+      try{
+
+      }catch (err) {
+        console.log('anomalie dans addNewItemStore')
+      }
+    },*/
     /*async getAllStore({commit}, params){
       var responce;
         try{
