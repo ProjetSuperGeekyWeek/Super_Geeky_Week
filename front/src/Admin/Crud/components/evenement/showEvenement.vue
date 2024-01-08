@@ -7,6 +7,8 @@
             <v-card-title>
               Evenement
               <v-spacer />
+              <v-btn @click="navigateToAdd" color="primary">Ajouter</v-btn>
+              <v-spacer/>
               <v-text-field
                   v-model="search"
                   append-icon="mdi-magnify"
@@ -30,10 +32,11 @@
               v-model="selected"
               :headers="evenement.headers"
               :items="evenement.stats"
-              :items-per-page="10"
+              :items-per-page="5"
               class="elevation-4"
               :search="search"
               show-select
+              single-select
               item-key="id_evenement"
               show-group-by
           >

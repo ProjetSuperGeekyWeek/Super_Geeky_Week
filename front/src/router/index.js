@@ -62,6 +62,46 @@ const routes = [
     path: '/admin/crud',
     name: 'admin_crud',
     component: () => import('@/Admin/Crud/views/ShowCrudView.vue')
+  },
+  {
+    path: '/admin/crud/role/add',
+    name: 'admin_crud_role_add',
+    component: () => import('@/Admin/Crud/components/role/addRole.vue')
+  },
+  {
+    path: '/admin/crud/acheter/add',
+    name: 'admin_crud_acheter_add',
+    component: () => import('@/Admin/Crud/components/acheter/addAcheter.vue')
+  },
+  {
+    path: '/admin/crud/item/add',
+    name: 'admin_crud_item_add',
+    component: () => import('@/Admin/Crud/components/item/addItem.vue')
+  },
+  {
+    path: '/admin/crud/panier/add',
+    name: 'admin_crud_panier_add',
+    component: () => import('@/Admin/Crud/components/panier/addPanier.vue')
+  },
+  {
+    path: '/admin/crud/personne/add',
+    name: 'admin_crud_personne_add',
+    component: () => import('@/Admin/Crud/components/personne/addPersonne.vue')
+  },
+  {
+    path: '/admin/crud/qrcode/add',
+    name: 'admin_crud_qrcode_add',
+    component: () => import('@/Admin/Crud/components/qrCode/addQrCode.vue')
+  },
+  {
+    path: '/admin/crud/ressource/add',
+    name: 'admin_crud_ressource_add',
+    component: () => import('@/Admin/Crud/components/ressource/addRessource.vue')
+  },
+  {
+    path: '/admin/crud/tag/add',
+    name: 'admin_crud_tag_add',
+    component: () => import('@/Admin/Crud/components/tag/addTag.vue')
   }
 
 ]

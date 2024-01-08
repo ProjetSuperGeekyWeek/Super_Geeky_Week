@@ -7,6 +7,8 @@
             <v-card-title>
               QrCode
               <v-spacer />
+              <v-btn @click="navigateToAdd" color="primary">Ajouter</v-btn>
+              <v-spacer/>
               <v-text-field
                   v-model="search"
                   append-icon="mdi-magnify"
@@ -30,11 +32,12 @@
               v-model="selected"
               :headers="qrCode.headers"
               :items="qrCode.stats"
-              :items-per-page="10"
+              :items-per-page="5"
               class="elevation-4"
               :search="search"
               show-select
-              item-key="id_qrCode"
+              single-select
+              item-key="id_qr_code"
               show-group-by
           >
           </v-data-table>
@@ -70,6 +73,9 @@ export default {
       }
       this.qrCode.stats = this.getAllQrCode;
     },
+  },
+  async navigateToAdd() {
+    this.$router.push('/admin/crud/qrcode/add');
   },
   async mounted() {
     await this.loadData();

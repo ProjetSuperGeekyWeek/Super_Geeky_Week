@@ -6,7 +6,7 @@ import {getAllAcheter,getAllAcheterColumn,getAllCalendrier,getAllCalendrierColum
   getAllCreneauColumn,getAllEmplacement,getAllEmplacementColumn,getAllEmplacementRessource,getAllEmplacementRessourceColumn,
   getAllEvenement,getAllEvenementColumn,getAllItem,getAllItemColumn,getAllLignePanier,getAllLignePanierColumn,getAllPanier,
   getAllPanierColumn,getAllPersonne,getAllPersonneColumn,getAllPersonneTag,getAllPersonneTagColumn,getAllQrCode,getAllQrCodeColumn,
-  getAllRessource,getAllRessourceColumn,getAllStand,getAllStandColumn,getAllTag,getAllTagColumn} from "@/../../back/axiosFunctions/crudAxios";
+  getAllRessource,getAllRessourceColumn,getAllStand,getAllStandColumn,getAllTag,getAllTagColumn, addNewRole} from "@/../../back/axiosFunctions/crudAxios";
 import {cleanSession,createSession,getIdSession,getAuthentifierSession,updateSessionTime} from "@/../../back/axiosFunctions/sessionAxios";
 import {adminVerif} from "@/../../back/axiosFunctions/authentificationAxios";
 
@@ -21,7 +21,6 @@ export default new Vuex.Store({
     en: en.data(),
     fr: fr.data(),
     nom: 'Invité',
-    id_prestataire: null,
     prestataire: {
       prenom: 'Jean',
       nom: 'Dupont',
@@ -519,7 +518,7 @@ export default new Vuex.Store({
         console.log(e);
       }
     },
-    /*async getAllStore({commit}, params){
+    /*async getAllStore({state,commit}, params){
       var responce;
         try{
           switch (params) {
@@ -614,9 +613,9 @@ export default new Vuex.Store({
     },
     async setIdSessionStore({commit}){
       try{
-        // alert("getId")
         const oldSession = await getIdSession(); // vérifie session dans cookies (token uuid), si existe et dans cookies et bdd le retourne, sinon retourne false
         if(oldSession === false){
+          alert("createSession")
           try{
             await createSession(); // crée session dans bdd et cookies (token uuid)
             const newSession = await getIdSession();
@@ -643,20 +642,20 @@ export default new Vuex.Store({
     },
     async setAdminStore({commit},id){
       try{
-        const admin = await adminVerif(id); // si session non admin return false, sinon return true
+        const admin = await getAdmin(id); // si session non admin return false, sinon return true
         await commit('setAdmin', admin);
       } catch (e) {
         console.log(e);
       }
     },
-    // async setIdPanierStore({commit},id){
-    //   try{
-    //     const panier = await getIdPanier(id); // si pas de panier lié return null
-    //     await commit('setIdPanier', panier);
-    //   } catch (e) {
-    //     console.log(e);
-    //   }
-    // }
+    async setIdPanierStore({commit},id){
+      try{
+        const panier = await getIdPanier(id); // si pas de panier lié return null
+        await commit('setIdPanier', panier);
+      } catch (e) {
+        console.log(e);
+      }
+    }
   },
   modules: {
   }

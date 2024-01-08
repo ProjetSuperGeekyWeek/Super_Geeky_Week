@@ -1,4 +1,4 @@
-import { getRequest } from "./axios";
+import {getRequest, patchRequest} from "./axios";
 
 //Role
 async function getAllRole() {
@@ -6,6 +6,10 @@ async function getAllRole() {
 }
 async function getAllRoleColumn() {
     return await getRequest("/api/crud/getAllRoleColumn", "GETALLROLECOLUMN");
+}
+async function addNewRole(nom_role){
+    let data = {nom_role:nom_role}
+    return patchRequest('/api/crud/addRole', data, "ADDROLE")
 }
 //Acheter
 async function getAllAcheter() {
@@ -162,5 +166,6 @@ export {
     getAllEvenementColumn,
     getAllEmplacementRessourceColumn,
     getAllEmplacementColumn,
+    addNewRole,
 };
 

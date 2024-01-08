@@ -21,7 +21,7 @@ export default {
       const ctx = document.getElementById('graphiqueClients').getContext('2d');
 
       const heures = ['9h', '10h', '11h', '12h', '13h', '14h', '15h'];
-      const clientsParHeure = [5, 12, 25, 31, 29, 15, 9];
+      const clientsParHeure = [100, 150, 187, 206, 216, 233, 237];
 
       this.graphique = new Chart(ctx, {
         type: 'line',

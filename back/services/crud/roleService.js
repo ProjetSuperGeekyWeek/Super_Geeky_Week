@@ -42,7 +42,29 @@ async function getAllRoleColumnFromAPI(){
     }
 }
 
+const addNewRole = (nom_role, callback) => {
+    addNewRoleFromAPI(nom_role).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function addNewRoleFromAPI(nom_role){
+    const client = await pool.connect();
+    try {
+        await client.query('INSERT INTO role (nom_role) VALUES ($1)', [nom_role]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllRole:getAllRole,
     getAllRoleColumn:getAllRoleColumn,
+    addNewRole:addNewRole,
 };

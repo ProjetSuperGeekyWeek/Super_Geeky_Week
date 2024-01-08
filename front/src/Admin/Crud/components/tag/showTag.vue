@@ -7,6 +7,8 @@
             <v-card-title>
               Tag
               <v-spacer />
+              <v-btn @click="navigateToAdd" color="primary">Ajouter</v-btn>
+              <v-spacer/>
               <v-text-field
                   v-model="search"
                   append-icon="mdi-magnify"
@@ -30,10 +32,11 @@
               v-model="selected"
               :headers="tag.headers"
               :items="tag.stats"
-              :items-per-page="10"
+              :items-per-page="5"
               class="elevation-4"
               :search="search"
               show-select
+              single-select
               item-key="id_tag"
               show-group-by
           >
@@ -70,6 +73,9 @@ export default {
       }
       this.tag.stats = this.getAllTag;
     },
+  },
+  async navigateToAdd() {
+    this.$router.push('/admin/crud/tag/add');
   },
   async mounted() {
     await this.loadData();

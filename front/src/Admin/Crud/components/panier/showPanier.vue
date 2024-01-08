@@ -7,6 +7,8 @@
             <v-card-title>
               Panier
               <v-spacer />
+              <v-btn @click="navigateToAdd" color="primary">Ajouter</v-btn>
+              <v-spacer/>
               <v-text-field
                   v-model="search"
                   append-icon="mdi-magnify"
@@ -30,10 +32,11 @@
               v-model="selected"
               :headers="panier.headers"
               :items="panier.stats"
-              :items-per-page="10"
+              :items-per-page="5"
               class="elevation-4"
               :search="search"
               show-select
+              single-select
               item-key="id_panier"
               show-group-by
           >
@@ -70,6 +73,9 @@ export default {
       }
       this.panier.stats = this.getAllPanier;
     },
+  },
+  async navigateToAdd() {
+    this.$router.push('/admin/crud/panier/add');
   },
   async mounted() {
     await this.loadData();

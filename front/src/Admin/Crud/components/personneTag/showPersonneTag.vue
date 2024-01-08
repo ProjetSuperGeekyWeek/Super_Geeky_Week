@@ -34,7 +34,8 @@
               class="elevation-4"
               :search="search"
               show-select
-              item-key="id_personneTag"
+              single-select
+              :item-key="['id_personne', 'id_tag']"
               show-group-by
           >
           </v-data-table>
