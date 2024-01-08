@@ -73,6 +73,9 @@ export default {
       }
       this.emplacement.stats = this.getAllEmplacement;
     },
+    async navigateToAdd() {
+      this.$router.push('/admin/crud/emplacement/add');
+    },
   },
   async mounted() {
     await this.loadData();

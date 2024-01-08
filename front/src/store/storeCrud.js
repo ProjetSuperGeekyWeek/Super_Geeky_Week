@@ -3,7 +3,8 @@ import {getAllAcheter,getAllAcheterColumn,getAllCalendrier,getAllCalendrierColum
     getAllCreneauColumn,getAllEmplacement,getAllEmplacementColumn,getAllEmplacementRessource,getAllEmplacementRessourceColumn,
     getAllEvenement,getAllEvenementColumn,getAllItem,getAllItemColumn,getAllLignePanier,getAllLignePanierColumn,getAllPanier,
     getAllPanierColumn,getAllPersonne,getAllPersonneColumn,getAllPersonneTag,getAllPersonneTagColumn,getAllQrCode,getAllQrCodeColumn,
-    getAllRessource,getAllRessourceColumn,getAllStand,getAllStandColumn,getAllTag,getAllTagColumn, addNewRole} from "@/../../back/axiosFunctions/crudAxios";  
+    getAllRessource,getAllRessourceColumn,getAllStand,getAllStandColumn,getAllTag,getAllTagColumn, addNewRole, addNewItem,addNewAcheter,
+    addNewPersonne,addNewRessource,addNewQrCode,addNewPanierStore,addNewTagStore,addNewEmplacement,addNewCalendrier,addNewEvenement} from "@/../../back/axiosFunctions/crudAxios";
 
 export default {
     namespaced: true,
@@ -495,6 +496,136 @@ export default {
               console.log('anomalie dans addNewROleStore')
             }
           },
+        async addNewItemStore({commit}, nom_item,stock_item,prix_item,image_item,description_item,id_personne,id_calendrier){
+            let result = null;
+            try{
+                result = await addNewItem(nom_item,stock_item,prix_item,image_item,description_item,id_personne,id_calendrier)
+                if (result.error === 0){
+                    commit('SET_ALL_ITEM', result.data)
+                }else{
+                    console.log(result.data)
+                }
+            }catch (e) {
+                console.log('anomalie dans addNewItemStore')
+            }
+        },
+        async addNewAcheterStore({commit}, id_item,id_qr_code,consommer){
+            let result = null;
+            try{
+                result = await addNewAcheter(id_item,id_qr_code,consommer)
+                if (result.error === 0){
+                    commit('SET_ALL_ACHETER', result.data)
+                }else{
+                    console.log(result.data)
+                }
+            }catch (e) {
+                console.log('anomalie dans addNewAcheterStore')
+            }
+        },
+        async addNewPersonneStore({commit}, nom_personne,prenom_personne,mail_personne,mdp_personne,image_personne,description_personne,id_role){
+            let result = null;
+            try{
+                result = await addNewPersonne(nom_personne,prenom_personne,mail_personne,mdp_personne,image_personne,description_personne,id_role)
+                if (result.error === 0){
+                    commit('SET_ALL_PERSONNE', result.data)
+                }else{
+                    console.log(result.data)
+                }
+            }catch (e) {
+                console.log('anomalie dans addNewPersonneStore')
+            }
+        },
+        async addNewRessourceStore({commit}, nom_ressource){
+            let result = null;
+            try{
+                result = await addNewRessource(nom_ressource)
+                if (result.error === 0){
+                    commit('SET_ALL_RESSOURCE', result.data)
+                }else{
+                    console.log(result.data)
+                }
+            }catch (e) {
+                console.log('anomalie dans addNewRessourceStore')
+            }
+        },
+        async addNewQrCodeStore({commit}, nom_client,prenom_client,mail_client){
+            let result = null;
+            try{
+                result = await addNewQrCode(nom_client,prenom_client,mail_client)
+                if (result.error === 0){
+                    commit('SET_ALL_QR_CODE', result.data)
+                }else{
+                    console.log(result.data)
+                }
+            }catch (e) {
+                console.log('anomalie dans addNewQrCodeStore')
+            }
+        },
+        async addNewPanierStore({commit}){
+            let result = null;
+            try{
+                result = await addNewPanierStore()
+                if (result.error === 0){
+                    commit('SET_ALL_PANIER', result.data)
+                }else{
+                    console.log(result.data)
+                }
+            }catch (e) {
+                console.log('anomalie dans addNewPanierStore')
+            }
+        },
+        async addNewTagStore({commit}, nom_tag){
+            let result = null;
+            try{
+                result = await addNewTagStore(nom_tag)
+                if (result.error === 0){
+                    commit('SET_ALL_TAG', result.data)
+                }else{
+                    console.log(result.data)
+                }
+            }catch (e) {
+                console.log('anomalie dans addNewTagStore')
+            }
+        },
+        async addNewEmplacementStore({commit}, nom_emplacement){
+            let result = null;
+            try{
+                result = await addNewEmplacement(nom_emplacement)
+                if (result.error === 0){
+                    commit('SET_ALL_EMPLACEMENT', result.data)
+                }else{
+                    console.log(result.data)
+                }
+            }catch (e) {
+                console.log('anomalie dans addNewEmplacementStore')
+            }
+        },
+        async addNewCalendrierStore({commit}, date_calendrier,horaire_debut,horaire_fin){
+            let result = null;
+            try{
+                result = await addNewCalendrier(date_calendrier,horaire_debut,horaire_fin)
+                if (result.error === 0){
+                    commit('SET_ALL_CALENDRIER', result.data)
+                }else{
+                    console.log(result.data)
+                }
+            }catch (e) {
+                console.log('anomalie dans addNewCalendrierStore')
+            }
+        },
+        async addNewEvenementStore({commit}, nom_evenement,description_evenement,nb_place,image_evenement,id_personne,id_emplacement){
+            let result = null;
+            try{
+                result = await addNewEvenement(nom_evenement,description_evenement,nb_place,image_evenement,id_personne,id_emplacement)
+                if (result.error === 0){
+                    commit('SET_ALL_EVENEMENT', result.data)
+                }else{
+                    console.log(result.data)
+                }
+            }catch (e) {
+                console.log('anomalie dans addNewEvenementStore')
+            }
+        },
           /*async getAllStore({state,commit}, params){
             var responce;
               try{

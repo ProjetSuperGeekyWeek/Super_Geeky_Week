@@ -9,7 +9,7 @@ async function getAllRoleColumn() {
 }
 async function addNewRole(nom_role){
     let data = {nom_role:nom_role}
-    return patchRequest('/api/crud/addRole', data, "ADDROLE")
+    return await patchRequest('/api/crud/addRole', data, "ADDROLE")
 }
 //Acheter
 async function getAllAcheter() {
@@ -18,6 +18,10 @@ async function getAllAcheter() {
 async function getAllAcheterColumn() {
     return await getRequest("/api/crud/getAllAcheterColumn", "GETALLACHETERCOLUMN");
 }
+async function addNewAcheter(id_item,id_qr_code,consommer){
+    let data = {id_item:id_item,id_qr_code:id_qr_code,consommer:consommer}
+    return await patchRequest("api/crud/addAcheter", data, "ADDACHETER")
+}
 
 //Calendrier
 async function getAllCalendrier() {
@@ -25,6 +29,10 @@ async function getAllCalendrier() {
 }
 async function getAllCalendrierColumn() {
     return await getRequest("/api/crud/getAllCalendrierColumn", "GETALLCALENDRIERCOLUMN");
+}
+async function addNewCalendrier(date_calendrier,horaire_debut,horaire_fin){
+    let data = {date_calendrier:date_calendrier,horaire_debut:horaire_debut,horaire_fin:horaire_fin}
+    return await patchRequest("/api/crud/addCalendrier", data, "ADDCALENDRIER")
 }
 
 //Creneau
@@ -42,6 +50,10 @@ async function getAllEmplacement() {
 async function getAllEmplacementColumn() {
     return await getRequest("/api/crud/getAllEmplacementColumn", "GETALLEMPLACEMENTCOLUMN");
 }
+async function addNewEmplacement(nom_emplacement){
+    let data = {nom_emplacement:nom_emplacement}
+    return await patchRequest("/api/crud/addEmplacement", data, "ADDEMPLACEMENT")
+}
 
 //EmplacementRessource
 async function getAllEmplacementRessource() {
@@ -58,6 +70,10 @@ async function getAllEvenement() {
 async function getAllEvenementColumn() {
     return await getRequest("/api/crud/getAllEvenementColumn", "GETALLEVENEMENTCOLUMN");
 }
+async function addNewEvenement(nom_evenement,description_evenement,nb_place,image_evenement,id_personne,id_emplacement){
+    let data = {nom_evenement:nom_evenement,description_evenement:description_evenement,nb_place:nb_place,image_evenement:image_evenement,id_personne:id_personne,id_emplacement:id_emplacement}
+    return await patchRequest("/api/crud/addEvenement", data, "ADDEVENEMENT")
+}
 
 //Item
 async function getAllItem() {
@@ -65,6 +81,10 @@ async function getAllItem() {
 }
 async function getAllItemColumn() {
     return await getRequest("/api/crud/getAllItemColumn", "GETALLITEMCOLUMN");
+}
+async function addNewItem(nom_item,stock_item,prix_item,image_item,description_item,id_personne,id_calendrier){
+    let data = {nom_item:nom_item,stock_item:stock_item,prix_item:prix_item,image_item:image_item,description_item:description_item,id_personne:id_personne,id_calendrier:id_calendrier}
+    return await patchRequest("/api/crud/addItem", data, "ADDITEM")
 }
 
 //Ligne Panier
@@ -82,6 +102,10 @@ async function getAllPanier() {
 async function getAllPanierColumn() {
     return await getRequest("/api/crud/getAllPanierColumn", "GETALLPANIERCOLUMN");
 }
+async function addNewPanierStore(){
+    let data = {}
+    return await patchRequest("/api/crud/addPanier", data, "ADDPANIER")
+}
 
 //Personne
 async function getAllPersonne() {
@@ -89,6 +113,10 @@ async function getAllPersonne() {
 }
 async function getAllPersonneColumn() {
     return await getRequest("/api/crud/getAllPersonneColumn", "GETALLPERSONNECOLUMN");
+}
+async function addNewPersonne(nom_personne,prenom_personne,mail_personne,mdp_personne,image_personne,description_personne,id_role){
+    let data = {nom_personne:nom_personne,prenom_personne:prenom_personne,mail_personne:mail_personne,mdp_personne:mdp_personne,image_personne:image_personne,description_personne:description_personne,id_role:id_role}
+    return await patchRequest("/api/crud/addPersonne", data, "ADDPERSONNE")
 }
 
 //PersonneTag
@@ -106,6 +134,10 @@ async function getAllQrCode() {
 async function getAllQrCodeColumn() {
     return await getRequest("/api/crud/getAllQrCodeColumn", "GETALLQRCODECOLUMN");
 }
+async function addNewQrCode(nom_client,prenom_client,mail_client){
+    let data = {nom_client:nom_client,prenom_client:prenom_client,mail_client:mail_client}
+    return await patchRequest("/api/crud/addQrCode", data, "ADDQRCODE")
+}
 
 //Ressource
 async function getAllRessource() {
@@ -113,6 +145,10 @@ async function getAllRessource() {
 }
 async function getAllRessourceColumn() {
     return await getRequest("/api/crud/getAllRessourceColumn", "GETALLRESSOURCECOLUMN");
+}
+async function addNewRessource(nom_ressource){
+    let data = {nom_ressource:nom_ressource}
+    return await patchRequest("/api/crud/addRessource", data, "ADDRESSOURCE")
 }
 
 //Stand
@@ -130,6 +166,10 @@ async function getAllTag() {
 }
 async function getAllTagColumn() {
     return await getRequest("/api/crud/getAllTagColumn", "GETALLTAGCOLUMN");
+}
+async function addNewTagStore(nom_tag){
+    let data = {nom_tag:nom_tag}
+    return await patchRequest("/api/crud/addTag", data, "ADDTAG")
 }
 
 
@@ -167,5 +207,15 @@ export {
     getAllEmplacementRessourceColumn,
     getAllEmplacementColumn,
     addNewRole,
+    addNewItem,
+    addNewAcheter,
+    addNewPersonne,
+    addNewRessource,
+    addNewQrCode,
+    addNewPanierStore,
+    addNewTagStore,
+    addNewEmplacement,
+    addNewCalendrier,
+    addNewEvenement,
 };
 

@@ -1,41 +1,58 @@
 <template>
   <div class="add">
-    <input type="text" placeholder="nom du rôle" v-model="nom_role">
-    <input type="button" value="Ajouter" @click="addNewAcheter">
-    <select name="ssss" id="ssss" >
-      <option value="test" v-for="test in test" :key="test.id">{{ test.id }}</option>
+    <select name="selectItem" id="selectItem" v-model="id_item">
+      <option :value="item.id_item" v-for="item in listItem" :key="item.id_item">{{item.nom_item}}</option>
     </select>
+    <select name="selectQrCode" id="selectQrCode" v-model="id_qr_code">
+      <option :value="qrcode.id_qr_code" v-for="qrcode in listQrCode" :key="qrcode.id_qr_code">{{ qrcode.nom_client }} - {{ qrcode.prenom_client }}</option>
+    </select>
+    consommer :<input type="checkbox" id="consommer" v-model="consommer">
+    <input type="button" value="Ajouter" @click="addNewAcheter">
+    <input type="button" value="retour" @click="returnCrud">
   </div>
 </template>
-
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default{
-  name: 'addRoleCrud',
+  name: 'addAcheterCrud',
   data: () => ({
-    nom_role: '',
-    test: [{id:'salut'},{id:'au revoir'}]
+    id_item: 1,
+    id_qr_code: 1,
+    consommer: false,
+    listItem: [],
+    listQrCode: [],
   }),
+  computed: {
+    ...mapGetters('crudStore',['getAllItem', 'getAllQrCode'])
+  },
   methods: {
-    ...mapActions('crudStore',['addNewRoleStore']),
+    ...mapActions('crudStore',['addNewAcheterStore']),
     async addNewAcheter() {
       console.log(this.nom_role,1)
       try{
-        if(this.nom_role === ''){
+        if(this.id_item === null || this.id_qr_code === null || this.consommer === null ){
           return
         }
-        this.addNewRoleStore(this.nom_role);
+        await this.addNewAcheterStore(this.id_item,this.id_qr_code,this.consommer);
         this.$router.push('/admin/crud')
       }catch (e) {
-        console.log('error addRole', e)
+        console.log('error addAcheter', e)
       }
+    },
+    async navigateToAdd() {
+      this.$router.push('/admin/crud/acheter/add');
+    },
+    async loadData(){
+      this.listItem = this.getAllItem;
+      this.listQrCode = this.getAllQrCode;
+    },
+    async returnCrud() {
+      this.$router.push('/admin/crud')
     }
   },
-  watch: {
-    nom_role: function (newVal) {
-      console.log("nom_role variable modified:", newVal);
-    }
+  async created(){
+    await this.loadData();
   }
 }
 </script>

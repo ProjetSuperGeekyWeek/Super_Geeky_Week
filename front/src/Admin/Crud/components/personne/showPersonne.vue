@@ -73,9 +73,9 @@ export default {
       }
       this.personne.stats = this.getAllPersonne;
     },
-  },
-  async navigateToAdd() {
-    this.$router.push('/admin/crud/personne/add');
+    async navigateToAdd() {
+      this.$router.push('/admin/crud/personne/add');
+    },
   },
   async mounted() {
     await this.loadData();

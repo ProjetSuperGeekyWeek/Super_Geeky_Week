@@ -73,6 +73,9 @@ export default {
       }
       this.calendrier.stats = this.getAllCalendrier;
     },
+    async navigateToAdd() {
+      this.$router.push('/admin/crud/calendrier/add');
+    },
   },
   async mounted() {
     await this.loadData();

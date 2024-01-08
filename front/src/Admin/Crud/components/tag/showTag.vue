@@ -73,9 +73,9 @@ export default {
       }
       this.tag.stats = this.getAllTag;
     },
-  },
-  async navigateToAdd() {
-    this.$router.push('/admin/crud/tag/add');
+    async navigateToAdd() {
+      this.$router.push('/admin/crud/tag/add');
+    },
   },
   async mounted() {
     await this.loadData();

@@ -73,6 +73,9 @@ export default {
       }
       this.evenement.stats = this.getAllEvenement;
     },
+    async navigateToAdd() {
+      this.$router.push('/admin/crud/evenement/add');
+    },
   },
   async mounted() {
     await this.loadData();

@@ -73,9 +73,9 @@ export default {
       }
       this.acheter.stats = this.getAllAcheters;
     },
-  },
-  async navigateToAdd() {
-    this.$router.push('/admin/crud/acheter/add');
+    async navigateToAdd() {
+      this.$router.push('/admin/crud/acheter/add');
+    },
   },
   async mounted() {
     await this.loadData();
