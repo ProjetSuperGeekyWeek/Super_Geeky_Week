@@ -61,8 +61,8 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getAllCalendrier','getAllCalendrierColumn']),
-    ...mapActions(['getAllCalendrierStore','getAllCalendrierColumnStore']),
+    ...mapGetters('crudStore',['getAllCalendrier','getAllCalendrierColumn']),
+    ...mapActions('crudStore',['getAllCalendrierStore','getAllCalendrierColumnStore']),
   },
   methods: {
     async loadData(){

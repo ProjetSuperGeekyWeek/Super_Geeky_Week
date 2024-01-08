@@ -33,10 +33,10 @@ export default{
     listPersonnes: [],
   }),
   computed: {
-    ...mapGetters(['getAllPersonne', 'getAllCalendrier'])
+    ...mapGetters('crudStore',['getAllPersonne', 'getAllCalendrier'])
   },
   methods: {
-    ...mapActions(['addNewItemStore','getAllPersonneStore']),
+    ...mapActions('crudStore',['addNewItemStore','getAllPersonneStore']),
     async loadData(){
       this.listCalendriers = this.getAllCalendrier;
       this.listPersonnes = this.getAllPersonne;

@@ -61,8 +61,8 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getAllPersonne','getAllPersonneColumn']),
-    ...mapActions(['getAllPersonneStore','getAllPersonneColumnStore']),
+    ...mapGetters('crudStore',['getAllPersonne','getAllPersonneColumn']),
+    ...mapActions('crudStore',['getAllPersonneStore','getAllPersonneColumnStore']),
   },
   methods: {
     async loadData(){

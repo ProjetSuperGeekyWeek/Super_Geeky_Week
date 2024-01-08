@@ -61,8 +61,8 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getAllPanier','getAllPanierColumn']),
-    ...mapActions(['getAllPanierStore','getAllPanierColumnStore']),
+    ...mapGetters('crudStore',['getAllPanier','getAllPanierColumn']),
+    ...mapActions('crudStore',['getAllPanierStore','getAllPanierColumnStore']),
   },
   methods: {
     async loadData(){

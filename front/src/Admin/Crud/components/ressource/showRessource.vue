@@ -61,8 +61,8 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getAllRessource','getAllRessourceColumn']),
-    ...mapActions(['getAllRessourceStore','getAllRessourceColumnStore']),
+    ...mapGetters('crudStore',['getAllRessource','getAllRessourceColumn']),
+    ...mapActions('crudStore',['getAllRessourceStore','getAllRessourceColumnStore']),
   },
   methods: {
     async loadData(){

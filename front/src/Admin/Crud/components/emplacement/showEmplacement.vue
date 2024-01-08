@@ -61,8 +61,8 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getAllEmplacement','getAllEmplacementColumn']),
-    ...mapActions(['getAllEmplacementStore','getAllEmplacementColumnStore']),
+    ...mapGetters('crudStore',['getAllEmplacement','getAllEmplacementColumn']),
+    ...mapActions('crudStore',['getAllEmplacementStore','getAllEmplacementColumnStore']),
   },
   methods: {
     async loadData(){

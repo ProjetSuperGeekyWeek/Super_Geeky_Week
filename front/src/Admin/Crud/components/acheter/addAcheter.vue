@@ -18,7 +18,7 @@ export default{
     test: [{id:'salut'},{id:'au revoir'}]
   }),
   methods: {
-    ...mapActions(['addNewRoleStore']),
+    ...mapActions('crudStore',['addNewRoleStore']),
     async addNewAcheter() {
       console.log(this.nom_role,1)
       try{

@@ -56,8 +56,8 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getAllRole','getAllRoleColumn']),
-    ...mapActions(['getAllRoleStore','getAllRoleColumnStore']),
+    ...mapGetters('crudStore',['getAllRole','getAllRoleColumn']),
+    ...mapActions('crudStore',['getAllRoleStore','getAllRoleColumnStore']),
   },
   methods: {
     async loadData() {

@@ -61,8 +61,8 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getAllEvenement','getAllEvenementColumn']),
-    ...mapActions(['getAllEvenementStore','getAllEvenementColumnStore']),
+    ...mapGetters('crudStore',['getAllEvenement','getAllEvenementColumn']),
+    ...mapActions('crudStore',['getAllEvenementStore','getAllEvenementColumnStore']),
   },
   methods: {
     async loadData(){

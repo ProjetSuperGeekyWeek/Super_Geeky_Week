@@ -61,8 +61,8 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getAllQrCode','getAllQrCodeColumn']),
-    ...mapActions(['getAllQrCodeStore','getAllQrCodeColumnStore']),
+    ...mapGetters('crudStore',['getAllQrCode','getAllQrCodeColumn']),
+    ...mapActions('crudStore',['getAllQrCodeStore','getAllQrCodeColumnStore']),
   },
   methods: {
     async loadData(){

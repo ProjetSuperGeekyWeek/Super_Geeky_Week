@@ -14,7 +14,7 @@ export default{
     nom_role: '',
   }),
   methods: {
-    ...mapActions(['addNewRoleStore']),
+    ...mapActions('crudStore',['addNewRoleStore']),
     async addNewRole() {
       console.log(this.nom_role,1)
       try{

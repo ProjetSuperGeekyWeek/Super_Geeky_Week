@@ -62,10 +62,10 @@ export default {
     },
   }),
   computed: {
-    ...mapGetters(['getAll','getAllColumn']),
+    ...mapGetters('crudStore',['getAll','getAllColumn']),
   },
   methods: {
-    ...mapActions(['getAllStore','getAllColumnStore']),
+    ...mapActions('crudStore',['getAllStore','getAllColumnStore']),
     async loadData(){
       await this.getAllStore(this.forData);
       await this.getAllColumnStore(this.forData);

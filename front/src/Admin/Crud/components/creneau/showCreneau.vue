@@ -58,8 +58,8 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getAllCreneau','getAllCreneauColumn']),
-    ...mapActions(['getAllCreneauStore','getAllCreneauColumnStore']),
+    ...mapGetters('crudStore',['getAllCreneau','getAllCreneauColumn']),
+    ...mapActions('crudStore',['getAllCreneauStore','getAllCreneauColumnStore']),
   },
   methods: {
     async loadData(){

@@ -58,8 +58,8 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getAllLignePanier','getAllLignePanierColumn']),
-    ...mapActions(['getAllLignePanierStore','getAllLignePanierColumnStore']),
+    ...mapGetters('crudStore',['getAllLignePanier','getAllLignePanierColumn']),
+    ...mapActions('crudStore',['getAllLignePanierStore','getAllLignePanierColumnStore']),
   },
   methods: {
     async loadData(){

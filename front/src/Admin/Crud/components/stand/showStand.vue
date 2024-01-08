@@ -58,8 +58,8 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getAllStand','getAllStandColumn']),
-    ...mapActions(['getAllStandStore','getAllStandColumnStore']),
+    ...mapGetters('crudStore',['getAllStand','getAllStandColumn']),
+    ...mapActions('crudStore',['getAllStandStore','getAllStandColumnStore']),
   },
   methods: {
     async loadData(){
