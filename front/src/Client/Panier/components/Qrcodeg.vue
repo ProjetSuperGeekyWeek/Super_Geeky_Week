@@ -8,16 +8,16 @@
       <label id="clo" for="familyName">  Nom de famille : </label>
       <input type="text" id="familyName" v-model="familyName">
 
-      <label id="clo" for="phoneNumber">  Numéro de téléphone : </label>
+      <label id="clo" for="email">  Adresse email : </label>
       <input
           type="text"
-          id="phoneNumber"
-          v-model="phoneNumber"
-          :class="{ error: phoneNumberError }"
+          id="email"
+          v-model="email"
+          :class="{ error: emailError }"
       >
       <button type="button" @click="validateAndGenerateQRCode">Valider les informations</button>
 
-      <p v-if="phoneNumberError" class="error-message">Entrer un numéro de téléphone</p>
+      <p v-if="emailError" class="error-message">Entrer une adresse email valide</p>
     </form>
 
     <qrcode-vue v-if="showQRCode" :value="qrCodeValue" :size="300" level="H" />
@@ -26,7 +26,7 @@
       <h3>Informations : </h3>
       <p><strong>Prénom : </strong> {{ name }}</p>
       <p><strong>Nom de famille : </strong> {{ familyName }}</p>
-      <p><strong>Numéro de téléphone : </strong> {{ phoneNumber }}</p>
+      <p><strong>Adresse email : </strong> {{ email }}</p>
 
       <h3>QR Code URL:</h3>
       <p>{{ qrCodeValue }}</p>
@@ -43,25 +43,25 @@ export default {
     return {
       name: '',
       familyName: '',
-      phoneNumber: '',
+      email: '',
       showQRCode: false,
-      phoneNumberError: false,
+      emailError: false,
       dataLoaded: false,
       infoPrompt: 'Rentrez vos informations',
     };
   },
   computed: {
     qrCodeValue() {
-      return `http://localhost:8080/qrcode/?name=${encodeURIComponent(this.name)}&familyName=${encodeURIComponent(this.familyName)}&phoneNumber=${encodeURIComponent(this.phoneNumber)}`;
+      return `http://localhost:8080/qrcode/?name=${encodeURIComponent(this.name)}&familyName=${encodeURIComponent(this.familyName)}&email=${encodeURIComponent(this.email)}`;
     },
   },
   mounted() {
     if (!this.dataLoaded) {
-      const { name, familyName, phoneNumber } = this.$route.query;
-      if (name && familyName && phoneNumber) {
+      const { name, familyName, email } = this.$route.query;
+      if (name && familyName && email) {
         this.name = decodeURIComponent(name);
         this.familyName = decodeURIComponent(familyName);
-        this.phoneNumber = decodeURIComponent(phoneNumber);
+        this.email = decodeURIComponent(email);
 
         this.validateAndGenerateQRCode();
       }
@@ -74,20 +74,20 @@ export default {
   },
   methods: {
     validateAndGenerateQRCode() {
-      const phoneNumberRegex = /^\d{10}$/;
+      const emailRegex = /@/;
 
-      if (!phoneNumberRegex.test(this.phoneNumber)) {
-        this.phoneNumberError = true;
+      if (!emailRegex.test(this.email)) {
+        this.emailError = true;
         return;
       }
 
-      this.phoneNumberError = false;
+      this.emailError = false;
       this.showQRCode = true;
 
       const routeParams = {
         name: encodeURIComponent(this.name),
         familyName: encodeURIComponent(this.familyName),
-        phoneNumber: encodeURIComponent(this.phoneNumber),
+        email: encodeURIComponent(this.email),
       };
 
       this.$router.push({ query: routeParams });
@@ -122,7 +122,7 @@ export default {
   filter: drop-shadow(0px 0px 20px var(--title));
 }
 
-#phoneNumber.error {
+#email.error {
   border-color: red;
 }
 
