@@ -14,17 +14,13 @@
         <div v-if="authentifier">
             <AlreadyAuthentifier/>
         </div>
-        <button @click="adminOn">Admin on</button>
-        <button @click="adminOff">Admin off</button>
-        <button @click="authentifierOn">Authentifier on</button>
-        <button @click="authentifierOff">Authentifier off</button>
     </div>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
     import FormulaireAuthentification from '@/Connexion/Authentification/components/FormulaireAuthentification.vue';
     import AlreadyAuthentifier from '@/Connexion/Authentification/components/AlreadyAuthentifier.vue';
+    import { mapState } from 'vuex';
 
     export default {
         name: 'AuthentificationView',
@@ -36,23 +32,8 @@
             FormulaireAuthentification,
             AlreadyAuthentifier
         },
-        methods: {
-            authentifierOn() {
-                this.$store.commit('setAuthentifier', true);
-            },
-            adminOn() {
-                this.$store.commit('setAdmin', true);
-                this.$router.push('/admin/crud');
-            },
-            authentifierOff() {
-                this.$store.commit('setAuthentifier', false);
-            },
-            adminOff() {
-                this.$store.commit('setAdmin', false);
-            }
-        },
         computed: {
-            ...mapState(['authentifier', 'admin'])
+            ...mapState('authentifierStore',['authentifier'])
         }
     }
 </script>

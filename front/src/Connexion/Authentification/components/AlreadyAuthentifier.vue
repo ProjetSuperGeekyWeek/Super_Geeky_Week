@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 // import { logoutSession } from '@/../../back/axiosFunctions/sessionAxios';
 export default {
     name: 'AlreadyAuthentifier',
@@ -19,13 +19,14 @@ export default {
         }
     },
     methods: {
+        ...mapMutations('authentifierStore',['setAuthentifier', 'setAdmin']),
         deconnect() {
-                this.$store.commit('setAuthentifier', false);
-                this.$store.commit('setAdmin', false);
+                this.setAuthentifier(false);
+                this.setAdmin(false);
         },
     },
     computed: {
-        ...mapState(['admin', 'nom', 'id_session']),
+        ...mapState('authentifierStore',['admin']),
     },
 }
 </script>

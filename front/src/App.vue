@@ -25,20 +25,9 @@ export default {
     translate(prop){
       return this[this.lang][this.lang][prop];
     },
-    // async sessionsConnect(){
-    //   await this.cleanSession;
-    //   await this.setIdSessionStore;
-    //   await this.setAuthentifierStore;
-    //   await this.setAdminStore;
-    //   // await this.setIdPanierStore;
-    // },
   },
   computed: {
     ...mapState(['lang','en','fr']),
-    // ...mapActions(['cleanSession','setIdSessionStore','setAuthentifierStore','setAdminStore']),
-  },
-  async mounted() {
-    // await this.sessionsConnect();
   },
 }
 </script>

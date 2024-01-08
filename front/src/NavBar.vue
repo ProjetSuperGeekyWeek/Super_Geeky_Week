@@ -58,7 +58,8 @@ export default {
     },
   },
   computed: {
-    ...mapState(['authentifier','lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr']),
+    ...mapState('authentifierStore', ['authentifier']),
   }
 }
 window.addEventListener("scroll", function(){
