@@ -1,18 +1,18 @@
 <template>
     <div id="formulaire-authentification">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" required @change="verifEmail">
+        <!-- <input type="email" name="email" id="email" required @change="verifEmail"> -->
         <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password" required @change="verifPassword">
+        <!-- <input type="password" name="password" id="password" required @change="verifPassword"> -->
         <span id="incorrectPassword"></span>
-        <button id="valide-authentification" @click="submitForm">Soumettre</button>
+        <!-- <button id="valide-authentification" @click="submitForm">Soumettre</button> -->
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import { getIdSession, linkSessionPresta } from '@/../../back/axiosFunctions/sessionAxios';
-import { getPrestataireMailPassword, adminVerif  } from '@/../../back/axiosFunctions/authentificationAxios';
+// import { mapState } from 'vuex';
+// import { getIdSession, linkSessionPresta } from '@/../../back/axiosFunctions/sessionAxios';
+// import { getPrestataireMailPassword, adminVerif  } from '@/../../back/axiosFunctions/authentificationAxios';
 
 export default {
     name: 'FormulaireAuthentification',
@@ -23,108 +23,108 @@ export default {
         }
     },
     methods: {
-        async authentification(email, password) {
-            const enregistrerInfos = await this.enregistrer(email, password);
-            this.$store.commit('setAuthentifier', prestataireInfo.authentifier);
-            this.$store.commit('setAdmin', prestataireInfo.admin);
-            const prestataireInfo = enregistrerInfos.infos;
-            this.$store.commit('setPrestataire', prestataireInfo);
+        // async authentification(email, password) {
+        //     const enregistrerInfos = await this.enregistrer(email, password);
+        //     this.$store.commit('setAuthentifier', prestataireInfo.authentifier);
+        //     this.$store.commit('setAdmin', prestataireInfo.admin);
+        //     const prestataireInfo = enregistrerInfos.infos;
+        //     this.$store.commit('setPrestataire', prestataireInfo);
 
-            let id_session = await getIdSession();
-            if (id_session.id_session !== undefined && this.$store.state.authentifier) {
-                await linkSessionPresta(id_session.id_session, prestataireInfo.id_personne);
-            }
+        //     let id_session = await getIdSession();
+        //     if (id_session.id_session !== undefined && this.$store.state.authentifier) {
+        //         await linkSessionPresta(id_session.id_session, prestataireInfo.id_personne);
+        //     }
 
-            if (this.$store.state.admin) {
-                    this.$router.push('/admin/crud');
-            } else if (this.$store.state.authentifier) {
-                this.$router.push('/services');
-            } else {
-                this.clearMdp();
-                alert('Email ou mot de passe incorrect');
-            }
-        },
+        //     if (this.$store.state.admin) {
+        //             this.$router.push('/admin/crud');
+        //     } else if (this.$store.state.authentifier) {
+        //         this.$router.push('/services');
+        //     } else {
+        //         this.clearMdp();
+        //         alert('Email ou mot de passe incorrect');
+        //     }
+        // },
 
-        async enregistrer(email, password) {
-            let authentifier = false;
-            let admin = false;
+        // async enregistrer(email, password) {
+        //     let authentifier = false;
+        //     let admin = false;
 
-            let prestataireInfos = await getPrestataireMailPassword(email, password);
+        //     let prestataireInfos = await getPrestataireMailPassword(email, password);
 
-            if (prestataireInfos.id_personne !== undefined) {
-                authentifier = true;
-                admin = await this.verifAdmin(prestataireInfos.id_personne);
-            }
+        //     if (prestataireInfos.id_personne !== undefined) {
+        //         authentifier = true;
+        //         admin = await this.verifAdmin(prestataireInfos.id_personne);
+        //     }
 
-            return {
-                infos : prestataireInfos,
-                authentifier: authentifier,
-                admin: admin
-            };
-        },
+        //     return {
+        //         infos : prestataireInfos,
+        //         authentifier: authentifier,
+        //         admin: admin
+        //     };
+        // },
 
-        async verifAdmin(id_personne) {
-            let admin = false;
-            let id_admin = await adminVerif(id_personne);
-            if (id_admin.id_personne !== undefined) {
-                admin = true;
-            }
-            return admin;
-        },
-        async submitForm() {
-            if (this.correctEmail && this.correctPassword) {
-                let emailForm = document.getElementById('email').value;
-                let passwordForm = document.getElementById('password').value;
-                await this.authentification(emailForm, passwordForm);
-            }
-            else {
-                this.clearMdp();
-                this.$store.commit('setAuthentifier', false);
-                alert('Veuillez remplir correctement les champs');
-            }
-        },
-        clearMdp() {
-            document.getElementById('password').value = '';
-        },
-        verifEmail() {
-            let email = document.getElementById('email').value;
-            let regexEmail = new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$');
-            if (regexEmail.test(email)) {
-                this.correctEmail = true;
-                this.colorVert(document.getElementById('email'));
-            } else {
-                this.correctEmail = false;
-                this.colorRouge(document.getElementById('email'));
-            }
-        },
-        verifPassword() {
-            let password = document.getElementById('password').value;
-            let regexPassword = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})');
-            if (regexPassword.test(password)) {
-                this.correctPassword = true;
-                this.colorVert(document.getElementById('password'));
-                this.clearMdpIncorrect();
-            } else {
-                this.correctPassword = false;
-                this.colorRouge(document.getElementById('password'));
-                this.mdpIncorrect();
-            }
-        },
-        colorRouge(element) {
-            element.style.backgroundColor = 'tomato';
-        },
-        colorVert(element) {
-            element.style.backgroundColor = 'lightgreen';
-        },
-        mdpIncorrect() {
-            document.getElementById('incorrectPassword').innerHTML = 'Mot de passe incorrect ! Votre mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial';
-        },
-        clearMdpIncorrect() {
-            document.getElementById('incorrectPassword').innerHTML = '';
-        }
+        // async verifAdmin(id_personne) {
+        //     let admin = false;
+        //     let id_admin = await adminVerif(id_personne);
+        //     if (id_admin.id_personne !== undefined) {
+        //         admin = true;
+        //     }
+        //     return admin;
+        // },
+        // async submitForm() {
+        //     if (this.correctEmail && this.correctPassword) {
+        //         let emailForm = document.getElementById('email').value;
+        //         let passwordForm = document.getElementById('password').value;
+        //         await this.authentification(emailForm, passwordForm);
+        //     }
+        //     else {
+        //         this.clearMdp();
+        //         this.$store.commit('setAuthentifier', false);
+        //         alert('Veuillez remplir correctement les champs');
+        //     }
+        // },
+        // clearMdp() {
+        //     document.getElementById('password').value = '';
+        // },
+        // verifEmail() {
+        //     let email = document.getElementById('email').value;
+        //     let regexEmail = new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$');
+        //     if (regexEmail.test(email)) {
+        //         this.correctEmail = true;
+        //         this.colorVert(document.getElementById('email'));
+        //     } else {
+        //         this.correctEmail = false;
+        //         this.colorRouge(document.getElementById('email'));
+        //     }
+        // },
+        // verifPassword() {
+        //     let password = document.getElementById('password').value;
+        //     let regexPassword = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})');
+        //     if (regexPassword.test(password)) {
+        //         this.correctPassword = true;
+        //         this.colorVert(document.getElementById('password'));
+        //         this.clearMdpIncorrect();
+        //     } else {
+        //         this.correctPassword = false;
+        //         this.colorRouge(document.getElementById('password'));
+        //         this.mdpIncorrect();
+        //     }
+        // },
+        // colorRouge(element) {
+        //     element.style.backgroundColor = 'tomato';
+        // },
+        // colorVert(element) {
+        //     element.style.backgroundColor = 'lightgreen';
+        // },
+        // mdpIncorrect() {
+        //     document.getElementById('incorrectPassword').innerHTML = 'Mot de passe incorrect ! Votre mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial';
+        // },
+        // clearMdpIncorrect() {
+        //     document.getElementById('incorrectPassword').innerHTML = '';
+        // }
     },
     computed: {
-        ...mapState(['authentifier', 'admin']),
+        // ...mapState(['authentifier', 'admin']),
     }
 }
 </script>

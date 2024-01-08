@@ -5,8 +5,8 @@
             <input v-if="id_prestataire == id_proprietaire" type="file" name="image-nourriture" id="image-nourriture">
         </div>
         <div v-if="id_prestataire != id_proprietaire" class="infos-nourriture">
-            <h3 v-bind="titre"></h3>
-            <p v-bind="description"></p>
+            <h3>{{ titre }}</h3>
+            <p>{{ description }}</p>
             <p>{{ prix }}€</p>
         </div>
         <div v-if="id_prestataire == id_proprietaire" class="infos-nourriture">

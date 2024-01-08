@@ -14,6 +14,10 @@
         <div v-if="authentifier">
             <AlreadyAuthentifier/>
         </div>
+        <button @click="adminOn">Admin on</button>
+        <button @click="adminOff">Admin off</button>
+        <button @click="authentifierOn">Authentifier on</button>
+        <button @click="authentifierOff">Authentifier off</button>
     </div>
 </template>
 
@@ -33,7 +37,22 @@
             AlreadyAuthentifier
         },
         methods: {
-            
+            authentifierOn() {
+                alert('authentifierOn');
+                this.$store.commit('setAuthentifier', true);
+                alert(this.authentifier)
+            },
+            adminOn() {
+                this.$store.commit('setAdmin', true);
+            },
+            authentifierOff() {
+                alert('authentifierOff');
+                this.$store.commit('setAuthentifier', false);
+                alert(this.authentifier)
+            },
+            adminOff() {
+                this.$store.commit('setAdmin', false);
+            }
         },
         computed: {
             ...mapState(['authentifier', 'admin'])
