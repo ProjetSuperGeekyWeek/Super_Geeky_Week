@@ -482,6 +482,19 @@ export default {
               console.log(e);
             }
           },
+          async addNewRoleStore({commit}, nom_role){
+            let result = null
+            try{
+              result = await addNewRole(nom_role)
+              if (result.error === 0){
+                commit('SET_ALL_ROLE', result.data)
+              }else{
+                console.log(result.data)
+              }
+            }catch (err) {
+              console.log('anomalie dans addNewROleStore')
+            }
+          },
           /*async getAllStore({state,commit}, params){
             var responce;
               try{
