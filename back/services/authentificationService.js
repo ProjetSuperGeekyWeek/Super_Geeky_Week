@@ -10,7 +10,6 @@ const getPrestataireMailPassword = (mail, mdp, callback) => {
 }
 
 async function getPrestataireMailPasswordFromAPI(mail, mdp){
-    console.log("getPrestataireMailPasswordFromAPI");
     const client = await pool.connect();
     try {
         const query = `

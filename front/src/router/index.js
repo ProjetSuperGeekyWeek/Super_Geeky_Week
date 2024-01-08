@@ -49,6 +49,11 @@ const routes = [
     component: () => import('@/Client/Panier/views/QrcodeView.vue')
   },
   {
+    path: '/marketNourriture',
+    name: 'marketNourriture',
+    component: () => import('@/Client/Prestataire/views/NourritureView.vue')
+  },
+  {
     path: '/carte_admin',
     name: 'carte_admin',
     component: () => import('@/Admin/Carte/views/CarteAdminView.vue')

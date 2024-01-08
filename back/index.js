@@ -11,6 +11,8 @@ const clientRouter = require('./routes/clientRouter');
 const boutiqueRouter = require('./routes/boutiqueRouter');
 const calendrierRouter = require('./routes/calendrierRouter');
 const crudRouter = require('./routes/crudRouter');
+const sessionRouter = require('./routes/sessionRouter');
+const authentificationRouter = require('./routes/authentificationRouter');
 
 app.use(cors({
     origin : '*'
@@ -25,6 +27,9 @@ app.use('/api/client', clientRouter);
 app.use('/api/boutique', boutiqueRouter);
 app.use('/api/calendrier', calendrierRouter);
 app.use('/api/crud', crudRouter);
+app.use('/api/session', sessionRouter);
+app.use('/api/authentification', authentificationRouter);
+
 
 
 app.listen(process.env.PORT, () => {

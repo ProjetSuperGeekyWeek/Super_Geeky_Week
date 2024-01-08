@@ -1,10 +1,10 @@
 const sessionService = require('../services/sessionService');
 const { v4: uuidv4 } = require('uuid');
 
-
 // get
 exports.getIdSession = async (req, res) => {
     let uuid = req.cookies.uuidSuperGeekyWeek;
+    // console.log(uuid);
     if(uuid){
         sessionService.getIdSession(uuid, (err, data) => {
             if (err) {
@@ -12,7 +12,6 @@ exports.getIdSession = async (req, res) => {
                     message: err.message || "Some error occurred while retrieving sessions."
                 });
             } else {
-                res.send(false);
                 if(data.lenght > 0){//TODO verif valide et égal à cookie
                     res.send(data);
                 }
@@ -70,6 +69,8 @@ exports.createSession = async (req, res) => {
         httpOnly: true,
         secure: false
     });
+    req.cookies.uuidSuperGeekyWeek = uuid;
+    // console.log(req.cookies.uuidSuperGeekyWeek);
     sessionService.createSession(uuid, (err, data) => {
         if (err) {
             res.status(500).send({
