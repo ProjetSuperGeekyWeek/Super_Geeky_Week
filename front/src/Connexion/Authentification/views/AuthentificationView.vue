@@ -42,6 +42,7 @@
             },
             adminOn() {
                 this.$store.commit('setAdmin', true);
+                this.$router.push('/admin/crud');
             },
             authentifierOff() {
                 this.$store.commit('setAuthentifier', false);
