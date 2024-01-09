@@ -73,9 +73,6 @@
                 return this.$route.params.id;
             },
             proprio() {
-                alert(this.id)
-                alert(this.prestataireAuthentifier.id_personne)
-                alert(this.id == this.prestataireAuthentifier.id_personne)
                 return this.id == this.prestataireAuthentifier.id_personne;
             },
         },
