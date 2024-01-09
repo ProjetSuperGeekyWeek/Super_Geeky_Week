@@ -24,7 +24,8 @@ export default{
         if(this.nom_client === '' || this.prenom_client === '' || await this.verifEmail() === false){
           return
         }
-        await this.addNewQrCodeStore(this.nom_client,this.prenom_client,this.mail_client);
+        const body = {nom_client:this.nom_client,prenom_client:this.prenom_client,mail_client:this.mail_client}
+        await this.addNewQrCodeStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {
         console.log('error addQrCode', e)

@@ -42,7 +42,29 @@ async function getAllRessourceColumnFromAPI(){
     }
 }
 
+const addNewRessource = (body, callback) => {
+    addNewRessourceFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function addNewRessourceFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('INSERT INTO ressource (nom_ressource) VALUES ($1)', [body.nom_ressource]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllRessource:getAllRessource,
     getAllRessourceColumn:getAllRessourceColumn,
+    addNewRessource:addNewRessource,
 };

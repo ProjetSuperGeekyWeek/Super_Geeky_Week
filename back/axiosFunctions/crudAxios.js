@@ -1,4 +1,4 @@
-import {getRequest, patchRequest} from "./axios";
+import { getRequest, patchRequest } from "./axios";
 
 //Role
 async function getAllRole() {
@@ -7,10 +7,14 @@ async function getAllRole() {
 async function getAllRoleColumn() {
     return await getRequest("/api/crud/getAllRoleColumn", "GETALLROLECOLUMN");
 }
-async function addNewRole(nom_role){
-    let data = {nom_role:nom_role}
-    return await patchRequest('/api/crud/addRole', data, "ADDROLE")
+async function addNewRole(body){
+    return await patchRequest('/api/crud/addRole', body, "ADDROLE")
 }
+
+
+
+
+
 //Acheter
 async function getAllAcheter() {
     return await getRequest("/api/crud/getAllAcheter", "GETALLACHETER");
@@ -18,10 +22,13 @@ async function getAllAcheter() {
 async function getAllAcheterColumn() {
     return await getRequest("/api/crud/getAllAcheterColumn", "GETALLACHETERCOLUMN");
 }
-async function addNewAcheter(id_item,id_qr_code,consommer){
-    let data = {id_item:id_item,id_qr_code:id_qr_code,consommer:consommer}
-    return await patchRequest("api/crud/addAcheter", data, "ADDACHETER")
+async function addNewAcheter(body){
+    return await patchRequest("/api/crud/addAcheter", body, "ADDACHETER")
 }
+
+
+
+
 
 //Calendrier
 async function getAllCalendrier() {
@@ -30,10 +37,13 @@ async function getAllCalendrier() {
 async function getAllCalendrierColumn() {
     return await getRequest("/api/crud/getAllCalendrierColumn", "GETALLCALENDRIERCOLUMN");
 }
-async function addNewCalendrier(date_calendrier,horaire_debut,horaire_fin){
-    let data = {date_calendrier:date_calendrier,horaire_debut:horaire_debut,horaire_fin:horaire_fin}
-    return await patchRequest("/api/crud/addCalendrier", data, "ADDCALENDRIER")
+async function addNewCalendrier(body){
+    return await patchRequest("/api/crud/addCalendrier", body, "ADDCALENDRIER")
 }
+
+
+
+
 
 //Creneau
 async function getAllCreneau() {
@@ -43,6 +53,10 @@ async function getAllCreneauColumn() {
     return await getRequest("/api/crud/getAllCreneauColumn", "GETALLCRENEAUCOLUMN");
 }
 
+
+
+
+
 //Emplacement
 async function getAllEmplacement() {
     return await getRequest("/api/crud/getAllEmplacement", "GETALL");
@@ -50,10 +64,13 @@ async function getAllEmplacement() {
 async function getAllEmplacementColumn() {
     return await getRequest("/api/crud/getAllEmplacementColumn", "GETALLEMPLACEMENTCOLUMN");
 }
-async function addNewEmplacement(nom_emplacement){
-    let data = {nom_emplacement:nom_emplacement}
-    return await patchRequest("/api/crud/addEmplacement", data, "ADDEMPLACEMENT")
+async function addNewEmplacement(body){
+    return await patchRequest("/api/crud/addEmplacement", body, "ADDEMPLACEMENT")
 }
+
+
+
+
 
 //EmplacementRessource
 async function getAllEmplacementRessource() {
@@ -63,6 +80,10 @@ async function getAllEmplacementRessourceColumn() {
     return await getRequest("/api/crud/getAllEmplacementRessourceColumn", "GETALLEMPLACEMENTRESSOURCECOLUMN");
 }
 
+
+
+
+
 //Evenement
 async function getAllEvenement() {
     return await getRequest("/api/crud/getAllEvenement", "GETALL");
@@ -70,10 +91,13 @@ async function getAllEvenement() {
 async function getAllEvenementColumn() {
     return await getRequest("/api/crud/getAllEvenementColumn", "GETALLEVENEMENTCOLUMN");
 }
-async function addNewEvenement(nom_evenement,description_evenement,nb_place,image_evenement,id_personne,id_emplacement){
-    let data = {nom_evenement:nom_evenement,description_evenement:description_evenement,nb_place:nb_place,image_evenement:image_evenement,id_personne:id_personne,id_emplacement:id_emplacement}
-    return await patchRequest("/api/crud/addEvenement", data, "ADDEVENEMENT")
+async function addNewEvenement(body){
+    return await patchRequest("/api/crud/addEvenement", body, "ADDEVENEMENT")
 }
+
+
+
+
 
 //Item
 async function getAllItem() {
@@ -82,10 +106,13 @@ async function getAllItem() {
 async function getAllItemColumn() {
     return await getRequest("/api/crud/getAllItemColumn", "GETALLITEMCOLUMN");
 }
-async function addNewItem(nom_item,stock_item,prix_item,image_item,description_item,id_personne,id_calendrier){
-    let data = {nom_item:nom_item,stock_item:stock_item,prix_item:prix_item,image_item:image_item,description_item:description_item,id_personne:id_personne,id_calendrier:id_calendrier}
-    return await patchRequest("/api/crud/addItem", data, "ADDITEM")
+async function addNewItem(body){
+    return await patchRequest("/api/crud/addItem", body, "ADDITEM")
 }
+
+
+
+
 
 //Ligne Panier
 async function getAllLignePanier() {
@@ -95,6 +122,10 @@ async function getAllLignePanierColumn() {
     return await getRequest("/api/crud/getAllLignePanierColumn", "GETALLLIGNEPANIERCOLUMN");
 }
 
+
+
+
+
 //Panier
 async function getAllPanier() {
     return await getRequest("/api/crud/getAllPanier", "GETALL");
@@ -102,10 +133,13 @@ async function getAllPanier() {
 async function getAllPanierColumn() {
     return await getRequest("/api/crud/getAllPanierColumn", "GETALLPANIERCOLUMN");
 }
-async function addNewPanierStore(){
-    let data = {}
-    return await patchRequest("/api/crud/addPanier", data, "ADDPANIER")
+async function addNewPanierStore(body){
+    return await patchRequest("/api/crud/addPanier", body, "ADDPANIER")
 }
+
+
+
+
 
 //Personne
 async function getAllPersonne() {
@@ -114,10 +148,13 @@ async function getAllPersonne() {
 async function getAllPersonneColumn() {
     return await getRequest("/api/crud/getAllPersonneColumn", "GETALLPERSONNECOLUMN");
 }
-async function addNewPersonne(nom_personne,prenom_personne,mail_personne,mdp_personne,image_personne,description_personne,id_role){
-    let data = {nom_personne:nom_personne,prenom_personne:prenom_personne,mail_personne:mail_personne,mdp_personne:mdp_personne,image_personne:image_personne,description_personne:description_personne,id_role:id_role}
-    return await patchRequest("/api/crud/addPersonne", data, "ADDPERSONNE")
+async function addNewPersonne(body){
+    return await patchRequest("/api/crud/addPersonne", body, "ADDPERSONNE")
 }
+
+
+
+
 
 //PersonneTag
 async function getAllPersonneTag() {
@@ -127,6 +164,10 @@ async function getAllPersonneTagColumn() {
     return await getRequest("/api/crud/getAllPersonneTagColumn", "GETALLPERSONNETAGCOLUMN");
 }
 
+
+
+
+
 //QRCode
 async function getAllQrCode() {
     return await getRequest("/api/crud/getAllQrCode", "GETALL");
@@ -134,10 +175,13 @@ async function getAllQrCode() {
 async function getAllQrCodeColumn() {
     return await getRequest("/api/crud/getAllQrCodeColumn", "GETALLQRCODECOLUMN");
 }
-async function addNewQrCode(nom_client,prenom_client,mail_client){
-    let data = {nom_client:nom_client,prenom_client:prenom_client,mail_client:mail_client}
-    return await patchRequest("/api/crud/addQrCode", data, "ADDQRCODE")
+async function addNewQrCode(body){
+    return await patchRequest("/api/crud/addQrCode", body, "ADDQRCODE")
 }
+
+
+
+
 
 //Ressource
 async function getAllRessource() {
@@ -146,10 +190,13 @@ async function getAllRessource() {
 async function getAllRessourceColumn() {
     return await getRequest("/api/crud/getAllRessourceColumn", "GETALLRESSOURCECOLUMN");
 }
-async function addNewRessource(nom_ressource){
-    let data = {nom_ressource:nom_ressource}
-    return await patchRequest("/api/crud/addRessource", data, "ADDRESSOURCE")
+async function addNewRessource(body){
+    return await patchRequest("/api/crud/addRessource", body, "ADDRESSOURCE")
 }
+
+
+
+
 
 //Stand
 async function getAllStand() {
@@ -160,6 +207,9 @@ async function getAllStandColumn() {
 }
 
 
+
+
+
 //Tag
 async function getAllTag() {
     return await getRequest("/api/crud/getAllTag", "GETALL");
@@ -167,9 +217,8 @@ async function getAllTag() {
 async function getAllTagColumn() {
     return await getRequest("/api/crud/getAllTagColumn", "GETALLTAGCOLUMN");
 }
-async function addNewTagStore(nom_tag){
-    let data = {nom_tag:nom_tag}
-    return await patchRequest("/api/crud/addTag", data, "ADDTAG")
+async function addNewTagStore(body){
+    return await patchRequest("/api/crud/addTag", body, "ADDTAG")
 }
 
 

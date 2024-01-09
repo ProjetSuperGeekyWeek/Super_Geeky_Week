@@ -23,3 +23,15 @@ exports.getAllPanierColumn = async (req, res) => {
         }
     });
 }
+
+exports.addNewPanier = async (req, res) => {
+    panierService.addNewPanier(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb addNewPanier."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

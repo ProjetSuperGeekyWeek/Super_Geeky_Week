@@ -42,18 +42,18 @@ async function getAllRoleColumnFromAPI(){
     }
 }
 
-const addNewRole = (nom_role, callback) => {
-    addNewRoleFromAPI(nom_role).then(res => {
+const addNewRole = (body, callback) => {
+    addNewRoleFromAPI(body).then(res => {
         callback(null, res);
     }).catch(error => {
         callback(error, null);
     });
 }
 
-async function addNewRoleFromAPI(nom_role){
+async function addNewRoleFromAPI(body){
     const client = await pool.connect();
     try {
-        await client.query('INSERT INTO role (nom_role) VALUES ($1)', [nom_role]);
+        await client.query('INSERT INTO role (nom_role) VALUES ($1)', [body.nom_role]);
         // Corrected the commit command
         await client.query('COMMIT');
     } catch (e) {

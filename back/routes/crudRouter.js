@@ -373,6 +373,16 @@ router.get('/getAllTagColumn', tagController.getAllTagColumn);
 
 // ADD
 router.patch('/addRole', roleController.addNewRole);
+router.patch('/addAcheter', acheterController.addNewAcheter);
+router.patch('/addItem', itemController.addNewItem);
+router.patch('/addPersonne', personneController.addNewPersonne);
+router.patch('/addRessource', ressourceController.addNewRessource);
+router.patch('/addQrCode', qrCodeController.addNewQrCode);
+router.patch('/addPanier', panierController.addNewPanier);
+router.patch('/addTag', tagController.addNewTag);
+router.patch('/addEmplacement', emplacementController.addNewEmplacement);
+router.patch('/addCalendrier', calendrierController.addNewCalendrier);
+router.patch('/addEvenement', evenementController.addNewEvenement);
 // DELETE
 
 // UPDATE

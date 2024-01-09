@@ -44,7 +44,8 @@ export default{
         if(this.nom_personne === '' || this.prenom_personne === '' || await this.verifEmail() === false || this.mdp_personne === '' || this.image_personne === '' || this.description_personne === '' || this.id_role === null){
           return
         }
-        await this.addNewPersonneStore(this.nom_personne,this.prenom_personne,this.mail_personne,this.mdp_personne,this.image_personne,this.description_personne,this.id_role);
+        const body = {nom_personne:this.nom_personne,prenom_personne:this.prenom_personne,mail_personne:this.mail_personne,mdp_personne:this.mdp_personne,image_personne:this.image_personne,description_personne:this.description_personne,id_role:this.id_role}
+        await this.addNewPersonneStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {
         console.log('error addPersonne', e)

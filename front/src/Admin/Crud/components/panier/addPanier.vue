@@ -1,5 +1,6 @@
 <template>
   <div class="add">
+    <input type="text" placeholder="nom" v-model="nom_panier">
     <input type="button" value="Ajouter" @click="addNewPanier">
     <input type="button" value="retour" @click="returnCrud">
   </div>
@@ -11,12 +12,14 @@ import {mapActions} from "vuex";
 export default{
   name: 'addPanierCrud',
   data: () => ({
+    nom_panier: '',
   }),
   methods: {
     ...mapActions('crudStore',['addNewPanierStore']),
     async addNewPanier() {
       try{
-        await this.addNewPanierStore();
+        const body = {nom_panier:this.nom_panier}
+        await this.addNewPanierStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {
         console.log('error addPanier', e)

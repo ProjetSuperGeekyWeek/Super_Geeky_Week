@@ -29,12 +29,12 @@ export default{
   methods: {
     ...mapActions('crudStore',['addNewAcheterStore']),
     async addNewAcheter() {
-      console.log(this.nom_role,1)
       try{
         if(this.id_item === null || this.id_qr_code === null || this.consommer === null ){
           return
         }
-        await this.addNewAcheterStore(this.id_item,this.id_qr_code,this.consommer);
+        const body = {id_item:this.id_item,id_qr_code:this.id_qr_code,consommer:this.consommer}
+        await this.addNewAcheterStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {
         console.log('error addAcheter', e)

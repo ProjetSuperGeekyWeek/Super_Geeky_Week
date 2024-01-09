@@ -44,7 +44,8 @@ export default{
         if(this.nom_evenement === '' || this.description_evenement === '' || this.nb_place === '' || this.image_evenement === '' || this.id_personne === null || this.id_emplacement === null){
           return
         }
-        await this.addNewEvenementStore(this.nom_evenement,this.description_evenement,this.nb_place,this.image_evenement,this.id_personne,this.id_emplacement);
+        const body = {nom_evenement:this.nom_evenement,description_evenement:this.description_evenement,nb_place:this.nb_place,image_evenement:this.image_evenement,id_personne:this.id_personne,id_emplacement:this.id_emplacement}
+        await this.addNewEvenementStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {
         console.log('error addEvenement', e)

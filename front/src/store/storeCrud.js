@@ -483,10 +483,10 @@ export default {
               console.log(e);
             }
           },
-          async addNewRoleStore({commit}, nom_role){
+          async addNewRoleStore({commit}, body){
             let result = null
             try{
-              result = await addNewRole(nom_role)
+              result = await addNewRole(body)
               if (result.error === 0){
                 commit('SET_ALL_ROLE', result.data)
               }else{
@@ -496,10 +496,10 @@ export default {
               console.log('anomalie dans addNewROleStore')
             }
           },
-        async addNewItemStore({commit}, nom_item,stock_item,prix_item,image_item,description_item,id_personne,id_calendrier){
+        async addNewItemStore({commit}, body){
             let result = null;
             try{
-                result = await addNewItem(nom_item,stock_item,prix_item,image_item,description_item,id_personne,id_calendrier)
+                result = await addNewItem(body)
                 if (result.error === 0){
                     commit('SET_ALL_ITEM', result.data)
                 }else{
@@ -509,10 +509,10 @@ export default {
                 console.log('anomalie dans addNewItemStore')
             }
         },
-        async addNewAcheterStore({commit}, id_item,id_qr_code,consommer){
+        async addNewAcheterStore({commit}, body){
             let result = null;
             try{
-                result = await addNewAcheter(id_item,id_qr_code,consommer)
+                result = await addNewAcheter(body)
                 if (result.error === 0){
                     commit('SET_ALL_ACHETER', result.data)
                 }else{
@@ -522,10 +522,10 @@ export default {
                 console.log('anomalie dans addNewAcheterStore')
             }
         },
-        async addNewPersonneStore({commit}, nom_personne,prenom_personne,mail_personne,mdp_personne,image_personne,description_personne,id_role){
+        async addNewPersonneStore({commit}, body){
             let result = null;
             try{
-                result = await addNewPersonne(nom_personne,prenom_personne,mail_personne,mdp_personne,image_personne,description_personne,id_role)
+                result = await addNewPersonne(body)
                 if (result.error === 0){
                     commit('SET_ALL_PERSONNE', result.data)
                 }else{
@@ -535,10 +535,10 @@ export default {
                 console.log('anomalie dans addNewPersonneStore')
             }
         },
-        async addNewRessourceStore({commit}, nom_ressource){
+        async addNewRessourceStore({commit}, body){
             let result = null;
             try{
-                result = await addNewRessource(nom_ressource)
+                result = await addNewRessource(body)
                 if (result.error === 0){
                     commit('SET_ALL_RESSOURCE', result.data)
                 }else{
@@ -548,10 +548,10 @@ export default {
                 console.log('anomalie dans addNewRessourceStore')
             }
         },
-        async addNewQrCodeStore({commit}, nom_client,prenom_client,mail_client){
+        async addNewQrCodeStore({commit}, body){
             let result = null;
             try{
-                result = await addNewQrCode(nom_client,prenom_client,mail_client)
+                result = await addNewQrCode(body)
                 if (result.error === 0){
                     commit('SET_ALL_QR_CODE', result.data)
                 }else{
@@ -561,10 +561,10 @@ export default {
                 console.log('anomalie dans addNewQrCodeStore')
             }
         },
-        async addNewPanierStore({commit}){
+        async addNewPanierStore({commit}, body){
             let result = null;
             try{
-                result = await addNewPanierStore()
+                result = await addNewPanierStore(body)
                 if (result.error === 0){
                     commit('SET_ALL_PANIER', result.data)
                 }else{
@@ -574,10 +574,10 @@ export default {
                 console.log('anomalie dans addNewPanierStore')
             }
         },
-        async addNewTagStore({commit}, nom_tag){
+        async addNewTagStore({commit}, body){
             let result = null;
             try{
-                result = await addNewTagStore(nom_tag)
+                result = await addNewTagStore(body)
                 if (result.error === 0){
                     commit('SET_ALL_TAG', result.data)
                 }else{
@@ -587,10 +587,10 @@ export default {
                 console.log('anomalie dans addNewTagStore')
             }
         },
-        async addNewEmplacementStore({commit}, nom_emplacement){
+        async addNewEmplacementStore({commit}, body){
             let result = null;
             try{
-                result = await addNewEmplacement(nom_emplacement)
+                result = await addNewEmplacement(body)
                 if (result.error === 0){
                     commit('SET_ALL_EMPLACEMENT', result.data)
                 }else{
@@ -600,10 +600,10 @@ export default {
                 console.log('anomalie dans addNewEmplacementStore')
             }
         },
-        async addNewCalendrierStore({commit}, date_calendrier,horaire_debut,horaire_fin){
+        async addNewCalendrierStore({commit}, body){
             let result = null;
             try{
-                result = await addNewCalendrier(date_calendrier,horaire_debut,horaire_fin)
+                result = await addNewCalendrier(body)
                 if (result.error === 0){
                     commit('SET_ALL_CALENDRIER', result.data)
                 }else{
@@ -613,10 +613,10 @@ export default {
                 console.log('anomalie dans addNewCalendrierStore')
             }
         },
-        async addNewEvenementStore({commit}, nom_evenement,description_evenement,nb_place,image_evenement,id_personne,id_emplacement){
+        async addNewEvenementStore({commit}, body){
             let result = null;
             try{
-                result = await addNewEvenement(nom_evenement,description_evenement,nb_place,image_evenement,id_personne,id_emplacement)
+                result = await addNewEvenement(body)
                 if (result.error === 0){
                     commit('SET_ALL_EVENEMENT', result.data)
                 }else{

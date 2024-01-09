@@ -27,8 +27,8 @@ export default{
     prix_item: 0,
     image_item: '',
     description_item: '',
-    id_personne: 0,
-    id_calendrier: 0,
+    id_personne: 1,
+    id_calendrier: 1,
     listCalendriers: [],
     listPersonnes: [],
   }),
@@ -46,8 +46,8 @@ export default{
         if(this.nom_item === '' || this.stock_item === null || this.prix_item === null || this.image_item === '' || this.description_item === '' || this.id_personne === null || this.id_calendrier === null){
           return
         }
-        await this.addNewItemStore(this.nom_item,this.stock_item,this.prix_item,this.image_item,this.description_item,this.id_personne,this.id_calendrier);
-        //console.log(this.nom_item,this.stock_item,this.prix_item,this.image_item,this.description_item,this.id_personne,this.id_calendrier)
+        const body = {nom_item:this.nom_item,stock_item:this.stock_item,prix_item:this.prix_item,image_item:this.image_item,description_item:this.description_item,id_personne:this.id_personne,id_calendrier:this.id_calendrier}
+        await this.addNewItemStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {
         console.log('error addItem', e)
