@@ -8,7 +8,7 @@ exports.getTemoignage = async (req, res) => {
                 message: err.message || "Some error occurred while retrieving temoignage."
             });
         } else {
-            res.send(data);
+            res.json({ data });
         }
     });
-}
+};

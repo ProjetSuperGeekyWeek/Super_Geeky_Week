@@ -1,4 +1,4 @@
-import { getRequest, patchRequest } from "./axios";
+import { getRequest, patchRequest, postRequest } from "./axios";
 
 //Role
 async function getAllRole() {
@@ -8,7 +8,7 @@ async function getAllRoleColumn() {
     return await getRequest("/api/crud/getAllRoleColumn", "GETALLROLECOLUMN");
 }
 async function addNewRole(body){
-    return await patchRequest('/api/crud/addRole', body, "ADDROLE")
+    return await postRequest('/api/crud/addRole', body, "ADDROLE")
 }
 
 
@@ -23,7 +23,7 @@ async function getAllAcheterColumn() {
     return await getRequest("/api/crud/getAllAcheterColumn", "GETALLACHETERCOLUMN");
 }
 async function addNewAcheter(body){
-    return await patchRequest("/api/crud/addAcheter", body, "ADDACHETER")
+    return await postRequest("/api/crud/addAcheter", body, "ADDACHETER")
 }
 
 
@@ -38,7 +38,7 @@ async function getAllCalendrierColumn() {
     return await getRequest("/api/crud/getAllCalendrierColumn", "GETALLCALENDRIERCOLUMN");
 }
 async function addNewCalendrier(body){
-    return await patchRequest("/api/crud/addCalendrier", body, "ADDCALENDRIER")
+    return await postRequest("/api/crud/addCalendrier", body, "ADDCALENDRIER")
 }
 
 
@@ -65,7 +65,7 @@ async function getAllEmplacementColumn() {
     return await getRequest("/api/crud/getAllEmplacementColumn", "GETALLEMPLACEMENTCOLUMN");
 }
 async function addNewEmplacement(body){
-    return await patchRequest("/api/crud/addEmplacement", body, "ADDEMPLACEMENT")
+    return await postRequest("/api/crud/addEmplacement", body, "ADDEMPLACEMENT")
 }
 
 
@@ -92,7 +92,7 @@ async function getAllEvenementColumn() {
     return await getRequest("/api/crud/getAllEvenementColumn", "GETALLEVENEMENTCOLUMN");
 }
 async function addNewEvenement(body){
-    return await patchRequest("/api/crud/addEvenement", body, "ADDEVENEMENT")
+    return await postRequest("/api/crud/addEvenement", body, "ADDEVENEMENT")
 }
 
 
@@ -107,7 +107,7 @@ async function getAllItemColumn() {
     return await getRequest("/api/crud/getAllItemColumn", "GETALLITEMCOLUMN");
 }
 async function addNewItem(body){
-    return await patchRequest("/api/crud/addItem", body, "ADDITEM")
+    return await postRequest("/api/crud/addItem", body, "ADDITEM")
 }
 
 
@@ -134,7 +134,7 @@ async function getAllPanierColumn() {
     return await getRequest("/api/crud/getAllPanierColumn", "GETALLPANIERCOLUMN");
 }
 async function addNewPanierStore(body){
-    return await patchRequest("/api/crud/addPanier", body, "ADDPANIER")
+    return await postRequest("/api/crud/addPanier", body, "ADDPANIER")
 }
 
 
@@ -149,7 +149,7 @@ async function getAllPersonneColumn() {
     return await getRequest("/api/crud/getAllPersonneColumn", "GETALLPERSONNECOLUMN");
 }
 async function addNewPersonne(body){
-    return await patchRequest("/api/crud/addPersonne", body, "ADDPERSONNE")
+    return await postRequest("/api/crud/addPersonne", body, "ADDPERSONNE")
 }
 
 
@@ -176,7 +176,7 @@ async function getAllQrCodeColumn() {
     return await getRequest("/api/crud/getAllQrCodeColumn", "GETALLQRCODECOLUMN");
 }
 async function addNewQrCode(body){
-    return await patchRequest("/api/crud/addQrCode", body, "ADDQRCODE")
+    return await postRequest("/api/crud/addQrCode", body, "ADDQRCODE")
 }
 
 
@@ -191,7 +191,7 @@ async function getAllRessourceColumn() {
     return await getRequest("/api/crud/getAllRessourceColumn", "GETALLRESSOURCECOLUMN");
 }
 async function addNewRessource(body){
-    return await patchRequest("/api/crud/addRessource", body, "ADDRESSOURCE")
+    return await postRequest("/api/crud/addRessource", body, "ADDRESSOURCE")
 }
 
 
@@ -218,7 +218,7 @@ async function getAllTagColumn() {
     return await getRequest("/api/crud/getAllTagColumn", "GETALLTAGCOLUMN");
 }
 async function addNewTagStore(body){
-    return await patchRequest("/api/crud/addTag", body, "ADDTAG")
+    return await postRequest("/api/crud/addTag", body, "ADDTAG")
 }
 
 
