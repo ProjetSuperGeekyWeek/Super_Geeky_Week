@@ -13,6 +13,8 @@ DROP TABLE IF EXISTS stand CASCADE;
 DROP TABLE IF EXISTS emplacement_ressource CASCADE;
 DROP TABLE IF EXISTS ressource CASCADE;
 DROP TABLE IF EXISTS emplacement CASCADE;
+DROP TABLE IF EXISTS inscription_personne CASCADE;
+DROP TABLE IF EXISTS inscription CASCADE;
 DROP TABLE IF EXISTS livre_personne CASCADE;
 DROP TABLE IF EXISTS Livre_d_or CASCADE;
 DROP TABLE IF EXISTS personne CASCADE;
@@ -37,6 +39,7 @@ CREATE TABLE personne (
                           CONSTRAINT fk_role FOREIGN KEY (id_role) REFERENCES role(id_role)
 );
 
+-- partie services
 CREATE TABLE Livre_d_or (
     id_temoignage SERIAL PRIMARY KEY,
     temoignage VARCHAR(255) NOT NULL,
@@ -50,6 +53,36 @@ CREATE TABLE livre_personne (
                                 CONSTRAINT fk_personne FOREIGN KEY (id_personne) REFERENCES personne(id_personne),
                                 CONSTRAINT fk_temoignage FOREIGN KEY (id_temoignage) REFERENCES Livre_d_or(id_temoignage)
 );
+
+CREATE TABLE inscription (
+                             id_inscription SERIAL PRIMARY KEY,
+                             nom_inscription VARCHAR(50) NOT NULL,
+                             description_inscription VARCHAR(255) NOT NULL,
+                             nb_place INTEGER NOT NULL,
+                             image_inscription VARCHAR(100) NOT NULL,
+                             id_personne INTEGER NOT NULL,
+                             CONSTRAINT fk_personne FOREIGN KEY (id_personne) REFERENCES personne(id_personne)
+);
+
+CREATE TABLE inscrit (
+                            id_inscription INTEGER NOT NULL,
+                            nom_inscrit VARCHAR(100) NOT NULL,
+                            prenom_inscrit VARCHAR(100) NOT NULL,
+                            description_inscrit VARCHAR(255) NOT NULL,
+                            id_calendrier INTEGER NOT NULL,
+                            CONSTRAINT pk_inscrit PRIMARY KEY (id_inscription, nom_inscrit, prenom_inscrit, horaire_inscrit),
+                            CONSTRAINT fk_inscription FOREIGN KEY (id_inscription) REFERENCES inscription(id_inscription)
+                            CONSTRAINT fk_calendrier FOREIGN KEY (id_calendrier) REFERENCES calendrier(id_calendrier)
+);
+
+CREATE TABLE inscription_calendrier(
+                            id_inscription INTEGER NOT NULL,
+                            id_calendrier INTEGER NOT NULL,
+                            CONSTRAINT pk_inscription_calendrier PRIMARY KEY (id_inscription, id_calendrier),
+                            CONSTRAINT fk_inscription FOREIGN KEY (id_inscription) REFERENCES inscription(id_inscription),
+);
+
+-- fin partie services
 
 CREATE TABLE emplacement (
                              id_emplacement SERIAL PRIMARY KEY,
