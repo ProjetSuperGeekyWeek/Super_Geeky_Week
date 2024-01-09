@@ -14,17 +14,11 @@ DROP TABLE IF EXISTS emplacement_ressource CASCADE;
 DROP TABLE IF EXISTS ressource CASCADE;
 DROP TABLE IF EXISTS emplacement CASCADE;
 DROP TABLE IF EXISTS livre_personne CASCADE;
+DROP TABLE IF EXISTS Livre_d_or CASCADE;
 DROP TABLE IF EXISTS personne CASCADE;
 DROP TABLE IF EXISTS role CASCADE;
-DROP TABLE IF EXISTS Livre_d_or CASCADE;
 
 -- Create table
-
-CREATE TABLE Livre_d_or (
-    id_temoignage SERIAL PRIMARY KEY,
-    temoignage VARCHAR(255) NOT NULL,
-    pseudo VARCHAR(50) NOT NULL
-);
 
 CREATE TABLE role (
                       id_role SERIAL PRIMARY KEY,
@@ -41,6 +35,12 @@ CREATE TABLE personne (
                           description_personne VARCHAR(255) NOT NULL,
                           id_role INTEGER NOT NULL,
                           CONSTRAINT fk_role FOREIGN KEY (id_role) REFERENCES role(id_role)
+);
+
+CREATE TABLE Livre_d_or (
+    id_temoignage SERIAL PRIMARY KEY,
+    temoignage VARCHAR(255) NOT NULL,
+    pseudo VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE livre_personne (
