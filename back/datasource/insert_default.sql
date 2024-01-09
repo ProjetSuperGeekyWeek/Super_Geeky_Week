@@ -16,6 +16,17 @@ INSERT INTO personne (nom_personne, prenom_personne, mail_personne, mdp_personne
         ('Jean', 'Pierre', 'jean@gmail.com', 'User1234&', 'random.png','Je suis un super prestataire qui dance', 2),
         ('Bob', 'Lennon', 'bob@gmail.com', 'User1234&', 'random.png','Je suis un prestataire prestigieux qui aime l or', 3);
 
+-- Insert data into livre_personne table
+INSERT INTO livre_personne (id_personne, id_temoignage) VALUES
+    (1,1),
+    (1,2),
+    (1,3),
+    (2,1),
+    (2,2),
+    (2,3),
+    (3,1),
+    (3,2),
+    (3,3);
 
 -- Insert data into emplacement_carte table
 INSERT INTO emplacement (nom_emplacement) VALUES

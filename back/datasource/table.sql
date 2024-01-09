@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS stand CASCADE;
 DROP TABLE IF EXISTS emplacement_ressource CASCADE;
 DROP TABLE IF EXISTS ressource CASCADE;
 DROP TABLE IF EXISTS emplacement CASCADE;
+DROP TABLE IF EXISTS livre_personne CASCADE;
 DROP TABLE IF EXISTS personne CASCADE;
 DROP TABLE IF EXISTS role CASCADE;
 DROP TABLE IF EXISTS Livre_d_or CASCADE;
@@ -40,6 +41,14 @@ CREATE TABLE personne (
                           description_personne VARCHAR(255) NOT NULL,
                           id_role INTEGER NOT NULL,
                           CONSTRAINT fk_role FOREIGN KEY (id_role) REFERENCES role(id_role)
+);
+
+CREATE TABLE livre_personne (
+                                id_personne INTEGER NOT NULL,
+                                id_temoignage INTEGER NOT NULL,
+                                constraint pk_livre_personne PRIMARY KEY (id_personne, id_temoignage),
+                                CONSTRAINT fk_personne FOREIGN KEY (id_personne) REFERENCES personne(id_personne),
+                                CONSTRAINT fk_temoignage FOREIGN KEY (id_temoignage) REFERENCES Livre_d_or(id_temoignage)
 );
 
 CREATE TABLE emplacement (
