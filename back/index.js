@@ -14,6 +14,7 @@ const boutiqueRouter = require('./routes/boutiqueRouter');
 const calendrierRouter = require('./routes/calendrierRouter');
 const crudRouter = require('./routes/crudRouter');
 const authentificationRouter = require('./routes/authentificationRouter');
+const inscriptionRouter = require('./routes/inscriptionRouter');
 const livredorRouter = require('./routes/livredorRouter');
 
 
@@ -46,6 +47,7 @@ app.use('/api/boutique', boutiqueRouter);
 app.use('/api/calendrier', calendrierRouter);
 app.use('/api/crud', crudRouter);
 app.use('/api/authentification', authentificationRouter);
+app.use('/api/inscription', inscriptionRouter);
 app.use('/api/livredor', livredorRouter);
 
 app.listen(process.env.PORT, () => {

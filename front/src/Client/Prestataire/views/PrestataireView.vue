@@ -12,15 +12,12 @@
                 <div class="tabactivite">
                     <div class="tabactivite-inscriptions">
                         <ModuleInscriptions 
+                            v-for="(inscription, index) in inscriptions"
+                            :key="index"
                             :position="index"
                             :proprio="proprio"
-                            :infos="inscriptions[0]"/> <!-- :id="nb dans la liste" //// 
-                                v-for="(inscription, index) in prestataire.inscriptions" 
-                                emit=> infos personnes inscrite {nom,prenom,seance,desc,idIsncription}-->
-                        <ModuleInscriptions
-                            :position="1"
-                            :proprio="proprio"
-                            :infos="inscriptions[0]"/>
+                            :infos="inscription"
+                        />
                     </div>
                     <div class="tabactivite-livreOr">
 
@@ -43,6 +40,7 @@
     import ModuleInscriptions from '@/Client/Prestataire/components/ModuleInscription.vue';
     import { mapState } from 'vuex';
     import { getPrestataireById } from '@/../../back/axiosFunctions/prestataireAxios';
+    // import { getAllInscriptionsIdPresta, getAllHorairesIdInscription } from '@/../../back/axiosFunctions/inscriptionAxios';
 
     export default {
         name: 'PrestataireView',
@@ -64,17 +62,46 @@
                     description : "Venez vous affronter sur le dernier opus de la série Super Smash Bros ! Avec finale sur scène et cashPrize à la clef !",
                     horaires : [
                         {
+                            id_calendrier: 1,
                             jour : "Vendredi",
                             heureDebut : "17h00",
                             heureFin : "20h00"
                         },
                         {
+                            id_calendrier: 2,
                             jour : "Samedi",
                             heureDebut : "14h00",
                             heureFin : "17h00"
                         },
                         {
+                            id_calendrier: 3,
                             jour : "Dimanche",
+                            heureDebut : "14h00",
+                            heureFin : "17h00"
+                        }
+                    ],
+                    tarif : 0,
+                    },
+                    {
+                    id_activite: 90,
+                    titre : "Tournoi super cookie clicker",
+                    description : "Venez vous détruire les doigts sur la souris",
+                    horaires : [
+                        {
+                            id_calendrier: 1,
+                            jour : "Vendredieu",
+                            heureDebut : "17h00",
+                            heureFin : "20h00"
+                        },
+                        {
+                            id_calendrier: 2,
+                            jour : "Samedieh",
+                            heureDebut : "14h00",
+                            heureFin : "17h00"
+                        },
+                        {
+                            id_calendrier: 3,
+                            jour : "Dimancheuh",
                             heureDebut : "14h00",
                             heureFin : "17h00"
                         }
