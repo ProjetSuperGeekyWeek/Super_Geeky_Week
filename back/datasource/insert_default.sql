@@ -1,3 +1,9 @@
+-- Insert data into Livre_d_or table
+INSERT INTO Livre_d_or (temoignage, pseudo) VALUES
+    ('C etait super', 'Higorami'),
+    ('J ai adoré le cosplay de fury', 'Senquen'),
+    ('C etait cool', 'Dragul');
+
 -- Insert data into role table
 INSERT INTO role (nom_role) VALUES
     ('Admin'),
