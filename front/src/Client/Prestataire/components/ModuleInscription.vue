@@ -13,7 +13,7 @@
                     <ul>
                         <li v-for="horaire in infos.horaires" :key="horaire">
                             <span>{{ horaire.jour }}</span>
-                            <span>{{ horaire.heureDebut }} - {{ horaire.heureFin }}</span>
+                            <span>{{ horaire.heure_debut }} - {{ horaire.heure_fin }}</span>
                         </li>
                     </ul>
                 </div>
@@ -30,7 +30,7 @@
                 <h2>{{ infos.titre }}</h2>
                 <select name="seance" class="seance" v-model="inscritSeance">
                     <option v-for="horaire in infos.horaires" :key="horaire" :value="horaire.jour+' de '+horaire.heureDebut+' à '+horaire.heureFin">
-                        {{ horaire.jour }} {{ horaire.heureDebut }}-{{ horaire.heureFin }}
+                        {{ horaire.jour }} {{ horaire.heure_debut }}-{{ horaire.heure_fin }}
                     </option>
                 </select>
                 <div class="card-inscription-formulaire-infos">

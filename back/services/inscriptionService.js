@@ -15,14 +15,16 @@ async function getAllInscriptionsIdPrestaFromAPI(id){
         const query = `
         SELECT id_inscription AS id_activite, nom_inscription AS titre,
             description_inscription AS description, nb_place AS nb_place, 
-            image_inscription AS image,
+            image_inscription AS image
             FROM inscription
             WHERE id_personne = $1
             ORDER BY id_activite ASC
         `;
-        const result = await client.query(query);
+        const result = await client.query(query, [id]);
+        console.log(result.rows);
         return result.rows;
     } catch (e) {
+        console.log(e);
         throw e;
     } finally {
         client.release();
@@ -41,7 +43,7 @@ async function getAllHorairesIdInscriptionFromAPI(id){
     const client = await pool.connect();
     try {
         const query = `
-            SELECT id_calendrier AS id_horaire, date_calendrier AS jour, 
+            SELECT calendrier.id_calendrier AS id_horaire, date_calendrier AS jour, 
             horaire_debut AS heure_debut, horaire_fin AS heure_fin
             FROM calendrier
             INNER JOIN inscription_calendrier ON inscription_calendrier.id_calendrier = calendrier.id_calendrier
@@ -49,8 +51,10 @@ async function getAllHorairesIdInscriptionFromAPI(id){
             ORDER BY jour ASC, heure_debut ASC
         `;
         const result = await client.query(query, [id]);
+        console.log(result.rows);
         return result.rows;
     } catch (e) {
+        console.log(e);
         throw e;
     } finally {
         client.release();

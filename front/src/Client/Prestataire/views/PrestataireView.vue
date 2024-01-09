@@ -40,7 +40,7 @@
     import ModuleInscriptions from '@/Client/Prestataire/components/ModuleInscription.vue';
     import { mapState } from 'vuex';
     import { getPrestataireById } from '@/../../back/axiosFunctions/prestataireAxios';
-    // import { getAllInscriptionsIdPresta, getAllHorairesIdInscription } from '@/../../back/axiosFunctions/inscriptionAxios';
+    import { getAllInscriptionsIdPresta, getAllHorairesIdInscription } from '@/../../back/axiosFunctions/inscriptionAxios';
 
     export default {
         name: 'PrestataireView',
@@ -64,20 +64,20 @@
                         {
                             id_calendrier: 1,
                             jour : "Vendredi",
-                            heureDebut : "17h00",
-                            heureFin : "20h00"
+                            heure_debut : "17h00",
+                            heure_fin : "20h00"
                         },
                         {
                             id_calendrier: 2,
                             jour : "Samedi",
-                            heureDebut : "14h00",
-                            heureFin : "17h00"
+                            heure_debut : "14h00",
+                            heure_fin : "17h00"
                         },
                         {
                             id_calendrier: 3,
                             jour : "Dimanche",
-                            heureDebut : "14h00",
-                            heureFin : "17h00"
+                            heure_debut : "14h00",
+                            heure_fin : "17h00"
                         }
                     ],
                     tarif : 0,
@@ -90,20 +90,20 @@
                         {
                             id_calendrier: 1,
                             jour : "Vendredieu",
-                            heureDebut : "17h00",
-                            heureFin : "20h00"
+                            heure_debut : "17h00",
+                            heure_fin : "20h00"
                         },
                         {
                             id_calendrier: 2,
                             jour : "Samedieh",
-                            heureDebut : "14h00",
-                            heureFin : "17h00"
+                            heure_debut : "14h00",
+                            heure_fin : "17h00"
                         },
                         {
                             id_calendrier: 3,
                             jour : "Dimancheuh",
-                            heureDebut : "14h00",
-                            heureFin : "17h00"
+                            heure_debut : "14h00",
+                            heure_fin : "17h00"
                         }
                     ],
                     tarif : 0,
@@ -133,8 +133,26 @@
                     console.log(error);
                 }
             },
+            async getInscriptions() {
+                try{
+                    let res = await getAllInscriptionsIdPresta(this.id);
+                    for (let i = 0; i < res.length; i++) {
+                        res[i].tarif = 0;
+                        let resHoraire = await getAllHorairesIdInscription(res[i].id_activite);
+                        for (let j = 0; j < resHoraire.length; j++) {
+                            resHoraire[j].heure_debut = resHoraire[j].heure_debut.substring(0, 5);
+                            resHoraire[j].heure_fin = resHoraire[j].heure_fin.substring(0, 5);
+                        }
+                        res[i].horaires = resHoraire;
+                    }
+                    this.inscriptions = res;
+                } catch (error) {
+                    console.log(error);
+                }
+            },
             async loadData() {
                 await this.getPrestataire();
+                await this.getInscriptions();
             },
         },
         computed: {
