@@ -11,6 +11,8 @@ INSERT INTO personne (nom_personne, prenom_personne, mail_personne, mdp_personne
         ('Jean', 'Pierre', 'jean@gmail.com', 'User1234&', 'random.png','Je suis un super prestataire qui dance', 2),
         ('Bob', 'Lennon', 'bob@gmail.com', 'User1234&', 'random.png','Je suis un prestataire prestigieux qui aime l or', 3);
 
+-- partie services
+
 -- Insert data into Livre_d_or table
 INSERT INTO Livre_d_or (temoignage, pseudo) VALUES
     ('C etait super', 'Higorami'),
@@ -29,6 +31,31 @@ INSERT INTO livre_personne (id_personne, id_temoignage) VALUES
     (3,1),
     (3,2),
     (3,3);
+
+-- Insert data into inscription table
+INSERT INTO inscription (nom_inscription, description_inscription, nb_place, image_inscription, id_personne) VALUES
+    ('Tournoi Smash Bros Ultimate', 'Un tournoi smash bros sympa', 16, 'random.png', 2),
+    ('Concours cosplay', 'Venez déguisés !', 128, 'random.png', 3);
+
+-- Insert data into inscrit table
+INSERT INTO inscrit (id_inscription, nom_inscrit, prenom_inscrit, description_inscrit, id_calendrier) VALUES
+    (1, 'visiteur 1', 'jacque', 'je suis un visiteur', 1),
+    (1, 'visiteur 2', 'jacquot', 'je suis un visiteur', 1),
+    (1, 'visiteur 3', 'jacquie', 'je suis un visiteur', 1),
+    (1, 'visiteur 4', 'du terroir', 'je suis un visiteur', 1),
+    (2, 'visiteur 1', 'jacque', 'je suis un visiteur', 2),
+    (2, 'visiteur 2', 'jacquot', 'je suis un visiteur', 2),
+    (2, 'visiteur 3', 'jacquie', 'je suis un visiteur', 2),
+    (2, 'visiteur 4', 'du terroir', 'je suis un visiteur', 2);
+
+-- Insert data into inscription_calendrier table
+INSERT INTO inscription_calendrier (id_inscription, id_calendrier) VALUES
+    (1,1),
+    (1,2),
+    (2,1),
+    (2,2);
+
+-- fin partie services
 
 -- Insert data into emplacement_carte table
 INSERT INTO emplacement (nom_emplacement) VALUES
