@@ -372,17 +372,17 @@ router.get('/getAllTagColumn', tagController.getAllTagColumn);
 
 
 // ADD
-router.patch('/addRole', roleController.addNewRole);
-router.patch('/addAcheter', acheterController.addNewAcheter);
-router.patch('/addItem', itemController.addNewItem);
-router.patch('/addPersonne', personneController.addNewPersonne);
-router.patch('/addRessource', ressourceController.addNewRessource);
-router.patch('/addQrCode', qrCodeController.addNewQrCode);
-router.patch('/addPanier', panierController.addNewPanier);
-router.patch('/addTag', tagController.addNewTag);
-router.patch('/addEmplacement', emplacementController.addNewEmplacement);
-router.patch('/addCalendrier', calendrierController.addNewCalendrier);
-router.patch('/addEvenement', evenementController.addNewEvenement);
+router.post('/addRole', roleController.addNewRole);
+router.post('/addAcheter', acheterController.addNewAcheter);
+router.post('/addItem', itemController.addNewItem);
+router.post('/addPersonne', personneController.addNewPersonne);
+router.post('/addRessource', ressourceController.addNewRessource);
+router.post('/addQrCode', qrCodeController.addNewQrCode);
+router.post('/addPanier', panierController.addNewPanier);
+router.post('/addTag', tagController.addNewTag);
+router.post('/addEmplacement', emplacementController.addNewEmplacement);
+router.post('/addCalendrier', calendrierController.addNewCalendrier);
+router.post('/addEvenement', evenementController.addNewEvenement);
 // DELETE
 
 // UPDATE
