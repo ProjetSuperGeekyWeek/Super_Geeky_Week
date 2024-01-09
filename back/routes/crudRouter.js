@@ -17,6 +17,310 @@ const tagController = require("../controllers/crud/tagController")
 const express = require('express');
 const router = express.Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Crud
+ *   description: API endpoints for crud operations
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllRole:
+ *   get:
+ *     summary: Get all roles
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all roles
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id_role:
+ *                     type: integer
+ *                   nom_role:
+ *                     type: string
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllRoleColumn:
+ *   get:
+ *     summary: Get columns for the roles
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved role columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllAcheter:
+ *   get:
+ *     summary: Get all acheter records
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all acheter records
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllAcheterColumn:
+ *   get:
+ *     summary: Get columns for acheter records
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved acheter record columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllCalendrier:
+ *   get:
+ *     summary: Get all calendrier records
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all calendrier records
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllCalendrierColumn:
+ *   get:
+ *     summary: Get columns for calendrier records
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved calendrier record columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllCreneau:
+ *   get:
+ *     summary: Get all creneau records
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all creneau records
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllCreneauColumn:
+ *   get:
+ *     summary: Get columns for creneau records
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved creneau record columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllEmplacement:
+ *   get:
+ *     summary: Get all emplacement records
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all emplacement records
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllEmplacementColumn:
+ *   get:
+ *     summary: Get columns for emplacement records
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved emplacement record columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllEmplacementRessource:
+ *   get:
+ *     summary: Get all emplacement ressource records
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all emplacement ressource records
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllEmplacementRessourceColumn:
+ *   get:
+ *     summary: Get columns for emplacement ressource records
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved emplacement ressource record columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllEvenement:
+ *   get:
+ *     summary: Get all events
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all events
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   [Define event properties here]
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllEvenementColumn:
+ *   get:
+ *     summary: Get columns for events
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved event columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   [Define event column properties here]
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/addRole:
+ *   patch:
+ *     summary: Add a new role
+ *     tags: [Crud]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nom_role:
+ *                 type: string
+ *     responses:
+ *       '200':
+ *         description: Successfully added a new role
+ *       '500':
+ *         description: Internal server error
+ */
+
 // GET
 router.get('/getAllRole', roleController.getAllRole);
 router.get('/getAllRoleColumn', roleController.getAllRoleColumn);

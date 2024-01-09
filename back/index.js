@@ -3,6 +3,8 @@ const cookieparser = require("cookie-parser");
 const dotenv = require("dotenv");
 const app = express();
 const cors = require('cors');
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 dotenv.config();
 
 const carteRouter = require('./routes/carteRouter');
@@ -12,6 +14,22 @@ const boutiqueRouter = require('./routes/boutiqueRouter');
 const calendrierRouter = require('./routes/calendrierRouter');
 const crudRouter = require('./routes/crudRouter');
 const authentificationRouter = require('./routes/authentificationRouter');
+
+
+// Swagger configuration
+const swaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            title: "Your API Documentation",
+            description: "API documentation for your project",
+            version: "1.0.0",
+        },
+    },
+    apis: ["./routes/*.js"], // Specify the path to your route files
+};
+
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use(cors({
     origin : '*'
@@ -27,8 +45,6 @@ app.use('/api/boutique', boutiqueRouter);
 app.use('/api/calendrier', calendrierRouter);
 app.use('/api/crud', crudRouter);
 app.use('/api/authentification', authentificationRouter);
-
-
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
