@@ -66,8 +66,8 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getAllTag']),
-    ...mapActions(['getAllTagStore']),
+    ...mapGetters('crudStore',['getAllTag']),
+    ...mapActions('crudStore',['getAllTagStore']),
   },
   methods: {
     includesId(array, id){

@@ -96,32 +96,8 @@ export default {
 
         /*getAll: state => state.tabAll,
         getAllColumn: state => state.tabAllColumn,*/
-
-        //session
-        getIdSession: state => state.id_session,
     },
     mutations: {
-        setAuthentifier(state, payload) {
-            state.authentifier = payload;
-        },
-        setAdmin(state, payload) {
-            state.admin = payload;
-        },
-        setLang(state, payload) {
-            state.lang = payload;
-        },
-        setPrestataire(state, payload) {
-            state.prestataire = payload;
-        },
-        setNomPrestataire(state, payload) {
-            state.nom_prestataire = payload;
-        },
-        setPrenomPrestataire(state, payload) {
-            state.prenom_prestataire = payload;
-        },
-        setNomStand(state, payload) {
-            state.nom_stand = payload;
-        },
         SET_ALL_ACHETER(state, payload){
             state.tabAllAcheters = payload;
         },
