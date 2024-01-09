@@ -3,14 +3,31 @@
         <template v-if="authentifier && proprio">
             <div class="service-content">
                 <p>id : {{ id }}</p>
-                <h1 class="intro">Bienvenue dans votre espace :</h1>
+                <h1 class="intro">Bienvenue dans votre espace : {{ prestataire.prenom_personne }} {{ prestataire.nom_personne }}</h1>
                 <br>
                 <!-- <div class="service-content" v-html="getServicePageText"></div> -->
                 <br>
                 <h1 class="intro">Vos activités :</h1>
                 <br>
                 <div class="tabactivite">
-                    <ModuleInscriptions />
+                    <div class="tabactivite-inscriptions">
+                        <ModuleInscriptions 
+                            :position="index"
+                            :proprio="proprio"
+                            :infos="inscriptions[0]"/> <!-- :id="nb dans la liste" //// 
+                                v-for="(inscription, index) in prestataire.inscriptions" 
+                                emit=> infos personnes inscrite {nom,prenom,seance,desc,idIsncription}-->
+                        <ModuleInscriptions
+                            :position="1"
+                            :proprio="proprio"
+                            :infos="inscriptions[0]"/>
+                    </div>
+                    <div class="tabactivite-livreOr">
+
+                    </div>
+                    <div class="tabactivite-contact">
+
+                    </div>
                 </div>
             </div>
         </template>
@@ -32,6 +49,7 @@
         components: { ModuleInscriptions },
         data() {
             return {
+                index: 0,
                 prestataire: {
                     nom_personne: '',
                     prenom_personne: '',
@@ -39,6 +57,40 @@
                     description_personne: '',
                     image_personne: '',
                 },
+                inscriptions: [
+                    {
+                    id_activite: 84,
+                    titre : "Tournoi super smash bros ultimate",
+                    description : "Venez vous affronter sur le dernier opus de la série Super Smash Bros ! Avec finale sur scène et cashPrize à la clef !",
+                    horaires : [
+                        {
+                            jour : "Vendredi",
+                            heureDebut : "17h00",
+                            heureFin : "20h00"
+                        },
+                        {
+                            jour : "Samedi",
+                            heureDebut : "14h00",
+                            heureFin : "17h00"
+                        },
+                        {
+                            jour : "Dimanche",
+                            heureDebut : "14h00",
+                            heureFin : "17h00"
+                        }
+                    ],
+                    tarif : 0,
+                    },
+                ],
+                livreOr: {
+                    id_personne: '',
+                    id_activite: '',
+                    note: '',
+                    commentaire: '',
+                },
+                contact: {
+
+                }
             };
         },
         methods: {
