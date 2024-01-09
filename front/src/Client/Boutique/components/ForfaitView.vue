@@ -1,9 +1,9 @@
 <template>
   <div class="forfait">
-    <p class="tres_grand gras titre">Billetterie</p>
-    <p class="text_pres">Pour la Super Geeky Week, nous vous proposons trois types de forfaits pour rendre votre séjour encore plus agréable. Tout d'abord, le forfait standard vous permettra de profiter pleinement de tous les stands. Ensuite, nous vous offrons le forfait prioritaire qui vous garantit un accès plus rapide à nos services, vous permettant ainsi de maximiser votre temps et votre expérience. Enfin, pour assurer une accessibilité optimale, nous avons également le forfait dédié aux personnes en situation de handicap.</p>
+    <p class="tres_grand gras titre">{{ translate('billet_title') }}</p>
+    <p class="text_pres">{{ translate('billet_text') }}</p>
     <div class="jour" v-for="jour in listCalendrier" :key="jour.id_calendrier">
-      <p class="grand gras titre">Jour {{ jour.id_calendrier }} / Horaire de {{ jour.horaire_debut }} a {{ jour.horaire_fin }}</p>
+      <p class="grand gras titre">{{ translate('jour') }}{{ jour.id_calendrier }}{{ translate('hora') }}{{ jour.horaire_debut }}{{ translate('a') }}{{ jour.horaire_fin }}</p>
       <div class="forfait_jour">
         <div class="forfait_card" v-for="item in filteredItems(jour.id_calendrier)" :key="item.id_calendrier">
           <p>{{ item.nom_item }}</p>
@@ -20,6 +20,7 @@
 <script>
 import {getAllItems} from '@/../../back/axiosFunctions/boutiqueAxios'
 import {getAllCalendrier} from '@/../../back/axiosFunctions/calendrierAxios'
+import {mapState} from "vuex";
 export default {
   name: 'ForfaitView',
   data() {
@@ -29,6 +30,9 @@ export default {
     }
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+  },
     async fillListeItems(){
       var result = await getAllItems();
       for (var i = 0; i < result.length; i++) {
@@ -49,6 +53,7 @@ export default {
     this.fillListCalendrier();
   },
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     // Propriété calculée pour filtrer les items en fonction de l'id du calendrier
     filteredItems() {
       return (idCalendrier) => {
