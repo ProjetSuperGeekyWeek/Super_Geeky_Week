@@ -63,8 +63,53 @@ async function addNewPersonneFromAPI(body){
     }
 }
 
+const deletePersonneById = (id_personne, callback) => {
+    deletePersonneByIdFromAPI(id_personne).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function deletePersonneByIdFromAPI(id_personne){
+    const client = await pool.connect();
+    try {
+        let query2 = "SELECT * FROM personne WHERE id_personne=$1";
+        let resultPersonne = await client.query(query2, [id_personne]);
+
+        let query = "SELECT * FROM personne WHERE nom_personne LIKE 'default_PERSONNE' AND id_role=$1";
+        let resultVerif = await client.query(query, [resultPersonne.rows[0].id_role]);
+        console.log(resultPersonne.rows, 'P')
+        console.log(resultVerif.rows, 'V')
+        if(resultVerif.rowCount !== 1) {
+            query = "INSERT INTO personne (nom_personne,prenom_personne,mail_personne,mdp_personne,image_personne,description_personne,id_role) VALUES ('default_PERSONNE','default_PERSONNE','default@personne.dp','df','default', 'je suis une personne qui a etait suprimmer',$1)"
+            await client.query(query, [resultPersonne.rows[0].id_role])
+            await client.query('COMMIT');
+            query = "SELECT * FROM personne WHERE nom_personne LIKE 'default_PERSONNE' AND id_role=$1";
+            resultVerif = await client.query(query, [resultPersonne.rows[0].id_role]);
+        }
+        console.log(resultVerif.rows[0], "test")
+        await client.query('UPDATE livre_personne SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('UPDATE inscription SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('UPDATE stand SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('UPDATE item SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('UPDATE personne_tag SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('UPDATE evenement SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('COMMIT');
+        await client.query('DELETE FROM personne WHERE id_personne=$1', [id_personne]);
+        await client.query('COMMIT');
+    } catch (e) {
+        console.log(e,"erreur")
+        await client.query("ROLLBACK")
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllPersonne:getAllPersonne,
     getAllPersonneColumn:getAllPersonneColumn,
     addNewPersonne:addNewPersonne,
+    deletePersonneById:deletePersonneById,
 };

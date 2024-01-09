@@ -63,8 +63,30 @@ async function addNewAcheterFromAPI(body){
     }
 }
 
+const deleteAcheterById = (id_acheter, callback) => {
+    deleteAcheterByIdFromAPI(id_acheter).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function deleteAcheterByIdFromAPI(id_acheter){
+    const client = await pool.connect();
+    try {
+        await client.query('DELETE FROM acheter WHERE id_acheter=$1', [id_acheter]);
+        await client.query('COMMIT');
+    } catch (e) {
+        await client.query("ROLLBACK")
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllAcheter:getAllAcheter,
     getAllAcheterColumn:getAllAcheterColumn,
     addNewAcheter:addNewAcheter,
+    deleteAcheterById:deleteAcheterById,
 };

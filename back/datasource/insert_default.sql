@@ -136,9 +136,9 @@ INSERT INTO stand (id_emplacement, id_personne) VALUES
     (47, 1);
 
 -- Insert data into calendrier table
-INSERT INTO calendrier (date_calendrier,horaire_debut,horaire_fin) VALUES
-    ('2024-03-25', '09:00', '18:30'),
-    ('2024-03-26', '08:30', '18:00');
+INSERT INTO calendrier (libelle_calendrier,date_calendrier,horaire_debut,horaire_fin) VALUES
+    ('jour1','2024-03-25', '09:00', '18:30'),
+    ('jour2','2024-03-26', '08:30', '18:00');
 
 -- Insert data into inscrit table
 INSERT INTO inscrit (id_inscription, nom_inscrit, prenom_inscrit, description_inscrit, id_calendrier) VALUES

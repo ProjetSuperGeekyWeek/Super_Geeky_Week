@@ -35,3 +35,19 @@ exports.addNewAcheter = async (req, res) => {
         }
     });
 }
+
+exports.deleteAcheterById = async (req, res) => {
+    const id_acheter = req.query.id_acheter;
+    if(!id_acheter){
+        return res.status(400).send("UUID Required!");
+    }
+    acheterService.deleteAcheterById(id_acheter, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb deleteAcheterById."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

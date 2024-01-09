@@ -35,3 +35,19 @@ exports.addNewPersonne = async (req, res) => {
         }
     });
 }
+
+exports.deletePersonneById = async (req, res) => {
+    const id_personne = req.query.id_personne;
+    if(!id_personne){
+        return res.status(400).send("UUID Required!");
+    }
+    personneService.deletePersonneById(id_personne, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb deletePersonneById."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

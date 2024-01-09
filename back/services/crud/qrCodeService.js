@@ -63,8 +63,41 @@ async function addNewQrCodeFromAPI(body){
     }
 }
 
+const deleteQrCodeById = (id_qr_code, callback) => {
+    deleteQrCodeByIdFromAPI(id_qr_code).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function deleteQrCodeByIdFromAPI(id_qr_code){
+    const client = await pool.connect();
+    try {
+        let query = "SELECT * FROM qr_code WHERE nom_client LIKE 'default_QRCODE'";
+        let result = await client.query(query);
+        if(result.rowCount !== 1) {
+            query = "INSERT INTO qr_code (nom_client,prenom_client,mail_client) VALUES ('default_QRCODE','default_QRCODE','dQ@dQ.dQ')"
+            await client.query(query)
+            await client.query('COMMIT');
+            query = "SELECT * FROM qr_code WHERE nom_client LIKE 'default_QRCODE'";
+            result = await client.query(query);
+        }
+        await client.query('UPDATE acheter SET id_qr_code=$1 WHERE id_qr_code=$2', [result.rows[0].id_qr_code,id_qr_code]);
+        await client.query('COMMIT');
+        await client.query('DELETE FROM qr_code WHERE id_qr_code=$1', [id_qr_code]);
+        await client.query('COMMIT');
+    } catch (e) {
+        await client.query("ROLLBACK")
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllQrCode:getAllQrCode,
     getAllQrCodeColumn:getAllQrCodeColumn,
     addNewQrCode:addNewQrCode,
+    deleteQrCodeById:deleteQrCodeById,
 };
