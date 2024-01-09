@@ -112,6 +112,21 @@ const routes = [
     path: '/admin/crud/tag/add',
     name: 'admin_crud_tag_add',
     component: () => import('@/Admin/Crud/components/tag/addTag.vue')
+  },
+  {
+    path: '/admin/crud/emplacement/add',
+    name: 'admin_crud_emplacement_add',
+    component: () => import('@/Admin/Crud/components/emplacement/addEmplacement.vue')
+  },
+  {
+    path: '/admin/crud/calendrier/add',
+    name: 'admin_crud_calendrier_add',
+    component: () => import('@/Admin/Crud/components/calendrier/addCalendrier.vue')
+  },
+  {
+    path: '/admin/crud/evenement/add',
+    name: 'admin_crud_evenement_add',
+    component: () => import('@/Admin/Crud/components/evenement/addEvenement.vue')
   }
 
 ]

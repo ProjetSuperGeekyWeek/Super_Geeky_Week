@@ -73,9 +73,9 @@ export default {
       }
       this.qrCode.stats = this.getAllQrCode;
     },
-  },
-  async navigateToAdd() {
-    this.$router.push('/admin/crud/qrcode/add');
+    async navigateToAdd() {
+      this.$router.push('/admin/crud/qrcode/add');
+    },
   },
   async mounted() {
     await this.loadData();

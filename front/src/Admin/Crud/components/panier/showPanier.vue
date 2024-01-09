@@ -73,9 +73,9 @@ export default {
       }
       this.panier.stats = this.getAllPanier;
     },
-  },
-  async navigateToAdd() {
-    this.$router.push('/admin/crud/panier/add');
+    async navigateToAdd() {
+      this.$router.push('/admin/crud/panier/add');
+    },
   },
   async mounted() {
     await this.loadData();

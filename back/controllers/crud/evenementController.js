@@ -23,3 +23,15 @@ exports.getAllEvenementColumn = async (req, res) => {
         }
     });
 }
+
+exports.addNewEvenement = async (req, res) => {
+    evenementService.addNewEvenement(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb addNewEvenement."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

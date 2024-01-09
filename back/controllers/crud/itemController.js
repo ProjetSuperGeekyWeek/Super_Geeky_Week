@@ -23,3 +23,15 @@ exports.getAllItemColumn = async (req, res) => {
         }
     });
 }
+
+exports.addNewItem = async (req, res) => {
+    itemService.addNewItem(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb addNewItem."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

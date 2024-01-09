@@ -25,8 +25,7 @@ exports.getAllRoleColumn = async (req, res) => {
 }
 
 exports.addNewRole = async (req, res) => {
-    const nom_role = req.body.nom_role;
-    roleService.addNewRole(nom_role, (err, data) => {
+    roleService.addNewRole(req.body, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: err.message || "pb addNewRole."

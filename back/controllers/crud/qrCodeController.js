@@ -23,3 +23,15 @@ exports.getAllQrCodeColumn = async (req, res) => {
         }
     });
 }
+
+exports.addNewQrCode = async (req, res) => {
+    qrCodeService.addNewQrCode(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb addNewQrCode."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

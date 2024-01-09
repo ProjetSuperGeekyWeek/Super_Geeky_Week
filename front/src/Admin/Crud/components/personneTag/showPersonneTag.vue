@@ -30,12 +30,12 @@
               v-model="selected"
               :headers="personneTag.headers"
               :items="personneTag.stats"
-              :items-per-page="10"
+              :items-per-page="5"
               class="elevation-4"
               :search="search"
               show-select
               single-select
-              item-key="id_personne"
+              item-key=""
               show-group-by
           >
           </v-data-table>

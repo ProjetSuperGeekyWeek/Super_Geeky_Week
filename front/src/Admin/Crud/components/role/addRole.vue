@@ -2,6 +2,7 @@
 <div class="add">
   <input type="text" placeholder="nom du rôle" v-model="nom_role">
   <input type="button" value="Ajouter" @click="addNewRole">
+  <input type="button" value="retour" @click="returnCrud">
 </div>
 </template>
 
@@ -16,22 +17,20 @@ export default{
   methods: {
     ...mapActions('crudStore',['addNewRoleStore']),
     async addNewRole() {
-      console.log(this.nom_role,1)
       try{
         if(this.nom_role === ''){
           return
         }
-        this.addNewRoleStore(this.nom_role);
+        const body = {nom_role:this.nom_role}
+        await this.addNewRoleStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {
         console.log('error addRole', e)
       }
-    }
-  },
-  watch: {
-    nom_role: function (newVal) {
-      console.log("nom_role variable modified:", newVal);
-    }
+    },
+    async returnCrud() {
+      this.$router.push('/admin/crud')
+    },
   }
 }
 </script>

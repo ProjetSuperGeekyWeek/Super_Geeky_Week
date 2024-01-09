@@ -73,9 +73,9 @@ export default {
       }
       this.ressource.stats = this.getAllRessource;
     },
-  },
-  async navigateToAdd() {
-    this.$router.push('/admin/crud/ressource/add');
+    async navigateToAdd() {
+      this.$router.push('/admin/crud/ressource/add');
+    },
   },
   async mounted() {
     await this.loadData();

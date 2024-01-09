@@ -23,3 +23,15 @@ exports.getAllPersonneColumn = async (req, res) => {
         }
     });
 }
+
+exports.addNewPersonne = async (req, res) => {
+    personneService.addNewPersonne(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb addNewPersonne."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
