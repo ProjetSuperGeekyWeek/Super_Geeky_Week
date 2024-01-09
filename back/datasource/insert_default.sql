@@ -37,24 +37,6 @@ INSERT INTO inscription (nom_inscription, description_inscription, nb_place, ima
     ('Tournoi Smash Bros Ultimate', 'Un tournoi smash bros sympa', 16, 'random.png', 2),
     ('Concours cosplay', 'Venez déguisés !', 128, 'random.png', 3);
 
--- Insert data into inscrit table
-INSERT INTO inscrit (id_inscription, nom_inscrit, prenom_inscrit, description_inscrit, id_calendrier) VALUES
-    (1, 'visiteur 1', 'jacque', 'je suis un visiteur', 1),
-    (1, 'visiteur 2', 'jacquot', 'je suis un visiteur', 1),
-    (1, 'visiteur 3', 'jacquie', 'je suis un visiteur', 1),
-    (1, 'visiteur 4', 'du terroir', 'je suis un visiteur', 1),
-    (2, 'visiteur 1', 'jacque', 'je suis un visiteur', 2),
-    (2, 'visiteur 2', 'jacquot', 'je suis un visiteur', 2),
-    (2, 'visiteur 3', 'jacquie', 'je suis un visiteur', 2),
-    (2, 'visiteur 4', 'du terroir', 'je suis un visiteur', 2);
-
--- Insert data into inscription_calendrier table
-INSERT INTO inscription_calendrier (id_inscription, id_calendrier) VALUES
-    (1,1),
-    (1,2),
-    (2,1),
-    (2,2);
-
 -- fin partie services
 
 -- Insert data into emplacement_carte table
@@ -157,6 +139,24 @@ INSERT INTO stand (id_emplacement, id_personne) VALUES
 INSERT INTO calendrier (date_calendrier,horaire_debut,horaire_fin) VALUES
     ('2024-03-25', '09:00', '18:30'),
     ('2024-03-26', '08:30', '18:00');
+
+-- Insert data into inscrit table
+INSERT INTO inscrit (id_inscription, nom_inscrit, prenom_inscrit, description_inscrit, id_calendrier) VALUES
+    (1, 'visiteur 1', 'jacque', 'je suis un visiteur', 1),
+    (1, 'visiteur 2', 'jacquot', 'je suis un visiteur', 1),
+    (1, 'visiteur 3', 'jacquie', 'je suis un visiteur', 1),
+    (1, 'visiteur 4', 'du terroir', 'je suis un visiteur', 1),
+    (2, 'visiteur 1', 'jacque', 'je suis un visiteur', 2),
+    (2, 'visiteur 2', 'jacquot', 'je suis un visiteur', 2),
+    (2, 'visiteur 3', 'jacquie', 'je suis un visiteur', 2),
+    (2, 'visiteur 4', 'du terroir', 'je suis un visiteur', 2);
+
+-- Insert data into inscription_calendrier table
+INSERT INTO inscription_calendrier (id_inscription, id_calendrier) VALUES
+    (1,1),
+    (1,2),
+    (2,1),
+    (2,2);
 
 -- Insert data into panier table
 INSERT INTO panier (nom_panier) VALUES
