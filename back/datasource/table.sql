@@ -18,8 +18,15 @@ DROP TABLE IF EXISTS ressource CASCADE;
 DROP TABLE IF EXISTS emplacement CASCADE;
 DROP TABLE IF EXISTS personne CASCADE;
 DROP TABLE IF EXISTS role CASCADE;
+DROP TABLE IF EXISTS Livre_d_or CASCADE;
 
 -- Create table
+
+CREATE TABLE Livre_d_or (
+    id_temoignage SERIAL PRIMARY KEY,
+    temoignage VARCHAR(255) NOT NULL,
+    pseudo VARCHAR(50) NOT NULL
+);
 
 CREATE TABLE role (
     id_role SERIAL PRIMARY KEY,
