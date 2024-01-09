@@ -8,12 +8,13 @@ DROP TABLE IF EXISTS qr_code CASCADE;
 DROP TABLE IF EXISTS ligne_panier CASCADE;
 DROP TABLE IF EXISTS item CASCADE;
 DROP TABLE IF EXISTS panier CASCADE;
+DROP TABLE IF EXISTS inscription_calendrier CASCADE;
+DROP TABLE IF EXISTS inscrit CASCADE;
 DROP TABLE IF EXISTS calendrier CASCADE;
 DROP TABLE IF EXISTS stand CASCADE;
 DROP TABLE IF EXISTS emplacement_ressource CASCADE;
 DROP TABLE IF EXISTS ressource CASCADE;
 DROP TABLE IF EXISTS emplacement CASCADE;
-DROP TABLE IF EXISTS inscription_personne CASCADE;
 DROP TABLE IF EXISTS inscription CASCADE;
 DROP TABLE IF EXISTS livre_personne CASCADE;
 DROP TABLE IF EXISTS Livre_d_or CASCADE;
@@ -41,9 +42,9 @@ CREATE TABLE personne (
 
 -- partie services
 CREATE TABLE Livre_d_or (
-    id_temoignage SERIAL PRIMARY KEY,
-    temoignage VARCHAR(255) NOT NULL,
-    pseudo VARCHAR(50) NOT NULL
+                            id_temoignage SERIAL PRIMARY KEY,
+                            temoignage VARCHAR(255) NOT NULL,
+                            pseudo VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE livre_personne (
@@ -62,24 +63,6 @@ CREATE TABLE inscription (
                              image_inscription VARCHAR(100) NOT NULL,
                              id_personne INTEGER NOT NULL,
                              CONSTRAINT fk_personne FOREIGN KEY (id_personne) REFERENCES personne(id_personne)
-);
-
-CREATE TABLE inscrit (
-                            id_inscription INTEGER NOT NULL,
-                            nom_inscrit VARCHAR(100) NOT NULL,
-                            prenom_inscrit VARCHAR(100) NOT NULL,
-                            description_inscrit VARCHAR(255) NOT NULL,
-                            id_calendrier INTEGER NOT NULL,
-                            CONSTRAINT pk_inscrit PRIMARY KEY (id_inscription, nom_inscrit, prenom_inscrit, horaire_inscrit),
-                            CONSTRAINT fk_inscription FOREIGN KEY (id_inscription) REFERENCES inscription(id_inscription)
-                            CONSTRAINT fk_calendrier FOREIGN KEY (id_calendrier) REFERENCES calendrier(id_calendrier)
-);
-
-CREATE TABLE inscription_calendrier(
-                            id_inscription INTEGER NOT NULL,
-                            id_calendrier INTEGER NOT NULL,
-                            CONSTRAINT pk_inscription_calendrier PRIMARY KEY (id_inscription, id_calendrier),
-                            CONSTRAINT fk_inscription FOREIGN KEY (id_inscription) REFERENCES inscription(id_inscription),
 );
 
 -- fin partie services
@@ -116,6 +99,24 @@ CREATE TABLE calendrier (
                             date_calendrier DATE NOT NULL,
                             horaire_debut TIME NOT NULL,
                             horaire_fin TIME NOT NULL
+);
+
+CREATE TABLE inscrit (
+                         id_inscription INTEGER NOT NULL,
+                         nom_inscrit VARCHAR(100) NOT NULL,
+                         prenom_inscrit VARCHAR(100) NOT NULL,
+                         description_inscrit VARCHAR(255) NOT NULL,
+                         id_calendrier INTEGER NOT NULL,
+                         CONSTRAINT pk_inscrit PRIMARY KEY (id_inscription, nom_inscrit, prenom_inscrit, id_calendrier),
+                         CONSTRAINT fk_inscription FOREIGN KEY (id_inscription) REFERENCES inscription(id_inscription),
+                         CONSTRAINT fk_calendrier FOREIGN KEY (id_calendrier) REFERENCES calendrier(id_calendrier)
+);
+
+CREATE TABLE inscription_calendrier(
+                                       id_inscription INTEGER NOT NULL,
+                                       id_calendrier INTEGER NOT NULL,
+                                       CONSTRAINT pk_inscription_calendrier PRIMARY KEY (id_inscription, id_calendrier),
+                                       CONSTRAINT fk_inscription FOREIGN KEY (id_inscription) REFERENCES inscription(id_inscription)
 );
 
 CREATE TABLE panier (
@@ -195,5 +196,3 @@ CREATE TABLE creneau (
                          CONSTRAINT fk_evenement FOREIGN KEY (id_evenement) REFERENCES evenement(id_evenement),
                          CONSTRAINT fk_calendrier FOREIGN KEY (id_calendrier) REFERENCES calendrier(id_calendrier)
 );
-
-
