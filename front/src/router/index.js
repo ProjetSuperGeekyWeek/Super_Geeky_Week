@@ -19,6 +19,16 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '@/Client/Boutique/views/BilletsView.vue')
   },
   {
+    path: '/exposants',
+    name: 'exposants',
+    component: () => import('@/Client/Prestataire/views/ExposantsView.vue')
+  },
+  {
+    path: '/page_prestataire/:id',
+    name: 'page_prestataire',
+    component: () => import('@/Client/Prestataire/views/PrestataireView.vue')
+  },
+  {
     path: '/services',
     name: 'services',
     component: () => import('@/Client/Prestataire/views/ServicesView.vue')
@@ -49,8 +59,8 @@ const routes = [
     component: () => import('@/Client/Panier/views/QrcodeView.vue')
   },
   {
-    path: '/marketNourriture',
-    name: 'marketNourriture',
+    path: '/market_nourriture',
+    name: 'market_nourriture',
     component: () => import('@/Client/Prestataire/views/NourritureView.vue')
   },
   {
