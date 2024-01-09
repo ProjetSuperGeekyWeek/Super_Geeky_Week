@@ -21,7 +21,6 @@ async function getAllInscriptionsIdPrestaFromAPI(id){
             ORDER BY id_activite ASC
         `;
         const result = await client.query(query, [id]);
-        console.log(result.rows);
         return result.rows;
     } catch (e) {
         console.log(e);
@@ -43,15 +42,15 @@ async function getAllHorairesIdInscriptionFromAPI(id){
     const client = await pool.connect();
     try {
         const query = `
-            SELECT calendrier.id_calendrier AS id_horaire, date_calendrier AS jour, 
-            horaire_debut AS heure_debut, horaire_fin AS heure_fin
+            SELECT calendrier.id_calendrier AS id_calendrier,
+            horaire_debut AS heure_debut, horaire_fin AS heure_fin,
+            jour.date_calendrier AS jour
             FROM calendrier
             INNER JOIN inscription_calendrier ON inscription_calendrier.id_calendrier = calendrier.id_calendrier
             WHERE inscription_calendrier.id_inscription = $1
             ORDER BY jour ASC, heure_debut ASC
         `;
         const result = await client.query(query, [id]);
-        console.log(result.rows);
         return result.rows;
     } catch (e) {
         console.log(e);
@@ -80,6 +79,7 @@ async function postInscritFromAPI(id, nom, prenom, description,id_calendrier){
         const result = await client.query(query, [id, nom, prenom, description,id_calendrier]);
         return result.rows;
     } catch (e) {
+        console.log(e);
         throw e;
     } finally {
         client.release();
@@ -100,7 +100,7 @@ async function deleteInscritFromAPI(id, nom, prenom,id_calendrier){
     try {
         const query = `
         DELETE FROM inscrit
-        WHERE id_personne = $1
+        WHERE id_inscription = $1
         AND nom_inscrit = $2
         AND prenom_inscrit = $3
         AND id_calendrier = $4
@@ -108,6 +108,7 @@ async function deleteInscritFromAPI(id, nom, prenom,id_calendrier){
         const result = await client.query(query, [id, nom, prenom,id_calendrier]);
         return result.rows;
     } catch (e) {
+        console.log(e);
         throw e;
     } finally {
         client.release();

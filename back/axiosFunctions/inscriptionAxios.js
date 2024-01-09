@@ -12,13 +12,13 @@ async function getAllHorairesIdInscription(id) {
 
 //post
 async function postInscrit(id_inscription, nom, prenom, description,id_calendrier) {
-    return await postRequest(`/api/inscription/${id_inscription}`, "POSTINSCRIT", {nom, prenom, description,id_calendrier});
+    return await postRequest(`/api/inscription/${id_inscription}`, {nom, prenom, description,id_calendrier}, "POSTINSCRIT");
 }
 
 //delete
 
 async function deleteInscrit(id_inscription,nom,prenom,id_calendrier) {
-    return await deleteRequest(`/api/inscription/${id_inscription}`, "DELETEINSCRIT", {nom,prenom,id_calendrier});
+    return await deleteRequest(`/api/inscription/${id_inscription}/${nom}/${prenom}/${id_calendrier}`, "DELETEINSCRIT");
 }
 
 

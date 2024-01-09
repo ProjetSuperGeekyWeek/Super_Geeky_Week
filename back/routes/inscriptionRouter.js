@@ -12,6 +12,6 @@ router.get('/:id/horaires', inscriptionController.getAllHorairesIdInscription);
 router.post('/:id', inscriptionController.postInscrit);
 
 //delete
-router.delete('/:id', inscriptionController.deleteInscrit);
+router.delete('/:id/:nom/:prenom/:id_calendrier', inscriptionController.deleteInscrit);
 
 module.exports = router;

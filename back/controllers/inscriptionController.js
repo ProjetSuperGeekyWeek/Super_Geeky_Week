@@ -43,7 +43,8 @@ exports.postInscrit = async (req, res) => {
 
 //delete
 exports.deleteInscrit = async (req, res) => {
-    inscriptionService.deleteInscrit(req.params.id, req.body.nom, req.body.prenom, req.body.id_calendrier, (err, data) => {
+    inscriptionService.deleteInscrit(req.params.id, req.params.nom, 
+            req.params.prenom, req.params.id_calendrier, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: err.message || "Some error occurred while deleting inscription."

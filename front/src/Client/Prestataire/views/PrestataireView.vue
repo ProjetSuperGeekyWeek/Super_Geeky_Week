@@ -1,38 +1,35 @@
 <template>
     <div class="services">
         <template v-if="authentifier && proprio">
-            <div class="service-content">
-                <p>id : {{ id }}</p>
-                <h1 class="intro">Bienvenue dans votre espace : {{ prestataire.prenom_personne }} {{ prestataire.nom_personne }}</h1>
-                <br>
-                <!-- <div class="service-content" v-html="getServicePageText"></div> -->
-                <br>
-                <h1 class="intro">Vos activités :</h1>
-                <br>
-                <div class="tabactivite">
-                    <div class="tabactivite-inscriptions">
-                        <ModuleInscriptions 
-                            v-for="(inscription, index) in inscriptions"
-                            :key="index"
-                            :position="index"
-                            :proprio="proprio"
-                            :infos="inscription"
-                        />
-                    </div>
-                    <div class="tabactivite-livreOr">
-
-                    </div>
-                    <div class="tabactivite-contact">
-
-                    </div>
-                </div>
-            </div>
+            <h1 class="intro">Bienvenue dans votre espace : {{ prestataire.prenom_personne }} {{ prestataire.nom_personne }}</h1>
+            <br>
+            <!-- <div class="service-content" v-html="getServicePageText"></div> -->
+            <br>
+            <h1 class="intro">Vos activités :</h1>
+            <br>
         </template>
         <template v-else>
-            <h1>Prestataire public coming soon...</h1>
-            <p>id : {{ id }}</p>
-            <p>idpresta : {{ prestataireAuthentifier.id_personne }}</p>
+
         </template>
+        <div class="service-content">
+            <div class="tabactivite">
+                <div class="tabactivite-inscriptions">
+                    <ModuleInscriptions 
+                        v-for="(inscription, index) in inscriptions"
+                        :key="index"
+                        :position="index"
+                        :proprio="proprio"
+                        :infos="inscription"
+                    />
+                </div>
+                <div class="tabactivite-livreOr">
+
+                </div>
+                <div class="tabactivite-contact">
+
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -55,60 +52,7 @@
                     description_personne: '',
                     image_personne: '',
                 },
-                inscriptions: [
-                    {
-                    id_activite: 84,
-                    titre : "Tournoi super smash bros ultimate",
-                    description : "Venez vous affronter sur le dernier opus de la série Super Smash Bros ! Avec finale sur scène et cashPrize à la clef !",
-                    horaires : [
-                        {
-                            id_calendrier: 1,
-                            jour : "Vendredi",
-                            heure_debut : "17h00",
-                            heure_fin : "20h00"
-                        },
-                        {
-                            id_calendrier: 2,
-                            jour : "Samedi",
-                            heure_debut : "14h00",
-                            heure_fin : "17h00"
-                        },
-                        {
-                            id_calendrier: 3,
-                            jour : "Dimanche",
-                            heure_debut : "14h00",
-                            heure_fin : "17h00"
-                        }
-                    ],
-                    tarif : 0,
-                    },
-                    {
-                    id_activite: 90,
-                    titre : "Tournoi super cookie clicker",
-                    description : "Venez vous détruire les doigts sur la souris",
-                    horaires : [
-                        {
-                            id_calendrier: 1,
-                            jour : "Vendredieu",
-                            heure_debut : "17h00",
-                            heure_fin : "20h00"
-                        },
-                        {
-                            id_calendrier: 2,
-                            jour : "Samedieh",
-                            heure_debut : "14h00",
-                            heure_fin : "17h00"
-                        },
-                        {
-                            id_calendrier: 3,
-                            jour : "Dimancheuh",
-                            heure_debut : "14h00",
-                            heure_fin : "17h00"
-                        }
-                    ],
-                    tarif : 0,
-                    },
-                ],
+                inscriptions: [],
                 livreOr: {
                     id_personne: '',
                     id_activite: '',
