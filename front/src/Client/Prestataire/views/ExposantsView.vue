@@ -148,5 +148,19 @@
     font-weight: bold;
     color: #333;
   }
-  </style>
+
+  .exposants-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centrer les tags horizontalement */
+}
+
+.exposants-tag {
+  background-color: rgba(1, 255, 255, 0.64);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin: 5px;
+}
+</style>
   
