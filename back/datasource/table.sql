@@ -73,7 +73,8 @@ CREATE TABLE calendrier (
 );
 
 CREATE TABLE panier (
-    id_panier SERIAL PRIMARY KEY
+    id_panier SERIAL PRIMARY KEY,
+    nom_panier VARCHAR(50) NOT NULL,
 );
 
 CREATE TABLE item (
