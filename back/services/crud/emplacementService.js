@@ -42,7 +42,29 @@ async function getAllEmplacementColumnFromAPI(){
     }
 }
 
+const addNewEmplacement = (body, callback) => {
+    addNewEmplacementFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function addNewEmplacementFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('INSERT INTO emplacement (nom_emplacement) VALUES ($1)', [body.nom_emplacement]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllEmplacement:getAllEmplacement,
     getAllEmplacementColumn:getAllEmplacementColumn,
+    addNewEmplacement:addNewEmplacement,
 };

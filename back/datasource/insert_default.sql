@@ -113,12 +113,12 @@ INSERT INTO calendrier (date_calendrier,horaire_debut,horaire_fin) VALUES
     ('2024-03-26', '08:30', '18:00');
 
 -- Insert data into panier table
-INSERT INTO panier (id_panier) VALUES
-    (1),
-    (2),
-    (3),
-    (4),
-    (5);
+INSERT INTO panier (nom_panier) VALUES
+    ('panier1'),
+    ('panier2'),
+    ('panier3'),
+    ('panier4'),
+    ('panier5');
 
 -- Insert data into item table
 INSERT INTO item (nom_item, stock_item, prix_item,image_item, description_item, id_personne, id_calendrier) VALUES

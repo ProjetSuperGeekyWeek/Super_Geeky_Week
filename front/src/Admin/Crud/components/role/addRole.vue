@@ -21,7 +21,8 @@ export default{
         if(this.nom_role === ''){
           return
         }
-        await this.addNewRoleStore(this.nom_role);
+        const body = {nom_role:this.nom_role}
+        await this.addNewRoleStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {
         console.log('error addRole', e)

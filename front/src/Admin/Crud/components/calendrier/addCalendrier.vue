@@ -24,7 +24,8 @@ export default{
         if(this.date_calendrier === '' || this.horaire_debut === '' || this.horaire_fin === ''){
           return
         }
-        await this.addNewCalendrierStore(this.date_calendrier,this.horaire_debut,this.horaire_fin);
+        const body = {date_calendrier:this.date_calendrier,horaire_debut:this.horaire_debut,horaire_fin:this.horaire_fin}
+        await this.addNewCalendrierStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {
         console.log('error addCalendrier', e)

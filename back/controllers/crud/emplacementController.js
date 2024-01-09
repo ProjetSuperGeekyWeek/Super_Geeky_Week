@@ -23,3 +23,15 @@ exports.getAllEmplacementColumn = async (req, res) => {
         }
     });
 }
+
+exports.addNewEmplacement = async (req, res) => {
+    emplacementService.addNewEmplacement(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb addNewEmplacement."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

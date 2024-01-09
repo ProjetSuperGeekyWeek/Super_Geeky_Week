@@ -23,3 +23,15 @@ exports.getAllTagColumn = async (req, res) => {
         }
     });
 }
+
+exports.addNewTag = async (req, res) => {
+    tagService.addNewTag(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb addNewTag."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

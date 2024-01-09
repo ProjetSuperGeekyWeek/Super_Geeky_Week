@@ -35,7 +35,7 @@
               :search="search"
               show-select
               single-select
-              item-key="id_personne"
+              item-key=""
               show-group-by
           >
           </v-data-table>

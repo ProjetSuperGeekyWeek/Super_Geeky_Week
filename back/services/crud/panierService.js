@@ -42,7 +42,29 @@ async function getAllPanierColumnFromAPI(){
     }
 }
 
+const addNewPanier = (body, callback) => {
+    addNewPanierFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function addNewPanierFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('INSERT INTO panier (nom_panier) VALUES ($1)', [body.nom_panier]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllPanier:getAllPanier,
     getAllPanierColumn:getAllPanierColumn,
+    addNewPanier:addNewPanier,
 };

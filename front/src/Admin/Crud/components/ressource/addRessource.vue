@@ -21,7 +21,8 @@ export default {
         if (this.nom_ressource === '') {
           return
         }
-        await this.addNewRessourceStore(this.nom_ressource);
+        const body = {nom_ressource:this.nom_ressource}
+        await this.addNewRessourceStore(body);
         this.$router.push('/admin/crud')
       } catch (e) {
         console.log('error addRessource', e)

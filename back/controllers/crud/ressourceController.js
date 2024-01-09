@@ -23,3 +23,15 @@ exports.getAllRessourceColumn = async (req, res) => {
         }
     });
 }
+
+exports.addNewRessource = async (req, res) => {
+    ressourceService.addNewRessource(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb addNewRessource."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

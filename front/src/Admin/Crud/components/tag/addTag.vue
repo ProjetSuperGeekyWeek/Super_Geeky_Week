@@ -21,7 +21,8 @@ export default{
         if(this.nom_tag === ''){
           return
         }
-        await this.addNewTagStore(this.nom_tag);
+        const body = {nom_tag:this.nom_tag}
+        await this.addNewTagStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {
         console.log('error addTag', e)

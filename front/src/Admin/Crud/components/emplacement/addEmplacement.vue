@@ -20,7 +20,8 @@ export default{
         if(this.nom_emplacement === ''){
           return
         }
-        await this.addNewEmplacementStore(this.nom_emplacement);
+        const body = {nom_emplacement:this.nom_emplacement}
+        await this.addNewEmplacementStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {
         console.log('error addEmplacement', e)

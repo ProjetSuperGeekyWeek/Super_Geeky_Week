@@ -23,3 +23,15 @@ exports.getAllAcheterColumn = async (req, res) => {
         }
     });
 }
+
+exports.addNewAcheter = async (req, res) => {
+    acheterService.addNewAcheter(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb addNewAcheter."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
