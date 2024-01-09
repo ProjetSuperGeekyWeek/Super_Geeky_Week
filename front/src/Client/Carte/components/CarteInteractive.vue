@@ -5,7 +5,7 @@
     <div id="bandeau-container">
       <div id="bandeau-selected">
         <div v-if="!admin" id="haut-selected">
-          <router-link id="image-selected" to="/services">
+          <router-link id="image-selected" :to="{ name:'page_prestataire', params: { id:idPresta } }">
             <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" alt="Image du tournoi">
           </router-link>
           <h4 id="titre-selected">
@@ -22,9 +22,9 @@
         </div>
         <div v-if="admin">
           <div id="carte-config-prestataire">
-            <div id="carte-config-image">
+            <router-link id="carte-config-image"  :to="{ name:'page_prestataire', params: { id:idPresta } }">
               <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" alt="Image du tournoi">
-            </div>
+            </router-link>
             <div id="carte-config-nom">
               <h4 id="titre-selected">
                 {{ nom_prestataire }} {{ prenom_prestataire }}

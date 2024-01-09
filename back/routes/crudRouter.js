@@ -272,8 +272,6 @@ const router = express.Router();
  *               type: array
  *               items:
  *                 type: object
- *                 properties:
- *                   [Define event properties here]
  *       '500':
  *         description: Internal server error
  */
@@ -293,30 +291,349 @@ const router = express.Router();
  *               type: array
  *               items:
  *                 type: object
- *                 properties:
- *                   [Define event column properties here]
  *       '500':
  *         description: Internal server error
  */
 
 /**
  * @swagger
- * /api/crud/addRole:
- *   patch:
- *     summary: Add a new role
+ * /api/crud/getAllItem:
+ *   get:
+ *     summary: Get all items
  *     tags: [Crud]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               nom_role:
- *                 type: string
  *     responses:
  *       '200':
- *         description: Successfully added a new role
+ *         description: Successfully retrieved all items
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllItemColumn:
+ *   get:
+ *     summary: Get columns for items
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved item columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllLignePanier:
+ *   get:
+ *     summary: Get all lignePanier
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all lignePanier
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllLignePanierColumn:
+ *   get:
+ *     summary: Get columns for lignePanier
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved lignePanier columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllPanier:
+ *   get:
+ *     summary: Get all panier
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all panier
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllPanierColumn:
+ *   get:
+ *     summary: Get columns for panier
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved panier columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllPersonne:
+ *   get:
+ *     summary: Get all personne
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all personne
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllPersonneColumn:
+ *   get:
+ *     summary: Get columns for personne
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved personne columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllPersonneTag:
+ *   get:
+ *     summary: Get all personneTag
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all personneTag
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllPersonneTagColumn:
+ *   get:
+ *     summary: Get columns for personneTag
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved personneTag columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllQrCode:
+ *   get:
+ *     summary: Get all QrCode
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all QrCode
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllQrCodeColumn:
+ *   get:
+ *     summary: Get columns for QrCode
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved QrCode columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+
+/**
+ * @swagger
+ * /api/crud/getAllRessource:
+ *   get:
+ *     summary: Get all Ressources
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all Ressources
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllRessourceColumn:
+ *   get:
+ *     summary: Get columns for Ressources
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved Ressource columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllStand:
+ *   get:
+ *     summary: Get all Stands
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all Stands
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllStandColumn:
+ *   get:
+ *     summary: Get columns for Stands
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved Stand columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllTag:
+ *   get:
+ *     summary: Get all Tags
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all Tags
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/crud/getAllTagColumn:
+ *   get:
+ *     summary: Get columns for Tags
+ *     tags: [Crud]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved Tag columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
  *       '500':
  *         description: Internal server error
  */

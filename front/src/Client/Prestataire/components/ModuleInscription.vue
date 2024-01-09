@@ -1,46 +1,92 @@
 <template>
-    <div id="module-inscriptions">
-        <div id="card-inscription">
-            <div id="card-inscription-image">
+    <div class="module-inscriptions">
+        <div class="card-inscription" v-if="!proprio">
+            <div class="card-inscription-image">
                 <img :src="image" alt="Image de l'événement">
             </div>
-            <div v-show="!inscription" id="card-inscription-body">
-                <h2>{{ titre }}</h2>
-                <p>{{ description }}</p>
-                <div id="card-inscription-horaires">
+            <div v-show="!inscription" class="card-inscription-body">
+                <h2>{{ infos.titre }}</h2>
+                <!-- warning -->
+                <p>{{ infos.description }}</p>
+                <div class="card-inscription-horaires">
                     <h3>Horaires</h3>
                     <ul>
-                        <li v-for="horaire in horaires" :key="horaire">
+                        <li v-for="horaire in infos.horaires" :key="horaire">
                             <span>{{ horaire.jour }}</span>
-                            <span>{{ horaire.heureDebut }} - {{ horaire.heureFin }}</span>
+                            <span>{{ horaire.heure_debut }} - {{ horaire.heure_fin }}</span>
                         </li>
                     </ul>
                 </div>
-                <div id="card-inscription-tarif" v-if="!alreadyInscrit">
+                <div class="card-inscription-tarif" v-if="!alreadyInscrit">
                     <h3>Inscription</h3>
-                    <button @click="formulaireInscrire()">{{ tarif }}</button>
+                    <button @click="formulaireInscrire()">{{ stringTarif }}</button>
                 </div>
-                <div v-if="alreadyInscrit" id="card-inscription-infos">
+                <div v-if="alreadyInscrit" class="card-inscription-infos">
                     <h4>Vous etes bien inscrit {{ inscritPrenom }} {{ inscritNom }} à la séance de {{ inscritSeance }}</h4>
-                    <button @click="alreadyInscrit = false">Désinscrire</button>
+                    <button @click="desinscrire">Désinscrire</button>
                 </div>
             </div>
-            <div id="card-inscription-formulaire" v-show="inscription">
-                <h2>{{ titre }}</h2>
-                <select name="seance" id="seance" v-model="inscritSeance">
-                    <option v-for="horaire in horaires" :key="horaire" :value="horaire.jour+' à '+horaire.heureDebut+'-'+horaire.heureFin">
-                        {{ horaire.jour }} {{ horaire.heureDebut }}-{{ horaire.heureFin }}
+            <div class="card-inscription-formulaire" v-show="inscription">
+                <h2>{{ infos.titre }}</h2>
+                <select name="seance" class="seance" v-model="inscritIndexSeance">
+                    <option v-for="(horaire, index) in infos.horaires" :key="index" :value="index">
+                        {{ horaire.jour }} {{ horaire.heure_debut }}-{{ horaire.heure_fin }}
                     </option>
                 </select>
-                <div id="card-inscription-formulaire-infos">
-                    <input type="text" name="nom" id="nom" placeholder="nom" v-model="inscritNom" @change="verifNom()">
-                    <input type="text" name="prenom" id="prenom" placeholder="prenom" v-model="inscritPrenom" @change="verifPrenom()">
+                <div class="card-inscription-formulaire-infos">
+                    <input type="text" name="nom" class="nom" placeholder="nom" v-model="inscritNom" @change="verifNom()">
+                    <input type="text" name="prenom" class="prenom" placeholder="prenom" v-model="inscritPrenom" @change="verifPrenom()">
                 </div>
-                <textarea name="description" id="description" cols="30" rows="10" placeholder="description" v-model="inscritDescription"></textarea>
-                <p id="message-erreur"></p>
-                <div id="card-inscription-formulaire-btn">
-                    <button id="btn-retour" @click="inscription = !inscription">Retour</button>
-                    <button id="btn-valider" @click="inscrire()">Valider</button>
+                <textarea name="description" class="description" cols="30" rows="10" placeholder="description" v-model="inscritDescription"></textarea>
+                <p class="message-erreur"></p>
+                <div class="card-inscription-formulaire-btn">
+                    <button class="btn-retour" @click="inscription = !inscription">Retour</button>
+                    <button class="btn-valider" @click="inscrire()">Valider</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-inscription" v-else>
+            <div class="card-inscription-image">
+                <img :src="image" alt="Image de l'événement">
+            </div>
+            <div v-show="!inscription" class="card-inscription-body">
+                <h2>{{ infos.titre }}</h2>
+                <!-- warning -->
+                <p>{{ infos.description }}</p>
+                <div class="card-inscription-horaires">
+                    <h3>Horaires</h3>
+                    <ul>
+                        <li v-for="horaire in infos.horaires" :key="horaire">
+                            <span>{{ horaire.jour }}</span>
+                            <span>{{ horaire.heure_debut }} - {{ horaire.heure_fin }}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-inscription-tarif" v-if="!alreadyInscrit">
+                    <h3>Inscription</h3>
+                    <button @click="formulaireInscrire()">{{ stringTarif }}</button>
+                </div>
+                <div v-if="alreadyInscrit" class="card-inscription-infos">
+                    <h4>Vous etes bien inscrit {{ inscritPrenom }} {{ inscritNom }} à la séance de {{ inscritSeance }}</h4>
+                    <button @click="desinscrire">Désinscrire</button>
+                </div>
+            </div>
+            <div class="card-inscription-formulaire" v-show="inscription">
+                <h2>{{ infos.titre }}</h2>
+                <select name="seance" class="seance" v-model="inscritIndexSeance">
+                    <option v-for="(horaire, index) in infos.horaires" :key="index" :value="index">
+                        {{ horaire.jour }} {{ horaire.heure_debut }}-{{ horaire.heure_fin }}
+                    </option>
+                </select>
+                <div class="card-inscription-formulaire-infos">
+                    <input type="text" name="nom" class="nom" placeholder="nom" v-model="inscritNom" @change="verifNom()">
+                    <input type="text" name="prenom" class="prenom" placeholder="prenom" v-model="inscritPrenom" @change="verifPrenom()">
+                </div>
+                <textarea name="description" class="description" cols="30" rows="10" placeholder="description" v-model="inscritDescription"></textarea>
+                <p class="message-erreur"></p>
+                <div class="card-inscription-formulaire-btn">
+                    <button class="btn-retour" @click="inscription = !inscription">Retour</button>
+                    <button class="btn-valider" @click="inscrire()">Valider</button>
                 </div>
             </div>
         </div>
@@ -48,37 +94,36 @@
 </template>
 
 <script>
+import { postInscrit, deleteInscrit } from '@/../../back/axiosFunctions/inscriptionAxios';
+
 export default {
     name: 'ModuleInscriptions',
+    props : {
+        position : Number,
+        proprio : Boolean,
+        infos : Object
+    },
     data() {
         return {
-            titre : "Tournoi super smash bros ultimate",
-            description : "Venez vous affronter sur le dernier opus de la série Super Smash Bros ! Avec finale sur scène et cashPrize à la clef !",
-            horaires : [
-                {
-                    jour : "Vendredi",
-                    heureDebut : "17h00",
-                    heureFin : "20h00"
-                },
-                {
-                    jour : "Samedi",
-                    heureDebut : "14h00",
-                    heureFin : "17h00"
-                },
-                {
-                    jour : "Dimanche",
-                    heureDebut : "14h00",
-                    heureFin : "17h00"
-                }
-            ],
-            tarif : "Gratuite",
             image : "https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg",
+
             alreadyInscrit : false,
             inscription : false,
             inscritNom : '',
             inscritPrenom : '',
+            inscritIndexSeance : null,
             inscritSeance : '',
-            inscritDescription : ''
+            inscritDescription : '',
+
+            modif: false,
+        }
+    },
+    computed: {
+        stringTarif(){
+            if (this.infos.tarif == 0) {
+                return "Gratuit";
+            }
+            return this.infos.tarif + "€";
         }
     },
     methods: {
@@ -87,16 +132,16 @@ export default {
                 element.style.filter = "drop-shadow(0px 0px 5px red)";
                 element.style.borderColor = "red";
             }
-            document.getElementById("message-erreur").innerHTML = message;
+            document.getElementsByClassName("message-erreur")[this.position].innerHTML = message;
         },
         turnValidate(element){
             element.style.filter = "drop-shadow(0px 0px 5px green)";
             element.style.borderColor = "green";
         },
         allNeutral(){
-            let nom = document.getElementById("nom");
-            let prenom = document.getElementById("prenom");
-            let seance = document.getElementById("seance");
+            let nom = document.getElementsByClassName("nom")[this.position];
+            let prenom = document.getElementsByClassName("prenom")[this.position];
+            let seance = document.getElementsByClassName("seance")[this.position];
             nom.style.filter = "none";
             nom.style.borderColor = "#000";
             prenom.style.filter = "none";
@@ -109,7 +154,7 @@ export default {
             this.inscription = true;
         },
         verifNom(){
-            let nom = document.getElementById("nom");
+            let nom = document.getElementsByClassName("nom")[this.position];
             let regexNom = new RegExp("^[a-zA-Z]{3,}$");
             if(!regexNom.test(nom.value)){
                 this.turnErreur(nom, "Le nom doit contenir au moins 3 caractères et ne doit contenir aucun de chiffres");
@@ -120,7 +165,7 @@ export default {
             }
         },
         verifPrenom(){
-            let prenom = document.getElementById("prenom");
+            let prenom = document.getElementsByClassName("prenom")[this.position];
             let regexPrenom = new RegExp("^[a-zA-Z]{3,}$");
             if(!regexPrenom.test(prenom.value)){
                 this.turnErreur(prenom, "Le prenom doit contenir au moins 3 caractères et ne doit contenir aucun de chiffres");
@@ -131,19 +176,39 @@ export default {
             }
         },
         verifSeance(){
-            let seance = document.getElementById("seance");
+            let seance = document.getElementsByClassName("seance")[this.position];
             if(seance.value == null || seance.value == ""){
                 this.turnErreur(seance, "Veuillez choisir une séance");
                 return false;
             }else{
+                this.inscritSeance = ""+this.infos.horaires[seance.value].jour+" de "+this.infos.horaires[seance.value].heure_debut+" à "+this.infos.horaires[seance.value].heure_fin;
                 this.turnValidate(seance);
                 return true;
             }
         },
-        inscrire() {
+        async inscrire() {
             if(this.verifNom() && this.verifPrenom() && this.verifSeance()){
-                this.alreadyInscrit = true;
-                this.inscription = false;
+                try{
+                    if(this.inscritDescription == null || this.inscritDescription == ""){
+                        this.inscritDescription = "Aucune description";
+                    }
+                    await postInscrit( this.infos.id_activite, this.inscritNom, this.inscritPrenom, 
+                        this.inscritDescription, this.infos.horaires[this.inscritIndexSeance].id_calendrier);
+                    this.alreadyInscrit = true;
+                    this.inscription = false;
+                    document.getElementsByClassName("message-erreur")[this.position].innerHTML = "";
+                }catch(error){
+                    console.log(error);
+                }
+            }
+        },
+        async desinscrire(){
+            try {
+                await deleteInscrit(this.infos.id_activite, this.inscritNom, this.inscritPrenom, 
+                    this.infos.horaires[this.inscritIndexSeance].id_calendrier);
+                this.alreadyInscrit = false;
+            } catch (error) {
+                console.log(error);
             }
         }
     },
@@ -153,14 +218,14 @@ export default {
 
 <style scoped>
 
-#module-inscriptions {
+.module-inscriptions {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 800px;
 }
 
-#card-inscription {
+.card-inscription {
     width: 50%;
     height: 70%;
     background-color: #fff;
@@ -169,13 +234,13 @@ export default {
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 }
 
-#card-inscription-image {
+.card-inscription-image {
     width: 100%;
     height: 40%;
     overflow: hidden;
 }
 
-#card-inscription-image img {
+.card-inscription-image img {
     width: 100%;
     height: 40%;
     object-fit: cover;
@@ -183,60 +248,60 @@ export default {
     border-bottom: 4px solid #000;
 }
 
-#card-inscription-body, #card-inscription-formulaire{
+.card-inscription-body, .card-inscription-formulaire{
     width: 100%;
     height: 60%;
     padding: 1rem;
 }
 
-#card-inscription-body h2,  #card-inscription-formulaire h2{
+.card-inscription-body h2,  .card-inscription-formulaire h2{
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
 }
 
-#card-inscription-body p {
+.card-inscription-body p {
     font-size: 1rem;
     margin-bottom: 1rem;
 }
 
-#card-inscription-horaires {
+.card-inscription-horaires {
     margin-bottom: 1rem;
 }
 
-#card-inscription-horaires h3 {
+.card-inscription-horaires h3 {
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 1rem;
 }
 
-#card-inscription-horaires ul {
+.card-inscription-horaires ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-#card-inscription-horaires ul li {
+.card-inscription-horaires ul li {
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.5rem;
 }
 
-#card-inscription-horaires ul li span {
+.card-inscription-horaires ul li span {
     font-size: 1rem;
 }
 
-#card-inscription-tarif {
+.card-inscription-tarif {
     margin-bottom: 1rem;
 }
 
-#card-inscription-tarif h3 {
+.card-inscription-tarif h3 {
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 1rem;
 }
 
-#card-inscription-tarif button{
+.card-inscription-tarif button{
     font-size: 1rem;
     padding: 0.5rem 1rem;
     border: 2px solid #000;
@@ -245,31 +310,31 @@ export default {
     cursor: pointer;
 }
 
-#card-inscription-tarif button:hover{
+.card-inscription-tarif button:hover{
     background-color: #000;
     color: #fff;
 }
 
-#card-inscription-infos {
+.card-inscription-infos {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
 
-#card-inscription-infos h4 {
+.card-inscription-infos h4 {
     font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
 }
 
-#card-inscription-formulaire-infos {
+.card-inscription-formulaire-infos {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
 }
 
-#card-inscription-formulaire-infos input {
+.card-inscription-formulaire-infos input {
     width: 45%;
     height: 2rem;
     border: 2px solid #000;
@@ -278,16 +343,16 @@ export default {
     font-size: 1rem;
 }
 
-#card-inscription-formulaire-infos input:hover {
+.card-inscription-formulaire-infos input:hover {
     border-color: darkred;
 }
 
-#card-inscription-formulaire-infos input:focus {
+.card-inscription-formulaire-infos input:focus {
     outline: none;
     border : 3px solid darkred;
 }
 
-#card-inscription-formulaire textarea {
+.card-inscription-formulaire textarea {
     width: 100%;
     max-width: max-content;
     height: 5rem;
@@ -298,16 +363,16 @@ export default {
     resize: none;
 }
 
-#card-inscription-formulaire textarea:focus {
+.card-inscription-formulaire textarea:focus {
     outline: none;
     border: 3px solid darkred;
 }
 
-#card-inscription-formulaire textarea:hover {
+.card-inscription-formulaire textarea:hover {
     border-color: darkred;
 }
 
-#card-inscription-formulaire #message-erreur {
+.card-inscription-formulaire .message-erreur {
     display: block;
     color: red;
     font-size: 1rem;
@@ -315,39 +380,39 @@ export default {
     margin-bottom: 1rem;
 }
 
-#card-inscription-formulaire-btn {
+.card-inscription-formulaire-btn {
     display: flex;
     justify-content: space-between;
 }
 
-#card-inscription-formulaire-btn button, #card-inscription-infos button {
+.card-inscription-formulaire-btn button, .card-inscription-infos button {
     font-size: 1rem;
     padding: 0.5rem 1rem;
     border-radius: 10px;
     cursor: pointer;
 }
 
-#btn-retour, #card-inscription-infos button {
+.btn-retour, .card-inscription-infos button {
     border: 2px solid #f84646;
     background-color: lightsalmon;
 }
 
-#btn-retour:hover, #card-inscription-infos button:hover {
+.btn-retour:hover, .card-inscription-infos button:hover {
     background-color: #f84646;
     color: #fff;
 }
 
-#btn-valider {
+.btn-valider {
     border: 2px solid rgb(38, 180, 38);
     background-color: lightgreen;
 }
 
-#btn-valider:hover {
+.btn-valider:hover {
     background-color: rgb(38, 180, 38);
     color: #fff;
 }
 
-#seance{
+.seance{
     width: 100%;
     max-width: min-content;
     height: 3rem;
@@ -358,7 +423,7 @@ export default {
     margin-bottom: 1rem;
 }
 
-#seance:focus {
+.seance:focus {
     outline: none;
 }
 

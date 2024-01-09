@@ -34,6 +34,9 @@ INSERT INTO livre_personne (id_personne, id_temoignage) VALUES
 
 -- Insert data into inscription table
 INSERT INTO inscription (nom_inscription, description_inscription, nb_place, image_inscription, id_personne) VALUES
+    ('Tournoi Smash Bros Ultimate', 'Un tournoi smash bros sympa', 16, 'random.png', 1),
+    ('Concours cosplay', 'Venez déguisés !', 128, 'random.png', 1),
+    ('Tournoi Smash Bros Melee', 'Un tournoi smash bros sympa', 16, 'random.png', 1),
     ('Tournoi Smash Bros Ultimate', 'Un tournoi smash bros sympa', 16, 'random.png', 2),
     ('Concours cosplay', 'Venez déguisés !', 128, 'random.png', 3);
 
@@ -135,10 +138,16 @@ INSERT INTO stand (id_emplacement, id_personne) VALUES
     (46, 1),
     (47, 1);
 
+-- Insert data into jour table
+INSERT INTO jour (date_calendrier) VALUES
+    ('Vendredi'),
+    ('Samedi'),
+    ('Dimanche');
+
 -- Insert data into calendrier table
-INSERT INTO calendrier (libelle_calendrier,date_calendrier,horaire_debut,horaire_fin) VALUES
-    ('jour1','2024-03-25', '09:00', '18:30'),
-    ('jour2','2024-03-26', '08:30', '18:00');
+INSERT INTO calendrier (id_jour,horaire_debut,horaire_fin) VALUES
+    (1, '09:00', '18:30'),
+    (2, '08:30', '18:00');
 
 -- Insert data into inscrit table
 INSERT INTO inscrit (id_inscription, nom_inscrit, prenom_inscrit, description_inscrit, id_calendrier) VALUES
@@ -156,7 +165,9 @@ INSERT INTO inscription_calendrier (id_inscription, id_calendrier) VALUES
     (1,1),
     (1,2),
     (2,1),
-    (2,2);
+    (2,2),
+    (3,1),
+    (3,2);
 
 -- Insert data into panier table
 INSERT INTO panier (nom_panier) VALUES

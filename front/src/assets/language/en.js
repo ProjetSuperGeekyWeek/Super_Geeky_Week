@@ -12,7 +12,13 @@ export default {
                 home_titre_1: "Close to you Franc-Comtois !",
                 home_text_1: "No need to travel to Paris to attend a major geek event ! With Super Geeky week you can now enjoy all types of geek activities near you. Located in the new room of Belfort, the Gigantomachie, you can enjoy 3 days of madness !",
                 home_titre_2: "A myriad of activities !",
-                home_text_2: "On the program all the activities you can dream of and more ! With prestigious guests with autograph sessions and goodies by the thousands to be sure that you keep, even at home, an unforgettable memory of this fantastic weekend !",            
+                home_text_2: "On the program all the activities you can dream of and more ! With prestigious guests with autograph sessions and goodies by the thousands to be sure that you keep, even at home, an unforgettable memory of this fantastic weekend !",
+
+                billet_title:"Ticketing",
+                billet_text:"For the Super Geeky Week, we offer three types of packages to make your stay even more enjoyable. Firstly, the standard package allows you to fully enjoy all the booths. Next, we offer the priority package, guaranteeing you faster access to our services, allowing you to maximize your time and experience. Finally, to ensure optimal accessibility, we also have a package dedicated to people with disabilities.",
+                jour:"Day ",
+                hora:" / Schedule from ",
+                a:" to ",
             },
         };
     },

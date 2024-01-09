@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS panier CASCADE;
 DROP TABLE IF EXISTS inscription_calendrier CASCADE;
 DROP TABLE IF EXISTS inscrit CASCADE;
 DROP TABLE IF EXISTS calendrier CASCADE;
+DROP TABLE IF EXISTS jour CASCADE;
 DROP TABLE IF EXISTS stand CASCADE;
 DROP TABLE IF EXISTS emplacement_ressource CASCADE;
 DROP TABLE IF EXISTS ressource CASCADE;
@@ -94,12 +95,17 @@ CREATE TABLE stand (
                        CONSTRAINT fk_personne FOREIGN KEY (id_personne) REFERENCES personne(id_personne)
 );
 
+CREATE TABLE jour (
+                            id_jour SERIAL PRIMARY KEY,
+                            date_calendrier VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE calendrier (
                             id_calendrier SERIAL PRIMARY KEY,
-                            libelle_calendrier VARCHAR(50) NOT NULL,
-                            date_calendrier DATE NOT NULL,
+                            id_jour INTEGER NOT NULL,
                             horaire_debut TIME NOT NULL,
-                            horaire_fin TIME NOT NULL
+                            horaire_fin TIME NOT NULL,
+                            CONSTRAINT fk_jour FOREIGN KEY (id_jour) REFERENCES jour(id_jour)
 );
 
 CREATE TABLE inscrit (
