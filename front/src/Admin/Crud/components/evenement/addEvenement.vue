@@ -11,15 +11,17 @@
       <option v-for="emplacement in listEmplacement" :key="emplacement.id_emplacement" :value="emplacement.id_emplacement">{{ emplacement.nom_emplacement }}</option>
     </select>
     <input type="button" value="Ajouter" @click="addNewRole">
-    <input type="button" value="retour" @click="returnCrud">
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
   name: 'addItemCrud',
+  components: {boutonRetourCrud},
   data: () => ({
     nom_evenement: '',
     description_evenement: '',
@@ -50,10 +52,7 @@ export default{
       }catch (e) {
         console.log('error addEvenement', e)
       }
-    },
-    async returnCrud() {
-      this.$router.push('/admin/crud')
-    },
+    }
   },
   async created(){
     await this.loadData();

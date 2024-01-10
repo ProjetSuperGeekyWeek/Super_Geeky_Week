@@ -14,6 +14,7 @@ const qrCodeController = require("../controllers/crud/qrCodeController")
 const ressourceController = require("../controllers/crud/ressourceController")
 const standController = require("../controllers/crud/standController")
 const tagController = require("../controllers/crud/tagController")
+const jourController = require("../controllers/jourController");
 const express = require('express');
 const router = express.Router();
 
@@ -687,6 +688,8 @@ router.get('/getAllStandColumn', standController.getAllStandColumn);
 router.get('/getAllTag', tagController.getAllTag);
 router.get('/getAllTagColumn', tagController.getAllTagColumn);
 
+router.get('/getAllJour', jourController.getAllJour);
+router.get('/getAllJourColumn', jourController.getAllJourColumn);
 
 // ADD
 router.post('/addRole', roleController.addNewRole);
@@ -701,7 +704,28 @@ router.post('/addEmplacement', emplacementController.addNewEmplacement);
 router.post('/addCalendrier', calendrierController.addNewCalendrier);
 router.post('/addEvenement', evenementController.addNewEvenement);
 // DELETE
-
+router.delete('/deleteRole', roleController.deleteRoleById);
+router.delete('/deleteAcheter', acheterController.deleteAcheterById);
+router.delete('/deleteItem', itemController.deleteItemById);
+router.delete('/deletePersonne', personneController.deletePersonneById);
+router.delete('/deleteRessource', ressourceController.deleteRessourceById);
+router.delete('/deleteQrCode', qrCodeController.deleteQrCodeById);
+router.delete('/deletePanier', panierController.deletePanierById);
+router.delete('/deleteTag', tagController.deleteTagById);
+router.delete('/deleteEmplacement', emplacementController.deleteEmplacementById);/*
+router.delete('/deleteCalendrier', calendrierController.deleteCalendrierById);*/
+router.delete('/deleteEvenement', evenementController.deleteEvenementById);
 // UPDATE
+router.patch('/updateRole', roleController.updateRole);
+router.patch('/updateAcheter', acheterController.updateAcheter);
+router.patch('/updateItem', itemController.updateItem);
+router.patch('/updatePersonne', personneController.updatePersonne);
+router.patch('/updateRessource', ressourceController.updateRessource);
+router.patch('/updateQrCode', qrCodeController.updateQrCode);
+router.patch('/updatePanier', panierController.updatePanier);
+router.patch('/updateTag', tagController.updateTag);
+router.patch('/updateEmplacement', emplacementController.updateEmplacement);
+router.patch('/updateCalendrier', calendrierController.updateCalendrier);
+router.patch('/updateEvenement', evenementController.updateEvenement);
 
 module.exports = router;

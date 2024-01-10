@@ -1,7 +1,7 @@
 <template>
   <div class="prestataires">
     <div id="filtrePresta">
-      <button @click="showDivs = !showDivs" class="filtreBtn">Filtre</button>
+      <button @click="showDivs = !showDivs" class="filtreBtn">{{translate('fitre')}}</button>
       <div v-show="showDivs">
         <button v-for="tag in tags" :key="tag.id_tag" @click="addTag(tag)" class="filtreBtn2">{{ tag.nom_tag }}</button>
       </div>
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div v-else>
-          <p>Aucun prestataire correspondant.</p>
+          <p>{{translate('nopresta')}}</p>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
 <script>
 import { getAllPrestataires, getPrestataireByTag, getPrestataireByNom, 
   getPrestataireTags } from '@/../../back/axiosFunctions/prestataireAxios';
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   name: 'PrestatairesList',
@@ -68,8 +68,12 @@ export default {
   computed: {
     ...mapGetters('crudStore',['getAllTag']),
     ...mapActions('crudStore',['getAllTagStore']),
+    ...mapState(['lang', 'en', 'fr']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     includesId(array, id){
       for(let i=0; i<array.length; i++){
         if(array[i].idpresta == id)
@@ -285,7 +289,7 @@ export default {
 }
 
 .prestataires-cards {
-  width: 60%;
+  width: 220px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -293,7 +297,7 @@ export default {
 
 .prestataires-card {
   flex: 0 0 calc(25% - 20px);
-  height: 250px;
+  height: auto;
   margin: 10px;
   border-radius: 10px;
   border-style: solid;

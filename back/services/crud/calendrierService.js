@@ -53,7 +53,29 @@ const addNewCalendrier = (body, callback) => {
 async function addNewCalendrierFromAPI(body){
     const client = await pool.connect();
     try {
-        await client.query('INSERT INTO calendrier (date_calendrier,horaire_debut,horaire_fin) VALUES ($1,$2,$3)', [body.date_calendrier,body.horaire_debut,body.horaire_fin]);
+        await client.query('INSERT INTO calendrier (id_jour,horaire_debut,horaire_fin) VALUES ($1,$2,$3)', [body.id_jour,body.horaire_debut,body.horaire_fin]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
+const updateCalendrier = (body, callback) => {
+    updateCalendrierFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function updateCalendrierFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('UPDATE calendrier SET id_jour=$1,horaire_debut=$2,horaire_fin=$3 WHERE id_calendrier=$4'
+            , [body.id_jour,body.horaire_debut,body.horaire_fin,body.id_calendrier]);
         // Corrected the commit command
         await client.query('COMMIT');
     } catch (e) {
@@ -67,4 +89,5 @@ module.exports = {
     getAllCalendrier:getAllCalendrier,
     getAllCalendrierColumn:getAllCalendrierColumn,
     addNewCalendrier:addNewCalendrier,
+    updateCalendrier:updateCalendrier,
 };

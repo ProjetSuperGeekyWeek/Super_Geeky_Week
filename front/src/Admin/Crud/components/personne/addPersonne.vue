@@ -10,14 +10,16 @@
       <option :value="role.id_role" v-for="role in listRole" :key="role.id_role">{{ role.nom_role }}</option>
     </select>
     <input type="button" value="Valider" @click="addNewPersonne">
-    <input type="button" value="retour" @click="returnCrud">
+    <boutonRetourCrud/>
   </div>
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
   name: 'addPersonneCrud',
+  components: {boutonRetourCrud},
   data: () => ({
     nom_personne: '',
     prenom_personne: '',
@@ -50,9 +52,6 @@ export default{
       }catch (e) {
         console.log('error addPersonne', e)
       }
-    },
-    async returnCrud() {
-      this.$router.push('/admin/crud')
     },
     async verifEmail() {
       const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;

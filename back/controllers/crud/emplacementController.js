@@ -35,3 +35,31 @@ exports.addNewEmplacement = async (req, res) => {
         }
     });
 }
+
+exports.deleteEmplacementById = async (req, res) => {
+    const id_emplacement = req.query.id_emplacement;
+    if(!id_emplacement){
+        return res.status(400).send("UUID Required!");
+    }
+    emplacementService.deleteEmplacementById(id_emplacement, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb deleteEmplacementById."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
+
+exports.updateEmplacement = async (req, res) => {
+    emplacementService.updateEmplacement(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updateEmplacement."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

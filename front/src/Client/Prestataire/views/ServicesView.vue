@@ -2,11 +2,11 @@
   <div class="services">
     <template v-if="$store.state.authentifier && $store.state.prestataire">
       <div class="service-content">
-        <h1 class="intro">Bienvenue dans votre espace :</h1>
+        <h1 class="intro">{{translate('welcespace')}}</h1>
         <br>
         <div class="service-content" v-html="getServicePageText"></div>
         <br>
-        <h1 class="intro">Vos activités :</h1>
+        <h1 class="intro">{{translate('activit')}}</h1>
         <br>
         <div class="tabactivite">
           <ModuleInscriptions />
@@ -21,10 +21,16 @@
 
 <script>
 import ModuleInscriptions from '@/Client/Prestataire/components/ModuleInscription.vue';
+import {mapState} from "vuex";
 export default {
+  methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
   name: 'ServicesView',
   components: { ModuleInscriptions },
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     getServicePageText() {
       const prestataire = this.$store.state.prestataire;
       return `

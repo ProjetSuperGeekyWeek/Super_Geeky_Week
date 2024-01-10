@@ -1,40 +1,53 @@
 <template>
   <div class="add">
-    <input type="date" placeholder="Date" v-model="date_calendrier">
+    <select name="selectJour" id="selectJour" v-model="id_jour">
+      <option :value="jour.id_jour" v-for="jour in listJour" :key="jour.id_jour">{{ jour.date_calendrier}}</option>
+    </select>
     <input type="time" placeholder="Horaire début" v-model="horaire_debut">
     <input type="time" placeholder="Horaire fin" v-model="horaire_fin">
     <input type="button" value="Valider" @click="addNewQrCode">
-    <input type="button" value="retour" @click="returnCrud">
+    <boutonRetourCrud/>
   </div>
 </template>
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
   name: 'addCalendrierCrud',
+  components: {boutonRetourCrud},
   data: () => ({
-    date_calendrier: '',
+    id_jour: 1,
     horaire_debut: '',
     horaire_fin: '',
+    listJour: [],
   }),
+  computed:{
+    ...mapGetters('crudStore', ['getAllJour'])
+  },
   methods: {
-    ...mapActions('crudStore',['addNewCalendrierStore']),
+    ...mapActions('crudStore',['addNewCalendrierStore', 'getAllJourStore']),
     async addNewQrCode() {
       try{
-        if(this.date_calendrier === '' || this.horaire_debut === '' || this.horaire_fin === ''){
+        if(this.id_jour === '' || this.horaire_debut === '' || this.horaire_fin === ''){
           return
         }
-        const body = {date_calendrier:this.date_calendrier,horaire_debut:this.horaire_debut,horaire_fin:this.horaire_fin}
+        const body = {id_jour:this.id_jour,horaire_debut:this.horaire_debut,horaire_fin:this.horaire_fin}
         await this.addNewCalendrierStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {
         console.log('error addCalendrier', e)
       }
     },
-    async returnCrud() {
-      this.$router.push('/admin/crud')
-    },
+    async loadData(){
+      await this.getAllJourStore()
+      this.listJour = this.getAllJour;
+      console.log(this.listJour, "listJour")
+    }
   },
+  async created(){
+    await this.loadData();
+  }
 }
 </script>
 

@@ -35,3 +35,31 @@ exports.addNewRessource = async (req, res) => {
         }
     });
 }
+
+exports.deleteRessourceById = async (req, res) => {
+    const id_ressource = req.query.id_ressource;
+    if(!id_ressource){
+        return res.status(400).send("UUID Required!");
+    }
+    ressourceService.deleteRessourceById(id_ressource, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb deleteRessourceById."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
+
+exports.updateRessource = async (req, res) => {
+    ressourceService.updateRessource(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updateRessource."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

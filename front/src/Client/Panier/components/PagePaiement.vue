@@ -1,11 +1,12 @@
+
 <template>
     <div id="page-paiement">
         <div id="facture">
             <div id="infos-facture">
-                <span>Prestation</span>
-                <span>Prix</span>
-                <span>Quantite</span>
-                <span>Sous-Total</span>
+                <span>{{ translate('prestation') }}</span>
+                <span>{{ translate('prix') }}</span>
+                <span>{{ translate('quantite') }}</span>
+                <span>{{ translate('soustotaux') }}</span>
             </div>
             <div v-for="ligne in listeCart" :key="ligne.id" class="ligne-facture">
                 <span class="ligne-prestation">{{ ligne.prestation }}</span>
@@ -48,6 +49,9 @@ export default {
         },
     },
     methods: {
+      translate(prop) {
+        return this[this.lang][this.lang][prop];
+      },
         validNumCarte(){
             var num = document.getElementById('num_carte').value;
             var regex = new RegExp("^[0-9]{16}$");
@@ -100,6 +104,7 @@ export default {
         },
     },
     computed: {
+      ...mapState(['lang', 'en', 'fr']),
         ...mapState(['nom']),
 
         prixTotal : function(){

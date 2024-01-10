@@ -35,3 +35,32 @@ exports.addNewEvenement = async (req, res) => {
         }
     });
 }
+
+
+exports.deleteEvenementById = async (req, res) => {
+    const id_evenement = req.query.id_evenement;
+    if(!id_evenement){
+        return res.status(400).send("UUID Required!");
+    }
+    evenementService.deleteEvenementById(id_evenement, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb deleteEvenementById."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
+
+exports.updateEvenement = async (req, res) => {
+    evenementService.updateEvenement(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updateEvenement."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

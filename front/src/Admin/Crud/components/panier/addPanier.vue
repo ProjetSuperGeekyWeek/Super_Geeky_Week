@@ -2,15 +2,17 @@
   <div class="add">
     <input type="text" placeholder="nom" v-model="nom_panier">
     <input type="button" value="Ajouter" @click="addNewPanier">
-    <input type="button" value="retour" @click="returnCrud">
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions} from "vuex";
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
   name: 'addPanierCrud',
+  components: {boutonRetourCrud},
   data: () => ({
     nom_panier: '',
   }),
@@ -24,10 +26,7 @@ export default{
       }catch (e) {
         console.log('error addPanier', e)
       }
-    },
-    async returnCrud() {
-      this.$router.push('/admin/crud')
-    },
+    }
   }
 }
 </script>

@@ -63,8 +63,63 @@ async function addNewRoleFromAPI(body){
     }
 }
 
+const deleteRoleById = (id_role, callback) => {
+    deleteRoleByIdFromAPI(id_role).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function deleteRoleByIdFromAPI(id_role){
+    const client = await pool.connect();
+    try {
+        let query = "SELECT * FROM role WHERE nom_role LIKE 'default_ROLE'";
+        let result = await client.query(query);
+        if(result.rowCount !== 1) {
+            query = "INSERT INTO role (nom_role) VALUES ('default_ROLE')"
+            await client.query(query)
+            await client.query('COMMIT');
+            query = "SELECT * FROM role WHERE nom_role LIKE 'default_ROLE'";
+            result = await client.query(query);
+        }
+        await client.query('UPDATE personne SET id_role=$1 WHERE id_role=$2', [result.rows[0].id_role,id_role]);
+        await client.query('COMMIT');
+        await client.query('DELETE FROM role WHERE id_role=$1', [id_role]);
+        await client.query('COMMIT');
+    } catch (e) {
+        await client.query("ROLLBACK")
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
+const updateRole = (body, callback) => {
+    updateRoleFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function updateRoleFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('UPDATE role SET nom_role=$1 WHERE id_role=$2', [body.nom_role, body.id_role]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllRole:getAllRole,
     getAllRoleColumn:getAllRoleColumn,
     addNewRole:addNewRole,
+    deleteRoleById:deleteRoleById,
+    updateRole:updateRole,
 };

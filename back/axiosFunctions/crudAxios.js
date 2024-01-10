@@ -221,6 +221,14 @@ async function addNewTagStore(body){
     return await postRequest("/api/crud/addTag", body, "ADDTAG")
 }
 
+//Jour
+async function getAllJour() {
+    return await getRequest("/api/crud/getAllJour", "GETALLJOUR");
+}
+async function getAllJourColumn() {
+    return await getRequest("/api/crud/getAllJourColumn", "GETALLJOURCOLUMN");
+}
+
 
 export {
     getAllRole,
@@ -255,6 +263,8 @@ export {
     getAllEvenementColumn,
     getAllEmplacementRessourceColumn,
     getAllEmplacementColumn,
+    getAllJour,
+    getAllJourColumn,
     addNewRole,
     addNewItem,
     addNewAcheter,

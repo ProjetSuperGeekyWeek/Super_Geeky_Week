@@ -35,3 +35,32 @@ exports.addNewTag = async (req, res) => {
         }
     });
 }
+
+
+exports.deleteTagById = async (req, res) => {
+    const id_tag = req.query.id_tag;
+    if(!id_tag){
+        return res.status(400).send("UUID Required!");
+    }
+    tagService.deleteTagById(id_tag, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb deleteTagById."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
+
+exports.updateTag = async (req, res) => {
+    tagService.updateTag(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updateTag."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

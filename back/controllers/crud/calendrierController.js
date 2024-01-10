@@ -1,6 +1,4 @@
 const calendrierService = require('../../services/crud/calendrierService');
-const roleService = require("../../services/crud/roleService");
-
 exports.getAllCalendrier = async (req, res) => {
     calendrierService.getAllCalendrier((err, data) => {
         if (err) {
@@ -30,6 +28,18 @@ exports.addNewCalendrier = async (req, res) => {
         if (err) {
             res.status(500).send({
                 message: err.message || "pb addNewCalendrier."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
+
+exports.updateCalendrier = async (req, res) => {
+    calendrierService.updateCalendrier(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updateCalendrier."
             });
         } else {
             res.send(data);

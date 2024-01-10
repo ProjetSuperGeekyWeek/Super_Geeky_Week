@@ -2,13 +2,13 @@
     <table class="tab grand">
       <tbody class="tab_body">
         <tr>
-          <th class="th_grand">Produit</th><th class="th_petit">Quantité</th><th class="th_petit">Prix</th>
+          <th class="th_grand">{{translate('produit')}}</th><th class="th_petit">{{translate('quantite')}}</th><th class="th_petit">{{translate('prix2')}}</th>
         </tr>
           <tr v-for="article in Panier" :key="article.id_article">
             <td>{{ article.nom_article }}</td><td>{{ article.quantite }}</td><td>{{ calc_prix(article.quantite, article.prix_article_seul)}}</td>
           </tr>
         <tr>
-          <td class="gras">Total</td><td>{{ total_quantite() }}</td><td>{{ total_prix() }}$</td>
+          <td class="gras">{{translate('total')}}</td><td>{{ total_quantite() }}</td><td>{{ total_prix() }}$</td>
         </tr>
       </tbody>
     </table>

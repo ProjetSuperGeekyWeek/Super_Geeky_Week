@@ -2,6 +2,8 @@ export default {
     data(){
         return{
             en: {
+                vid_not_supported:"Your browser does not support the video tag.",
+
                 nav_home: "Home",
                 nav_ticket: "Ticket",
                 nav_espace_perso: "My Page",
@@ -19,6 +21,59 @@ export default {
                 jour:"Day ",
                 hora:" / Schedule from ",
                 a:" to ",
+                description:"Description: ",
+                prix:"Price: ",
+                prix2:"Price",
+                prix3:"Price:",
+                stock:"Stock: ",
+
+                prestation:"Service",
+                quantite:"Quantity",
+                soustotaux:"Subtotal",
+
+                rentrezinfo:"Enter your information",
+                prenom:"First Name: ",
+                nom:"Last Name: ",
+                email:"Email Address: ",
+                validerinfo:"Validate Information",
+                enteremail:"Enter a valid email address",
+
+                information:"Information: ",
+                produit:"Product",
+
+                panier:"Cart",
+                returnbout:"Back to shop",
+
+                titre:"Title:",
+                addpanier:"Add to cart",
+                modifier:"Edit",
+                supprimer:"Delete",
+                valider:"Validate",
+                annuler:"Cancel",
+
+                livror:"Guestbook",
+                aucuntemoin:"No testimonials available",
+
+                retour:"Return",
+                desinscrire:"Unsubscribe",
+                horaires:"Opening Hours",
+                inscription:"Registration",
+
+                zetebieninscrit:"You are successfully registered ",
+                seancede:" for the session of ",
+
+                filre:"Filter",
+                nopresta:"No matching service provider.",
+
+                exposants: "Exhibitors",
+                envoyer: "Send",
+                aucunexpos: "No exhibitor available.",
+                contactpresta: "Contact Service Provider",
+                voirprof:"View Profil",
+
+                nourriture:"Food",
+                activit: "Your activities:",
+                welcespace: "Welcome to your space:",
             },
         };
     },

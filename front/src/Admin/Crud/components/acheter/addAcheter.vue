@@ -8,14 +8,16 @@
     </select>
     consommer :<input type="checkbox" id="consommer" v-model="consommer">
     <input type="button" value="Ajouter" @click="addNewAcheter">
-    <input type="button" value="retour" @click="returnCrud">
+    <boutonRetourCrud/>
   </div>
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
   name: 'addAcheterCrud',
+  components: {boutonRetourCrud},
   data: () => ({
     id_item: 1,
     id_qr_code: 1,
@@ -24,7 +26,7 @@ export default{
     listQrCode: [],
   }),
   computed: {
-    ...mapGetters('crudStore',['getAllItem', 'getAllQrCode'])
+    ...mapGetters('crudStore',['getAllItem', 'getAllQrCode']),
   },
   methods: {
     ...mapActions('crudStore',['addNewAcheterStore']),
@@ -40,15 +42,9 @@ export default{
         console.log('error addAcheter', e)
       }
     },
-    async navigateToAdd() {
-      this.$router.push('/admin/crud/acheter/add');
-    },
     async loadData(){
       this.listItem = this.getAllItem;
       this.listQrCode = this.getAllQrCode;
-    },
-    async returnCrud() {
-      this.$router.push('/admin/crud')
     }
   },
   async created(){

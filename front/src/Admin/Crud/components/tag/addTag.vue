@@ -2,15 +2,17 @@
   <div class="add">
     <input type="text" placeholder="nom du tag" v-model="nom_tag">
     <input type="button" value="Ajouter" @click="addNewTag">
-    <input type="button" value="retour" @click="returnCrud">
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions} from "vuex";
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
   name: 'addTagCrud',
+  components: {boutonRetourCrud},
   data: () => ({
     nom_tag: '',
   }),
@@ -27,9 +29,6 @@ export default{
       }catch (e) {
         console.log('error addTag', e)
       }
-    },
-    async returnCrud() {
-      this.$router.push('/admin/crud')
     },
   }
 }

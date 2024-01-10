@@ -2,6 +2,8 @@ export default {
     data(){
         return{
             fr: {
+                vid_not_supported:"Votre navigateur ne supporte pas la balise vidéo.",
+
                 nav_home: "Accueil",
                 nav_ticket: "Billets",
                 nav_espace_perso: "Ma Page",
@@ -19,6 +21,59 @@ export default {
                 jour:"Jour ",
                 hora:" / Horaire de ",
                 a:" a ",
+                description:"Description : ",
+                prix:"Prix : ",
+                prix2:"Prix",
+                prix3:"Prix :",
+                stock:"Stock : ",
+
+                prestation:"Prestations",
+                quantite:"Quantité",
+                soustotaux:"Sous-total",
+
+                rentrezinfo:"Renseignez vos informations",
+                prenom:"Prénom : ",
+                nom:"Nom : ",
+                email:"Adresse email : ",
+                validerinfo:"Valider les informations",
+                enteremail:"Entrer une adresse email valide",
+
+                information:"Information : ",
+                produit:"Produit",
+
+                panier:"Panier",
+                returnbout:"Retour boutique",
+
+                titre:"Titre :",
+                addpanier:"Ajouter au panier",
+                modifier:"Modifier",
+                supprimer:"Supprimer",
+                valider:"Valider",
+                annuler:"Annuler",
+
+                livror:"Livre d'or",
+                aucuntemoin:"Aucun témoignage disponible",
+
+                retour:"Retour",
+                desinscrire:"Désinscrire",
+                horaires:"Horaires",
+                inscription:"Inscription",
+
+                zetebieninscrit:"Vous êtes bien inscrit ",
+                seancede:" à la séance de ",
+
+                filre:"Filtre",
+                nopresta:"Aucun prestataire correspondant.",
+
+                exposants:"Exposants",
+                envoyer:"Envoyer",
+                aucunexpos:"Aucun exposant disponible.",
+                contactpresta:"Contact Prestataire",
+                voirprof:"Voir le profil",
+
+                nourriture:"Nourriture",
+                activit:"Vos activités :",
+                welcespace:"Bienvenue dans votre espace : ",
             },
         };
     },

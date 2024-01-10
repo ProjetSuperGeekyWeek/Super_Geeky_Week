@@ -15,9 +15,10 @@ INSERT INTO personne (nom_personne, prenom_personne, mail_personne, mdp_personne
 
 -- Insert data into Livre_d_or table
 INSERT INTO Livre_d_or (temoignage, pseudo) VALUES
-    ('C etait super', 'Higorami'),
-    ('J ai adoré le cosplay de fury', 'Senquen'),
-    ('C etait cool', 'Dragul');
+    ('C''était super', 'Higorami'),
+    ('J''ai adoré le cosplay', 'Senqen'),
+    ('C''était cool', 'Dragul'),
+    ('Eren','Mikasa');
 
 
 -- Insert data into livre_personne table
