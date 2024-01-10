@@ -23,7 +23,7 @@
             <input type="text" name="num_carte" id="num_carte" required v-model="num_carte" @change="validNumCarte" placeholder="numéro de carte">
             <input type="text" name="date_expiration" id="date_expiration" required v-model="date_expiration" @change="validDateCarte" placeholder="date d'expiration">
             <input type="text" name="code_securite" id="code_securite" required v-model="code_securite" @change="validCCV" placeholder="CCV">
-            <button id="valide-paiement" @click="validPaiement">Valider</button>
+            <button id="valide-paiement" @click="validPaiement">{{translate('valider')}}</button>
         </div>
     </div>
 </template>
