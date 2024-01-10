@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">Exposants</h1>
+    <h1 class="title">{{translate('exposants')}}</h1>
     <div v-if="prestataires.length > 0" class="exposants-cards">
       <div v-for="prestataire in prestataires" :key="prestataire.idpresta" class="exposants-card"
         :class="{ 'highlighted': prestataire.highlighted }">
@@ -19,24 +19,24 @@
             <p>{{ prestataire.description }}</p>
           </div>
           <div class="exposants-buttons">
-            <button @click="navigateToPrestataire(prestataire)" class="contact-button">Voir le profil</button>
+            <button @click="navigateToPrestataire(prestataire)" class="contact-button">{{translate('voirprof')}}</button>
             <button @click="contactPrestataire(prestataire)" class="contact-button">Contact</button>
           </div>
         </div>
       </div>
     </div>
     <div v-else>
-      <p>Aucun exposant disponible.</p>
+      <p>{{translate('aucunexpos')}}</p>
     </div>
 
     <!-- Boîte de dialogue modal -->
     <div v-if="isModalOpen" class="modal-overlay">
       <div class="modal">
-        <h2>Contact Prestataire</h2>
+        <h2>{{translate('contactpresta')}}</h2>
         <textarea v-model="messageContent" placeholder="Votre message"></textarea>
         <div>
-          <button @click="sendMessage" class="contact-button">Envoyer</button>
-          <button @click="closeModal" class="contact-button">Annuler</button>
+          <button @click="sendMessage" class="contact-button">{{translate('envoyer')}}</button>
+          <button @click="closeModal" class="contact-button">{{translate('annuler')}}</button>
         </div>
       </div>
     </div>
@@ -45,6 +45,7 @@
 
 <script>
 import { getAllPrestataires } from '@/../../back/axiosFunctions/prestataireAxios';
+import {mapState} from "vuex";
 
 export default {
   name: 'ExposantsView',
@@ -57,6 +58,9 @@ export default {
     };
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     async fetchPrestataires() {
       try {
         const response = await getAllPrestataires();
@@ -101,6 +105,9 @@ export default {
   mounted() {
     this.fetchPrestataires();
   },
+  computed: {
+    ...mapState(['lang', 'en', 'fr']),
+  }
 };
 </script>
   

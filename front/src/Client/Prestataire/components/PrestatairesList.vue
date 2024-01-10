@@ -49,7 +49,7 @@
 <script>
 import { getAllPrestataires, getPrestataireByTag, getPrestataireByNom, 
   getPrestataireTags } from '@/../../back/axiosFunctions/prestataireAxios';
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   name: 'PrestatairesList',
@@ -68,8 +68,12 @@ export default {
   computed: {
     ...mapGetters('crudStore',['getAllTag']),
     ...mapActions('crudStore',['getAllTagStore']),
+    ...mapState(['lang', 'en', 'fr']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     includesId(array, id){
       for(let i=0; i<array.length; i++){
         if(array[i].idpresta == id)

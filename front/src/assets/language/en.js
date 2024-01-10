@@ -64,6 +64,12 @@ export default {
 
                 filre:"Filter",
                 nopresta:"No matching service provider.",
+
+                exposants: "Exhibitors",
+                envoyer: "Send",
+                aucunexpos: "No exhibitor available.",
+                contactpresta: "Contact Service Provider",
+                voirprof:"View Profil",
             },
         };
     },
