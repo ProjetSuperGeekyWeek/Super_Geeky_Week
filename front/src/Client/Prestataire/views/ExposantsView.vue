@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">{{translate('exposants')}}</h1>
+    <h1 class="title">{{ translate('exposants') }}</h1>
     <div v-if="prestataires.length > 0" class="exposants-cards">
       <div v-for="prestataire in prestataires" :key="prestataire.idpresta" class="exposants-card"
         :class="{ 'highlighted': prestataire.highlighted }">
@@ -19,30 +19,40 @@
             <p>{{ prestataire.description }}</p>
           </div>
           <div class="exposants-buttons">
-            <button @click="navigateToPrestataire(prestataire)" class="contact-button">{{translate('voirprof')}}</button>
+            <button @click="navigateToPrestataire(prestataire)" class="contact-button">{{ translate('voirprof')
+            }}</button>
             <button @click="contactPrestataire(prestataire)" class="contact-button">Contact</button>
           </div>
         </div>
       </div>
     </div>
     <div v-else>
-      <p>{{translate('aucunexpos')}}</p>
+      <p>{{ translate('aucunexpos') }}</p>
     </div>
 
     <!-- Boîte de dialogue modal -->
     <div v-if="isModalOpen" class="modal-overlay">
       <div class="modal">
-        <h2>{{translate('contactpresta')}}</h2>
+        <h2>{{ translate('contactpresta') }}</h2>
         <div>
-          <p v-if="selectedPrestataire && selectedPrestataire.mail_personne"><strong>{{translate('mailpresta')}}</strong> {{
-            selectedPrestataire.mail_personne }}</p>
-          <p v-else><strong>{{translate('mailpresta')}}</strong> N/A</p>
+          <p v-if="selectedPrestataire && selectedPrestataire.mail_personne">
+            <strong>Veuillez me contacter à l'adresse suivante :</strong> {{ selectedPrestataire.mail_personne }}
+          </p>
+          <p v-else><strong>Veuillez me contacter à l'adresse suivante :</strong> N/A</p>
         </div>
         <br>
-        <textarea v-model="messageContent" placeholder="Votre message"></textarea>
         <div>
-          <button @click="sendMessage" class="contact-button">{{translate('envoyer')}}</button>
-          <button @click="closeModal" class="contact-button">{{translate('annuler')}}</button>
+          <label for="emailInput">Votre adresse e-mail :</label>
+          <input type="text" v-model="userEmail" id="emailInput" placeholder="Ton mail">
+        </div>
+        <br>
+        <div>
+          <label for="messageInput">Votre message :</label>
+          <textarea v-model="messageContent" id="messageInput" placeholder="Écris ton message ici"></textarea>
+        </div>
+        <div>
+          <button @click="sendMessage" class="contact-button">{{ translate('envoyer') }}</button>
+          <button @click="closeModal" class="contact-button">{{ translate('annuler') }}</button>
         </div>
       </div>
     </div>
@@ -50,8 +60,8 @@
 </template>
 
 <script>
-import { getAllPrestataires } from '@/axiosFunctions/prestataireAxios';
-import {mapState} from "vuex";
+import { getAllPrestataires, sendContactMessage } from '@/axiosFunctions/prestataireAxios';
+import { mapState } from "vuex";
 
 export default {
   name: 'ExposantsView',
@@ -61,6 +71,7 @@ export default {
       isModalOpen: false,
       messageContent: '',
       selectedPrestataire: null,
+      userEmail: ''
     };
   },
   methods: {
@@ -98,13 +109,30 @@ export default {
         console.error("Erreur: selectedPrestataire n'est pas défini.");
       }
     },
-    sendMessage() {
+    async sendMessage() {
+  if (this.selectedPrestataire && this.userEmail && this.messageContent) {
+    // Envoyez le message au serveur
+    sendContactMessage(this.selectedPrestataire.idpresta, {
+      id_personne: this.selectedPrestataire.idpresta,  // Ajoutez cette ligne pour inclure id_personne
+      mail_client: this.userEmail,
+      message_client: this.messageContent
+    }).then(() => {
       console.log("Message envoyé :", this.messageContent, "à", this.selectedPrestataire.nom);
       this.closeModal();
-    },
+    }).catch(error => {
+      console.error("Erreur lors de l'envoi du message :", error);
+      // Gérer l'erreur selon vos besoins
+    });
+  } else {
+    console.error("Erreur: selectedPrestataire, userEmail ou messageContent est vide.");
+    // Gérer l'erreur selon vos besoins
+  }
+},
+
     closeModal() {
       this.isModalOpen = false;
       this.messageContent = ''; // Réinitialiser le contenu du message
+      this.userEmail = ''; // Réinitialiser l'adresse e-mail de l'utilisateur
       this.selectedPrestataire = null; // Réinitialiser le prestataire sélectionné
     },
   },

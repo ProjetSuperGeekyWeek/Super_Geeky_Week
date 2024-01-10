@@ -109,12 +109,46 @@ var router = express.Router();
  *         description: Internal server error
  */
 
+/**
+ * @swagger
+ * /api/prestataire/{id}/contact:
+ *   post:
+ *     summary: Send a contact message to a prestataire
+ *     tags: [Prestataire]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the prestataire to send the contact message
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               mail_client:
+ *                 type: string
+ *                 description: Email of the client sending the message
+ *               message_client:
+ *                 type: string
+ *                 description: Content of the contact message
+ *     responses:
+ *       '200':
+ *         description: Successfully sent contact message
+ *       '500':
+ *         description: Internal server error
+ */
+
 // affichage
 router.get('/', prestataireController.getAllPrestataires);
 router.get('/:id', prestataireController.getPrestataireById);
 router.get('/nom/:nom', prestataireController.getPrestataireByNom);
 router.get('/tag/:tag', prestataireController.getPrestataireByTag);
 router.get('/:id/tags', prestataireController.getPrestataireTags);
+router.post('/:id/contact', prestataireController.sendContactMessage);
 
 
 module.exports = router;

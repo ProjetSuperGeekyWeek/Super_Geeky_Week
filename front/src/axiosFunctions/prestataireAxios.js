@@ -20,6 +20,10 @@ async function getPrestataireTags(id) {
     return await getRequest(`/api/prestataire/${id}/tags`, "GETPRESTATAIRETAGS");
 }
 
+async function sendContactMessage(id, data) {
+    return await postRequest(`/api/prestataire/${id}/contact`, data);
+}
+
 
 export { 
     getAllPrestataires ,
@@ -27,4 +31,5 @@ export {
     getPrestataireByNom,
     getPrestataireByTag,
     getPrestataireTags
+    sendContactMessage
 };

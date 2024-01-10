@@ -230,3 +230,7 @@ INSERT INTO creneau (id_evenement, id_calendrier,heure_debut_evenement, heure_fi
         (3,1,'12:00:00','14:00:00'),
         (4,1,'10:30:00','12:00:00'),
         (5,2,'12:00:00','15:00:00');
+
+-- Insert data into contact table
+INSERT INTO contact (mail_client, message_client, id_personne)
+VALUES ('client@example.com', 'Contenu du message', 1); -- Assurez-vous d'ajuster l'identifiant de la personne correcte
