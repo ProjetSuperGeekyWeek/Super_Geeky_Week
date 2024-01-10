@@ -27,6 +27,7 @@ export default {
     translate(prop) {
       return this[this.lang][this.lang][prop];
     },
+  },
   name: 'ServicesView',
   components: { ModuleInscriptions },
   computed: {

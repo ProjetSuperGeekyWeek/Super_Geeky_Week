@@ -9,7 +9,7 @@
                 <!-- warning -->
                 <p>{{ infos.description }}</p>
                 <div class="card-inscription-horaires">
-                    <h3>{{translate('horaires')}}</h3>
+                    <h3>Horaires</h3>
                     <ul>
                         <li v-for="horaire in infos.horaires" :key="horaire">
                             <span>{{ horaire.jour }}</span>
@@ -18,12 +18,12 @@
                     </ul>
                 </div>
                 <div class="card-inscription-tarif" v-if="!alreadyInscrit">
-                    <h3>{{translate('inscription')}}</h3>
+                    <h3>Inscription</h3>
                     <button @click="formulaireInscrire()">{{ stringTarif }}</button>
                 </div>
                 <div v-if="alreadyInscrit" class="card-inscription-infos">
-                    <h4>{{translate('zetebieninscrit')}}{{ inscritPrenom }} {{ inscritNom }}{{translate('seancede')}}{{ inscritSeance }}</h4>
-                    <button @click="desinscrire">{{translate('desinscrire')}}</button>
+                    <h4>Vous etes bien inscrit {{ inscritPrenom }} {{ inscritNom }} à la séance de {{ inscritSeance }}</h4>
+                    <button @click="desinscrire">Désinscrire</button>
                 </div>
             </div>
             <div class="card-inscription-formulaire" v-show="inscription">
@@ -40,8 +40,8 @@
                 <textarea name="description" class="description" cols="30" rows="10" placeholder="description" v-model="inscritDescription"></textarea>
                 <p class="message-erreur"></p>
                 <div class="card-inscription-formulaire-btn">
-                    <button class="btn-retour" @click="inscription = !inscription">{{translate('retour')}}</button>
-                    <button class="btn-valider" @click="inscrire()">{{translate('valider')}}</button>
+                    <button class="btn-retour" @click="inscription = !inscription">Retour</button>
+                    <button class="btn-valider" @click="inscrire()">Valider</button>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 <!-- warning -->
                 <p>{{ infos.description }}</p>
                 <div class="card-inscription-horaires">
-                    <h3>{{translate('horaires')}}</h3>
+                    <h3>Horaires</h3>
                     <ul>
                         <li v-for="horaire in infos.horaires" :key="horaire">
                             <span>{{ horaire.jour }}</span>
@@ -62,13 +62,14 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card-inscription-tarif" v-if="!alreadyInscrit">
-                    <h3>{{translate('inscription')}}</h3>
-                    <button @click="formulaireInscrire()">{{ stringTarif }}</button>
+                <div class="card-inscription-tarif">
+                    <h3>Inscription</h3>
+                    <h4>{{ stringTarif }}</h4>
                 </div>
-                <div v-if="alreadyInscrit" class="card-inscription-infos">
-                    <h4>{{translate('zetebieninscrit')}}{{ inscritPrenom }} {{ inscritNom }}{{translate('seancede')}}{{ inscritSeance }}</h4>
-                    <button @click="desinscrire">{{translate('desinscrire')}}</button>
+                <div class="card-inscription-admin-btn">
+                    <button @click="modif = true">Modifier</button>
+                    <button v-show="!listeInscrit" @click="afficherInscrits">Afficher inscrits</button>
+                    <button v-show="listeInscrit" @click="listeInscrit = false">Cacher inscrits</button>
                 </div>
             </div>
             <div class="card-inscription-formulaire" v-show="modif">
@@ -120,11 +121,11 @@
                     <span>Seance</span>
                     <span>Description</span>
                 </div>
-                <textarea name="description" class="description" cols="30" rows="10" placeholder="description" v-model="inscritDescription"></textarea>
-                <p class="message-erreur"></p>
-                <div class="card-inscription-formulaire-btn">
-                    <button class="btn-retour" @click="inscription = !inscription">Retour</button>
-                    <button class="btn-valider" @click="inscrire()">Valider</button>
+                <div class="liste-inscrits-body-inscrit" v-for="(inscrit, index) in listeInscrits" :key="index">
+                    <span>{{ inscrit.nom }}</span>
+                    <span>{{ inscrit.prenom }}</span>
+                    <span>{{ inscrit.jour }} {{ inscrit.heure_debut }}-{{ inscrit.heure_fin }}</span>
+                    <span>{{ inscrit.description }}</span>
                 </div>
             </div>
         </div>
@@ -132,7 +133,9 @@
 </template>
 
 <script>
-import { postInscrit, deleteInscrit } from '@/../../back/axiosFunctions/inscriptionAxios';
+import { postInscrit, postHoraire, putInscription, deleteInscrit, deleteHoraire,
+        getAllInscritsIdInscription } 
+    from '@/../../back/axiosFunctions/inscriptionAxios';
 
 export default {
     name: 'ModuleInscriptions',
@@ -175,10 +178,103 @@ export default {
                 return "Gratuit";
             }
             return this.infos.tarif + "€";
-        },
-        ...mapState(['lang', 'en', 'fr']),
+        }
     },
     methods: {
+        updateProps(){
+            this.$emit('update', true);
+        },
+        transformMinuteHeureToTimeFormat(heure,minute){
+            if(heure < 10){
+                heure = "0"+heure;
+            }
+            if(minute < 10){
+                minute = "0"+minute;
+            }
+            return heure+":"+minute;
+        },
+        verifNewHoraires(){
+            alert(this.idJourAdd);
+            alert((this.idJourAdd == null || this.idJourAdd == ""));
+            if(
+                (isNaN(this.newHeureDebut) || this.newHeureDebut == "")
+                || (isNaN(this.newHeureFin) || this.newHeureFin == "")
+                || (isNaN(this.newMinuteDebut) || this.newMinuteDebut == "")
+                || (isNaN(this.newMinuteFin) || this.newMinuteFin == "")
+                || (this.idJourAdd == null)
+            ){
+                return false;
+            }
+            if (
+                (this.newHeureDebut > 22 || this.newHeureDebut < 8)
+                || (this.newHeureFin > 22 || this.newHeureFin < 8)
+                || (this.newMinuteDebut > 59 || this.newMinuteDebut < 0)
+                || (this.newMinuteFin > 59 || this.newMinuteFin < 0)
+            ) {
+                return false;
+            }
+            return true;
+        },
+        async addNewHoraire(){
+            if(this.verifNewHoraires()){
+                let id_jour = this.idJourAdd;
+                let heure_debut = this.transformMinuteHeureToTimeFormat(this.newHeureDebut,this.newMinuteDebut);
+                let heure_fin = this.transformMinuteHeureToTimeFormat(this.newHeureFin,this.newMinuteFin);
+                try {
+                    await postHoraire(this.infos.id_activite, id_jour, heure_debut, heure_fin);
+                    this.addHoraire = false;
+                    this.updateProps();
+                } catch (error) {
+                    console.log(error);
+                }
+            }else{
+                alert("veuillez remplir correctement tout les champs horaires (les heures allant de 8h à 22h et les minutes de 0 à 59) et choisir un jour")
+            }
+        },
+        async removeHoraire(index){
+            let id_calendrier = this.infos.horaires[index].id_calendrier;
+            try {
+                await deleteHoraire(this.infos.id_activite, id_calendrier);
+                this.updateProps();
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async afficherInscrits(){
+            this.listeInscrit = true;
+            try {
+                let res = await getAllInscritsIdInscription(this.infos.id_activite);
+                for (let i = 0; i < res.length; i++) {
+                    res[i].heure_debut = res[i].heure_debut.substring(0, 5);
+                    res[i].heure_fin = res[i].heure_fin.substring(0, 5);
+                }
+                this.listeInscrits = res;
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async validModif(){
+            this.modif = false;
+            let titre = this.titreProvisoire;
+            if (titre == null || titre == "") {
+                titre = this.infos.titre;
+            }
+            let description = this.descriptionProvisoire;
+            if (description == null || description == "") {
+                description = this.infos.description;
+            }
+            // let nb_place = this.nbPlacesProvisoire;
+            // if (nb_place == null || nb_place == "") {
+            //     nb_place = this.infos.nb_place;
+            // }
+            let id_activite = this.infos.id_activite;
+            try {
+                await putInscription(id_activite, titre, description, 1);
+                this.updateProps();
+            } catch (error) {
+                console.log(error);
+            }
+        },
         turnErreur(element,message){
             if(element != null){
                 element.style.filter = "drop-shadow(0px 0px 5px red)";
