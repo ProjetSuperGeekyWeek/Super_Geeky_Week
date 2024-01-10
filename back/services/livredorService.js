@@ -29,7 +29,7 @@ async function getAllTemoignageFromAPI() {
 
 const getTemoignageByIdPresta = async (id, callback) => {
     try {
-        const res = await getTemoignageByIdFromAPI(id);
+        const res = await getTemoignageByIdPrestaFromAPI(id);
         callback(null, res);
     } catch (error) {
         callback(error, null);
@@ -37,18 +37,15 @@ const getTemoignageByIdPresta = async (id, callback) => {
 }
 
 async function getTemoignageByIdPrestaFromAPI(id) {
-    console.log("getTemoignageByIdFromAPI");
     const client = await pool.connect();
     
     try {
         const query = `
         SELECT id_temoignage AS id_temoignage, temoignage, pseudo
         FROM livre_d_or
-        INNER JOIN livre_personne ON livre_d_or.id_temoignage = livre_personne.id_temoignage
-        WHERE livre_personne.id_personne = $1
+        WHERE id_personne = $1
         `;
-        const result = await client.query(query, [id]);
-        console.log("Query result:", result.rows);  
+        const result = await client.query(query, [id]); 
         return result.rows;
     } catch (e) {
         console.error("Error in getTemoignageByIdFromAPI:", e); 

@@ -14,24 +14,11 @@ INSERT INTO personne (nom_personne, prenom_personne, mail_personne, mdp_personne
 -- partie services
 
 -- Insert data into Livre_d_or table
-INSERT INTO Livre_d_or (temoignage, pseudo) VALUES
-    ('C''était super', 'Higorami'),
-    ('J''ai adoré le cosplay', 'Senqen'),
-    ('C''était cool', 'Dragul'),
-    ('Eren','Mikasa');
-
-
--- Insert data into livre_personne table
-INSERT INTO livre_personne (id_personne, id_temoignage) VALUES
-    (1,1),
-    (1,2),
-    (1,3),
-    (2,1),
-    (2,2),
-    (2,3),
-    (3,1),
-    (3,2),
-    (3,3);
+INSERT INTO Livre_d_or (temoignage, pseudo, id_personne) VALUES
+    ('C''était super', 'Higorami',1),
+    ('J''ai adoré le cosplay', 'Senqen',1),
+    ('C''était cool', 'Dragul',2),
+    ('Eren','Mikasa',1);
 
 -- Insert data into inscription table
 INSERT INTO inscription (nom_inscription, description_inscription, nb_place, image_inscription, id_personne) VALUES

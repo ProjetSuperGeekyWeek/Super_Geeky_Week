@@ -25,7 +25,14 @@
                     />
                 </div>
                 <div class="tabactivite-livreOr">
-                    <livreDor v-if="livreOr != []"/>
+                    <livreDor
+                    :temoignages="livreOr"
+                    :proprio="proprio"
+                    :show="showLivreOr"/>
+                </div>
+                <div v-if="proprio">
+                    <button v-if="!showLivreOr" @click="showLivreOr = true">Afficher le Livre d'or</button>
+                    <button v-else @click="showLivreOr = false">Cacher le Livre d'or</button>
                 </div>
                 <div class="tabactivite-contact">
 
@@ -61,6 +68,7 @@
                     image_personne: '',
                 },
                 inscriptions: [],
+                showLivreOr: true,
                 livreOr: [],
                 contact: {
 

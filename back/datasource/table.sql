@@ -45,15 +45,9 @@ CREATE TABLE personne (
 CREATE TABLE Livre_d_or (
     id_temoignage SERIAL PRIMARY KEY,
     temoignage VARCHAR(255) NOT NULL,
-    pseudo VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE livre_personne (
+    pseudo VARCHAR(50) NOT NULL,
     id_personne INTEGER NOT NULL,
-    id_temoignage INTEGER NOT NULL,
-    constraint pk_livre_personne PRIMARY KEY (id_personne, id_temoignage),
-    CONSTRAINT fk_personne FOREIGN KEY (id_personne) REFERENCES personne(id_personne),
-    CONSTRAINT fk_temoignage FOREIGN KEY (id_temoignage) REFERENCES Livre_d_or(id_temoignage)
+    CONSTRAINT fk_personne FOREIGN KEY (id_personne) REFERENCES personne(id_personne)
 );
 
 CREATE TABLE inscription (
