@@ -188,8 +188,8 @@ import InfobulleCarte from '@/Client/Carte/components/InfobulleCarte.vue'
 import {
   getInfoBulle, getInfoPanel, getAllStandsTaken, getInfoPanelNoTake, saveStand,
   updateStand, deleteStand
-} from '@/../../back/axiosFunctions/carteAxios.js'
-import { getAllPrestataires, getPrestataireTags } from '@/../../back/axiosFunctions/prestataireAxios.js'
+} from '@/axiosFunctions/carteAxios.js'
+import { getAllPrestataires, getPrestataireTags } from '@/axiosFunctions/prestataireAxios.js'
 
 export default {
   name: 'CarteInteractive',

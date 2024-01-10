@@ -38,8 +38,8 @@
 <script>
     import ModuleInscriptions from '@/Client/Prestataire/components/ModuleInscription.vue';
     import { mapState } from 'vuex';
-    import { getPrestataireById } from '@/../../back/axiosFunctions/prestataireAxios';
-    import { getAllInscriptionsIdPresta, getAllHorairesIdInscription, getJours } from '@/../../back/axiosFunctions/inscriptionAxios';
+    import { getPrestataireById } from '@/axiosFunctions/prestataireAxios';
+    import { getAllInscriptionsIdPresta, getAllHorairesIdInscription, getJours } from '@/axiosFunctions/inscriptionAxios';
 
     export default {
         name: 'PrestataireView',

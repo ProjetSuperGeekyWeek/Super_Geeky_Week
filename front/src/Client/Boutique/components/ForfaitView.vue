@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import {getAllItems} from '@/../../back/axiosFunctions/boutiqueAxios'
-import {getAllCalendrier} from '@/../../back/axiosFunctions/calendrierAxios'
+import {getAllItems} from '@/axiosFunctions/boutiqueAxios'
+import {getAllCalendrier} from '@/axiosFunctions/calendrierAxios'
 import {mapState} from "vuex";
 export default {
   name: 'ForfaitView',

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { getTemoignage } from '@/../../back/axiosFunctions/livredorAxios';
+import { getTemoignage } from '@/axiosFunctions/livredorAxios';
 import {mapState} from "vuex";
 
 export default {

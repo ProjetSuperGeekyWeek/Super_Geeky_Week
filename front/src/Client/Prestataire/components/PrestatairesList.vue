@@ -48,7 +48,7 @@
 
 <script>
 import { getAllPrestataires, getPrestataireByTag, getPrestataireByNom, 
-  getPrestataireTags } from '@/../../back/axiosFunctions/prestataireAxios';
+  getPrestataireTags } from '@/axiosFunctions/prestataireAxios';
 import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {

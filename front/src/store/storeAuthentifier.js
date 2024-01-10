@@ -1,5 +1,5 @@
 
-import { getPrestataireMailPassword, adminVerif } from '@/../../back/axiosFunctions/authentificationAxios';
+import { getPrestataireMailPassword, adminVerif } from '@/axiosFunctions/authentificationAxios';
 
 export default{
     namespaced: true,

@@ -4,7 +4,7 @@ import {getAllAcheter,getAllAcheterColumn,getAllCalendrier,getAllCalendrierColum
     getAllEvenement,getAllEvenementColumn,getAllItem,getAllItemColumn,getAllLignePanier,getAllLignePanierColumn,getAllPanier,
     getAllPanierColumn,getAllPersonne,getAllPersonneColumn,getAllPersonneTag,getAllPersonneTagColumn,getAllQrCode,getAllQrCodeColumn,
     getAllRessource,getAllRessourceColumn,getAllStand,getAllStandColumn,getAllTag,getAllTagColumn, addNewRole, addNewItem,addNewAcheter,
-    addNewPersonne,addNewRessource,addNewQrCode,addNewPanierStore,addNewTagStore,addNewEmplacement,addNewCalendrier,addNewEvenement,getAllJour,getAllJourColumn} from "@/../../back/axiosFunctions/crudAxios";
+    addNewPersonne,addNewRessource,addNewQrCode,addNewPanierStore,addNewTagStore,addNewEmplacement,addNewCalendrier,addNewEvenement,getAllJour,getAllJourColumn} from "@/axiosFunctions/crudAxios";
 
 export default {
     namespaced: true,
