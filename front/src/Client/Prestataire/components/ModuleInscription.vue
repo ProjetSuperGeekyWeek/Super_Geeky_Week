@@ -49,7 +49,7 @@
             <div class="card-inscription-image">
                 <img :src="image" alt="Image de l'événement">
             </div>
-            <div v-show="!inscription" class="card-inscription-body">
+            <div v-show="!modif" class="card-inscription-body">
                 <h2>{{ infos.titre }}</h2>
                 <!-- warning -->
                 <p>{{ infos.description }}</p>
@@ -62,31 +62,70 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card-inscription-tarif" v-if="!alreadyInscrit">
+                <div class="card-inscription-tarif">
                     <h3>Inscription</h3>
-                    <button @click="formulaireInscrire()">{{ stringTarif }}</button>
+                    <h4>{{ stringTarif }}</h4>
                 </div>
-                <div v-if="alreadyInscrit" class="card-inscription-infos">
-                    <h4>Vous etes bien inscrit {{ inscritPrenom }} {{ inscritNom }} à la séance de {{ inscritSeance }}</h4>
-                    <button @click="desinscrire">Désinscrire</button>
+                <div class="card-inscription-admin-btn">
+                    <button @click="modif = true">Modifier</button>
+                    <button v-show="!listeInscrit" @click="afficherInscrits">Afficher inscrits</button>
+                    <button v-show="listeInscrit" @click="listeInscrit = false">Cacher inscrits</button>
                 </div>
             </div>
-            <div class="card-inscription-formulaire" v-show="inscription">
-                <h2>{{ infos.titre }}</h2>
-                <select name="seance" class="seance" v-model="inscritIndexSeance">
-                    <option v-for="(horaire, index) in infos.horaires" :key="index" :value="index">
-                        {{ horaire.jour }} {{ horaire.heure_debut }}-{{ horaire.heure_fin }}
-                    </option>
-                </select>
-                <div class="card-inscription-formulaire-infos">
-                    <input type="text" name="nom" class="nom" placeholder="nom" v-model="inscritNom" @change="verifNom()">
-                    <input type="text" name="prenom" class="prenom" placeholder="prenom" v-model="inscritPrenom" @change="verifPrenom()">
+            <div class="card-inscription-formulaire" v-show="modif">
+                <textarea name="description-modif" class="card-inscription-modif-titre" cols="30" rows="10" :placeholder="infos.titre" v-model="titreProvisoire"></textarea>
+                <textarea name="description-modif" class="description-modif" cols="30" rows="10" :placeholder="infos.description" v-model="descriptionProvisoire"></textarea>
+                <!-- <textarea name="description-modif" class="card-inscription-modif-place" cols="30" rows="10" :placeholder="infos.nb_place" v-model="nbPlacesProvisoire"></textarea> -->
+                <div class="liste-inscription-horaires" v-for="(horaire, index) in infos.horaires" :key="index">
+                    <span>{{ horaire.jour }}</span>
+                    <span>{{ horaire.heure_debut }}</span>
+                    <span>{{ horaire.heure_fin }}</span>
+                    <button @click="removeHoraire(index)">Supprimer</button>
                 </div>
-                <textarea name="description" class="description" cols="30" rows="10" placeholder="description" v-model="inscritDescription"></textarea>
-                <p class="message-erreur"></p>
-                <div class="card-inscription-formulaire-btn">
-                    <button class="btn-retour" @click="inscription = !inscription">Retour</button>
-                    <button class="btn-valider" @click="inscrire()">Valider</button>
+                <button class="ajouter-horaire-bouton" @click="addHoraire = true">Ajouter un horaire</button>
+                <div v-show="addHoraire">
+                    <select name="jour-add" class="jour-add" v-model="idJourAdd">
+                        <option v-for="jour in nomJours" :key="jour.id_jour" :value="jour.id_jour">
+                            {{ jour.jour }}
+                        </option>
+                    </select>
+                    <div class="jour-add-texte">
+                        <span>
+                            <input type="number" v-model="newHeureDebut">h
+                            <input type="number" v-model="newMinuteDebut">
+                        </span>
+                        <span>
+                            <input type="number" v-model="newHeureFin">h
+                            <input type="number" v-model="newMinuteFin">
+                        </span>
+                    </div>
+                    <div class="jour-add-button">
+                        <button @click="addHoraire = false">Annuler</button>
+                        <button @click="addNewHoraire">Ajouter</button>
+                    </div>
+                </div>
+                <div class="card-inscription-formulaire-btn" v-show="!addHoraire">
+                    <button class="btn-retour" @click="modif = false">Annuler</button>
+                    <button class="btn-valider" @click="validModif">Valider</button>
+                </div>
+            </div>
+        </div>
+        <div class="liste-inscrits" v-if="listeInscrit">
+            <div class="liste-inscrits-titre">
+                <h2>Liste des inscrits</h2>
+            </div>
+            <div class="liste-inscrits-body">
+                <div class="liste-inscrits-body-titre">
+                    <span>Nom</span>
+                    <span>Prenom</span>
+                    <span>Seance</span>
+                    <span>Description</span>
+                </div>
+                <div class="liste-inscrits-body-inscrit" v-for="(inscrit, index) in listeInscrits" :key="index">
+                    <span>{{ inscrit.nom }}</span>
+                    <span>{{ inscrit.prenom }}</span>
+                    <span>{{ inscrit.jour }} {{ inscrit.heure_debut }}-{{ inscrit.heure_fin }}</span>
+                    <span>{{ inscrit.description }}</span>
                 </div>
             </div>
         </div>
@@ -94,14 +133,17 @@
 </template>
 
 <script>
-import { postInscrit, deleteInscrit } from '@/../../back/axiosFunctions/inscriptionAxios';
+import { postInscrit, postHoraire, putInscription, deleteInscrit, deleteHoraire,
+        getAllInscritsIdInscription } 
+    from '@/../../back/axiosFunctions/inscriptionAxios';
 
 export default {
     name: 'ModuleInscriptions',
     props : {
         position : Number,
         proprio : Boolean,
-        infos : Object
+        infos : Object,
+        nomJours: Object,
     },
     data() {
         return {
@@ -116,6 +158,18 @@ export default {
             inscritDescription : '',
 
             modif: false,
+            idJourAdd: null,
+            titreProvisoire: '',
+            descriptionProvisoire: '',
+            // nbPlacesProvisoire: '',
+            addHoraire: false,
+            jours: [],
+            newHeureDebut: '',
+            newHeureFin: '',
+            newMinuteDebut: '',
+            newMinuteFin: '',
+            listeInscrit: false,
+            listeInscrits: [],
         }
     },
     computed: {
@@ -127,6 +181,98 @@ export default {
         }
     },
     methods: {
+        updateProps(){
+            this.$emit('update', true);
+        },
+        transformMinuteHeureToTimeFormat(heure,minute){
+            if(heure < 10){
+                heure = "0"+heure;
+            }
+            if(minute < 10){
+                minute = "0"+minute;
+            }
+            return heure+":"+minute;
+        },
+        verifNewHoraires(){
+            if(
+                (isNaN(this.newHeureDebut) || this.newHeureDebut == "")
+                || (isNaN(this.newHeureFin) || this.newHeureFin == "")
+                || (isNaN(this.newMinuteDebut) || this.newMinuteDebut == "")
+                || (isNaN(this.newMinuteFin) || this.newMinuteFin == "")
+                || (this.idJourAdd == null)
+            ){
+                return false;
+            }
+            if (
+                (this.newHeureDebut > 22 || this.newHeureDebut < 8)
+                || (this.newHeureFin > 22 || this.newHeureFin < 8)
+                || (this.newMinuteDebut > 59 || this.newMinuteDebut < 0)
+                || (this.newMinuteFin > 59 || this.newMinuteFin < 0)
+            ) {
+                return false;
+            }
+            return true;
+        },
+        async addNewHoraire(){
+            if(this.verifNewHoraires()){
+                let id_jour = this.idJourAdd;
+                let heure_debut = this.transformMinuteHeureToTimeFormat(this.newHeureDebut,this.newMinuteDebut);
+                let heure_fin = this.transformMinuteHeureToTimeFormat(this.newHeureFin,this.newMinuteFin);
+                try {
+                    await postHoraire(this.infos.id_activite, id_jour, heure_debut, heure_fin);
+                    this.addHoraire = false;
+                    this.updateProps();
+                } catch (error) {
+                    console.log(error);
+                }
+            }else{
+                alert("veuillez remplir correctement tout les champs horaires (les heures allant de 8h à 22h et les minutes de 0 à 59) et choisir un jour")
+            }
+        },
+        async removeHoraire(index){
+            let id_calendrier = this.infos.horaires[index].id_calendrier;
+            try {
+                await deleteHoraire(this.infos.id_activite, id_calendrier);
+                this.updateProps();
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async afficherInscrits(){
+            this.listeInscrit = true;
+            try {
+                let res = await getAllInscritsIdInscription(this.infos.id_activite);
+                for (let i = 0; i < res.length; i++) {
+                    res[i].heure_debut = res[i].heure_debut.substring(0, 5);
+                    res[i].heure_fin = res[i].heure_fin.substring(0, 5);
+                }
+                this.listeInscrits = res;
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async validModif(){
+            this.modif = false;
+            let titre = this.titreProvisoire;
+            if (titre == null || titre == "") {
+                titre = this.infos.titre;
+            }
+            let description = this.descriptionProvisoire;
+            if (description == null || description == "") {
+                description = this.infos.description;
+            }
+            // let nb_place = this.nbPlacesProvisoire;
+            // if (nb_place == null || nb_place == "") {
+            //     nb_place = this.infos.nb_place;
+            // }
+            let id_activite = this.infos.id_activite;
+            try {
+                await putInscription(id_activite, titre, description, 1);
+                this.updateProps();
+            } catch (error) {
+                console.log(error);
+            }
+        },
         turnErreur(element,message){
             if(element != null){
                 element.style.filter = "drop-shadow(0px 0px 5px red)";
@@ -210,7 +356,7 @@ export default {
             } catch (error) {
                 console.log(error);
             }
-        }
+        },
     },
 }
 
@@ -291,7 +437,7 @@ export default {
     font-size: 1rem;
 }
 
-.card-inscription-tarif {
+.card-inscription-tarif, .card-inscription-admin-btn{
     margin-bottom: 1rem;
 }
 
@@ -301,7 +447,7 @@ export default {
     margin-bottom: 1rem;
 }
 
-.card-inscription-tarif button{
+.card-inscription-tarif button, .card-inscription-admin-btn button{
     font-size: 1rem;
     padding: 0.5rem 1rem;
     border: 2px solid #000;
@@ -310,7 +456,7 @@ export default {
     cursor: pointer;
 }
 
-.card-inscription-tarif button:hover{
+.card-inscription-tarif button:hover, .card-inscription-admin-btn button:hover{
     background-color: #000;
     color: #fff;
 }
@@ -352,7 +498,7 @@ export default {
     border : 3px solid darkred;
 }
 
-.card-inscription-formulaire textarea {
+.card-inscription-formulaire textarea, .card-inscription-modif-titre {
     width: 100%;
     max-width: max-content;
     height: 5rem;
@@ -363,12 +509,12 @@ export default {
     resize: none;
 }
 
-.card-inscription-formulaire textarea:focus {
+.card-inscription-formulaire textarea:focus, .card-inscription-modif-titre:focus {
     outline: none;
     border: 3px solid darkred;
 }
 
-.card-inscription-formulaire textarea:hover {
+.card-inscription-formulaire textarea:hover, .card-inscription-modif-titre:hover {
     border-color: darkred;
 }
 
@@ -380,7 +526,7 @@ export default {
     margin-bottom: 1rem;
 }
 
-.card-inscription-formulaire-btn {
+.card-inscription-formulaire-btn{
     display: flex;
     justify-content: space-between;
 }

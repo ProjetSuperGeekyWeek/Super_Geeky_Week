@@ -23,7 +23,7 @@ async function getAllInscriptionsIdPrestaFromAPI(id){
         const result = await client.query(query, [id]);
         return result.rows;
     } catch (e) {
-        console.log(e);
+        // console.log(e);,
         throw e;
     } finally {
         client.release();
@@ -47,10 +47,72 @@ async function getAllHorairesIdInscriptionFromAPI(id){
             jour.date_calendrier AS jour
             FROM calendrier
             INNER JOIN inscription_calendrier ON inscription_calendrier.id_calendrier = calendrier.id_calendrier
+            INNER JOIN jour ON jour.id_jour = calendrier.id_jour
             WHERE inscription_calendrier.id_inscription = $1
-            ORDER BY jour ASC, heure_debut ASC
+            ORDER BY jour.id_jour ASC, heure_debut ASC
         `;
         const result = await client.query(query, [id]);
+        return result.rows;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
+const getAllInscritsIdInscription = (id, callback) => {
+    getAllInscritsIdInscriptionFromAPI(id).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function getAllInscritsIdInscriptionFromAPI(id){
+    const client = await pool.connect();
+    try {
+        const query = `
+            SELECT inscription.id_inscription AS id_activite, nom_inscrit AS nom, 
+            prenom_inscrit AS prenom, description_inscrit AS description,
+            calendrier.id_calendrier AS id_calendrier,
+            horaire_debut AS heure_debut, horaire_fin AS heure_fin,
+            jour.date_calendrier AS jour
+            FROM inscrit
+            INNER JOIN inscription ON inscription.id_inscription = inscrit.id_inscription
+            INNER JOIN inscription_calendrier ON inscription_calendrier.id_inscription = inscrit.id_inscription
+            INNER JOIN calendrier ON calendrier.id_calendrier = inscription_calendrier.id_calendrier
+            INNER JOIN jour ON jour.id_jour = calendrier.id_jour
+            WHERE inscrit.id_inscription = $1
+            ORDER BY jour.id_jour ASC, heure_debut ASC
+        `;
+        const result = await client.query(query, [id]);
+        return result.rows;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
+const getJours = (callback) => {
+    getJoursFromAPI().then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function getJoursFromAPI(){
+    const client = await pool.connect();
+    try {
+        const query = `
+        SELECT id_jour, date_calendrier AS jour
+        FROM jour
+        ORDER BY id_jour ASC
+        `;
+        const result = await client.query(query);
         return result.rows;
     } catch (e) {
         console.log(e);
@@ -77,6 +139,82 @@ async function postInscritFromAPI(id, nom, prenom, description,id_calendrier){
         VALUES ($1, $2, $3, $4, $5)
         `;
         const result = await client.query(query, [id, nom, prenom, description,id_calendrier]);
+        return result.rows;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
+const postHoraire = (id, id_jour, heure_debut, heure_fin, callback) => {
+    postHoraireFromAPI(id, id_jour, heure_debut, heure_fin).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function postHoraireFromAPI(id, id_jour, heure_debut, heure_fin){
+    const client = await pool.connect();
+    try {
+        const query = `
+        SELECT id_calendrier
+        FROM calendrier
+        WHERE id_jour = $1
+        AND horaire_debut = $2
+        AND horaire_fin = $3
+        `;
+        const calendrier = await client.query(query, [id_jour, heure_debut, heure_fin]);
+        if(calendrier.rows[0] === undefined){
+            const query2 = `
+            INSERT INTO calendrier (id_jour, horaire_debut, horaire_fin)
+            VALUES ($1, $2, $3)
+            RETURNING id_calendrier
+            `;
+            const insert = await client.query(query2, [id_jour, heure_debut, heure_fin]);
+            const query3 = `
+            SELECT id_calendrier
+            FROM calendrier
+            WHERE id_jour = $1
+            AND horaire_debut = $2
+            AND horaire_fin = $3
+            `;
+            const calendrier = await client.query(query3, [id_jour, heure_debut, heure_fin]);
+        }
+        const query4 = `
+        INSERT INTO inscription_calendrier (id_inscription, id_calendrier)
+        VALUES ($1, $2)
+        `;
+        const result = await client.query(query4, [id, calendrier.rows[0].id_calendrier]);
+        return result.rows;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
+//put
+const putInscription = (id, titre, description, nb_place, callback) => {
+    putInscriptionFromAPI(id, titre, description, nb_place).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function putInscriptionFromAPI(id, titre, description, nb_place){
+    const client = await pool.connect();
+    try {
+        const query = `
+        UPDATE inscription
+        SET nom_inscription = $2, description_inscription = $3, nb_place = $4
+        WHERE id_inscription = $1
+        `;
+        const result = await client.query(query, [id, titre, description, nb_place]);
         return result.rows;
     } catch (e) {
         console.log(e);
@@ -115,10 +253,41 @@ async function deleteInscritFromAPI(id, nom, prenom,id_calendrier){
     }
 }
 
+const deleteHoraire = (id, id_calendrier, callback) => {
+    deleteHoraireFromAPI(id, id_calendrier).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function deleteHoraireFromAPI(id, id_calendrier){
+    const client = await pool.connect();
+    try {
+        const query = `
+        DELETE FROM inscription_calendrier
+        WHERE id_inscription = $1
+        AND id_calendrier = $2
+        `;
+        const result = await client.query(query, [id, id_calendrier]);
+        return result.rows;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 
 module.exports = {
     getAllInscriptionsIdPresta,
     getAllHorairesIdInscription,
+    getAllInscritsIdInscription,
+    getJours,
     postInscrit,
-    deleteInscrit
+    postHoraire,
+    putInscription,
+    deleteInscrit,
+    deleteHoraire
 };

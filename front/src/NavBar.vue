@@ -104,7 +104,6 @@ hr{
 
 .logo_auth{
   width: 10%;
-
 }
 
 .logo2_auth{

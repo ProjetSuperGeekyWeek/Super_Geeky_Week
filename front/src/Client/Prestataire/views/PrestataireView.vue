@@ -20,6 +20,8 @@
                         :position="index"
                         :proprio="proprio"
                         :infos="inscription"
+                        :nomJours="nomJours"
+                        @update="getInscriptions"
                     />
                 </div>
                 <div class="tabactivite-livreOr">
@@ -37,7 +39,7 @@
     import ModuleInscriptions from '@/Client/Prestataire/components/ModuleInscription.vue';
     import { mapState } from 'vuex';
     import { getPrestataireById } from '@/../../back/axiosFunctions/prestataireAxios';
-    import { getAllInscriptionsIdPresta, getAllHorairesIdInscription } from '@/../../back/axiosFunctions/inscriptionAxios';
+    import { getAllInscriptionsIdPresta, getAllHorairesIdInscription, getJours } from '@/../../back/axiosFunctions/inscriptionAxios';
 
     export default {
         name: 'PrestataireView',
@@ -45,6 +47,7 @@
         data() {
             return {
                 index: 0,
+                nomJours: [],
                 prestataire: {
                     nom_personne: '',
                     prenom_personne: '',
@@ -94,9 +97,18 @@
                     console.log(error);
                 }
             },
+            async getJours(){
+                try {
+                    let res = await getJours();
+                    this.nomJours = res;
+                } catch (error) {
+                    console.log(error);
+                }
+            },
             async loadData() {
                 await this.getPrestataire();
                 await this.getInscriptions();
+                await this.getJours();
             },
         },
         computed: {
