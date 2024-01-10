@@ -82,6 +82,8 @@ export default {
                 deconection:"Déconnexion",
                 mdp:"Mot de passe",
                 soumettre:"Soumettre",
+                acheter:"Acheter",
+
             },
         };
     },
