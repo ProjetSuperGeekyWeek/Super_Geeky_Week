@@ -31,8 +31,12 @@
                     :idPresta="id"
                     @update:temoignages="getLivreOr"/>
                 </div>
-                <div class="tabactivite-contact">
-
+                <div class="tabactivite-contact" v-if="proprio">
+                    <ContactPrestataire
+                        :messages="messages"
+                        :idPresta="id"
+                        @update:messages="getMessages"
+                    />
                 </div>
             </div>
         </div>
@@ -42,6 +46,7 @@
 <script>
     import ModuleInscriptions from '@/Client/Prestataire/components/ModuleInscription.vue';
     import livreDor from '@/Client/Prestataire/components/LivreDor.vue';
+    import ContactPrestataire from '@/Client/Prestataire/components/ContactPrestataire.vue';
     import { mapState } from 'vuex';
     import { getPrestataireById } from '@/axiosFunctions/prestataireAxios';
     import { getAllInscriptionsIdPresta, getAllHorairesIdInscription, getJours } from '@/axiosFunctions/inscriptionAxios';
@@ -51,7 +56,8 @@
         name: 'PrestataireView',
         components: { 
             ModuleInscriptions,
-            livreDor 
+            livreDor,
+            ContactPrestataire,
         },
         data() {
             return {
@@ -74,6 +80,15 @@
         methods: {
             translate(prop) {
                 return this[this.lang][this.lang][prop];
+            },
+            async getMessages() {
+                // try {
+                //     let res = await getMessagesByIdPresta(this.id);
+                //     this.messages = res;
+                // } catch (error) {
+                //     console.log(error);
+                // }
+                return true;
             },
             async getLivreOr(){
                 try {
@@ -148,13 +163,6 @@
         },
         async mounted() {
             this.loadData();
-        },
-        watch: {
-            $route(to, from) {
-                from;
-                to;
-                this.user = 1;// chercher avec axios les infos de user en fonction de $route.params.id
-            },
         },
     };
 </script>
