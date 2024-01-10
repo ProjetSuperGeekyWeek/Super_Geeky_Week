@@ -6,14 +6,16 @@
     <input type="time" placeholder="Horaire début" v-model="horaire_debut">
     <input type="time" placeholder="Horaire fin" v-model="horaire_fin">
     <input type="button" value="Valider" @click="addNewQrCode">
-    <input type="button" value="retour" @click="returnCrud">
+    <boutonRetourCrud/>
   </div>
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
   name: 'addCalendrierCrud',
+  components: {boutonRetourCrud},
   data: () => ({
     id_jour: 1,
     horaire_debut: '',
@@ -41,10 +43,7 @@ export default{
       await this.getAllJourStore()
       this.listJour = this.getAllJour;
       console.log(this.listJour, "listJour")
-    },
-    async returnCrud() {
-      this.$router.push('/admin/crud')
-    },
+    }
   },
   async created(){
     await this.loadData();
