@@ -25,7 +25,7 @@
                     />
                 </div>
                 <div class="tabactivite-livreOr">
-
+                    <livreDor v-if="livreOr != []"/>
                 </div>
                 <div class="tabactivite-contact">
 
@@ -37,13 +37,18 @@
 
 <script>
     import ModuleInscriptions from '@/Client/Prestataire/components/ModuleInscription.vue';
+    import livreDor from '@/Client/Prestataire/components/LivreDor.vue';
     import { mapState } from 'vuex';
     import { getPrestataireById } from '@/axiosFunctions/prestataireAxios';
     import { getAllInscriptionsIdPresta, getAllHorairesIdInscription, getJours } from '@/axiosFunctions/inscriptionAxios';
+    import { getTemoignageByIdPresta } from '@/axiosFunctions/livredorAxios';
 
     export default {
         name: 'PrestataireView',
-        components: { ModuleInscriptions },
+        components: { 
+            ModuleInscriptions,
+            livreDor 
+        },
         data() {
             return {
                 index: 0,
@@ -56,21 +61,24 @@
                     image_personne: '',
                 },
                 inscriptions: [],
-                livreOr: {
-                    id_personne: '',
-                    id_activite: '',
-                    note: '',
-                    commentaire: '',
-                },
+                livreOr: [],
                 contact: {
 
                 }
             };
         },
         methods: {
-          translate(prop) {
-            return this[this.lang][this.lang][prop];
-          },
+            translate(prop) {
+                return this[this.lang][this.lang][prop];
+            },
+            async getLivreOr(){
+                try {
+                    let res = await getTemoignageByIdPresta(this.id);
+                    this.livreOr = res;
+                } catch (error) {
+                    console.log(error);
+                }
+            },
             async getPrestataire() {
                 try{
                     let res = await getPrestataireById(this.id);
@@ -112,6 +120,7 @@
                 await this.getPrestataire();
                 await this.getInscriptions();
                 await this.getJours();
+                await this.getLivreOr();
             },
         },
         computed: {
