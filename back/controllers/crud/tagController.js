@@ -52,3 +52,15 @@ exports.deleteTagById = async (req, res) => {
         }
     });
 }
+
+exports.updateTag = async (req, res) => {
+    tagService.updateTag(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updateTag."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

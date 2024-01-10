@@ -121,9 +121,31 @@ async function deletePanierByIdFromAPI(id_panier){
     }
 }
 
+const updatePanier = (body, callback) => {
+    updatePanierFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function updatePanierFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('UPDATE panier SET nom_panier=$1 WHERE id_panier=$2', [body.nom_panier,body.id_panier]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllPanier:getAllPanier,
     getAllPanierColumn:getAllPanierColumn,
     addNewPanier:addNewPanier,
     deletePanierById:deletePanierById,
+    updatePanier:updatePanier,
 };

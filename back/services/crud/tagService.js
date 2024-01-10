@@ -121,9 +121,31 @@ async function deleteTagByIdFromAPI(id_tag){
     }
 }
 
+const updateTag = (body, callback) => {
+    updateTagFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function updateTagFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('UPDATE tag SET nom_tag=$1 WHERE id_tag=$2', [body.nom_tag,body.id_tag]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllTag:getAllTag,
     getAllTagColumn:getAllTagColumn,
     addNewTag:addNewTag,
     deleteTagById:deleteTagById,
+    updateTag:updateTag,
 };

@@ -148,9 +148,31 @@ async function deleteEmplacementByIdFromAPI(id_emplacement){
     }
 }
 
+const updateEmplacement = (body, callback) => {
+    updateEmplacementFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function updateEmplacementFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('UPDATE emplacement SET nom_emplacement=$1 WHERE id_emplacement=$2', [body.nom_emplacement,body.id_emplacement]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllEmplacement:getAllEmplacement,
     getAllEmplacementColumn:getAllEmplacementColumn,
     addNewEmplacement:addNewEmplacement,
     deleteEmplacementById:deleteEmplacementById,
+    updateEmplacement:updateEmplacement,
 };

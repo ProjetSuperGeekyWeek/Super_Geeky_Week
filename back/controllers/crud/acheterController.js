@@ -51,3 +51,15 @@ exports.deleteAcheterById = async (req, res) => {
         }
     });
 }
+
+exports.updateAcheter = async (req, res) => {
+    acheterService.updateAcheter(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updateAcheter."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

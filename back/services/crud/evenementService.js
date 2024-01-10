@@ -123,9 +123,32 @@ async function deleteEvenementByIdFromAPI(id_evenement){
     }
 }
 
+const updateEvenement = (body, callback) => {
+    updateEvenementFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function updateEvenementFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('UPDATE evenement SET nom_evenement=$1,description_evenement=$2,nb_place=$3,image_evenement=$4,id_personne=$5,id_emplacement=$6 WHERE id_evenement=$7'
+            , [body.nom_evenement,body.description_evenement,body.nb_place,body.image_evenement,body.id_personne,body.id_emplacement,body.id_evenement]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllEvenement:getAllEvenement,
     getAllEvenementColumn:getAllEvenementColumn,
     addNewEvenement:addNewEvenement,
     deleteEvenementById:deleteEvenementById,
+    updateEvenement:updateEvenement,
 };

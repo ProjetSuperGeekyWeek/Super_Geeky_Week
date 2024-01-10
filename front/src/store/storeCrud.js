@@ -4,7 +4,7 @@ import {getAllAcheter,getAllAcheterColumn,getAllCalendrier,getAllCalendrierColum
     getAllEvenement,getAllEvenementColumn,getAllItem,getAllItemColumn,getAllLignePanier,getAllLignePanierColumn,getAllPanier,
     getAllPanierColumn,getAllPersonne,getAllPersonneColumn,getAllPersonneTag,getAllPersonneTagColumn,getAllQrCode,getAllQrCodeColumn,
     getAllRessource,getAllRessourceColumn,getAllStand,getAllStandColumn,getAllTag,getAllTagColumn, addNewRole, addNewItem,addNewAcheter,
-    addNewPersonne,addNewRessource,addNewQrCode,addNewPanierStore,addNewTagStore,addNewEmplacement,addNewCalendrier,addNewEvenement} from "@/../../back/axiosFunctions/crudAxios";
+    addNewPersonne,addNewRessource,addNewQrCode,addNewPanierStore,addNewTagStore,addNewEmplacement,addNewCalendrier,addNewEvenement,getAllJour,getAllJourColumn} from "@/../../back/axiosFunctions/crudAxios";
 
 export default {
     namespaced: true,
@@ -57,6 +57,9 @@ export default {
         tabAllTag: [],
         tabAllTagColumn: [],
 
+        tabAllJour: [],
+        tabAllJourColumn: [],
+
         /*tabAll: [],
         tabAllColumn: [],*/
     }),
@@ -93,6 +96,8 @@ export default {
         getAllStandColumn: state => state.tabAllStandColumn,
         getAllTag: state => state.tabAllTag,
         getAllTagColumn: state => state.tabAllTagColumn,
+        getAllJour: state => state.tabAllJour,
+        getAllJourColumn: state => state.tabAllJourColumn,
 
         /*getAll: state => state.tabAll,
         getAllColumn: state => state.tabAllColumn,*/
@@ -193,6 +198,12 @@ export default {
         },
         SET_ALL_TAG_COLUMN(state, payload){
             state.tabAllTagColumn = payload;
+        },
+        SET_ALL_JOUR(state, payload){
+            state.tabAllJour = payload;
+        },
+        SET_ALL_JOUR_COLUMN(state, payload){
+            state.tabAllJourColumn = payload;
         },
     
         /*SET_ALL(state, payload){
@@ -459,6 +470,22 @@ export default {
               console.log(e);
             }
           },
+        async getAllJourStore({commit}){
+            try{
+                const tag = await getAllJour();
+                await commit('SET_ALL_JOUR', tag);
+            } catch (e) {
+                console.log(e);
+            }
+        },
+        async getAllJourColumnStore({commit}){
+            try{
+                const columnTag = await getAllJourColumn();
+                await commit('SET_ALL_JOUR_COLUMN', columnTag);
+            } catch (e) {
+                console.log(e);
+            }
+        },
           async addNewRoleStore({commit}, body){
             let result = null
             try{

@@ -53,3 +53,15 @@ exports.deleteItemById = async (req, res) => {
         }
     });
 }
+
+exports.updateItem = async (req, res) => {
+    itemService.updateItem(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updateItem."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

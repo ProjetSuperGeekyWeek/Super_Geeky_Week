@@ -51,3 +51,15 @@ exports.deleteQrCodeById = async (req, res) => {
         }
     });
 }
+
+exports.updateQrCode = async (req, res) => {
+    qrCodeService.updateQrCode(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updateQrCode."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
