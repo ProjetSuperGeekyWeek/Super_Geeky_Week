@@ -2,6 +2,8 @@ export default {
     data(){
         return{
             en: {
+                vid_not_supported:"Your browser does not support the video tag.",
+
                 nav_home: "Home",
                 nav_ticket: "Ticket",
                 nav_espace_perso: "My Page",

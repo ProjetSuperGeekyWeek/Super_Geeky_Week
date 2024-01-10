@@ -2,6 +2,8 @@ export default {
     data(){
         return{
             fr: {
+                vid_not_supported:"Votre navigateur ne supporte pas la balise vidéo.",
+
                 nav_home: "Accueil",
                 nav_ticket: "Billets",
                 nav_espace_perso: "Ma Page",
