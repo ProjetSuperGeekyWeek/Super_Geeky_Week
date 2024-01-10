@@ -2,7 +2,7 @@
   <div class="home">
     <video autoplay loop muted>
       <source src="../../.././assets/vidéo/Conv_video.mp4" type="video/mp4">
-      Votre navigateur ne supporte pas la balise vidéo.
+      {{ translate('vid_not_supported') }}
     </video>
   </div>
 </template>

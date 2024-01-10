@@ -2,6 +2,8 @@ export default {
     data(){
         return{
             en: {
+                vid_not_supported:"Your browser does not support the video tag.",
+
                 nav_home: "Home",
                 nav_ticket: "Ticket",
                 nav_espace_perso: "My Page",
@@ -19,6 +21,22 @@ export default {
                 jour:"Day ",
                 hora:" / Schedule from ",
                 a:" to ",
+                description:"Description: ",
+                prix:"Price: ",
+                stock:"Stock: ",
+
+                prestation:"Service",
+                quantite:"Quantity",
+                soustotaux:"Subtotal",
+
+                rentrezinfo:"Enter your information",
+                prenom:"First Name: ",
+                nom:"Last Name: ",
+                email:"Email Address: ",
+                validerinfo:"Validate Information",
+                enteremail:"Enter a valid email address",
+
+                information:"Information: ",
             },
         };
     },

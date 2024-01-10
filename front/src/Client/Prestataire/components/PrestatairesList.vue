@@ -285,7 +285,7 @@ export default {
 }
 
 .prestataires-cards {
-  width: 60%;
+  width: 220px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -293,7 +293,7 @@ export default {
 
 .prestataires-card {
   flex: 0 0 calc(25% - 20px);
-  height: 250px;
+  height: auto;
   margin: 10px;
   border-radius: 10px;
   border-style: solid;

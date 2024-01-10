@@ -2,6 +2,8 @@ export default {
     data(){
         return{
             fr: {
+                vid_not_supported:"Votre navigateur ne supporte pas la balise vidéo.",
+
                 nav_home: "Accueil",
                 nav_ticket: "Billets",
                 nav_espace_perso: "Ma Page",
@@ -19,6 +21,22 @@ export default {
                 jour:"Jour ",
                 hora:" / Horaire de ",
                 a:" a ",
+                description:"Description : ",
+                prix:"Prix : ",
+                stock:"Stock : ",
+
+                prestation:"Prestations",
+                quantite:"Quantité",
+                soustotaux:"Sous-total",
+
+                rentrezinfo:"Renseignez vos informations",
+                prenom:"Prénom : ",
+                nom:"Nom : ",
+                email:"Adresse email : ",
+                validerinfo:"Valider les informations",
+                enteremail:"Entrer une adresse email valide",
+
+                information:"Information : ",
             },
         };
     },
