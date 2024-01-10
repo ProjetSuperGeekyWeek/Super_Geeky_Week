@@ -84,6 +84,14 @@ export default {
                 soumettre:"Soumettre",
                 acheter:"Acheter",
 
+                affinscrit:"Afficher inscrits",
+                cachinscrit:"Cacher inscrits",
+                addhoraire:"Ajouter un horaire",
+                ajouter:"Ajouter",
+                listinscrit:"Liste des inscrits",
+                seance:"Séance",
+                rechmotcle:"Recherche par mot-clé",
+                mailpresta:"Mail du prestataire :",
             },
         };
     },

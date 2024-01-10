@@ -83,6 +83,15 @@ export default {
                 mdp:"Password",
                 soumettre:"Submit",
                 acheter:"Buy",
+
+                affinscrit: "Show Registered",
+                cachinscrit: "Hide Registered",
+                addhoraire:"add a schedule",
+                ajouter:"Add",
+                listinscrit:"Registered participants",
+                seance:"Session",
+                rechmotcle:"Search by Keyword",
+                mailpresta:"Provider's Email:",
             },
         };
     },
