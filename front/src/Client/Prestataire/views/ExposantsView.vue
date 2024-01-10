@@ -150,11 +150,6 @@ export default {
   transition: background-color 0.3s;
 }
 
-.exposants-card:hover {
-  background-color: rgba(255, 255, 255, 0.7);
-  /* Changement de couleur au survol */
-}
-
 .exposants-card.highlighted {
   background-color: #ffeb3b;
   /* Couleur de surbrillance */
@@ -186,7 +181,7 @@ export default {
 
 .exposants-info p {
   margin-top: 10px;
-  color: #555;
+  color: #312bbd;
 }
 
 .exposants-nom p {
@@ -203,7 +198,7 @@ export default {
 }
 
 .exposants-tag {
-  background-color: rgba(1, 255, 255, 0.64);
+  background-color: #312bbd;
   color: white;
   padding: 5px 10px;
   border-radius: 15px;
@@ -217,7 +212,7 @@ export default {
 }
 
 .contact-button {
-  background-color: #3498db;
+  background-color: rgba(1, 255, 255, 0.64);
   border: none;
   color: white;
   padding: 7px 16px;
