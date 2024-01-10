@@ -53,6 +53,14 @@ export default {
 
                 livror:"Livre d'or",
                 aucuntemoin:"Aucun témoignage disponible",
+
+                retour:"Retour",
+                desinscrire:"Désinscrire",
+                horaires:"Horaires",
+                inscription:"Inscription",
+
+                zetebieninscrit:"Vous êtes bien inscrit ",
+                seancede:" à la séance de ",
             },
         };
     },

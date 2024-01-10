@@ -9,7 +9,7 @@
                 <!-- warning -->
                 <p>{{ infos.description }}</p>
                 <div class="card-inscription-horaires">
-                    <h3>Horaires</h3>
+                    <h3>{{translate('horaires')}}</h3>
                     <ul>
                         <li v-for="horaire in infos.horaires" :key="horaire">
                             <span>{{ horaire.jour }}</span>
@@ -18,12 +18,12 @@
                     </ul>
                 </div>
                 <div class="card-inscription-tarif" v-if="!alreadyInscrit">
-                    <h3>Inscription</h3>
+                    <h3>{{translate('inscription')}}</h3>
                     <button @click="formulaireInscrire()">{{ stringTarif }}</button>
                 </div>
                 <div v-if="alreadyInscrit" class="card-inscription-infos">
-                    <h4>Vous etes bien inscrit {{ inscritPrenom }} {{ inscritNom }} à la séance de {{ inscritSeance }}</h4>
-                    <button @click="desinscrire">Désinscrire</button>
+                    <h4>{{translate('zetebieninscrit')}}{{ inscritPrenom }} {{ inscritNom }}{{translate('seancede')}}{{ inscritSeance }}</h4>
+                    <button @click="desinscrire">{{translate('desinscrire')}}</button>
                 </div>
             </div>
             <div class="card-inscription-formulaire" v-show="inscription">
@@ -40,8 +40,8 @@
                 <textarea name="description" class="description" cols="30" rows="10" placeholder="description" v-model="inscritDescription"></textarea>
                 <p class="message-erreur"></p>
                 <div class="card-inscription-formulaire-btn">
-                    <button class="btn-retour" @click="inscription = !inscription">Retour</button>
-                    <button class="btn-valider" @click="inscrire()">Valider</button>
+                    <button class="btn-retour" @click="inscription = !inscription">{{translate('retour')}}</button>
+                    <button class="btn-valider" @click="inscrire()">{{translate('valider')}}</button>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 <!-- warning -->
                 <p>{{ infos.description }}</p>
                 <div class="card-inscription-horaires">
-                    <h3>Horaires</h3>
+                    <h3>{{translate('horaires')}}</h3>
                     <ul>
                         <li v-for="horaire in infos.horaires" :key="horaire">
                             <span>{{ horaire.jour }}</span>
@@ -63,12 +63,12 @@
                     </ul>
                 </div>
                 <div class="card-inscription-tarif" v-if="!alreadyInscrit">
-                    <h3>Inscription</h3>
+                    <h3>{{translate('inscription')}}</h3>
                     <button @click="formulaireInscrire()">{{ stringTarif }}</button>
                 </div>
                 <div v-if="alreadyInscrit" class="card-inscription-infos">
-                    <h4>Vous etes bien inscrit {{ inscritPrenom }} {{ inscritNom }} à la séance de {{ inscritSeance }}</h4>
-                    <button @click="desinscrire">Désinscrire</button>
+                    <h4>{{translate('zetebieninscrit')}}{{ inscritPrenom }} {{ inscritNom }}{{translate('seancede')}}{{ inscritSeance }}</h4>
+                    <button @click="desinscrire">{{translate('desinscrire')}}</button>
                 </div>
             </div>
             <div class="card-inscription-formulaire" v-show="inscription">
@@ -85,8 +85,8 @@
                 <textarea name="description" class="description" cols="30" rows="10" placeholder="description" v-model="inscritDescription"></textarea>
                 <p class="message-erreur"></p>
                 <div class="card-inscription-formulaire-btn">
-                    <button class="btn-retour" @click="inscription = !inscription">Retour</button>
-                    <button class="btn-valider" @click="inscrire()">Valider</button>
+                    <button class="btn-retour" @click="inscription = !inscription">{{translate('retour')}}</button>
+                    <button class="btn-valider" @click="inscrire()">{{translate('valider')}}</button>
                 </div>
             </div>
         </div>
@@ -95,6 +95,7 @@
 
 <script>
 import { postInscrit, deleteInscrit } from '@/../../back/axiosFunctions/inscriptionAxios';
+import {mapState} from "vuex";
 
 export default {
     name: 'ModuleInscriptions',
@@ -124,9 +125,13 @@ export default {
                 return "Gratuit";
             }
             return this.infos.tarif + "€";
-        }
+        },
+        ...mapState(['lang', 'en', 'fr']),
     },
     methods: {
+      translate(prop) {
+        return this[this.lang][this.lang][prop];
+      },
         turnErreur(element,message){
             if(element != null){
                 element.style.filter = "drop-shadow(0px 0px 5px red)";

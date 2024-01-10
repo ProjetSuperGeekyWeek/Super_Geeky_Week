@@ -52,7 +52,15 @@ export default {
                 annuler:"Cancel",
 
                 livror:"Guestbook",
-                notemoin:"No testimonials available",
+                aucuntemoin:"No testimonials available",
+
+                retour:"Return",
+                desinscrire:"Unsubscribe",
+                horaires:"Opening Hours",
+                inscription:"Registration",
+
+                zetebieninscrit:"You are successfully registered ",
+                seancede:" for the session of ",
             },
         };
     },
