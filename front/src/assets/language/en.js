@@ -50,6 +50,9 @@ export default {
                 supprimer:"Delete",
                 valider:"Validate",
                 annuler:"Cancel",
+
+                livror:"Guestbook",
+                notemoin:"No testimonials available",
             },
         };
     },

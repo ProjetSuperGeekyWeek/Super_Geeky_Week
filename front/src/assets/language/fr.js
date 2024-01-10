@@ -50,6 +50,9 @@ export default {
                 supprimer:"Supprimer",
                 valider:"Valider",
                 annuler:"Annuler",
+
+                livror:"Livre d'or",
+                aucuntemoin:"Aucun témoignage disponible",
             },
         };
     },

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Livre d'or</h2>
+    <h2>{{translate('livror')}}</h2>
     <div v-if="temoignages.length > 0">
       <div v-for="temoignage in temoignages" :key="temoignage.id_temoignage">
         <div v-html="formatTemoignage(temoignage)" class="temoignage"></div>
@@ -8,13 +8,14 @@
       </div>
     </div>
     <div v-else>
-      <p>Aucun témoignage disponible.</p>
+      <p>{{translate('aucuntemoin')}}</p>
     </div>
   </div>
 </template>
 
 <script>
 import { getTemoignage } from '@/../../back/axiosFunctions/livredorAxios';
+import {mapState} from "vuex";
 
 export default {
   data() {
@@ -23,6 +24,9 @@ export default {
     };
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     async fetchTemoignages() {
       try {
         const response = await getTemoignage();
@@ -42,7 +46,11 @@ export default {
   mounted() {
     this.fetchTemoignages();
   },
+  computed: {
+    ...mapState(['lang', 'en', 'fr']),
+  }
 };
+
 </script>
 
 <style>
