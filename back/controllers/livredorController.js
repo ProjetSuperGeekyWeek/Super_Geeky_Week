@@ -8,7 +8,7 @@ exports.getAllTemoignage = async (req, res) => {
                 message: err.message || "Some error occurred while retrieving temoignage."
             });
         } else {
-            res.json({ data });
+            res.json( data );
         }
     });
 };
@@ -23,7 +23,7 @@ exports.getTemoignageByIdPresta = async (req, res) => {
                 res.status(500).send({ message: "Error retrieving Temoignage with id " + id });
             }
         } else {
-            res.json({ data });
+            res.json( data );
         }
     });
 };
