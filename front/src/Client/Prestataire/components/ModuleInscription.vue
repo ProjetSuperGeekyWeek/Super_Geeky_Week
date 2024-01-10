@@ -9,7 +9,7 @@
                 <!-- warning -->
                 <p>{{ infos.description }}</p>
                 <div class="card-inscription-horaires">
-                    <h3>Horaires</h3>
+                    <h3>{{translate('horaires')}}</h3>
                     <ul>
                         <li v-for="horaire in infos.horaires" :key="horaire">
                             <span>{{ horaire.jour }}</span>
@@ -18,12 +18,12 @@
                     </ul>
                 </div>
                 <div class="card-inscription-tarif" v-if="!alreadyInscrit">
-                    <h3>Inscription</h3>
+                    <h3>{{translate('inscription')}}</h3>
                     <button @click="formulaireInscrire()">{{ stringTarif }}</button>
                 </div>
                 <div v-if="alreadyInscrit" class="card-inscription-infos">
-                    <h4>Vous etes bien inscrit {{ inscritPrenom }} {{ inscritNom }} à la séance de {{ inscritSeance }}</h4>
-                    <button @click="desinscrire">Désinscrire</button>
+                    <h4>{{translate('zetebieninscrit')}}{{ inscritPrenom }} {{ inscritNom }}{{translate('seancede')}}{{ inscritSeance }}</h4>
+                    <button @click="desinscrire">{{translate('desinscrire')}}</button>
                 </div>
             </div>
             <div class="card-inscription-formulaire" v-show="inscription">
@@ -34,14 +34,14 @@
                     </option>
                 </select>
                 <div class="card-inscription-formulaire-infos">
-                    <input type="text" name="nom" class="nom" placeholder="nom" v-model="inscritNom" @change="verifNom()">
-                    <input type="text" name="prenom" class="prenom" placeholder="prenom" v-model="inscritPrenom" @change="verifPrenom()">
+                    <input type="text" name="nom" class="nom" :placeholder="translate('nom')" v-model="inscritNom" @change="verifNom()">
+                    <input type="text" name="prenom" class="prenom" :placeholder="translate('prenom')" v-model="inscritPrenom" @change="verifPrenom()">
                 </div>
                 <textarea name="description" class="description" cols="30" rows="10" placeholder="description" v-model="inscritDescription"></textarea>
                 <p class="message-erreur"></p>
                 <div class="card-inscription-formulaire-btn">
-                    <button class="btn-retour" @click="inscription = !inscription">Retour</button>
-                    <button class="btn-valider" @click="inscrire()">Valider</button>
+                    <button class="btn-retour" @click="inscription = !inscription">{{translate('retour')}}</button>
+                    <button class="btn-valider" @click="inscrire()">{{translate('valider')}}</button>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 <!-- warning -->
                 <p>{{ infos.description }}</p>
                 <div class="card-inscription-horaires">
-                    <h3>Horaires</h3>
+                    <h3>{{translate('horaires')}}</h3>
                     <ul>
                         <li v-for="horaire in infos.horaires" :key="horaire">
                             <span>{{ horaire.jour }}</span>
@@ -63,13 +63,13 @@
                     </ul>
                 </div>
                 <div class="card-inscription-tarif">
-                    <h3>Inscription</h3>
+                    <h3>{{translate('inscription')}}</h3>
                     <h4>{{ stringTarif }}</h4>
                 </div>
                 <div class="card-inscription-admin-btn">
-                    <button @click="modif = true">Modifier</button>
-                    <button v-show="!listeInscrit" @click="afficherInscrits">Afficher inscrits</button>
-                    <button v-show="listeInscrit" @click="listeInscrit = false">Cacher inscrits</button>
+                    <button @click="modif = true">{{translate('modifier')}}</button>
+                    <button v-show="!listeInscrit" @click="afficherInscrits">{{translate('affinscrit')}}</button>
+                    <button v-show="listeInscrit" @click="listeInscrit = false">{{translate('cachinscrit')}}</button>
                 </div>
             </div>
             <div class="card-inscription-formulaire" v-show="modif">
@@ -80,9 +80,9 @@
                     <span>{{ horaire.jour }}</span>
                     <span>{{ horaire.heure_debut }}</span>
                     <span>{{ horaire.heure_fin }}</span>
-                    <button @click="removeHoraire(index)">Supprimer</button>
+                    <button @click="removeHoraire(index)">{{translate('supprimer')}}</button>
                 </div>
-                <button class="ajouter-horaire-bouton" @click="addHoraire = true" v-show="!addHoraire">Ajouter un horaire</button>
+                <button class="ajouter-horaire-bouton" @click="addHoraire = true" v-show="!addHoraire">{{translate('addhoraire')}}</button>
                 <div v-show="addHoraire">
                     <select name="jour-add" class="jour-add" v-model="idJourAdd">
                         <option v-for="jour in nomJours" :key="jour.id_jour" :value="jour.id_jour">
@@ -100,25 +100,25 @@
                         </span>
                     </div>
                     <div class="jour-add-button">
-                        <button @click="addHoraire = false">Annuler</button>
-                        <button @click="addNewHoraire">Ajouter</button>
+                        <button @click="addHoraire = false">{{translate('annuler')}}</button>
+                        <button @click="addNewHoraire">{{translate('ajouter')}}</button>
                     </div>
                 </div>
                 <div class="card-inscription-formulaire-btn" v-show="!addHoraire">
-                    <button class="btn-retour" @click="modif = false">Annuler</button>
-                    <button class="btn-valider" @click="validModif">Valider</button>
+                    <button class="btn-retour" @click="modif = false">{{translate('annuler')}}</button>
+                    <button class="btn-valider" @click="validModif">{{translate('valider')}}</button>
                 </div>
             </div>
         </div>
         <div class="liste-inscrits" v-if="listeInscrit">
             <div class="liste-inscrits-titre">
-                <h2>Liste des inscrits</h2>
+                <h2>{{translate('listinscrit')}}</h2>
             </div>
             <div class="liste-inscrits-body">
                 <div class="liste-inscrits-body-titre">
-                    <span>Nom</span>
-                    <span>Prenom</span>
-                    <span>Seance</span>
+                    <span>{{translate('nom')}}</span>
+                    <span>{{translate('prenom')}}</span>
+                    <span>{{translate('seance')}}</span>
                     <span>Description</span>
                 </div>
                 <div class="liste-inscrits-body-inscrit" v-for="(inscrit, index) in listeInscrits" :key="index">

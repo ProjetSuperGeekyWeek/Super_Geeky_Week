@@ -8,7 +8,7 @@
     </div>
 
     <div v-show="showDivs" class="search-bar">
-      <input id="search" type="text" v-model="keyword" placeholder="Rechercher par mot-clé" @input="filterPresta">
+      <input id="search" type="text" v-model="keyword" :placeholder="translate('rechmotcle')" @input="filterPresta">
     </div>
 
     <div class="selected-filters" v-show="filterTagOn">

@@ -34,9 +34,9 @@
       <div class="modal">
         <h2>{{translate('contactpresta')}}</h2>
         <div>
-          <p v-if="selectedPrestataire && selectedPrestataire.mail_personne"><strong>Mail du prestataire :</strong> {{
+          <p v-if="selectedPrestataire && selectedPrestataire.mail_personne"><strong>{{translate('mailpresta')}}</strong> {{
             selectedPrestataire.mail_personne }}</p>
-          <p v-else><strong>Mail du prestataire :</strong> N/A</p>
+          <p v-else><strong>{{translate('mailpresta')}}</strong> N/A</p>
         </div>
         <br>
         <textarea v-model="messageContent" placeholder="Votre message"></textarea>
