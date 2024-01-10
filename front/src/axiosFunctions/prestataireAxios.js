@@ -1,4 +1,4 @@
-import { getRequest } from "./axios";
+import { getRequest, postRequest } from "./axios";
 
 async function getAllPrestataires() {
     return await getRequest("/api/prestataire", "GETALLPRESTATAIRES");
@@ -30,6 +30,6 @@ export {
     getPrestataireById,
     getPrestataireByNom,
     getPrestataireByTag,
-    getPrestataireTags
+    getPrestataireTags,
     sendContactMessage
 };
