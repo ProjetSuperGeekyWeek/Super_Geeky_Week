@@ -136,6 +136,7 @@
 import { postInscrit, postHoraire, putInscription, deleteInscrit, deleteHoraire,
         getAllInscritsIdInscription } 
     from '@/axiosFunctions/inscriptionAxios';
+import {mapState} from "vuex";
 
 export default {
     name: 'ModuleInscriptions',
@@ -173,6 +174,7 @@ export default {
         }
     },
     computed: {
+      ...mapState(['lang', 'en', 'fr']),
         stringTarif(){
             if (this.infos.tarif == 0) {
                 return "Gratuit";
@@ -181,6 +183,9 @@ export default {
         }
     },
     methods: {
+      translate(prop) {
+        return this[this.lang][this.lang][prop];
+      },
         updateProps(){
             this.$emit('update', true);
         },

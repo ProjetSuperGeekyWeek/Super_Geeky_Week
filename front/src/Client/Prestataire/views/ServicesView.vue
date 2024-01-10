@@ -14,7 +14,7 @@
       </div>
     </template>
     <template v-else>
-      <h1>Service Page</h1>
+      <h1>{{translate('servicepage')}}</h1>
     </template>
   </div>
 </template>
