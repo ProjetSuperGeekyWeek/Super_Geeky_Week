@@ -187,7 +187,7 @@ export default {
         return this[this.lang][this.lang][prop];
       },
         updateProps(){
-            this.$emit('update', true);
+            this.$emit('update:inscriptions', true);
         },
         transformMinuteHeureToTimeFormat(heure,minute){
             if(heure < 10){

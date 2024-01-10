@@ -55,8 +55,37 @@ async function getTemoignageByIdPrestaFromAPI(id) {
     }
 }
 
+//post
+const postTemoignage = async (id_presta, pseudo, temoignage, callback) => {
+    try {
+        const res = await postTemoignageFromAPI(id_presta, pseudo, temoignage);
+        callback(null, res);
+    } catch (error) {
+        callback(error, null);
+    }
+}
+
+async function postTemoignageFromAPI(id_presta, pseudo, temoignage) {
+    const client = await pool.connect();
+    console.log("post");
+    try {
+        const query = `
+        INSERT INTO livre_d_or (id_personne, pseudo, temoignage)
+        VALUES ($1, $2, $3)
+        `;
+        const result = await client.query(query, [id_presta, pseudo, temoignage]); 
+        return result.rows;
+    } catch (e) {
+        console.error("Error in postTemoignageFromAPI:", e); 
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 
 module.exports = {
     getAllTemoignage,
-    getTemoignageByIdPresta
+    getTemoignageByIdPresta,
+    postTemoignage
 };

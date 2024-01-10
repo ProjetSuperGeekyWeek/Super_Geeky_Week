@@ -21,18 +21,15 @@
                         :proprio="proprio"
                         :infos="inscription"
                         :nomJours="nomJours"
-                        @update="getInscriptions"
+                        @update:inscriptions="getInscriptions"
                     />
                 </div>
                 <div class="tabactivite-livreOr">
                     <livreDor
                     :temoignages="livreOr"
                     :proprio="proprio"
-                    :show="showLivreOr"/>
-                </div>
-                <div v-if="proprio">
-                    <button v-if="!showLivreOr" @click="showLivreOr = true">Afficher le Livre d'or</button>
-                    <button v-else @click="showLivreOr = false">Cacher le Livre d'or</button>
+                    :idPresta="id"
+                    @update:temoignages="getLivreOr"/>
                 </div>
                 <div class="tabactivite-contact">
 
@@ -68,7 +65,6 @@
                     image_personne: '',
                 },
                 inscriptions: [],
-                showLivreOr: true,
                 livreOr: [],
                 contact: {
 

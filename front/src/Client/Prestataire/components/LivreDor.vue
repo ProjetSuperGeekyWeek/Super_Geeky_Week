@@ -1,23 +1,25 @@
 <template>
-  <div v-if="(proprio && !show) || show">
-    <h2>{{translate('livror')}}</h2>
-    <div v-if="temoignages.length > 0">
-      <div v-for="temoignage in temoignages" :key="temoignage.id_temoignage">
-        <div v-html="formatTemoignage(temoignage)" class="temoignage"></div>
-        <br>
+  <div>
+    <div class="component-livre-or">
+      <h2>{{translate('livror')}}</h2>
+      <div v-if="temoignages.length > 0">
+        <div class="box-temoignages" v-for="temoignage in temoignages" :key="temoignage.id_temoignage">
+          <div v-html="formatTemoignage(temoignage)" class="temoignage"></div>
+          <br>
+        </div>
+      </div>
+      <div v-else>
+        <p>{{translate('aucuntemoin')}}</p>
       </div>
     </div>
-    <div v-else>
-      <p>{{translate('aucuntemoin')}}</p>
-    </div>
     <div v-if="!proprio">
-      <button v-if="!addTemoin" @click="addTemoignage">ajouter un temoignage</button>
+      <button v-if="!addTemoin" @click="addTemoin = true">ajouter un temoignage</button>
       <div v-if="addTemoin">
-        <form @submit.prevent="addTemoignage">
+        <form @submit.prevent="addTemoignage" class="formulaire-temoignage">
           <label for="pseudo">Pseudo</label>
-          <input type="text" name="pseudo" id="pseudo" :value="addPseudo" required>
+          <input type="texte" name="pseudo" v-model="addPseudo" required>
           <label for="temoignage">Temoignage</label>
-          <textarea name="temoignage" id="temoignage" cols="30" rows="10" :value="addCommentaire" required></textarea>
+          <textarea name="temoignage" cols="30" rows="10" v-model="addCommentaire" required></textarea>
           <button type="submit">Envoyer</button>
         </form>
       </div>
@@ -27,6 +29,7 @@
 
 <script>
 import {mapState} from "vuex";
+import { postTemoignage } from "@/axiosFunctions/livredorAxios";
 
 export default {
   name: "LivreDor",
@@ -40,19 +43,29 @@ export default {
   props: {
     proprio: Boolean,
     temoignages: Object,
+    idPresta: Number,
   },
   methods: {
     translate(prop) {
       return this[this.lang][this.lang][prop];
     },
+    updateProps() {
+      this.$emit('update:temoignages', true);
+    },
     async addTemoignage() {
-      this.addTemoin = !this.addTemoin;
+      try {
+        await postTemoignage(this.addCommentaire,this.addPseudo,this.idPresta);
+        this.updateProps();
+        this.addTemoin = false;
+      } catch (error) {
+        console.log(error);
+      }
     },
     formatTemoignage(temoignage) {
       const temoignageText = temoignage.temoignage;
       const pseudoText = temoignage.pseudo;
 
-      const formattedTemoignage = `<span class="temoignage">${temoignageText}</span> - <span class="pseudo">${pseudoText}</span>`;
+      const formattedTemoignage = `<span class="temoignage">${temoignageText}</span> </br> signé : <span class="pseudo">${pseudoText}</span>`;
       return formattedTemoignage;
     },
   },
@@ -71,6 +84,11 @@ export default {
     margin-bottom: 10px;
   }
 
+.box-temoignages{
+  display: flex;
+  flex-direction: column;
+}
+
 .temoignage {
     color: rgb(158, 1, 1);
   }
@@ -78,4 +96,14 @@ export default {
   .pseudo {
     color: rgb(255, 0, 0);
   }
+
+.formulaire-temoignage{
+  display: flex;
+  flex-direction: column;
+}
+.component-livre-or{
+  border: 3px dashed darkred;
+  border-radius: 60px;
+  background-color: rgb(228, 214, 178);
+}
 </style>

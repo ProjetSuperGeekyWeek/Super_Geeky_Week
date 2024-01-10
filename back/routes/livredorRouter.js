@@ -39,4 +39,8 @@ router.get('/', livredorController.getAllTemoignage);
 
 router.get('/:id', livredorController.getTemoignageByIdPresta);
 
+// post
+router.post('/:id_presta/:pseudo/:temoignage', livredorController.postTemoignage)
+
+
 module.exports = router;
