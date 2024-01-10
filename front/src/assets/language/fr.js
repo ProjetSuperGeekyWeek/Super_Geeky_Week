@@ -74,6 +74,12 @@ export default {
                 nourriture:"Nourriture",
                 activit:"Vos activités :",
                 welcespace:"Bienvenue dans votre espace : ",
+
+                servicepage:"Page de service",
+                bienvenue:"Bienvenue ",
+                changemdp:"Changer le mot de passe",
+                dejaconnect:"Vous êtes déjà connecté",
+                deconection:"Déconnexion",
             },
         };
     },
