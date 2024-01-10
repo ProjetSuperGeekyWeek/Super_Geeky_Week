@@ -51,6 +51,7 @@
     import { getPrestataireById } from '@/axiosFunctions/prestataireAxios';
     import { getAllInscriptionsIdPresta, getAllHorairesIdInscription, getJours } from '@/axiosFunctions/inscriptionAxios';
     import { getTemoignageByIdPresta } from '@/axiosFunctions/livredorAxios';
+    import { getAllContactIdPresta } from '@/axiosFunctions/contactAxios';
 
     export default {
         name: 'PrestataireView',
@@ -72,9 +73,7 @@
                 },
                 inscriptions: [],
                 livreOr: [],
-                contact: {
-
-                }
+                messages: [],
             };
         },
         methods: {
@@ -82,13 +81,12 @@
                 return this[this.lang][this.lang][prop];
             },
             async getMessages() {
-                // try {
-                //     let res = await getMessagesByIdPresta(this.id);
-                //     this.messages = res;
-                // } catch (error) {
-                //     console.log(error);
-                // }
-                return true;
+                try {
+                    let res = await getAllContactIdPresta(this.id);
+                    this.messages = res;
+                } catch (error) {
+                    console.log(error);
+                }
             },
             async getLivreOr(){
                 try {
@@ -140,6 +138,7 @@
                 await this.getInscriptions();
                 await this.getJours();
                 await this.getLivreOr();
+                await this.getMessages();
             },
         },
         computed: {
