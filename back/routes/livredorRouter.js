@@ -35,6 +35,8 @@ var router = express.Router();
  */
 
 // get
-router.get('/', livredorController.getTemoignage);
+router.get('/', livredorController.getAllTemoignage);
+
+router.get('/:id', livredorController.getTemoignageByIdPresta);
 
 module.exports = router;

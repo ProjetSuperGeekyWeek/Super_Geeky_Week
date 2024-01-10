@@ -14,10 +14,11 @@
 </template>
 
 <script>
-import { getTemoignage } from '@/axiosFunctions/livredorAxios';
+import { getAllTemoignage } from '@/axiosFunctions/livredorAxios';
 import {mapState} from "vuex";
 
 export default {
+  name: "LivreDor",
   data() {
     return {
       temoignages: [],
@@ -29,7 +30,7 @@ export default {
     },
     async fetchTemoignages() {
       try {
-        const response = await getTemoignage();
+        const response = await getAllTemoignage();
         this.temoignages = response.data;
       } catch (error) {
         console.error("Error fetching témoignages:", error);
