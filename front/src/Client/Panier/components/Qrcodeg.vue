@@ -1,32 +1,32 @@
 <template>
   <div id="Qrcodeg">
-    <p id="accroched">{{ infoPrompt }}</p>
+    <p id="accroched">{{translate('rentrezinfo')}}</p>
     <form v-if="!showQRCode" @submit.prevent="onFormSubmit">
-      <label id="clo" for="name">  Prénom : </label>
+      <label id="clo" for="name">{{translate('prenom')}}</label>
       <input type="text" id="name" v-model="name">
 
-      <label id="clo" for="familyName">  Nom de famille : </label>
+      <label id="clo" for="familyName">{{translate('nom')}}</label>
       <input type="text" id="familyName" v-model="familyName">
 
-      <label id="clo" for="email">  Adresse email : </label>
+      <label id="clo" for="email">{{translate('email')}}</label>
       <input
           type="text"
           id="email"
           v-model="email"
           :class="{ error: emailError }"
       >
-      <button type="button" @click="validateAndGenerateQRCode">Valider les informations</button>
+      <button type="button" @click="validateAndGenerateQRCode">{{translate('validerinfo')}}</button>
 
-      <p v-if="emailError" class="error-message">Entrer une adresse email valide</p>
+      <p v-if="emailError" class="error-message">{{translate('enteremail')}}</p>
     </form>
 
     <qrcode-vue v-if="showQRCode" :value="qrCodeValue" :size="300" level="H" />
 
     <div v-if="showQRCode" class="info-section">
-      <h3>Informations : </h3>
-      <p><strong>Prénom : </strong> {{ name }}</p>
-      <p><strong>Nom de famille : </strong> {{ familyName }}</p>
-      <p><strong>Adresse email : </strong> {{ email }}</p>
+      <h3>{{translate('information')}}</h3>
+      <p><strong>{{translate('prenom')}}</strong> {{ name }}</p>
+      <p><strong>{{translate('nom')}}</strong> {{ familyName }}</p>
+      <p><strong>{{translate('email')}}</strong> {{ email }}</p>
 
       <h3>QR Code URL:</h3>
       <p>{{ qrCodeValue }}</p>
@@ -36,6 +36,7 @@
 
 <script>
 import QrcodeVue from "qrcode.vue";
+import {mapState} from "vuex";
 
 export default {
   name: 'QrcodeView',
@@ -47,10 +48,10 @@ export default {
       showQRCode: false,
       emailError: false,
       dataLoaded: false,
-      infoPrompt: 'Rentrez vos informations',
     };
   },
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     qrCodeValue() {
       return `http://localhost:8080/qrcode/?name=${encodeURIComponent(this.name)}&familyName=${encodeURIComponent(this.familyName)}&email=${encodeURIComponent(this.email)}`;
     },
@@ -73,6 +74,9 @@ export default {
     }
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     validateAndGenerateQRCode() {
       const emailRegex = /@/;
 

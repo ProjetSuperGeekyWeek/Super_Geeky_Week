@@ -21,7 +21,22 @@ export default {
                 jour:"Jour ",
                 hora:" / Horaire de ",
                 a:" a ",
+                description:"Description : ",
                 prix:"Prix : ",
+                stock:"Stock : ",
+
+                prestation:"Prestations",
+                quantite:"Quantité",
+                soustotaux:"Sous-total",
+
+                rentrezinfo:"Renseignez vos informations",
+                prenom:"Prénom : ",
+                nom:"Nom : ",
+                email:"Adresse email : ",
+                validerinfo:"Valider les informations",
+                enteremail:"Entrer une adresse email valide",
+
+                information:"Information : ",
             },
         };
     },

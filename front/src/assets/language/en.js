@@ -21,8 +21,22 @@ export default {
                 jour:"Day ",
                 hora:" / Schedule from ",
                 a:" to ",
-                prix:"Price : ",
+                description:"Description: ",
+                prix:"Price: ",
+                stock:"Stock: ",
 
+                prestation:"Service",
+                quantite:"Quantity",
+                soustotaux:"Subtotal",
+
+                rentrezinfo:"Enter your information",
+                prenom:"First Name: ",
+                nom:"Last Name: ",
+                email:"Email Address: ",
+                validerinfo:"Validate Information",
+                enteremail:"Enter a valid email address",
+
+                information:"Information: ",
             },
         };
     },
