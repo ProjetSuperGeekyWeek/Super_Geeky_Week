@@ -166,7 +166,7 @@ async function postHoraireFromAPI(id, id_jour, heure_debut, heure_fin){
         AND horaire_debut = $2
         AND horaire_fin = $3
         `;
-        const calendrier = await client.query(query, [id_jour, heure_debut, heure_fin]);
+        var calendrier = await client.query(query, [id_jour, heure_debut, heure_fin]);
         if(calendrier.rows[0] === undefined){
             const query2 = `
             INSERT INTO calendrier (id_jour, horaire_debut, horaire_fin)
@@ -174,14 +174,7 @@ async function postHoraireFromAPI(id, id_jour, heure_debut, heure_fin){
             RETURNING id_calendrier
             `;
             const insert = await client.query(query2, [id_jour, heure_debut, heure_fin]);
-            const query3 = `
-            SELECT id_calendrier
-            FROM calendrier
-            WHERE id_jour = $1
-            AND horaire_debut = $2
-            AND horaire_fin = $3
-            `;
-            const calendrier = await client.query(query3, [id_jour, heure_debut, heure_fin]);
+            calendrier = await client.query(query, [id_jour, heure_debut, heure_fin]);
         }
         const query4 = `
         INSERT INTO inscription_calendrier (id_inscription, id_calendrier)
