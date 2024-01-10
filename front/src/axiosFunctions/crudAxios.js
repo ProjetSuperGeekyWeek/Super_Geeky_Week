@@ -1,4 +1,4 @@
-import { getRequest, patchRequest, postRequest } from "./axios";
+import { getRequest, postRequest } from "./axios";
 
 //Role
 async function getAllRole() {

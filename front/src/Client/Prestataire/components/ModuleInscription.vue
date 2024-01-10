@@ -135,7 +135,7 @@
 <script>
 import { postInscrit, postHoraire, putInscription, deleteInscrit, deleteHoraire,
         getAllInscritsIdInscription } 
-    from '@/../../back/axiosFunctions/inscriptionAxios';
+    from '@/axiosFunctions/inscriptionAxios';
 
 export default {
     name: 'ModuleInscriptions',

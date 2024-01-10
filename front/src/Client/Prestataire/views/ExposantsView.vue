@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { getAllPrestataires } from '@/../../back/axiosFunctions/prestataireAxios';
+import { getAllPrestataires } from '@/axiosFunctions/prestataireAxios';
 import {mapState} from "vuex";
 
 export default {
