@@ -4,19 +4,22 @@
     <form v-if="!showQRCode" @submit.prevent="onFormSubmit">
       <label id="clo" for="name">{{translate('prenom')}}</label>
       <input type="text" id="name" v-model="name">
+      <br>
 
       <label id="clo" for="familyName">{{translate('nom')}}</label>
       <input type="text" id="familyName" v-model="familyName">
+      <br>
 
-      <label id="clo" for="email">{{translate('email')}}</label>
+      <label id="clo" for="email">{{translate('email')}}   </label>
       <input
           type="text"
           id="email"
           v-model="email"
           :class="{ error: emailError }"
       >
-      <button type="button" @click="validateAndGenerateQRCode">{{translate('validerinfo')}}</button>
-
+      <br>
+      <button type="button" class="btninfoqr" @click="validateAndGenerateQRCode">{{translate('validerinfo')}}</button>
+      <br>
       <p v-if="emailError" class="error-message">{{translate('enteremail')}}</p>
     </form>
 
@@ -95,10 +98,8 @@ export default {
       };
 
       this.$router.push({ query: routeParams });
-      this.infoPrompt = 'Qrcode';
     },
     onFormSubmit() {
-      // Prevent the default form submission behavior
     },
   },
   components: {
@@ -152,4 +153,13 @@ export default {
   margin: 5px 0;
   color: var(--paragraph);
 }
+ input {
+   border: 1px solid #ccc;
+   display: block; /* Pour que la marge automatique fonctionne */
+   margin: auto;
+ }
+.btninfoqr{
+   border: 1px solid #ccc;
+   padding: 4px;
+ }
 </style>
