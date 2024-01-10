@@ -1,4 +1,5 @@
 -- Drop table if exists
+DROP TABLE IF EXISTS contact CASCADE;
 DROP TABLE IF EXISTS creneau CASCADE;
 DROP TABLE IF EXISTS evenement CASCADE;
 DROP TABLE IF EXISTS personne_tag CASCADE;
@@ -197,3 +198,11 @@ CREATE TABLE creneau (
     CONSTRAINT fk_evenement FOREIGN KEY (id_evenement) REFERENCES evenement(id_evenement),
     CONSTRAINT fk_calendrier FOREIGN KEY (id_calendrier) REFERENCES calendrier(id_calendrier)
 );
+
+CREATE TABLE contact(
+    id_contact SERIAL PRIMARY KEY,
+    mail_client VARCHAR(100) NOT NULL,
+    message_client TEXT NOT NULL,
+    id_personne INTEGER NOT NULL,
+    CONSTRAINT fk_personne_contact FOREIGN KEY (id_personne) REFERENCES personne(id_personne)
+); 
