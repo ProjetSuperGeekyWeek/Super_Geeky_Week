@@ -80,6 +80,8 @@ export default {
                 changemdp:"Change password",
                 dejaconnecte:"You are already connected",
                 deconection:"Logout",
+                mdp:"Password",
+                soumettre:"Submit",
             },
         };
     },
