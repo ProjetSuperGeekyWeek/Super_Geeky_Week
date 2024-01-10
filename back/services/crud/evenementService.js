@@ -63,8 +63,69 @@ async function addNewEvenementFromAPI(body){
     }
 }
 
+const deleteEvenementById = (id_evenement, callback) => {
+    deleteEvenementByIdFromAPI(id_evenement).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function deleteEvenementByIdFromAPI(id_evenement){
+    const client = await pool.connect();
+    try {
+        let query = "SELECT * FROM evenement WHERE id_evenement=$1";
+        let result_evenement = await client.query(query, [id_evenement]);
+        query = "SELECT * FROM evenement WHERE nom_evenement LIKE 'default_EVENEMENT'";
+        let result = await client.query(query);
+        if(result.rows.length === 0){
+            query = "INSERT INTO evenement (nom_evenement,description_evenement,nb_place,image_evenement,id_personne,id_emplacement) VALUES ('default_EVENEMENT','dE',0,'default',$1,$2)"
+            await client.query(query, [result_evenement.rows[0].id_personne, result_evenement.rows[0].id_evenement])
+            await client.query('COMMIT');
+            query = "SELECT * FROM evenement WHERE nom_evenement LIKE 'default_EVENEMENT'";
+            result = await client.query(query);
+            const idDefault = result.rows[0].id_evenement;
+            await client.query('UPDATE creneau SET id_evenement=$1 WHERE id_evenement = $2', [idDefault,id_evenement])
+        }else{
+            const idDefault = result.rows[0].id_evenement;
+            query = "SELECT * FROM creneau";
+            let creneau = await client.query(query);
+            let tabLigneUse = [];
+            for (const row of creneau.rows) {
+                if(row.id_evenement == id_evenement){
+                    tabLigneUse.push(row);
+                }
+            }
+            if(tabLigneUse !== []){
+                for(const row of tabLigneUse){
+                    let occurence = false;
+                    for(const row2 of creneau.rows){
+                        if(row.id_calendrier === row2.id_calendrier && row2.id_evenement === idDefault){
+                            occurence = true;
+                        }
+                    }
+                    if(occurence){
+                        await client.query('DELETE FROM creneau WHERE id_evenement=$1 AND id_calendrier=$2', [row.id_evenement,row.id_calendrier]);
+                    }else{
+                        await client.query('UPDATE creneau SET id_evenement=$1 WHERE id_evenement=$2 AND id_calendrier=$3', [idDefault,row.id_evenement,row.id_calendrier])
+                    }
+                }
+            }
+        }
+        query = "DELETE FROM evenement WHERE id_evenement=$1"
+        await client.query(query, [id_evenement])
+        await client.query('COMMIT');
+    } catch (e) {
+        await client.query("ROLLBACK")
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllEvenement:getAllEvenement,
     getAllEvenementColumn:getAllEvenementColumn,
     addNewEvenement:addNewEvenement,
+    deleteEvenementById:deleteEvenementById,
 };

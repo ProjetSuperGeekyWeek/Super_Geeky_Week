@@ -709,9 +709,9 @@ router.delete('/deleteRessource', ressourceController.deleteRessourceById);
 router.delete('/deleteQrCode', qrCodeController.deleteQrCodeById);
 router.delete('/deletePanier', panierController.deletePanierById);
 router.delete('/deleteTag', tagController.deleteTagById);
-router.delete('/deleteEmplacement', emplacementController.deleteEmplacementById);
-router.delete('/deleteCalendrier', calendrierController.deleteCalendrierById);/*
-router.delete('/deleteEvenement', evenementController.deleteEvenementById);*/
+router.delete('/deleteEmplacement', emplacementController.deleteEmplacementById);/*
+router.delete('/deleteCalendrier', calendrierController.deleteCalendrierById);*/
+router.delete('/deleteEvenement', evenementController.deleteEvenementById);
 // UPDATE
 
 module.exports = router;
