@@ -21,6 +21,7 @@ export default {
                 jour:"Jour ",
                 hora:" / Horaire de ",
                 a:" a ",
+                prix:"Prix : ",
             },
         };
     },

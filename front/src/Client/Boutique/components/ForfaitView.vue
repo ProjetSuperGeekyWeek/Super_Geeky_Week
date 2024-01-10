@@ -8,7 +8,7 @@
         <div class="forfait_card" v-for="item in filteredItems(jour.id_calendrier)" :key="item.id_calendrier">
           <p>{{ item.nom_item }}</p>
           <p>Description : {{ item.description_item }}</p>
-          <p>Prix : {{ item.prix_item }}€</p>
+          <p>{{ translate('prix') }}{{ item.prix_item }}€</p>
           <p>Stock : {{ item.stock_item }}</p>
           <router-link to="/panier"><input type="button" value="Acheter" class="bouton grand_moins"></router-link>
         </div>

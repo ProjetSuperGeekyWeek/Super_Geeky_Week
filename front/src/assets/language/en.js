@@ -21,6 +21,8 @@ export default {
                 jour:"Day ",
                 hora:" / Schedule from ",
                 a:" to ",
+                prix:"Price : ",
+
             },
         };
     },
