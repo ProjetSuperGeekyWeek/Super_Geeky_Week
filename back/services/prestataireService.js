@@ -141,10 +141,46 @@ async function getPrestataireTagsFromAPI(id){
     }
 }
 
+const sendContactMessage = (messageData, callback) => {
+    sendContactMessageToAPI(messageData).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function sendContactMessageToAPI(messageData) {
+    console.log("Données reçues:", messageData); // Ajoutez cette ligne pour le débogage
+  
+    const client = await pool.connect();
+    try {
+      const query = `
+        INSERT INTO contact (id_personne, mail_client, message_client)
+        VALUES ($1, $2, $3)
+        RETURNING id_contact;
+      `;
+  
+      const result = await client.query(query, [
+        messageData.id_personne,
+        messageData.mail_client,
+        messageData.message_client
+      ]);
+  
+      const messageId = result.rows[0].id_message;
+      return { success: true, messageId };
+    } catch (e) {
+      throw e;
+    } finally {
+      client.release();
+    }
+  }
+  
+
 module.exports = {
     getAllPrestataires,
     getPrestataireById,
     getPrestataireByNom,
     getPrestataireByTag,
-    getPrestataireTags
+    getPrestataireTags,
+    sendContactMessage
 };
