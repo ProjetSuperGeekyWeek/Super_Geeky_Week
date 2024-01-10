@@ -139,10 +139,16 @@ INSERT INTO stand (id_emplacement, id_personne) VALUES
     (46, 1),
     (47, 1);
 
+-- Insert data into jour table
+INSERT INTO jour (date_calendrier) VALUES
+    ('Vendredi'),
+    ('Samedi'),
+    ('Dimanche');
+
 -- Insert data into calendrier table
-INSERT INTO calendrier (date_calendrier,horaire_debut,horaire_fin) VALUES
-    ('Vendredi', '09:00', '18:30'),
-    ('Samedi', '08:30', '18:00');
+INSERT INTO calendrier (id_jour,horaire_debut,horaire_fin) VALUES
+    (1, '09:00', '18:30'),
+    (2, '08:30', '18:00');
 
 -- Insert data into inscrit table
 INSERT INTO inscrit (id_inscription, nom_inscrit, prenom_inscrit, description_inscrit, id_calendrier) VALUES

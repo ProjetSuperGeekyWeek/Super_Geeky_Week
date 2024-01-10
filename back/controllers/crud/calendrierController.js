@@ -1,6 +1,5 @@
 const calendrierService = require('../../services/crud/calendrierService');
 const roleService = require("../../services/crud/roleService");
-
 exports.getAllCalendrier = async (req, res) => {
     calendrierService.getAllCalendrier((err, data) => {
         if (err) {

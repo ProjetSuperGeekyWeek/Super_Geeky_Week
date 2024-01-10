@@ -701,7 +701,17 @@ router.post('/addEmplacement', emplacementController.addNewEmplacement);
 router.post('/addCalendrier', calendrierController.addNewCalendrier);
 router.post('/addEvenement', evenementController.addNewEvenement);
 // DELETE
-
+router.delete('/deleteRole', roleController.deleteRoleById);
+router.delete('/deleteAcheter', acheterController.deleteAcheterById);
+router.delete('/deleteItem', itemController.deleteItemById);
+router.delete('/deletePersonne', personneController.deletePersonneById);
+router.delete('/deleteRessource', ressourceController.deleteRessourceById);
+router.delete('/deleteQrCode', qrCodeController.deleteQrCodeById);
+router.delete('/deletePanier', panierController.deletePanierById);
+router.delete('/deleteTag', tagController.deleteTagById);
+router.delete('/deleteEmplacement', emplacementController.deleteEmplacementById);/*
+router.delete('/deleteCalendrier', calendrierController.deleteCalendrierById);*/
+router.delete('/deleteEvenement', evenementController.deleteEvenementById);
 // UPDATE
 
 module.exports = router;

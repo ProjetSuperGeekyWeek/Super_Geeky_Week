@@ -1,6 +1,6 @@
 <template>
     <div class="module-inscriptions">
-        <div class="card-inscription">
+        <div class="card-inscription" v-if="!proprio">
             <div class="card-inscription-image">
                 <img :src="image" alt="Image de l'événement">
             </div>
@@ -23,13 +23,58 @@
                 </div>
                 <div v-if="alreadyInscrit" class="card-inscription-infos">
                     <h4>Vous etes bien inscrit {{ inscritPrenom }} {{ inscritNom }} à la séance de {{ inscritSeance }}</h4>
-                    <button @click="alreadyInscrit = false">Désinscrire</button>
+                    <button @click="desinscrire">Désinscrire</button>
                 </div>
             </div>
             <div class="card-inscription-formulaire" v-show="inscription">
                 <h2>{{ infos.titre }}</h2>
-                <select name="seance" class="seance" v-model="inscritSeance">
-                    <option v-for="horaire in infos.horaires" :key="horaire" :value="horaire.jour+' de '+horaire.heureDebut+' à '+horaire.heureFin">
+                <select name="seance" class="seance" v-model="inscritIndexSeance">
+                    <option v-for="(horaire, index) in infos.horaires" :key="index" :value="index">
+                        {{ horaire.jour }} {{ horaire.heure_debut }}-{{ horaire.heure_fin }}
+                    </option>
+                </select>
+                <div class="card-inscription-formulaire-infos">
+                    <input type="text" name="nom" class="nom" placeholder="nom" v-model="inscritNom" @change="verifNom()">
+                    <input type="text" name="prenom" class="prenom" placeholder="prenom" v-model="inscritPrenom" @change="verifPrenom()">
+                </div>
+                <textarea name="description" class="description" cols="30" rows="10" placeholder="description" v-model="inscritDescription"></textarea>
+                <p class="message-erreur"></p>
+                <div class="card-inscription-formulaire-btn">
+                    <button class="btn-retour" @click="inscription = !inscription">Retour</button>
+                    <button class="btn-valider" @click="inscrire()">Valider</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-inscription" v-else>
+            <div class="card-inscription-image">
+                <img :src="image" alt="Image de l'événement">
+            </div>
+            <div v-show="!inscription" class="card-inscription-body">
+                <h2>{{ infos.titre }}</h2>
+                <!-- warning -->
+                <p>{{ infos.description }}</p>
+                <div class="card-inscription-horaires">
+                    <h3>Horaires</h3>
+                    <ul>
+                        <li v-for="horaire in infos.horaires" :key="horaire">
+                            <span>{{ horaire.jour }}</span>
+                            <span>{{ horaire.heure_debut }} - {{ horaire.heure_fin }}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-inscription-tarif" v-if="!alreadyInscrit">
+                    <h3>Inscription</h3>
+                    <button @click="formulaireInscrire()">{{ stringTarif }}</button>
+                </div>
+                <div v-if="alreadyInscrit" class="card-inscription-infos">
+                    <h4>Vous etes bien inscrit {{ inscritPrenom }} {{ inscritNom }} à la séance de {{ inscritSeance }}</h4>
+                    <button @click="desinscrire">Désinscrire</button>
+                </div>
+            </div>
+            <div class="card-inscription-formulaire" v-show="inscription">
+                <h2>{{ infos.titre }}</h2>
+                <select name="seance" class="seance" v-model="inscritIndexSeance">
+                    <option v-for="(horaire, index) in infos.horaires" :key="index" :value="index">
                         {{ horaire.jour }} {{ horaire.heure_debut }}-{{ horaire.heure_fin }}
                     </option>
                 </select>
@@ -49,6 +94,8 @@
 </template>
 
 <script>
+import { postInscrit, deleteInscrit } from '@/../../back/axiosFunctions/inscriptionAxios';
+
 export default {
     name: 'ModuleInscriptions',
     props : {
@@ -59,12 +106,16 @@ export default {
     data() {
         return {
             image : "https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg",
+
             alreadyInscrit : false,
             inscription : false,
             inscritNom : '',
             inscritPrenom : '',
+            inscritIndexSeance : null,
             inscritSeance : '',
-            inscritDescription : ''
+            inscritDescription : '',
+
+            modif: false,
         }
     },
     computed: {
@@ -130,15 +181,34 @@ export default {
                 this.turnErreur(seance, "Veuillez choisir une séance");
                 return false;
             }else{
+                this.inscritSeance = ""+this.infos.horaires[seance.value].jour+" de "+this.infos.horaires[seance.value].heure_debut+" à "+this.infos.horaires[seance.value].heure_fin;
                 this.turnValidate(seance);
                 return true;
             }
         },
-        inscrire() {
+        async inscrire() {
             if(this.verifNom() && this.verifPrenom() && this.verifSeance()){
-                this.alreadyInscrit = true;
-                this.inscription = false;
-                document.getElementsByClassName("message-erreur")[this.position].innerHTML = "";
+                try{
+                    if(this.inscritDescription == null || this.inscritDescription == ""){
+                        this.inscritDescription = "Aucune description";
+                    }
+                    await postInscrit( this.infos.id_activite, this.inscritNom, this.inscritPrenom, 
+                        this.inscritDescription, this.infos.horaires[this.inscritIndexSeance].id_calendrier);
+                    this.alreadyInscrit = true;
+                    this.inscription = false;
+                    document.getElementsByClassName("message-erreur")[this.position].innerHTML = "";
+                }catch(error){
+                    console.log(error);
+                }
+            }
+        },
+        async desinscrire(){
+            try {
+                await deleteInscrit(this.infos.id_activite, this.inscritNom, this.inscritPrenom, 
+                    this.infos.horaires[this.inscritIndexSeance].id_calendrier);
+                this.alreadyInscrit = false;
+            } catch (error) {
+                console.log(error);
             }
         }
     },
