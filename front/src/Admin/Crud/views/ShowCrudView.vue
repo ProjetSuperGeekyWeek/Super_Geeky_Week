@@ -1,22 +1,22 @@
 <template>
   <div class="menu_crud">
     <div class="menu_crud_button">
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('role')" name="menu" id="role" value="role"> <label for="role">Rôle</label></div>
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('personne')" name="menu" id="personne" value="personne"> <label for="personne">Personne</label></div>
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('emplacement')" name="menu" id="emplacement" value="emplacement"> <label for="emplacement">Emplacement</label></div>
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('ressource')" name="menu" id="ressource" value="ressource"> <label for="ressource">Ressource</label></div>
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('emplacement_ressource')" name="menu" id="emplacement_ressource" value="emplacement_ressource"> <label for="emplacement_ressource">Emplacement des ressource</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('role')" name="menu" id="role" value="role"> <label for="role">{{translate('role')}}</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('personne')" name="menu" id="personne" value="personne"> <label for="personne">{{translate('personne')}}</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('emplacement')" name="menu" id="emplacement" value="emplacement"> <label for="emplacement">{{translate('emplacement')}}</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('ressource')" name="menu" id="ressource" value="ressource"> <label for="ressource">{{translate('ressource')}}</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('emplacement_ressource')" name="menu" id="emplacement_ressource" value="emplacement_ressource"> <label for="emplacement_ressource">{{translate('emplressources')}}</label></div>
       <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('stand')" name="menu" id="stand" value="stand"> <label for="stand">Stand</label></div>
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('calendrier')" name="menu" id="calendrier" value="calendrier"> <label for="calendrier">Calendrier</label></div>
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('panier')" name="menu" id="panier" value="panier"> <label for="panier">Panier</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('calendrier')" name="menu" id="calendrier" value="calendrier"> <label for="calendrier">{{translate('calendrier')}}</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('panier')" name="menu" id="panier" value="panier"> <label for="panier">{{translate('panier')}}</label></div>
       <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('item')" name="menu" id="item" value="item"> <label for="item">Item</label></div>
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('ligne_panier')" name="menu" id="ligne_panier" value="ligne_panier"> <label for="ligne_panier">Ligne du panier</label></div>
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('qr_code')" name="menu" id="qr_code" value="qr_code"> <label for="qr_code">QR_code</label></div>
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('acheter')" name="menu" id="acheter" value="acheter"> <label for="acheter">Acheter</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('ligne_panier')" name="menu" id="ligne_panier" value="ligne_panier"> <label for="ligne_panier">{{translate('lignepanier')}}</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('qr_code')" name="menu" id="qr_code" value="qr_code"> <label for="qr_code">QR Code</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('acheter')" name="menu" id="acheter" value="acheter"> <label for="acheter">{{translate('acheter')}}</label></div>
       <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('tag')" name="menu" id="tag" value="tag"> <label for="tag">Tag</label></div>
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('personne_tag')" name="menu" id="personne_tag" value="personne_tag"> <label for="personne_tag">Personne association tag</label></div>
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('evenement')" name="menu" id="evenement" value="evenement"> <label for="evenement">Evénement</label></div>
-      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('creneau')" name="menu" id="creneau" value="creneau"> <label for="creneau">Créneau</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('personne_tag')" name="menu" id="personne_tag" value="personne_tag"> <label for="personne_tag">{{translate('personnetag')}}</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('evenement')" name="menu" id="evenement" value="evenement"> <label for="evenement">{{translate('event')}}</label></div>
+      <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('creneau')" name="menu" id="creneau" value="creneau"> <label for="creneau">{{translate('creneau')}}</label></div>
     </div>
     <div class="menu_crud_emplacement">
       <div v-show="selectedMenu === 'role'" class="crud_role"><crudRole/></div>
@@ -56,13 +56,20 @@ import crudRole from "@/Admin/Crud/components/role/showRole.vue"
 import crudStand from "@/Admin/Crud/components/stand/showStand.vue"
 import crudTag from "@/Admin/Crud/components/tag/showTag.vue"
 import crudItem from "@/Admin/Crud/components/item/showItem.vue"
+import {mapState} from "vuex";
 export default {
   data() {
     return {
       selectedMenu: ''
     };
   },
+  computed: {
+    ...mapState(['lang', 'en', 'fr']),
+  },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     selectMenu(menu) {
       this.selectedMenu = menu;
     }

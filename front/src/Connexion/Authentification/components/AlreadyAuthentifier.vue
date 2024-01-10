@@ -1,10 +1,10 @@
 <template>
     <div id="authentifier">
-        <h4 id="nom-authentifier">Bienvenue {{ nom }}</h4><br>
-        <h5>Vous êtes déjà connecté</h5>
+        <h4 id="nom-authentifier">{{translate('bienvenue')}}{{ nom }}</h4><br>
+        <h5>{{translate('dejaconnect')}}</h5>
         <div id="btn-box">
-            <button id="change-mdp">Changer mot de passe</button>
-            <button id="deconnect" @click="deconnect">Déconnexion</button>
+            <button id="change-mdp">{{translate('changemdp')}}</button>
+            <button id="deconnect" @click="deconnect">{{translate('deconection')}}</button>
         </div>
     </div>
 </template>
@@ -19,6 +19,9 @@ export default {
         }
     },
     methods: {
+      translate(prop) {
+        return this[this.lang][this.lang][prop];
+      },
         ...mapMutations('authentifierStore',['setAuthentifier', 'setAdmin']),
         deconnect() {
                 this.setAuthentifier(false);
@@ -26,6 +29,7 @@ export default {
         },
     },
     computed: {
+        ...mapState(['lang', 'en', 'fr']),
         ...mapState('authentifierStore',['admin']),
     },
 }

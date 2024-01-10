@@ -10,7 +10,7 @@
           <p>{{ translate('description') }}{{ item.description_item }}</p>
           <p>{{ translate('prix') }}{{ item.prix_item }}€</p>
           <p>{{ translate('stock') }}{{ item.stock_item }}</p>
-          <router-link to="/panier"><input type="button" value="Acheter" class="bouton grand_moins"></router-link>
+          <router-link to="/panier"><input type="button" :value="translate('acheter')" class="bouton grand_moins"></router-link>
         </div>
       </div>
     </div>

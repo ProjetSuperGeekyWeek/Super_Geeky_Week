@@ -1,4 +1,5 @@
 -- Drop table if exists
+DROP TABLE IF EXISTS contact CASCADE;
 DROP TABLE IF EXISTS creneau CASCADE;
 DROP TABLE IF EXISTS evenement CASCADE;
 DROP TABLE IF EXISTS personne_tag CASCADE;
@@ -17,7 +18,6 @@ DROP TABLE IF EXISTS emplacement_ressource CASCADE;
 DROP TABLE IF EXISTS ressource CASCADE;
 DROP TABLE IF EXISTS emplacement CASCADE;
 DROP TABLE IF EXISTS inscription CASCADE;
-DROP TABLE IF EXISTS livre_personne CASCADE;
 DROP TABLE IF EXISTS Livre_d_or CASCADE;
 DROP TABLE IF EXISTS personne CASCADE;
 DROP TABLE IF EXISTS role CASCADE;
@@ -45,15 +45,9 @@ CREATE TABLE personne (
 CREATE TABLE Livre_d_or (
     id_temoignage SERIAL PRIMARY KEY,
     temoignage VARCHAR(255) NOT NULL,
-    pseudo VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE livre_personne (
+    pseudo VARCHAR(50) NOT NULL,
     id_personne INTEGER NOT NULL,
-    id_temoignage INTEGER NOT NULL,
-    constraint pk_livre_personne PRIMARY KEY (id_personne, id_temoignage),
-    CONSTRAINT fk_personne FOREIGN KEY (id_personne) REFERENCES personne(id_personne),
-    CONSTRAINT fk_temoignage FOREIGN KEY (id_temoignage) REFERENCES Livre_d_or(id_temoignage)
+    CONSTRAINT fk_personne FOREIGN KEY (id_personne) REFERENCES personne(id_personne)
 );
 
 CREATE TABLE inscription (
@@ -203,3 +197,11 @@ CREATE TABLE creneau (
     CONSTRAINT fk_evenement FOREIGN KEY (id_evenement) REFERENCES evenement(id_evenement),
     CONSTRAINT fk_calendrier FOREIGN KEY (id_calendrier) REFERENCES calendrier(id_calendrier)
 );
+
+CREATE TABLE contact(
+    id_contact SERIAL PRIMARY KEY,
+    mail_client VARCHAR(100) NOT NULL,
+    message_client TEXT NOT NULL,
+    id_personne INTEGER NOT NULL,
+    CONSTRAINT fk_personne_contact FOREIGN KEY (id_personne) REFERENCES personne(id_personne)
+); 

@@ -15,7 +15,7 @@
         <h1 id="accroche" class="">{{ translate('title') }}</h1>
       </div>
       <hr>
-      <div class="nav_droite_bas">
+      <div class="nav_droite_bas" v-if="!admin">
         <router-link to="/billets"><p class="nav_titre">{{ translate('nav_ticket') }}</p></router-link>
         <router-link :to="{ name:'page_prestataire', params: { id:prestataireAuthentifier.id_personne } }" v-if="authentifier"><p class="nav_titre">{{ translate('nav_espace_perso') }}</p></router-link>
         <router-link to="/exposants" v-if="!authentifier"><p class="nav_titre">{{ translate('nav_exposants') }}</p></router-link>
@@ -26,6 +26,21 @@
         <div>
           <router-link to="/panier"><img src="./assets/image/logo/panier.png" alt="panier" class="logo"></router-link>
         </div>
+        <div class="logo_auth">
+          <router-link to="/authentification">
+            <img v-if="authentifier" src="./assets/image/logo/main_logo.png" alt="" class="logo2_auth">
+            <img v-if="!authentifier" src="./assets/image/fond_ecran/image_authentification.png" alt="authent" class="logo2_auth">
+          </router-link>
+        </div>
+      </div>
+      <div class="nav_droite_bas" v-if="admin">
+        <router-link to="/billets"><p class="nav_titre">Crud</p></router-link>
+        <router-link to="/exposants"><p class="nav_titre">Carte</p></router-link>
+        <router-link to="/panier"><p class="nav_titre">Statistiques</p></router-link>
+        <select name="lang" v-model="langue" @change="langSet" class="test deco_select">
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+        </select>
         <div class="logo_auth">
           <router-link to="/authentification">
             <img v-if="authentifier" src="./assets/image/logo/main_logo.png" alt="" class="logo2_auth">
@@ -59,7 +74,7 @@ export default {
   },
   computed: {
     ...mapState(['lang', 'en', 'fr']),
-    ...mapState('authentifierStore', ['authentifier', 'prestataireAuthentifier']),
+    ...mapState('authentifierStore', ['authentifier', 'prestataireAuthentifier', 'admin']),
   }
 }
 window.addEventListener("scroll", function(){

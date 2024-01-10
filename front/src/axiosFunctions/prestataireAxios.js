@@ -1,4 +1,4 @@
-import { getRequest } from "./axios";
+import { getRequest, postRequest } from "./axios";
 
 async function getAllPrestataires() {
     return await getRequest("/api/prestataire", "GETALLPRESTATAIRES");
@@ -20,11 +20,16 @@ async function getPrestataireTags(id) {
     return await getRequest(`/api/prestataire/${id}/tags`, "GETPRESTATAIRETAGS");
 }
 
+async function sendContactMessage(id, data) {
+    return await postRequest(`/api/prestataire/${id}/contact`, data);
+}
+
 
 export { 
     getAllPrestataires ,
     getPrestataireById,
     getPrestataireByNom,
     getPrestataireByTag,
-    getPrestataireTags
+    getPrestataireTags,
+    sendContactMessage
 };

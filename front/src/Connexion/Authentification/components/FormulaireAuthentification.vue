@@ -2,15 +2,15 @@
     <div id="formulaire-authentification">
         <label for="email">Email</label>
         <input type="email" name="email" id="email" required @change="verifEmail">
-        <label for="password">Mot de passe</label>
+        <label for="password">{{translate('mdp')}}</label>
         <input type="password" name="password" id="password" required @change="verifPassword">
         <span id="incorrectPassword"></span>
-        <button id="valide-authentification" @click="submitForm">Soumettre</button>
+        <button id="valide-authentification" @click="submitForm">{{translate('soumettre')}}</button>
     </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import {mapGetters, mapActions, mapState} from 'vuex';
 
 export default {
     name: 'FormulaireAuthentification',
@@ -21,6 +21,9 @@ export default {
         }
     },
     methods: {
+      translate(prop) {
+        return this[this.lang][this.lang][prop];
+      },
         ...mapActions('authentifierStore',['getPrestataireMailPassword', 'adminVerif']),
         ...mapGetters('authentifierStore',['getPrestataireAuthentifier']),
 
@@ -91,6 +94,7 @@ export default {
         }
     },
     computed: {
+      ...mapState(['lang', 'en', 'fr']),
     }
 }
 </script>

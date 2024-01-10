@@ -14,24 +14,11 @@ INSERT INTO personne (nom_personne, prenom_personne, mail_personne, mdp_personne
 -- partie services
 
 -- Insert data into Livre_d_or table
-INSERT INTO Livre_d_or (temoignage, pseudo) VALUES
-    ('C''était super', 'Higorami'),
-    ('J''ai adoré le cosplay', 'Senqen'),
-    ('C''était cool', 'Dragul'),
-    ('Eren','Mikasa');
-
-
--- Insert data into livre_personne table
-INSERT INTO livre_personne (id_personne, id_temoignage) VALUES
-    (1,1),
-    (1,2),
-    (1,3),
-    (2,1),
-    (2,2),
-    (2,3),
-    (3,1),
-    (3,2),
-    (3,3);
+INSERT INTO Livre_d_or (temoignage, pseudo, id_personne) VALUES
+    ('C''était super', 'Higorami',1),
+    ('J''ai adoré le cosplay', 'Senqen',1),
+    ('C''était cool', 'Dragul',2),
+    ('Eren','Mikasa',1);
 
 -- Insert data into inscription table
 INSERT INTO inscription (nom_inscription, description_inscription, nb_place, image_inscription, id_personne) VALUES
@@ -243,3 +230,10 @@ INSERT INTO creneau (id_evenement, id_calendrier,heure_debut_evenement, heure_fi
         (3,1,'12:00:00','14:00:00'),
         (4,1,'10:30:00','12:00:00'),
         (5,2,'12:00:00','15:00:00');
+
+-- Insert data into contact table
+INSERT INTO contact (mail_client, message_client, id_personne) VALUES 
+        ('client@example.com', 'Contenu du message', 1), -- Assurez-vous d'ajuster l'identifiant de la personne correcte
+        ('jesuis@moi.com', 'Je suis moi', 2),
+        ('jetais@moi.com', 'il etre corps moi', 2),
+        ('help@me.fr', 'to late', 3);

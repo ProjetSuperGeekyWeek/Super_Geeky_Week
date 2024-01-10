@@ -21,14 +21,22 @@
                         :proprio="proprio"
                         :infos="inscription"
                         :nomJours="nomJours"
-                        @update="getInscriptions"
+                        @update:inscriptions="getInscriptions"
                     />
                 </div>
                 <div class="tabactivite-livreOr">
-
+                    <livreDor
+                    :temoignages="livreOr"
+                    :proprio="proprio"
+                    :idPresta="id"
+                    @update:temoignages="getLivreOr"/>
                 </div>
-                <div class="tabactivite-contact">
-
+                <div class="tabactivite-contact" v-if="proprio">
+                    <ContactPrestataire
+                        :messages="messages"
+                        :idPresta="id"
+                        @update:messages="getMessages"
+                    />
                 </div>
             </div>
         </div>
@@ -37,13 +45,21 @@
 
 <script>
     import ModuleInscriptions from '@/Client/Prestataire/components/ModuleInscription.vue';
+    import livreDor from '@/Client/Prestataire/components/LivreDor.vue';
+    import ContactPrestataire from '@/Client/Prestataire/components/ContactPrestataire.vue';
     import { mapState } from 'vuex';
     import { getPrestataireById } from '@/axiosFunctions/prestataireAxios';
     import { getAllInscriptionsIdPresta, getAllHorairesIdInscription, getJours } from '@/axiosFunctions/inscriptionAxios';
+    import { getTemoignageByIdPresta } from '@/axiosFunctions/livredorAxios';
+    import { getAllContactIdPresta } from '@/axiosFunctions/contactAxios';
 
     export default {
         name: 'PrestataireView',
-        components: { ModuleInscriptions },
+        components: { 
+            ModuleInscriptions,
+            livreDor,
+            ContactPrestataire,
+        },
         data() {
             return {
                 index: 0,
@@ -56,21 +72,30 @@
                     image_personne: '',
                 },
                 inscriptions: [],
-                livreOr: {
-                    id_personne: '',
-                    id_activite: '',
-                    note: '',
-                    commentaire: '',
-                },
-                contact: {
-
-                }
+                livreOr: [],
+                messages: [],
             };
         },
         methods: {
-          translate(prop) {
-            return this[this.lang][this.lang][prop];
-          },
+            translate(prop) {
+                return this[this.lang][this.lang][prop];
+            },
+            async getMessages() {
+                try {
+                    let res = await getAllContactIdPresta(this.id);
+                    this.messages = res;
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            async getLivreOr(){
+                try {
+                    let res = await getTemoignageByIdPresta(this.id);
+                    this.livreOr = res;
+                } catch (error) {
+                    console.log(error);
+                }
+            },
             async getPrestataire() {
                 try{
                     let res = await getPrestataireById(this.id);
@@ -112,6 +137,8 @@
                 await this.getPrestataire();
                 await this.getInscriptions();
                 await this.getJours();
+                await this.getLivreOr();
+                await this.getMessages();
             },
         },
         computed: {
@@ -135,13 +162,6 @@
         },
         async mounted() {
             this.loadData();
-        },
-        watch: {
-            $route(to, from) {
-                from;
-                to;
-                this.user = 1;// chercher avec axios les infos de user en fonction de $route.params.id
-            },
         },
     };
 </script>
