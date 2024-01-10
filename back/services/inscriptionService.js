@@ -73,15 +73,13 @@ async function getAllInscritsIdInscriptionFromAPI(id){
     const client = await pool.connect();
     try {
         const query = `
-            SELECT inscription.id_inscription AS id_activite, nom_inscrit AS nom, 
+            SELECT inscrit.id_inscription AS id_activite, nom_inscrit AS nom, 
             prenom_inscrit AS prenom, description_inscrit AS description,
-            calendrier.id_calendrier AS id_calendrier,
             horaire_debut AS heure_debut, horaire_fin AS heure_fin,
             jour.date_calendrier AS jour
             FROM inscrit
             INNER JOIN inscription ON inscription.id_inscription = inscrit.id_inscription
-            INNER JOIN inscription_calendrier ON inscription_calendrier.id_inscription = inscrit.id_inscription
-            INNER JOIN calendrier ON calendrier.id_calendrier = inscription_calendrier.id_calendrier
+            INNER JOIN calendrier ON calendrier.id_calendrier = inscrit.id_calendrier
             INNER JOIN jour ON jour.id_jour = calendrier.id_jour
             WHERE inscrit.id_inscription = $1
             ORDER BY jour.id_jour ASC, heure_debut ASC
