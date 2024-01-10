@@ -30,7 +30,6 @@ exports.getTemoignageByIdPresta = async (req, res) => {
 
 // post
 exports.postTemoignage = async (req, res) => {
-    console.log("postTemoignage")
     const id_presta = req.params.id_presta;
     const pseudo = req.params.pseudo;
     const temoignage = req.params.temoignage;

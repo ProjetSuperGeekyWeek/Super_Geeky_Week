@@ -67,7 +67,6 @@ const postTemoignage = async (id_presta, pseudo, temoignage, callback) => {
 
 async function postTemoignageFromAPI(id_presta, pseudo, temoignage) {
     const client = await pool.connect();
-    console.log("post");
     try {
         const query = `
         INSERT INTO livre_d_or (id_personne, pseudo, temoignage)
