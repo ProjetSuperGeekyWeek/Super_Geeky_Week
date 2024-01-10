@@ -29,7 +29,17 @@ var router = express.Router();
  *         description: Internal server error
  */
 
-// affichage
+//GET
 router.get('/getAllCalendrier', calendrierController.getAllCalendrier);
+router.get('/getAllCalendrierColumn', calendrierController.getAllCalendrierColumn);
+
+//POST
+router.post('/addCalendrier', calendrierController.addNewCalendrier);
+
+//DELETE
+/*router.delete('/deleteCalendrier', calendrierController.deleteCalendrierById);*/
+
+//UPDATE
+router.patch('/updateCalendrier', calendrierController.updateCalendrier);
 
 module.exports = router;

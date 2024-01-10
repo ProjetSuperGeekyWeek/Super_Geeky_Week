@@ -1,10 +1,20 @@
-
-import {getAllAcheter,getAllAcheterColumn,getAllCalendrier,getAllCalendrierColumn,getAllRoleColumn,getAllRole,getAllCreneau,
-    getAllCreneauColumn,getAllEmplacement,getAllEmplacementColumn,getAllEmplacementRessource,getAllEmplacementRessourceColumn,
-    getAllEvenement,getAllEvenementColumn,getAllItem,getAllItemColumn,getAllLignePanier,getAllLignePanierColumn,getAllPanier,
-    getAllPanierColumn,getAllPersonne,getAllPersonneColumn,getAllPersonneTag,getAllPersonneTagColumn,getAllQrCode,getAllQrCodeColumn,
-    getAllRessource,getAllRessourceColumn,getAllStand,getAllStandColumn,getAllTag,getAllTagColumn, addNewRole, addNewItem,addNewAcheter,
-    addNewPersonne,addNewRessource,addNewQrCode,addNewPanierStore,addNewTagStore,addNewEmplacement,addNewCalendrier,addNewEvenement,getAllJour,getAllJourColumn} from "@/axiosFunctions/crudAxios";
+import {addNewAcheter, getAllAcheter, getAllAcheterColumn} from "@/axiosFunctions/acheterAxios";
+import {addNewCalendrier, getAllCalendrier, getAllCalendrierColumn} from "@/axiosFunctions/calendrierAxios";
+import {addNewRole, getAllRole, getAllRoleColumn} from "@/axiosFunctions/roleAxios";
+import {getAllCreneau, getAllCreneauColumn} from "@/axiosFunctions/creneauAxios";
+import {addNewEmplacement, getAllEmplacement, getAllEmplacementColumn} from "@/axiosFunctions/emplacementAxios";
+import {getAllEmplacementRessource, getAllEmplacementRessourceColumn} from "@/axiosFunctions/emplacementRessourceAxios";
+import {addNewEvenement, getAllEvenement, getAllEvenementColumn} from "@/axiosFunctions/evenementAxios";
+import {addNewItem, getAllItem, getAllItemColumn} from "@/axiosFunctions/itemAxios";
+import {getAllLignePanier, getAllLignePanierColumn} from "@/axiosFunctions/lignePanierAxios";
+import {addNewPanierStore, getAllPanier, getAllPanierColumn} from "@/axiosFunctions/panierAxios";
+import {addNewPersonne, getAllPersonne, getAllPersonneColumn} from "@/axiosFunctions/personneAxios";
+import {getAllPersonneTag, getAllPersonneTagColumn} from "@/axiosFunctions/personneTagAxios";
+import {addNewQrCode, getAllQrCode, getAllQrCodeColumn} from "@/axiosFunctions/qrCodeAxios";
+import {addNewRessource, getAllRessource, getAllRessourceColumn} from "@/axiosFunctions/ressourceAxios";
+import {getAllStand, getAllStandColumn} from "@/axiosFunctions/standAxios";
+import {addNewTagStore, getAllTag, getAllTagColumn} from "@/axiosFunctions/tagAxios";
+import {getAllJour, getAllJourColumn} from "@/axiosFunctions/jourAxios";
 
 export default {
     namespaced: true,
