@@ -4,14 +4,16 @@
     <input type="text" placeholder="Prenom du client" v-model="prenom_client">
     <input type="text" placeholder="email du client" v-model="mail_client" @change="verifEmail" id="email" name="email">
     <input type="button" value="Valider" @click="addNewQrCode">
-    <input type="button" value="retour" @click="returnCrud">
+    <boutonRetourCrud/>
   </div>
 </template>
 <script>
 import {mapActions} from "vuex";
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
   name: 'addQrCodeCrud',
+  components: {boutonRetourCrud},
   data: () => ({
     nom_client: '',
     prenom_client: '',
@@ -30,9 +32,6 @@ export default{
       }catch (e) {
         console.log('error addQrCode', e)
       }
-    },
-    async returnCrud() {
-      this.$router.push('/admin/crud')
     },
     async verifEmail() {
       const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;

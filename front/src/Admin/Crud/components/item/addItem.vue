@@ -12,15 +12,17 @@
       <option v-for="calendrier in listCalendriers" :key="calendrier.id_calendrier" :value="calendrier.id_calendrier">{{ calendrier.date_calendrier }}</option>
     </select>
     <input type="button" value="Ajouter" @click="addNewRole">
-    <input type="button" value="retour" @click="returnCrud">
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
   name: 'addItemCrud',
+  components: {boutonRetourCrud},
   data: () => ({
     nom_item: '',
     stock_item: 0,
@@ -52,10 +54,7 @@ export default{
       }catch (e) {
         console.log('error addItem', e)
       }
-    },
-    async returnCrud() {
-      this.$router.push('/admin/crud')
-    },
+    }
   },
   async created(){
     await this.loadData();
