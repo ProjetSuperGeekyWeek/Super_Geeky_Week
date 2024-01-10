@@ -23,6 +23,8 @@ export default {
                 a:" to ",
                 description:"Description: ",
                 prix:"Price: ",
+                prix2:"Price",
+                prix3:"Price:",
                 stock:"Stock: ",
 
                 prestation:"Service",
@@ -37,6 +39,17 @@ export default {
                 enteremail:"Enter a valid email address",
 
                 information:"Information: ",
+                produit:"Product",
+
+                panier:"Cart",
+                returnbout:"Back to shop",
+
+                titre:"Title:",
+                addpanier:"Add to cart",
+                modifier:"Edit",
+                supprimer:"Delete",
+                valider:"Validate",
+                annuler:"Cancel",
             },
         };
     },

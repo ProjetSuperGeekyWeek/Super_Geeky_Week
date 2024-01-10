@@ -1,11 +1,11 @@
 <template>
   <div class="panier">
-    <p class="tres_grand gras titre">Panier</p>
+    <p class="tres_grand gras titre">{{translate('panier')}}</p>
     <div class="body_panier">
       <div class="retour_boutique">
         <router-link to="/billets">
           <h1 id="accroche">
-            Retour boutique
+            {{translate('returnbout')}}
           </h1>
         </router-link>
       </div>
