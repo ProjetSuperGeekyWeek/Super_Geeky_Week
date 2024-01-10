@@ -32,7 +32,7 @@
               v-model="selected"
               :headers="panier.headers"
               :items="panier.stats"
-              :items-per-page="5"
+              :items-per-page="10"
               class="elevation-4"
               :search="search"
               show-select
