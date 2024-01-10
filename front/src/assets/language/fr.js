@@ -61,6 +61,9 @@ export default {
 
                 zetebieninscrit:"Vous êtes bien inscrit ",
                 seancede:" à la séance de ",
+
+                filre:"Filtre",
+                nopresta:"Aucun prestataire correspondant.",
             },
         };
     },

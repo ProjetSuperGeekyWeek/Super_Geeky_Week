@@ -61,6 +61,9 @@ export default {
 
                 zetebieninscrit:"You are successfully registered ",
                 seancede:" for the session of ",
+
+                filre:"Filter",
+                nopresta:"No matching service provider.",
             },
         };
     },

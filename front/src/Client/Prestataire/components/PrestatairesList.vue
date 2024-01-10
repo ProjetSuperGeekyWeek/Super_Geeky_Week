@@ -1,7 +1,7 @@
 <template>
   <div class="prestataires">
     <div id="filtrePresta">
-      <button @click="showDivs = !showDivs" class="filtreBtn">Filtre</button>
+      <button @click="showDivs = !showDivs" class="filtreBtn">{{translate('fitre')}}</button>
       <div v-show="showDivs">
         <button v-for="tag in tags" :key="tag.id_tag" @click="addTag(tag)" class="filtreBtn2">{{ tag.nom_tag }}</button>
       </div>
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div v-else>
-          <p>Aucun prestataire correspondant.</p>
+          <p>{{translate('nopresta')}}</p>
         </div>
       </div>
     </div>
