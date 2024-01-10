@@ -71,6 +71,27 @@ const deleteAcheterById = (id_acheter, callback) => {
     });
 }
 
+const updateAcheter = (body, callback) => {
+    updateAcheterFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function updateAcheterFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('UPDATE acheter SET id_item=$1,id_qr_code=$2,consommer=$3 WHERE id_acheter=$4', [body.id_item,body.id_qr_code,body.consommer,body.id_acheter]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 async function deleteAcheterByIdFromAPI(id_acheter){
     const client = await pool.connect();
     try {
@@ -89,4 +110,5 @@ module.exports = {
     getAllAcheterColumn:getAllAcheterColumn,
     addNewAcheter:addNewAcheter,
     deleteAcheterById:deleteAcheterById,
+    updateAcheter:updateAcheter,
 };

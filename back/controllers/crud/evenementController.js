@@ -52,3 +52,15 @@ exports.deleteEvenementById = async (req, res) => {
         }
     });
 }
+
+exports.updateEvenement = async (req, res) => {
+    evenementService.updateEvenement(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updateEvenement."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

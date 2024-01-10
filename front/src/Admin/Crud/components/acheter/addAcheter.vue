@@ -40,9 +40,6 @@ export default{
         console.log('error addAcheter', e)
       }
     },
-    async navigateToAdd() {
-      this.$router.push('/admin/crud/acheter/add');
-    },
     async loadData(){
       this.listItem = this.getAllItem;
       this.listQrCode = this.getAllQrCode;

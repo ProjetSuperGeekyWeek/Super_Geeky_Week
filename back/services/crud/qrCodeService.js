@@ -95,9 +95,32 @@ async function deleteQrCodeByIdFromAPI(id_qr_code){
     }
 }
 
+const updateQrCode = (body, callback) => {
+    updateQrCodeFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function updateQrCodeFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('UPDATE qr_code SET nom_client=$1,prenom_client=$2,mail_client=$3 WHERE id_qr_code=$4'
+            , [body.nom_client,body.prenom_client,body.mail_client,body.id_qr_code]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllQrCode:getAllQrCode,
     getAllQrCodeColumn:getAllQrCodeColumn,
     addNewQrCode:addNewQrCode,
     deleteQrCodeById:deleteQrCodeById,
+    updateQrCode:updateQrCode,
 };

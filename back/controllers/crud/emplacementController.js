@@ -51,3 +51,15 @@ exports.deleteEmplacementById = async (req, res) => {
         }
     });
 }
+
+exports.updateEmplacement = async (req, res) => {
+    emplacementService.updateEmplacement(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updateEmplacement."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

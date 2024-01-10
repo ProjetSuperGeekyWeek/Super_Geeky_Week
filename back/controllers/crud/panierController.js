@@ -51,3 +51,15 @@ exports.deletePanierById = async (req, res) => {
         }
     });
 }
+
+exports.updatePanier = async (req, res) => {
+    panierService.updatePanier(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updatePanier."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

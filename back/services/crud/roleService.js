@@ -95,9 +95,31 @@ async function deleteRoleByIdFromAPI(id_role){
     }
 }
 
+const updateRole = (body, callback) => {
+    updateRoleFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function updateRoleFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('UPDATE role SET nom_role=$1 WHERE id_role=$2', [body.nom_role, body.id_role]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllRole:getAllRole,
     getAllRoleColumn:getAllRoleColumn,
     addNewRole:addNewRole,
     deleteRoleById:deleteRoleById,
+    updateRole:updateRole,
 };

@@ -98,9 +98,32 @@ async function deleteItemByIdFromAPI(id_item,id_personne,id_calendrier){
     }
 }
 
+const updateItem = (body, callback) => {
+    updateItemFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function updateItemFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('UPDATE item SET nom_item=$1,stock_item=$2,prix_item=$3,image_item=$4,description_item=$5,id_personne=$6,id_calendrier=$7 WHERE id_item=$8'
+            , [body.nom_item,body.stock_item,body.prix_item,body.image_item,body.description_item,body.id_personne,body.id_calendrier,body.id_item]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllItem:getAllItem,
     getAllItemColumn:getAllItemColumn,
     addNewItem:addNewItem,
     deleteItemById:deleteItemById,
+    updateItem:updateItem,
 };

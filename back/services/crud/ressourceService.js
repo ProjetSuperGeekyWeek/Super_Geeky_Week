@@ -121,9 +121,31 @@ async function deleteRessourceByIdFromAPI(id_ressource){
     }
 }
 
+const updateRessource = (body, callback) => {
+    updateRessourceFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function updateRessourceFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('UPDATE ressource SET nom_ressource=$1 WHERE id_ressource=$2', [body.nom_ressource,body.id_ressource]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllRessource:getAllRessource,
     getAllRessourceColumn:getAllRessourceColumn,
     addNewRessource:addNewRessource,
     deleteRessourceById:deleteRessourceById,
+    updateRessource:updateRessource,
 };

@@ -107,9 +107,32 @@ async function deletePersonneByIdFromAPI(id_personne){
     }
 }
 
+const updatePersonne = (body, callback) => {
+    updatePersonneFromAPI(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function updatePersonneFromAPI(body){
+    const client = await pool.connect();
+    try {
+        await client.query('UPDATE personne SET nom_personne=$1,prenom_personne=$2,mail_personne=$3,mdp_personne=$4,image_personne=$5,description_personne=$6,id_role=$7 WHERE id_personne=$8'
+            , [body.nom_personne,body.prenom_personne,body.mail_personne,body.mdp_personne,body.image_personne,body.description_personne,body.id_role,body.id_personne]);
+        // Corrected the commit command
+        await client.query('COMMIT');
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllPersonne:getAllPersonne,
     getAllPersonneColumn:getAllPersonneColumn,
     addNewPersonne:addNewPersonne,
     deletePersonneById:deletePersonneById,
+    updatePersonne:updatePersonne,
 };

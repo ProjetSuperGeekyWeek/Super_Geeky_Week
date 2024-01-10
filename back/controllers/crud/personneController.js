@@ -51,3 +51,15 @@ exports.deletePersonneById = async (req, res) => {
         }
     });
 }
+
+exports.updatePersonne = async (req, res) => {
+    personneService.updatePersonne(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updatePersonne."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

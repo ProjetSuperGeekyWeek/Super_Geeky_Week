@@ -51,3 +51,15 @@ exports.deleteRoleById = async (req, res) => {
         }
     });
 }
+
+exports.updateRole = async (req, res) => {
+    roleService.updateRole(req.body, (err, data) => {
+        if(err) {
+            res.status(500).send({
+                message: err.message || "pb updateRole"
+            });
+        }else{
+            res.send(data);
+        }
+    });
+}

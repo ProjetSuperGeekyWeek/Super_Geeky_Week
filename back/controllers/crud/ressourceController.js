@@ -51,3 +51,15 @@ exports.deleteRessourceById = async (req, res) => {
         }
     });
 }
+
+exports.updateRessource = async (req, res) => {
+    ressourceService.updateRessource(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb updateRessource."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
