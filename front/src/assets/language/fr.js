@@ -23,6 +23,8 @@ export default {
                 a:" a ",
                 description:"Description : ",
                 prix:"Prix : ",
+                prix2:"Prix",
+                prix3:"Prix :",
                 stock:"Stock : ",
 
                 prestation:"Prestations",
@@ -37,6 +39,31 @@ export default {
                 enteremail:"Entrer une adresse email valide",
 
                 information:"Information : ",
+                produit:"Produit",
+
+                panier:"Panier",
+                returnbout:"Retour boutique",
+
+                titre:"Titre :",
+                addpanier:"Ajouter au panier",
+                modifier:"Modifier",
+                supprimer:"Supprimer",
+                valider:"Valider",
+                annuler:"Annuler",
+
+                livror:"Livre d'or",
+                aucuntemoin:"Aucun témoignage disponible",
+
+                retour:"Retour",
+                desinscrire:"Désinscrire",
+                horaires:"Horaires",
+                inscription:"Inscription",
+
+                zetebieninscrit:"Vous êtes bien inscrit ",
+                seancede:" à la séance de ",
+
+                filre:"Filtre",
+                nopresta:"Aucun prestataire correspondant.",
             },
         };
     },

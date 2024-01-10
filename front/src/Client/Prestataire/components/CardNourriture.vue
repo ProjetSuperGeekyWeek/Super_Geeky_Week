@@ -10,24 +10,24 @@
             <p>{{ prix }}€</p>
         </div>
         <div v-if="id_prestataire == id_proprietaire" class="infos-nourriture">
-            <h3>Titre :</h3>
+            <h3>{{translate('titre')}}</h3>
             <input type="text" v-bind="titre">
             <h3>Description :</h3>
             <input type="text" v-bind="description">
-            <h3>Prix :</h3>
+            <h3>{{translate('prix3')}}</h3>
             <input type="number" v-bind="prix">
         </div>
         <div v-if="id_prestataire != id_proprietaire" class="button-nourriture">
             <input type="number" value="1">
-            <button>Ajouter au panier</button>
+            <button>{{translate('addpanier')}}</button>
         </div>
         <div v-if="(id_prestataire == id_proprietaire) && (!modifierCardNourriture)" class="button-nourriture">
-            <button>Modifier</button>
-            <button>Supprimer</button>
+            <button>{{translate('modifier')}}</button>
+            <button>{{translate('supprimer')}}</button>
         </div>
         <div v-if="(id_prestataire == id_proprietaire) && (modifierCardNourriture)" class="button-nourriture">
-            <button>Valider</button>
-            <button>Annuler</button>
+            <button>{{translate('valider')}}</button>
+            <button>{{translate('annuler')}}</button>
         </div>
     </div>
 </template>
@@ -35,21 +35,27 @@
 <script>
     import { mapState } from 'vuex';
     export default {
-        name: 'CardNourriture',
-        props: {
-            titre: String,
-            description: String,
-            prix: Number,
-            id_proprietaire : Number
+      name: 'CardNourriture',
+      props: {
+        titre: String,
+        description: String,
+        prix: Number,
+        id_proprietaire: Number
+      },
+      methods: {
+        translate(prop) {
+          return this[this.lang][this.lang][prop];
         },
         data() {
-            return {
-                modifierCardNourriture: false,
-            }
+          return {
+            modifierCardNourriture: false,
+          }
         },
         computed: {
-            ...mapState(['id_prestataire']),
+          ...mapState(['id_prestataire']),
+          ...mapState(['lang', 'en', 'fr']),
         },
+      }
     }
 </script>
 
