@@ -59,3 +59,15 @@ exports.getPrestataireTags = async (req, res) => {
         }
     });
 }
+
+exports.sendContactMessage = async (req, res) => {
+    prestataireSerices.sendContactMessage(req.body, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Some error occurred while sending message."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}
