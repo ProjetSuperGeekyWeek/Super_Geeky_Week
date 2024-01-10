@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Nourriture</h1>
+        <h1>{{translate('nourriture')}}</h1>
         <div class="cards-nourriture">
             <CardNourriture v-for="nourriture in listeNourritures" v-bind="nourriture" :key="nourriture.id" /> 
                 titre="nourriture.titre" description="nourriture.description" prix="nourriture.prix" 
@@ -11,6 +11,7 @@
 
 <script>
     import CardNourriture from '../components/CardNourriture.vue';
+    import {mapState} from "vuex";
     export default {
         name: 'NourritureView',
         components: {
@@ -44,8 +45,12 @@
             }
         },
         methods: {
+          translate(prop) {
+            return this[this.lang][this.lang][prop];
+          },
         },
         computed: {
+          ...mapState(['lang', 'en', 'fr']),
         },
     }
 

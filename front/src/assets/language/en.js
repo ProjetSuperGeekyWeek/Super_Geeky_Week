@@ -70,6 +70,10 @@ export default {
                 aucunexpos: "No exhibitor available.",
                 contactpresta: "Contact Service Provider",
                 voirprof:"View Profil",
+
+                nourriture:"Food",
+                activit: "Your activities:",
+                welcespace: "Welcome to your space:",
             },
         };
     },

@@ -1,11 +1,11 @@
 <template>
     <div class="services">
         <template v-if="authentifier && proprio">
-            <h1 class="intro">Bienvenue dans votre espace : {{ prestataire.prenom_personne }} {{ prestataire.nom_personne }}</h1>
+            <h1 class="intro">{{translate('welcespace')}}{{ prestataire.prenom_personne }} {{ prestataire.nom_personne }}</h1>
             <br>
             <!-- <div class="service-content" v-html="getServicePageText"></div> -->
             <br>
-            <h1 class="intro">Vos activités :</h1>
+            <h1 class="intro">{{translate('activit')}}</h1>
             <br>
         </template>
         <template v-else>
@@ -65,6 +65,9 @@
             };
         },
         methods: {
+          translate(prop) {
+            return this[this.lang][this.lang][prop];
+          },
             async getPrestataire() {
                 try{
                     let res = await getPrestataireById(this.id);
@@ -100,6 +103,7 @@
             },
         },
         computed: {
+            ...mapState(['lang', 'en', 'fr']),
             ...mapState('authentifierStore', ['authentifier', 'prestataireAuthentifier']),
             // getServicePageText() {
             //     const prestataire = this.$store.state.prestataire;

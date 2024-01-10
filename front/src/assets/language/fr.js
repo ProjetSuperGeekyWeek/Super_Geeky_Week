@@ -70,6 +70,10 @@ export default {
                 aucunexpos:"Aucun exposant disponible.",
                 contactpresta:"Contact Prestataire",
                 voirprof:"Voir le profil",
+
+                nourriture:"Nourriture",
+                activit:"Vos activités :",
+                welcespace:"Bienvenue dans votre espace : ",
             },
         };
     },
