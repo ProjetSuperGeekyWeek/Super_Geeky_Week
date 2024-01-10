@@ -73,16 +73,16 @@
                 </div>
             </div>
             <div class="card-inscription-formulaire" v-show="modif">
-                <textarea name="description-modif" class="card-inscription-modif-titre" cols="30" rows="10" :placeholder="infos.titre" v-model="titreProvisoire"></textarea>
-                <textarea name="description-modif" class="description-modif" cols="30" rows="10" :placeholder="infos.description" v-model="descriptionProvisoire"></textarea>
-                <!-- <textarea name="description-modif" class="card-inscription-modif-place" cols="30" rows="10" :placeholder="infos.nb_place" v-model="nbPlacesProvisoire"></textarea> -->
+                <textarea name="description-modif" class="card-inscription-modif-titre" cols="30" rows="10" :placeholder="infos.titre" v-model="titreProvisoire" v-show="!addHoraire"></textarea>
+                <textarea name="description-modif" class="description-modif" cols="30" rows="10" :placeholder="infos.description" v-model="descriptionProvisoire" v-show="!addHoraire"></textarea>
+                <!-- <textarea name="description-modif" class="card-inscription-modif-place" cols="30" rows="10" :placeholder="infos.nb_place" v-model="nbPlacesProvisoire" v-show="!addHoraire"></textarea> -->
                 <div class="liste-inscription-horaires" v-for="(horaire, index) in infos.horaires" :key="index">
                     <span>{{ horaire.jour }}</span>
                     <span>{{ horaire.heure_debut }}</span>
                     <span>{{ horaire.heure_fin }}</span>
                     <button @click="removeHoraire(index)">Supprimer</button>
                 </div>
-                <button class="ajouter-horaire-bouton" @click="addHoraire = true">Ajouter un horaire</button>
+                <button class="ajouter-horaire-bouton" @click="addHoraire = true" v-show="!addHoraire">Ajouter un horaire</button>
                 <div v-show="addHoraire">
                     <select name="jour-add" class="jour-add" v-model="idJourAdd">
                         <option v-for="jour in nomJours" :key="jour.id_jour" :value="jour.id_jour">
