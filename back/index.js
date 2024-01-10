@@ -17,7 +17,6 @@ const authentificationRouter = require('./routes/authentificationRouter');
 const inscriptionRouter = require('./routes/inscriptionRouter');
 const livredorRouter = require('./routes/livredorRouter');
 
-
 // Swagger configuration
 const swaggerOptions = {
     swaggerDefinition: {

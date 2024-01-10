@@ -194,8 +194,6 @@ export default {
             return heure+":"+minute;
         },
         verifNewHoraires(){
-            alert(this.idJourAdd);
-            alert((this.idJourAdd == null || this.idJourAdd == ""));
             if(
                 (isNaN(this.newHeureDebut) || this.newHeureDebut == "")
                 || (isNaN(this.newHeureFin) || this.newHeureFin == "")
