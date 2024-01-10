@@ -27,7 +27,7 @@
               v-model="selected"
               :headers="role.headers"
               :items="role.stats"
-              :items-per-page="5"
+              :items-per-page="10"
               class="elevation-4"
               :search="search"
               show-select
@@ -39,6 +39,7 @@
         </v-container>
       </v-main>
     </v-app>
+    <input type="button" value="supprimé">
   </div>
 </template>
 
@@ -75,6 +76,9 @@ export default {
     async navigateToAdd() {
       await this.$router.push('/admin/crud/role/add');
     },
+    async deleterows(){
+
+    }
   },
   watch: {
     selected: function (newVal) {
