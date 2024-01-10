@@ -64,6 +64,12 @@ export default {
 
                 filre:"Filtre",
                 nopresta:"Aucun prestataire correspondant.",
+
+                exposants:"Exposants",
+                envoyer:"Envoyer",
+                aucunexpos:"Aucun exposant disponible.",
+                contactpresta:"Contact Prestataire",
+                voirprof:"Voir le profil",
             },
         };
     },
