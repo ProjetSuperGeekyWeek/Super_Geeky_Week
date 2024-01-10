@@ -42,6 +42,8 @@
           >
           </v-data-table>
         </v-container>
+        <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
+        <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
       </v-main>
     </v-app>
   </div>
@@ -65,7 +67,10 @@ export default {
     ...mapActions('crudStore',['getAllItemStore','getAllItemColumnStore']),
   },
   methods: {
+    ...mapActions('crudStore',['deleteRowItem']),
     async loadData(){
+      this.item.headers = [];
+      this.item.stats = [];
       await this.getAllItemStore;
       await this.getAllItemColumnStore;
       for(var i = 0; i<this.getAllItemColumn.length; i++){
@@ -76,6 +81,34 @@ export default {
     async navigateToAdd() {
       await this.$router.push('/admin/crud/item/add');
     },
+    async deleteRow() {
+      try {
+        if (this.selected.length === 0) {
+          alert('Veuillez sélectionner une ligne')
+          return
+        }
+        if (this.selected[0].nom_item === "default_ITEM") {
+          alert("Vous ne pouvez pas supprimer cet item");
+          return;
+        }
+        const body = {id_item: this.selected[0].id_item, id_personne: this.selected[0].id_personne, id_calendrier: this.selected[0].id_calendrier}
+        await this.deleteRowItem(body);
+        await this.loadData();
+      } catch (e) {
+        console.log('error deleteRow', e)
+      }
+    },
+    showUpdateDialog() {
+      if (this.selected.length === 0) {
+        alert("Veuillez sélectionner une ligne");
+        return;
+      }
+      if (this.selected[0].nom_item === "default_ITEM") {
+        alert("Vous ne pouvez pas supprimer cet item");
+        return;
+      }
+      this.$router.push('/admin/crud/update/item/' + this.selected[0].id_item);
+    }
   },
   async mounted() {
     await this.loadData();

@@ -119,9 +119,14 @@ const routes = [
     component: () => import('@/Admin/Crud/components/calendrier/addCalendrier.vue')
   },
   {
-    path: '/admin/crud/evenement/add',
+    path: '/admin/crud/evenement/add/',
     name: 'admin_crud_evenement_add',
     component: () => import('@/Admin/Crud/components/evenement/addEvenement.vue')
+  },
+  {
+    path: '/admin/crud/update/:table/:id',
+    name: 'admin_crud_update',
+    component: () => import('@/Admin/Crud/views/updateCrudView.vue')
   }
 
 ]

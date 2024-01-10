@@ -42,6 +42,8 @@
           >
           </v-data-table>
         </v-container>
+        <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
+        <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
       </v-main>
     </v-app>
   </div>
@@ -65,7 +67,10 @@ export default {
     ...mapActions('crudStore',['getAllEmplacementStore','getAllEmplacementColumnStore']),
   },
   methods: {
+    ...mapActions('crudStore',['deleteRowEmplacement']),
     async loadData(){
+      this.emplacement.headers = [];
+      this.emplacement.stats = [];
       await this.getAllEmplacementStore;
       await this.getAllEmplacementColumnStore;
       for(var i = 0; i<this.getAllEmplacementColumn.length; i++){
@@ -76,6 +81,34 @@ export default {
     async navigateToAdd() {
       this.$router.push('/admin/crud/emplacement/add');
     },
+    async deleteRow(){
+      try{
+        if(this.selected.length === 0){
+          alert('Veuillez sélectionner une ligne')
+          return
+        }
+        if(this.selected[0].nom_emplacement === 'default_EMPLACEMENT'){
+          alert('Veuillez sélectionner une autre')
+          return
+        }
+        const body = {id_emplacement: this.selected[0].id_emplacement}
+        await this.deleteRowEmplacement(body);
+        await this.loadData();
+      }catch (e) {
+        console.log('error deleteRow', e)
+      }
+    },
+    async showUpdateDialog(){
+      if(this.selected.length === 0){
+        alert('Veuillez sélectionner une ligne')
+        return
+      }
+      if(this.selected[0].nom_emplacement === 'default_EMPLACEMENT'){
+        alert('Veuillez sélectionner une autre')
+        return
+      }
+      this.$router.push('/admin/crud/update/emplacement/'+this.selected[0].id_emplacement);
+    }
   },
   async mounted() {
     await this.loadData();

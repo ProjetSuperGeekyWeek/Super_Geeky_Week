@@ -41,6 +41,8 @@
               show-group-by
           >
           </v-data-table>
+          <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
+          <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
         </v-container>
       </v-main>
     </v-app>
@@ -65,7 +67,10 @@ export default {
     ...mapActions('crudStore',['getAllQrCodeStore','getAllQrCodeColumnStore']),
   },
   methods: {
+    ...mapActions('crudStore',['deleteRowQrCode']),
     async loadData(){
+      this.qrCode.headers = [];
+      this.qrCode.stats = [];
       await this.getAllQrCodeStore;
       await this.getAllQrCodeColumnStore;
       for(var i = 0; i<this.getAllQrCodeColumn.length; i++){
@@ -75,6 +80,34 @@ export default {
     },
     async navigateToAdd() {
       this.$router.push('/admin/crud/qrcode/add');
+    },
+    async deleteRow() {
+      try {
+        if (this.selected.length === 0) {
+          alert('Veuillez sélectionner une ligne')
+          return
+        }
+        if (this.selected[0].nom_client === "default_QRCODE") {
+          alert("Vous ne pouvez pas supprimer ce role");
+          return;
+        }
+        const body = {id_qr_code: this.selected[0].id_qr_code}
+        await this.deleteRowQrCode(body);
+        await this.loadData();
+      } catch (e) {
+        console.log('error deleteRow', e)
+      }
+    },
+    showUpdateDialog() {
+      if (this.selected.length === 0) {
+        alert("Veuillez sélectionner une ligne");
+        return;
+      }
+      if (this.selected[0].nom_client === "default_QRCODE") {
+        alert("Vous ne pouvez pas supprimer ce role");
+        return;
+      }
+      this.$router.push('/admin/crud/update/qrcode/'+this.selected[0].id_qr_code);
     },
   },
   async mounted() {

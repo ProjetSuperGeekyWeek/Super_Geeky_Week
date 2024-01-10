@@ -41,6 +41,8 @@
               show-group-by
           >
           </v-data-table>
+          <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
+          <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
         </v-container>
       </v-main>
     </v-app>
@@ -65,7 +67,10 @@ export default {
     ...mapActions('crudStore',['getAllTagStore','getAllTagColumnStore']),
   },
   methods: {
+    ...mapActions('crudStore',['deleteRowTag']),
     async loadData(){
+      this.tag.headers = [];
+      this.tag.stats = [];
       await this.getAllTagStore;
       await this.getAllTagColumnStore;
       for(var i = 0; i<this.getAllTagColumn.length; i++){
@@ -75,6 +80,34 @@ export default {
     },
     async navigateToAdd() {
       this.$router.push('/admin/crud/tag/add');
+    },
+    async deleteRow() {
+      try {
+        if (this.selected.length === 0) {
+          alert('Veuillez sélectionner une ligne')
+          return
+        }
+        if (this.selected[0].nom_tag === "default_TAG") {
+          alert("Vous ne pouvez pas supprimer ce tag");
+          return;
+        }
+        const body = {id_tag: this.selected[0].id_tag}
+        await this.deleteRowTag(body);
+        await this.loadData();
+      } catch (e) {
+        console.log('error deleteRow', e)
+      }
+    },
+    showUpdateDialog() {
+      if (this.selected.length === 0) {
+        alert("Veuillez sélectionner une ligne");
+        return;
+      }
+      if (this.selected[0].nom_tag === "default_TAG") {
+        alert("Vous ne pouvez pas supprimer ce tag");
+        return;
+      }
+      this.$router.push('/admin/crud/update/tag/'+this.selected[0].id_tag);
     },
   },
   async mounted() {

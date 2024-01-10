@@ -42,6 +42,8 @@
           >
           </v-data-table>
         </v-container>
+        <!--<v-btn @click="deleteRow" color="primary">Supprimé</v-btn>-->
+        <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
       </v-main>
     </v-app>
   </div>
@@ -65,7 +67,10 @@ export default {
     ...mapActions('crudStore',['getAllCalendrierStore','getAllCalendrierColumnStore']),
   },
   methods: {
+    ...mapActions('crudStore',['deleteRowCalendrier']),
     async loadData(){
+      this.calendrier.headers = [];
+      this.calendrier.stats = [];
       await this.getAllCalendrierStore;
       await this.getAllCalendrierColumnStore;
       for(var i = 0; i<this.getAllCalendrierColumn.length; i++){
@@ -75,6 +80,24 @@ export default {
     },
     async navigateToAdd() {
       this.$router.push('/admin/crud/calendrier/add');
+    },
+    /*async deleteRow() {
+      if (this.selected.length === 0) {
+        alert("Veuillez sélectionner une ligne");
+        return;
+      }
+      const body = {
+        id_calendrier: this.selected[0].id_calendrier
+      }
+      await this.deleteRowCalendrier(body)
+      await this.loadData();
+    },*/
+    showUpdateDialog() {
+      if (this.selected.length === 0) {
+        alert("Veuillez sélectionner une ligne");
+        return;
+      }
+      this.$router.push('/admin/crud/update/calendrier/'+this.selected[0].id_calendrier);
     },
   },
   async mounted() {
