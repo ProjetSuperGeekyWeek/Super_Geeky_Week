@@ -33,6 +33,12 @@
     <div v-if="isModalOpen" class="modal-overlay">
       <div class="modal">
         <h2>{{translate('contactpresta')}}</h2>
+        <div>
+          <p v-if="selectedPrestataire && selectedPrestataire.mail_personne"><strong>Mail du prestataire :</strong> {{
+            selectedPrestataire.mail_personne }}</p>
+          <p v-else><strong>Mail du prestataire :</strong> N/A</p>
+        </div>
+        <br>
         <textarea v-model="messageContent" placeholder="Votre message"></textarea>
         <div>
           <button @click="sendMessage" class="contact-button">{{translate('envoyer')}}</button>
@@ -84,17 +90,17 @@ export default {
     },
     contactPrestataire(prestataire) {
       this.selectedPrestataire = prestataire;
-      this.openModal();
+      console.log(`Contactez ${prestataire.nom} ${prestataire.prenom}`);
+      if (this.selectedPrestataire) {
+        console.log(this.selectedPrestataire);
+        this.isModalOpen = true;
+      } else {
+        console.error("Erreur: selectedPrestataire n'est pas défini.");
+      }
     },
     sendMessage() {
-      // Logique d'envoi du message (à implémenter)
       console.log("Message envoyé :", this.messageContent, "à", this.selectedPrestataire.nom);
-
-      // Fermer le modal après l'envoi
       this.closeModal();
-    },
-    openModal() {
-      this.isModalOpen = true;
     },
     closeModal() {
       this.isModalOpen = false;
@@ -256,5 +262,6 @@ export default {
   width: 100%;
   height: 100px;
   margin-bottom: 10px;
-}</style>
+}
+</style>
   
