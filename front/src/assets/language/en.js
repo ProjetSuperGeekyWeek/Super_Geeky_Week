@@ -114,7 +114,15 @@ export default {
                 errorprenom3caract:"The first name must contain at least 3 characters and must not contain any digits",
                 choiseance:"Please choose a session",
                 nodescription:"No description",
-
+                cartebnovalide: "The credit card number is invalid",
+                datexpinovalide: "The expiry date is invalid",
+                codesecunovalide: "The security code is invalid",
+                paievalide: "Payment validated",
+                imgtournoi:"Tournament image",
+                anormalallstandtaken:"Abnormal case in getAllStandsTaken",
+                anormalinfobulle:"Abnormal case in GetInfoBulle",
+                anormalinfopaneltake:"Abnormal case in GetInfoPanelNoTake",
+                anormalinfopanel:"Abnormal case in GetInfoPanel",
             },
         };
     },

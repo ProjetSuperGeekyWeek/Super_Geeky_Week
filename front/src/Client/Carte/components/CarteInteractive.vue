@@ -6,7 +6,7 @@
       <div id="bandeau-selected">
         <div v-if="!admin" id="haut-selected">
           <router-link id="image-selected" :to="{ name:'page_prestataire', params: { id:idPresta } }">
-            <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" alt="Image du tournoi">
+            <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" :alt="translate('imgtournoi')">
           </router-link>
           <h4 id="titre-selected">
             {{ nom_prestataire }}
@@ -23,7 +23,7 @@
         <div v-if="admin">
           <div id="carte-config-prestataire">
             <router-link id="carte-config-image"  :to="{ name:'page_prestataire', params: { id:idPresta } }">
-              <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" alt="Image du tournoi">
+              <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" :alt="translate('imgtournoi')">
             </router-link>
             <div id="carte-config-nom">
               <h4 id="titre-selected">
@@ -36,13 +36,13 @@
           </div>
           <div v-show="neutre">
             <button v-show="!verifyTaken(idStand)" @click="ajout = true; neutre = false; modif = false">
-              Ajouter
+              {{translate('ajouter')}}
             </button>
             <button v-show="verifyTaken(idStand)" @click="modif = true; neutre = false; ajout = false">
-              Modifier
+              {{translate('modifier')}}
             </button>
             <button v-show="verifyTaken(idStand)" @click="deleteStand()">
-              Supprimer
+              {{translate('supprimer')}}
             </button>
           </div>
           <div v-show="ajout">
@@ -52,10 +52,10 @@
               </option>
             </select>
             <button @click="ajout = false; neutre = true">
-              Retour
+              {{translate('retour')}}
             </button>
             <button @click="addStand()">
-              Ajouter
+              {{translate('ajouter')}}
             </button>
           </div>
           <div v-show="modif">
@@ -65,10 +65,10 @@
               </option>
             </select>
             <button @click="modif = false; neutre = true">
-              Retour
+              {{translate('retour')}}
             </button>
             <button @click="modifStand()">
-              Modifier
+              {{translate('modifier')}}
             </button>
           </div>
         </div>
@@ -213,6 +213,9 @@ export default {
     }
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     async getAllPrestataires() {
       var result = await getAllPrestataires();
       for (var i = 0; i < result.length; i++) {
@@ -257,7 +260,7 @@ export default {
           this.idAllStandsTaken.push(result[i].id_emplacement);
         }
       } catch (error) {
-        console.log("Cas anormal dans getAllStandsTaken");
+        console.log(this.translate('anormalallstandtaken'));
       }
       this.changeColorNoTaken();
       await this.bandeauSelected(document.getElementById(this.idStand));
@@ -280,7 +283,7 @@ export default {
         infoBulle.style.top = ((stand.getBoundingClientRect().top + window.pageYOffset) + ajustementY) + "px";
         infoBulle.style.left = ((stand.getBoundingClientRect().left + window.pageXOffset) + ajustementX) + "px";
       } catch (error) {
-        console.log("Cas Anormal dans GetInfoBulle");
+        console.log(this.translate('anormalinfobulle'));
       }
     },
     async bandeauSelected(stand) {
@@ -293,7 +296,7 @@ export default {
         try {
           result = await getInfoPanelNoTake(stand.id);
         } catch (error) {
-          console.log("Cas anormal dans GetInfoPanelNoTake");
+          console.log(this.translate('anormalinfopaneltake'));
         }
       } else {
         try {
@@ -307,7 +310,7 @@ export default {
             this.listeTags.push(resultTags[i].nom_tag);
           }
         } catch (error) {
-          console.log("Cas anormal dans GetInfoPanel");
+          console.log(this.translate('anormalinfopanel'));
         }
       }
       this.idStand = stand.id;
@@ -367,7 +370,7 @@ export default {
             this.idAllStandsTaken.push(result[i].id_emplacement);
           }
         } catch (error) {
-          console.log("Cas anormal dans getAllStandsTaken");
+          console.log(this.translate('anormalallstandtaken'));
         }
         this.changeColorNoTaken();
         if (this.admin) {
@@ -431,6 +434,7 @@ export default {
     },
   },
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapState(['nom_prestataire', 'prenom_prestataire', 'nom_stand']),
     ...mapState('authentifierStore',['admin']),
   },
