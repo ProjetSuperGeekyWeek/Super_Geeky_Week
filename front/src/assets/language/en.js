@@ -86,8 +86,6 @@ export default {
                 personnetag:"Person Associated with a Tag",
                 event:"Event",
                 creneau:"Time Slot",
-                afflivror:"Show the Guestbook",
-                cachlivror:"Hide the Guestbook",
                 temoignage:"Testimonial",
                 addtemoin:"Add a testimonial",
                 numcarte:"Card number",

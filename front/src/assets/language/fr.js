@@ -86,8 +86,6 @@ export default {
                 personnetag:"Personne associée à un tag",
                 event:"Événement",
                 creneau:"Créneau",
-                afflivror:"Afficher le Livre d'or",
-                cachlivror:"Cacher le Livre d'or",
                 temoignage:"Témoignage",
                 addtemoin:"Ajouter un témoignage",
                 numcarte:"Numéro de carte",
