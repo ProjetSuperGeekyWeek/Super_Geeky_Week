@@ -131,7 +131,9 @@ export default {
                 dsntdeltrole:"You cannot delete this role",
                 bienvenuepage:"Welcome to the page of ",
                 vousprofitact:"You can now enjoy fantastic activities.",
-
+                emplaname:"Location name",
+                dsntdeltrpersonne:"You cannot delete this person",
+                selectother:"Please choose another one.",
             },
         };
     },

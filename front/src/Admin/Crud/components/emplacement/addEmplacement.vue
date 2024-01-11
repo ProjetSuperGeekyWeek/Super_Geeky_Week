@@ -1,19 +1,25 @@
 <template>
   <div class="add">
-    <input type="text" placeholder="Nom de l'emplacement" v-model="nom_emplacement">
-    <input type="button" value="Valider" @click="addNewQrCode">
-    <input type="button" value="retour" @click="returnCrud">
+    <input type="text" :placeholder="translate('emplaname')" v-model="nom_emplacement">
+    <input type="button" :value="translate('valider')" @click="addNewQrCode">
+    <input type="button" :value="translate('retour')" @click="returnCrud">
   </div>
 </template>
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapState} from "vuex";
 
 export default{
   name: 'addEmplacementCrud',
   data: () => ({
     nom_emplacement: '',
   }),
+  computed: {
+    ...mapState(['lang', 'en', 'fr']),
+  },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore',['addNewEmplacementStore']),
     async addNewQrCode() {
       try{

@@ -92,7 +92,7 @@ export default {
           return
         }
         if (this.selected[0].nom_personne === "default_PERSONNE") {
-          alert(this.translate('dsntdeltrole'));
+          alert(this.translate('dsntdeltrpersonne'));
           return;
         }
         const body = {id_personne: this.selected[0].id_personne}
@@ -108,7 +108,7 @@ export default {
         return;
       }
       if (this.selected[0].nom_personne === "default_PERSONNE") {
-        alert(this.translate('dsntdeltrole'));
+        alert(this.translate('dsntdeltrpersonne'));
         return;
       }
       this.$router.push('/admin/crud/update/personne/' + this.selected[0].id_personne);
