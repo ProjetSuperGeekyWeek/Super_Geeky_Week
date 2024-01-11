@@ -20,22 +20,22 @@
         <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('creneau')" name="menu" id="creneau" value="creneau"> <label for="creneau">{{translate('creneau')}}</label></div>
       </div>
       <div class="menu_crud_emplacement">
-        <div v-show="selectedMenu === 'role'" class="crud_role"><crudRole/></div>
-        <div v-show="selectedMenu === 'personne'" class="crud_personne"><crudPersonne/></div>
-        <div v-show="selectedMenu === 'emplacement'" class="crud_emplacement"><crud-emplacement/></div>
-        <div v-show="selectedMenu === 'ressource'" class="crud_ressource"><crud-ressource/></div>
-        <div v-show="selectedMenu === 'emplacement_ressource'" class="crud_emplacement_ressource"><crud-emplacement-ressource/></div>
-        <div v-show="selectedMenu === 'stand'" class="crud_stand"><crud-stand/></div>
-        <div v-show="selectedMenu === 'calendrier'" class="crud_calendrier"><crud-calendrier/></div>
-        <div v-show="selectedMenu === 'panier'" class="crud_panier"><crud-panier/></div>
-        <div v-show="selectedMenu === 'item'" class="crud_item"><crud-item/></div>
-        <div v-show="selectedMenu === 'ligne_panier'" class="crud_ligne_panier"><crud-ligne-panier/></div>
-        <div v-show="selectedMenu === 'qr_code'" class="qr_code"><crud-qr-code/></div>
-        <div v-show="selectedMenu === 'acheter'" class="crud_acheter"><crudAcheter/></div>
-        <div v-show="selectedMenu === 'tag'" class="crud_tag"><crud-tag/></div>
-        <div v-show="selectedMenu === 'personne_tag'" class="crud_personne_tag"><crud-personne-tag/></div>
-        <div v-show="selectedMenu === 'evenement'" class="crud_evenement"><crud-evenement/></div>
-        <div v-show="selectedMenu === 'creneau'" class="crud_creneau"><crudCreneau/></div>
+        <div v-if="selectedMenu === 'role'" class="crud_role"><crudRole/></div>
+        <div v-if="selectedMenu === 'personne'" class="crud_personne"><crudPersonne/></div>
+        <div v-if="selectedMenu === 'emplacement'" class="crud_emplacement"><crud-emplacement/></div>
+        <div v-if="selectedMenu === 'ressource'" class="crud_ressource"><crud-ressource/></div>
+        <div v-if="selectedMenu === 'emplacement_ressource'" class="crud_emplacement_ressource"><crud-emplacement-ressource/></div>
+        <div v-if="selectedMenu === 'stand'" class="crud_stand"><crud-stand/></div>
+        <div v-if="selectedMenu === 'calendrier'" class="crud_calendrier"><crud-calendrier/></div>
+        <div v-if="selectedMenu === 'panier'" class="crud_panier"><crud-panier/></div>
+        <div v-if="selectedMenu === 'item'" class="crud_item"><crud-item/></div>
+        <div v-if="selectedMenu === 'ligne_panier'" class="crud_ligne_panier"><crud-ligne-panier/></div>
+        <div v-if="selectedMenu === 'qr_code'" class="qr_code"><crud-qr-code/></div>
+        <div v-if="selectedMenu === 'acheter'" class="crud_acheter"><crudAcheter/></div>
+        <div v-if="selectedMenu === 'tag'" class="crud_tag"><crud-tag/></div>
+        <div v-if="selectedMenu === 'personne_tag'" class="crud_personne_tag"><crud-personne-tag/></div>
+        <div v-if="selectedMenu === 'evenement'" class="crud_evenement"><crud-evenement/></div>
+        <div v-if="selectedMenu === 'creneau'" class="crud_creneau"><crudCreneau/></div>
       </div>
     </div>
   </div>
@@ -80,6 +80,7 @@ export default {
     },
     selectMenu(menu) {
       this.selectedMenu = menu;
+      this.$router.push('/admin/crud/' + menu)
     }
   },
   components: {
