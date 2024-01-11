@@ -29,11 +29,6 @@ const routes = [
     component: () => import('@/Client/Prestataire/views/PrestataireView.vue')
   },
   {
-    path: '/services',
-    name: 'services',
-    component: () => import('@/Client/Prestataire/views/ServicesView.vue')
-  },
-  {
     path: '/authentification',
     name: 'authentification',
     component: () => import('@/Connexion/Authentification/views/AuthentificationView.vue')
