@@ -124,6 +124,11 @@ export default {
                 anormalinfopaneltake:"Abnormal case in GetInfoPanelNoTake",
                 anormalinfopanel:"Abnormal case in GetInfoPanel",
                 day:"June 21/22/23, 2024",
+                remplirtouschamps:"Please fill in all fields",
+                numerole:"Role name",
+                chercher:"Search",
+                selectligne:"Please select a line",
+                dsntdeltrole:"You cannot delete this role",
             },
         };
     },

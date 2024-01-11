@@ -124,6 +124,11 @@ export default {
                 anormalinfopaneltake:"Cas anormal dans GetInfoPanelNoTake",
                 anormalinfopanel:"Cas anormal dans GetInfoPanel",
                 day:"21/22/23 Juin 2024",
+                remplirtouschamps:"Veuillez remplir tous les champs",
+                namerole:"Nom du rôle",
+                chercher:"Chercher",
+                selectligne:"Veuillez sélectionner une ligne",
+                dsntdeltrole:"Vous ne pouvez pas supprimer ce rôle",
             },
         };
     },

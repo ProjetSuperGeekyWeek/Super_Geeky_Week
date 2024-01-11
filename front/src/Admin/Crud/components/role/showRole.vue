@@ -5,14 +5,14 @@
         <v-container>
           <v-card>
             <v-card-title>
-              Role
+              {{translate('role')}}
               <v-spacer />
-              <v-btn @click="navigateToAdd" color="primary">Ajouter</v-btn>
+              <v-btn @click="navigateToAdd" color="primary">{{translate('ajouter')}}</v-btn>
               <v-spacer />
               <v-text-field
                   v-model="search"
                   append-icon="mdi-magnify"
-                  label="chercher"
+                  :label="translate('chercher')"
                   single-line
                   hide-details
               >
@@ -36,8 +36,8 @@
               show-group-by
           >
           </v-data-table>
-          <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
-          <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
+          <v-btn @click="deleteRow" color="primary">{{translate('supprimer')}}</v-btn>
+          <v-btn @click="showUpdateDialog" color="primary">{{translate('modifier')}}</v-btn>
         </v-container>
       </v-main>
     </v-app>
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   name: 'crudRole',
@@ -59,10 +59,14 @@ export default {
     showUpdate: false,
   }),
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore', ['getAllRole', 'getAllRoleColumn']),
     ...mapActions('crudStore', ['getAllRoleStore', 'getAllRoleColumnStore']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore', ['deleteRowRole']),
     async loadData() {
       this.role.headers = [];
@@ -83,11 +87,11 @@ export default {
     },
     async deleteRow() {
       if (this.selected.length === 0) {
-        alert("Veuillez sélectionner une ligne");
+        alert(this.translate('selectligne'));
         return;
       }
       if (this.selected[0].nom_role === "default_ROLE") {
-        alert("Vous ne pouvez pas supprimer ce role");
+        alert(this.translate('dsntdeltrole'));
         return;
       }
       const body = {
@@ -98,11 +102,11 @@ export default {
     },
     showUpdateDialog() {
       if (this.selected.length === 0) {
-        alert("Veuillez sélectionner une ligne");
+        alert(this.translate('selectligne'));
         return;
       }
       if (this.selected[0].nom_role === "default_ROLE") {
-        alert("Vous ne pouvez pas supprimer ce rôle");
+        alert(this.translate('dsntdeltrole'));
         return;
       }
       this.$router.push('/admin/crud/update/role/'+this.selected[0].id_role);
