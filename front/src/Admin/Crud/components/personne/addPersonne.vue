@@ -9,7 +9,7 @@
     <select name="selectRole" id="selectRole" v-model="id_role">
       <option :value="role.id_role" v-for="role in listRole" :key="role.id_role">{{ role.nom_role }}</option>
     </select>
-    <input type="button" :value="translate('valider')" @click="addNewPersonne">
+    <input type="button" :value="translate('ajouter')" @click="addNewPersonne">
     <boutonRetourCrud/>
   </div>
 </template>

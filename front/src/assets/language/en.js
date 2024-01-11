@@ -134,6 +134,8 @@ export default {
                 emplaname:"Location name",
                 dsntdeltrpersonne:"You cannot delete this person",
                 selectother:"Please choose another one.",
+                ressname:"Resource name",
+                dsntdeltrressource:"You cannot delete this resource",
             },
         };
     },

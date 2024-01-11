@@ -1,7 +1,7 @@
 <template>
   <div class="add">
     <input type="text" :placeholder="translate('emplaname')" v-model="nom_emplacement">
-    <input type="button" :value="translate('valider')" @click="addNewQrCode">
+    <input type="button" :value="translate('ajouter')" @click="addNewQrCode">
     <input type="button" :value="translate('retour')" @click="returnCrud">
   </div>
 </template>

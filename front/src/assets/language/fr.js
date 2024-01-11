@@ -134,6 +134,8 @@ export default {
                 emplaname:"Nom de l'emplacement",
                 dsntdeltrpersonne:"Vous ne pouvez pas supprimer cette personne",
                 selectother:"Veuillez en sélectionner une autre",
+                ressname:"Nom de la ressource",
+                dsntdeltrressource:"Vous ne pouvez pas supprimer cet ressource",
             },
         };
     },
