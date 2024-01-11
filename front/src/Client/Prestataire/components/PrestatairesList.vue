@@ -22,9 +22,9 @@
       <div class="prestataires-cards">
         <div v-if="prestataires.length > 0">
           <div class="prestataires-card" v-for="prestataire in prestataires" :key="prestataire.idpresta">
-            <div class="prestataires-photo">
+            <router-link class="prestataires-photo" :to="{ name:'page_prestataire', params: { id:prestataire.idpresta } }">
               <img src="@/assets/image/logo/main_logo.png" alt="">
-            </div>
+            </router-link>
             <div class="prestataires-description">
               <div class="prestataires-nom">
                 <p>{{ prestataire.nom }} {{ prestataire.prenom }}</p>
