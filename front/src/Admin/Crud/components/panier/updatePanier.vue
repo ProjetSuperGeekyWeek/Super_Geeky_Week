@@ -1,14 +1,14 @@
 <template>
   <div class="updateCrud">
     <input type="hidden" v-model="id_panier">
-    <input type="text" v-model="nom_panier" placeholder="nom panier">
-    <button @click="updateRole">Valider</button>
+    <input type="text" v-model="nom_panier" :placeholder="translate('paniername')">
+    <button @click="updateRole">{{translate('valider')}}</button>
     <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updatePanier",
@@ -25,9 +25,13 @@ export default {
     };
   },
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore', ['getAllPanier']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore', ['updateRowPanier']),
     async loadData() {
       this.id_panier = this.$route.params.id;
@@ -40,7 +44,7 @@ export default {
     async updateRole() {
       try {
         if (this.id_panier === '' || this.nom_panier === '') {
-          alert('Veuillez remplir tous les champs')
+          alert(this.translate('remplirtouschamps'))
           return
         }
         const body = { id_panier: this.id_panier, nom_panier: this.nom_panier }

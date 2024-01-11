@@ -138,6 +138,8 @@ export default {
                 dsntdeltrressource:"Vous ne pouvez pas supprimer cet ressource",
                 hordeb:"Horaire début",
                 horfin:"Horaire fin",
+                paniername:"Nom du panier",
+                dsntdeltpanier:"Vous ne pouvez pas supprimer ce panier",
             },
         };
     },

@@ -138,6 +138,8 @@ export default {
                 dsntdeltrressource:"You cannot delete this resource",
                 hordeb:"Start time",
                 horfin:"End time",
+                paniername:"Cart name",
+                dsntdeltpanier:"You cannot delete this cart",
             },
         };
     },
