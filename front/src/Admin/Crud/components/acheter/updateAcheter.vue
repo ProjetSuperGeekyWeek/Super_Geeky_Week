@@ -8,13 +8,13 @@
       <option :value="qrCode.id_qr_code" v-for="qrCode in listQrCode" :key="qrCode.id_qr_code" :selected="qrCode.id_qr_code === id_qr_code">{{ qrCode.nom_client }} - {{ qrCode.prenom_client }}</option>
     </select>
     <input type="checkbox" v-model="consommer">
-    <button @click="updateRole">Valider</button>
+    <button @click="updateRole">{{translate('valider')}}</button>
     <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateAcheter",
@@ -34,9 +34,13 @@ export default {
     };
   },
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore', ['getAllAcheters', 'getAllItem', 'getAllQrCode']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore', ['updateRowAcheter']),
     async loadData() {
       this.listItem = this.getAllItem;
@@ -54,7 +58,7 @@ export default {
     async updateRole() {
       try {
         if (this.id_acheter === '' || this.id_item === '' || this.id_qr_code === '') {
-          alert('Veuillez remplir tous les champs')
+          alert(this.translate('remplirtouschamps'))
           return
         }
         const body = { id_acheter: this.id_acheter, id_item: this.id_item, id_qr_code: this.id_qr_code, consommer: this.consommer }

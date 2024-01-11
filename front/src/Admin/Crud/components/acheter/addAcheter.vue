@@ -7,12 +7,12 @@
       <option :value="qrcode.id_qr_code" v-for="qrcode in listQrCode" :key="qrcode.id_qr_code">{{ qrcode.nom_client }} - {{ qrcode.prenom_client }}</option>
     </select>
     consommer :<input type="checkbox" id="consommer" v-model="consommer">
-    <input type="button" value="Ajouter" @click="addNewAcheter">
+    <input type="button" :value="translate('ajouter')" @click="addNewAcheter">
     <boutonRetourCrud/>
   </div>
 </template>
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
@@ -26,9 +26,13 @@ export default{
     listQrCode: [],
   }),
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore',['getAllItem', 'getAllQrCode']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore',['addNewAcheterStore']),
     async addNewAcheter() {
       try{
