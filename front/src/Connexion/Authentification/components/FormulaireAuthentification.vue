@@ -36,7 +36,7 @@ export default {
                     this.$router.push('/admin/crud');
                 }
                 else {
-                    this.$router.push('/services');
+                    this.$router.push('/page_prestataire/' + this.getPrestataireAuthentifier().id_personne);
                 }
             } else
                 alert('Email ou mot de passe incorrect');
