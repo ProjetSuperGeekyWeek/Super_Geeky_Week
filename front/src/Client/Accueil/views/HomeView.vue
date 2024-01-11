@@ -5,7 +5,7 @@
       {{ translate('accroche') }}
     </h1>
     <h3 id="sous-accroche">
-      21/22/23 Juin 2024
+      {{ translate('day') }}
     </h3>
 
     <div class="section">
