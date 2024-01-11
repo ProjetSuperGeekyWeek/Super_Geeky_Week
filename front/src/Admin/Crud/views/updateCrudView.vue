@@ -1,17 +1,22 @@
 <template>
-<div>
-  <div v-show="table === 'role'" class="divUpdateCrudView"><updateRole :id="id"/></div>
-  <div v-show="table === 'acheter'" class="divUpdateCrudView"><updateAcheter :id="id"/></div>
-  <div v-show="table === 'calendrier'" class="divUpdateCrudView"><updateCalendrier :id="id"/></div>
-  <div v-show="table === 'emplacement'" class="divUpdateCrudView"><updateEmplacement :id="id"/></div>
-  <div v-show="table === 'evenement'" class="divUpdateCrudView"><updateEvenement :id="id"/></div>
-  <div v-show="table === 'item'" class="divUpdateCrudView"><updateItem :id="id"/></div>
-  <div v-show="table === 'panier'" class="divUpdateCrudView"><updatePanier :id="id"/></div>
-  <div v-show="table === 'personne'" class="divUpdateCrudView"><updatePersonne :id="id"/></div>
-  <div v-show="table === 'qrcode'" class="divUpdateCrudView"><updateQrCode :id="id"/></div>
-  <div v-show="table === 'ressource'" class="divUpdateCrudView"><updateRessource :id="id"/></div>
-  <div v-show="table === 'tag'" class="divUpdateCrudView"><updateTag :id="id"/></div>
-</div>
+  <div v-if="admin">
+    <div>
+      <div v-show="table === 'role'" class="divUpdateCrudView"><updateRole :id="id"/></div>
+      <div v-show="table === 'acheter'" class="divUpdateCrudView"><updateAcheter :id="id"/></div>
+      <div v-show="table === 'calendrier'" class="divUpdateCrudView"><updateCalendrier :id="id"/></div>
+      <div v-show="table === 'emplacement'" class="divUpdateCrudView"><updateEmplacement :id="id"/></div>
+      <div v-show="table === 'evenement'" class="divUpdateCrudView"><updateEvenement :id="id"/></div>
+      <div v-show="table === 'item'" class="divUpdateCrudView"><updateItem :id="id"/></div>
+      <div v-show="table === 'panier'" class="divUpdateCrudView"><updatePanier :id="id"/></div>
+      <div v-show="table === 'personne'" class="divUpdateCrudView"><updatePersonne :id="id"/></div>
+      <div v-show="table === 'qrcode'" class="divUpdateCrudView"><updateQrCode :id="id"/></div>
+      <div v-show="table === 'ressource'" class="divUpdateCrudView"><updateRessource :id="id"/></div>
+      <div v-show="table === 'tag'" class="divUpdateCrudView"><updateTag :id="id"/></div>
+    </div>
+  </div>
+  <div v-else>
+    <NoAdminRightView/>
+  </div>
 </template>
 
 <script>
@@ -26,12 +31,17 @@ import updatePersonne from "@/Admin/Crud/components/personne/updatePersonne.vue"
 import updateQrCode from "@/Admin/Crud/components/qrCode/updateQrCode.vue";
 import updateRessource from "@/Admin/Crud/components/ressource/updateRessource.vue";
 import updateTag from "@/Admin/Crud/components/tag/updateTag.vue";
+import NoAdminRightView from '@/Admin/NoAdminRightView/views/NoAdminRightView.vue';
+import {mapState} from "vuex";
 export default {
   name: 'updateCrudView',
   components: {
     updateRole,updateAcheter,updateCalendrier,updateEmplacement,updateEvenement,updateItem,
-    updatePanier,updatePersonne,updateQrCode,updateRessource,updateTag
+    updatePanier,updatePersonne,updateQrCode,updateRessource,updateTag,NoAdminRightView
 
+  },
+  computed: {
+    ...mapState('authentifierStore', ['admin']),
   },
   data: () => {
     return {
