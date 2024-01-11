@@ -4,6 +4,9 @@
     <h1 id="accroche">
       {{ translate('accroche') }}
     </h1>
+    <h3 id="sous-accroche">
+      21/22/23 Juin 2024
+    </h3>
 
     <div class="section">
       <div class="text_home texte-carte">
@@ -73,6 +76,13 @@ export default {
   font-size: 3em;
   filter: drop-shadow(0px 0px 20px var(--title));
   margin-top: 1%;
+  width: 50%;
+  text-align: center;
+}
+#sous-accroche{
+  color: var(--paragraph);
+  font-size: 2em;
+  filter: drop-shadow(0px 0px 20px var(--paragraph));
   margin-bottom: 4%;
   width: 50%;
   text-align: center;

@@ -13,14 +13,17 @@
       </div>
     </div>
     <div v-if="!proprio">
-      <button v-if="!addTemoin" @click="addTemoin = true">{{translate('addtemoin')}}</button>
+      <button class="button-add-temoin" v-if="!addTemoin" @click="addTemoin = true">{{translate('addtemoin')}}</button>
       <div v-if="addTemoin">
         <form @submit.prevent="addTemoignage" class="formulaire-temoignage">
           <label for="pseudo">Pseudo</label>
           <input type="texte" name="pseudo" v-model="addPseudo" required>
           <label for="temoignage">{{translate('temoignage')}}</label>
           <textarea name="temoignage" cols="30" rows="10" v-model="addCommentaire" required></textarea>
-          <button type="submit">{{translate('envoyer')}}</button>
+          <div class="button-form-livre">
+            <button class="button-form-livre-annuler" @click="addTemoin = false">{{translate('annuler')}}</button>
+            <button class="button-form-livre-envoyer" type="submit">{{translate('envoyer')}}</button>
+          </div>
         </form>
       </div>
     </div>
@@ -91,16 +94,84 @@ export default {
 
 .temoignage {
     color: rgb(158, 1, 1);
+    padding-bottom: 10px;
   }
 
   .pseudo {
     color: rgb(255, 0, 0);
   }
 
+.button-add-temoin{
+  font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid rgb(38, 180, 38);
+    border-radius: 10px;
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+.button-add-temoin:hover{
+  background-color: rgb(38, 180, 38);
+  color: #fff;
+}
+
 .formulaire-temoignage{
   display: flex;
   flex-direction: column;
 }
+
+.formulaire-temoignage label{
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.formulaire-temoignage input{
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+.formulaire-temoignage textarea{
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+.button-form-livre{
+  display: flex;
+  justify-content: space-around;
+}
+
+.button-form-livre-annuler{
+  font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #f84646;
+    border-radius: 10px;
+    background-color: lightsalmon;
+    cursor: pointer;
+}
+
+.button-form-livre-annuler:hover{
+  background-color: #f84646;
+  color: #fff;
+}
+
+.button-form-livre-envoyer{
+  font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid rgb(38, 180, 38);
+    border-radius: 10px;
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+.button-form-livre-envoyer:hover{
+  background-color: rgb(38, 180, 38);
+  color: #fff;
+}
+
 .component-livre-or{
   border: 3px dashed darkred;
   border-radius: 60px;

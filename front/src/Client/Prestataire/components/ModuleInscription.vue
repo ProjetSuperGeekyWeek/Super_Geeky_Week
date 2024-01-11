@@ -91,17 +91,19 @@
                     </select>
                     <div class="jour-add-texte">
                         <span>
-                            <input type="number" v-model="newHeureDebut">h
+                            <input type="number" v-model="newHeureDebut">
+                            <p>h</p>
                             <input type="number" v-model="newMinuteDebut">
                         </span>
                         <span>
-                            <input type="number" v-model="newHeureFin">h
+                            <input type="number" v-model="newHeureFin">
+                            <p>h</p>
                             <input type="number" v-model="newMinuteFin">
                         </span>
                     </div>
                     <div class="jour-add-button">
-                        <button @click="addHoraire = false">{{translate('annuler')}}</button>
-                        <button @click="addNewHoraire">{{translate('ajouter')}}</button>
+                        <button class="jour-add-button-annuler" @click="addHoraire = false">{{translate('annuler')}}</button>
+                        <button class="jour-add-button-ajouter" @click="addNewHoraire">{{translate('ajouter')}}</button>
                     </div>
                 </div>
                 <div class="card-inscription-formulaire-btn" v-show="!addHoraire">
@@ -576,6 +578,165 @@ export default {
 
 .seance:focus {
     outline: none;
+}
+
+.liste-inscription-horaires{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.liste-inscription-horaires span {
+    font-size: 1rem;
+    width: 25%;
+}
+
+.liste-inscription-horaires button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #f84646;
+    border-radius: 10px;
+    background-color: lightsalmon;
+    cursor: pointer;
+}
+
+.liste-inscription-horaires button:hover {
+    background-color: #f84646;
+    color: #fff;
+}
+
+.ajouter-horaire-bouton {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid rgb(38, 180, 38);
+    border-radius: 10px;
+    background-color: lightgreen;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.ajouter-horaire-bouton:hover {
+    background-color: rgb(38, 180, 38);
+    color: #fff;
+}
+
+.jour-add-button {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+}
+
+.jour-add {
+    width: 100%;
+    max-width: min-content;
+    height: 3rem;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.jour-add:focus {
+    outline: none;
+}
+
+.jour-add-texte {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.jour-add-texte span {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.jour-add-texte span input {
+    width: 45%;
+    height: 2rem;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+.jour-add-texte p {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.jour-add-button-annuler {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #f84646;
+    border-radius: 10px;
+    background-color: lightsalmon;
+    cursor: pointer;
+}
+
+.jour-add-button-annuler:hover {
+    background-color: #f84646;
+    color: #fff;
+}
+
+.jour-add-button-ajouter {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid rgb(38, 180, 38);
+    border-radius: 10px;
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+.jour-add-button-ajouter:hover {
+    background-color: rgb(38, 180, 38);
+    color: #fff;
+}
+
+.liste-inscrits {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 70%;
+    border: #000 2px solid;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.liste-inscrits-body-titre {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.liste-inscrits-body-titre span {
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 25%;
+}
+
+.liste-inscrits-body-inscrit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.liste-inscrits-body-inscrit span {
+    font-size: 1rem;
+    width: 25%;
 }
 
 </style>

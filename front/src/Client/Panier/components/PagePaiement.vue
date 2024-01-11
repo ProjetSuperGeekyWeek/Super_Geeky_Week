@@ -57,7 +57,7 @@ export default {
             var regex = new RegExp("^[0-9]{16}$");
             if (!regex.test(num)) {
                 this.InvalideRouge(document.getElementById('num_carte'));
-                alert("Le numéro de carte bancaire n'est pas valide");
+                alert(this.translate('cartebnovalide'));
                 return false;
             }
             this.num_carte = num;
@@ -69,7 +69,7 @@ export default {
             var regex = new RegExp("^[0-9]{2}/[0-9]{2}$");
             if (!regex.test(date)) {
                 this.InvalideRouge(document.getElementById('date_expiration'));
-                alert("La date d'expiration n'est pas valide");
+                alert(this.translate('datexpinovalide'));
                 return false;
             }
             this.date_expiration = date;
@@ -81,7 +81,7 @@ export default {
             var regex = new RegExp("^[0-9]{3}$");
             if (!regex.test(ccv)) {
                 this.InvalideRouge(document.getElementById('code_securite'));
-                alert("Le code de sécurité n'est pas valide");
+                alert(this.translate('codesecunovalide'));
                 return false;
             }
             this.code_securite = ccv;
@@ -90,7 +90,7 @@ export default {
         },
         validPaiement(){
             if (this.validNumCarte() && this.validDateCarte() && this.validCCV()) {
-                alert("Paiement validé");
+                alert(this.translate('paievalide'));
                 return true;
             }
         },
