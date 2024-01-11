@@ -5,14 +5,18 @@
     <input type="text" placeholder="Prenom du client" v-model="prenom_client">
     <input type="text" placeholder="email du client" v-model="mail_client" id="email" name="email">
     <button @click="updateRole">Valider</button>
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateQrCode",
+  components: {
+    boutonRetourCrud
+  },
   data: () => {
     return {
       id_qr_code: 0,

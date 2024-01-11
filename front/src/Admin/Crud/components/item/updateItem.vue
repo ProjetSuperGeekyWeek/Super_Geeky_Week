@@ -13,14 +13,16 @@
       <option :value="calendrier.id_calendrier" v-for="calendrier in listCalendrier" :key="calendrier.id_calendrier" :selected="calendrier.id_calendrier === id_calendrier">{{ calendrier.id_jour }}</option>
     </select>
     <button @click="updateRole">Valider</button>
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateItem",
+  components: {boutonRetourCrud},
   data: () => {
     return {
       id_item: 0,

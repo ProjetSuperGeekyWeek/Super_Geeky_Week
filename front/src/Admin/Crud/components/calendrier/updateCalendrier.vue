@@ -7,14 +7,16 @@
     <input type="time" v-model="horaire_debut">
     <input type="time" v-model="horaire_fin">
     <button @click="updateRole">Valider</button>
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateCalendrier",
+  components: {boutonRetourCrud},
   data: () => {
     return {
       id_calendrier: 0,

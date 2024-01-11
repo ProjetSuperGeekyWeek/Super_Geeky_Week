@@ -3,14 +3,18 @@
     <input type="hidden" v-model="id_panier">
     <input type="text" v-model="nom_panier" placeholder="nom panier">
     <button @click="updateRole">Valider</button>
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updatePanier",
+  components: {
+    boutonRetourCrud
+  },
   data: () => {
     return {
       id_panier: 0,

@@ -11,14 +11,18 @@
     <input type="text" v-model="image_personne">
     <input type="text" v-model="description_personne">
     <button @click="updateRole">Valider</button>
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updatePersonne",
+  components: {
+    boutonRetourCrud
+  },
   data: () => {
     return {
       id_personne: 0,

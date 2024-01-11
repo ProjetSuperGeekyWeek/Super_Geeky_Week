@@ -9,14 +9,18 @@
     </select>
     <input type="checkbox" v-model="consommer">
     <button @click="updateRole">Valider</button>
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateAcheter",
+  components: {
+    boutonRetourCrud
+  },
   data: () => {
     return {
       id_acheter: 0,

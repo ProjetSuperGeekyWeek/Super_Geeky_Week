@@ -3,14 +3,18 @@
     <input type="hidden" v-model="id_ressource">
     <input type="text" v-model="nom_ressource">
     <button @click="updateRole">Valider</button>
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateRessource",
+  components: {
+    boutonRetourCrud
+  },
   data: () => {
     return {
       id_ressource: 0,

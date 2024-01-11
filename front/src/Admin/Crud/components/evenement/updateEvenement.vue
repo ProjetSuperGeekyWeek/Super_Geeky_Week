@@ -12,14 +12,18 @@
       <option :value="emplacement.id_emplacement" v-for="emplacement in listEmplacement" :key="emplacement.id_emplacement" :selected="emplacement.id_emplacement === id_emplacement">{{ emplacement.nom_emplacement }}</option>
     </select>
     <button @click="updateRole">Valider</button>
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateEvenement",
+  components: {
+    boutonRetourCrud
+  },
   data: () => {
     return {
       id_evenement: 0,

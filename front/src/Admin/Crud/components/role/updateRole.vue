@@ -3,14 +3,18 @@
     <input type="hidden" v-model="id_role">
     <input type="text" placeholder="nom_role" v-model="nom_role">
     <button @click="updateRole">Valider</button>
+    <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-
+import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateRole",
+  components: {
+    boutonRetourCrud
+  },
   data: () => {
     return {
       id_role: 0,
