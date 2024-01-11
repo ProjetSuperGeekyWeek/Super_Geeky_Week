@@ -36,19 +36,19 @@
         <h2>{{ translate('contactpresta') }}</h2>
         <div>
           <p v-if="selectedPrestataire && selectedPrestataire.mail_personne">
-            <strong>Veuillez me contacter à l'adresse suivante :</strong> {{ selectedPrestataire.mail_personne }}
+            <strong></strong> {{ selectedPrestataire.mail_personne }}
           </p>
-          <p v-else><strong>Veuillez me contacter à l'adresse suivante :</strong> N/A</p>
+          <p v-else><strong>{{ translate('ctctadrssuiv') }}</strong> N/A</p>
         </div>
         <br>
         <div>
-          <label for="emailInput">Votre adresse e-mail :</label>
-          <input type="text" v-model="userEmail" id="emailInput" placeholder="Ton mail">
+          <label for="emailInput">{{ translate('yremail') }}</label>
+          <input type="text" v-model="userEmail" id="emailInput" :placeholder="translate('tonmail')">
         </div>
         <br>
         <div>
-          <label for="messageInput">Votre message :</label>
-          <textarea v-model="messageContent" id="messageInput" placeholder="Écris ton message ici"></textarea>
+          <label for="messageInput">{{translate('yremessage')}}</label>
+          <textarea v-model="messageContent" id="messageInput" :placeholder="translate('ecrtonmessage')"></textarea>
         </div>
         <div>
           <button @click="sendMessage" class="contact-button">{{ translate('envoyer') }}</button>
@@ -85,11 +85,11 @@ export default {
         if (response && Array.isArray(response)) {
           this.prestataires = response;
         } else {
-          console.error('Erreur: Les données de l\'API sont incorrectes ou non définies.');
+          console.error(this.translate('errordonneAPI'));
           this.prestataires = [];
         }
       } catch (error) {
-        console.error('Erreur lors de la récupération des exposants', error);
+        console.error(this.translate('errorrecupexpo'), error);
         this.prestataires = [];
       }
     },
@@ -101,12 +101,12 @@ export default {
     },
     contactPrestataire(prestataire) {
       this.selectedPrestataire = prestataire;
-      console.log(`Contactez ${prestataire.nom} ${prestataire.prenom}`);
+      console.log(this.translate('contactez')`${prestataire.nom} ${prestataire.prenom}`);
       if (this.selectedPrestataire) {
         console.log(this.selectedPrestataire);
         this.isModalOpen = true;
       } else {
-        console.error("Erreur: selectedPrestataire n'est pas défini.");
+        console.error(this.translate('errorselecpresta'));
       }
     },
     async sendMessage() {
@@ -117,14 +117,14 @@ export default {
       mail_client: this.userEmail,
       message_client: this.messageContent
     }).then(() => {
-      console.log("Message envoyé :", this.messageContent, "à", this.selectedPrestataire.nom);
+      console.log(this.translate('messageenvo'), this.messageContent, this.translate('to'), this.selectedPrestataire.nom);
       this.closeModal();
     }).catch(error => {
-      console.error("Erreur lors de l'envoi du message :", error);
+      console.error(this.translate('errorenvoimsg'), error);
       // Gérer l'erreur selon vos besoins
     });
   } else {
-    console.error("Erreur: selectedPrestataire, userEmail ou messageContent est vide.");
+    console.error(this.translate('errorsltprestavide'));
     // Gérer l'erreur selon vos besoins
   }
 },
