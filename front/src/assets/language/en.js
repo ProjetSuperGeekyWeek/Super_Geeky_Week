@@ -114,6 +114,7 @@ export default {
                 errorprenom3caract:"The first name must contain at least 3 characters and must not contain any digits",
                 choiseance:"Please choose a session",
                 nodescription:"No description",
+
             },
         };
     },

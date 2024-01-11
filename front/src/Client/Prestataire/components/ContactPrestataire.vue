@@ -4,13 +4,14 @@
         <div v-for="message in messages" :key="message.id_contact">
             <h3>{{ message.mail_client }}</h3>
             <p>{{ message.message_client }}</p>
-            <button @click="deleteMessage(message.id_contact)">Supprimer</button>
+            <button @click="deleteMessage(message.id_contact)">{{translate('supprimer')}}</button>
         </div>
     </div>
 </template>
 
 <script>
 import { deleteContact } from '@/axiosFunctions/contactAxios';
+import {mapState} from "vuex";
 export default{
     name: "ContactPrestataire",
     data() {
@@ -22,6 +23,9 @@ export default{
         idPresta: Number,
     },
     methods: {
+      translate(prop) {
+        return this[this.lang][this.lang][prop];
+      },
         updateProps() {
             this.$emit('update:messages', true);
         },
@@ -34,6 +38,9 @@ export default{
             }
         },
     },
+  computed: {
+    ...mapState(['lang', 'en', 'fr']),
+  }
 }
 </script>
 

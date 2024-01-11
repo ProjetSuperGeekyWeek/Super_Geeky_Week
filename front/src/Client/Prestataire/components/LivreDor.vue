@@ -65,7 +65,7 @@ export default {
       const temoignageText = temoignage.temoignage;
       const pseudoText = temoignage.pseudo;
 
-      const formattedTemoignage = `<span class="temoignage">${temoignageText}</span> </br> signé : <span class="pseudo">${pseudoText}</span>`;
+      const formattedTemoignage = `<span class="temoignage">${temoignageText}</span> </br> signe : <span class="pseudo">${pseudoText}</span>`;
       return formattedTemoignage;
     },
   },
