@@ -109,7 +109,7 @@ export default {
                 errorenvoimsg:"Error sending the message:",
                 errorsltprestavide:"Error: selectedPrestataire, userEmail, or messageContent is empty.",
                 imgevent:"Event image",
-                enterhoraires:"please fill in all the time fields correctly (hours from 8am to 10pm and minutes from 0 to 59) and choose a day",
+                enterhoraire:"please fill in all the time fields correctly (hours from 8am to 10pm and minutes from 0 to 59) and choose a day",
                 errorname3caract:"The name must be at least 3 characters long and contain no digits",
                 errorprenom3caract:"The first name must contain at least 3 characters and must not contain any digits",
                 choiseance:"Please choose a session",

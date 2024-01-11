@@ -109,7 +109,7 @@ export default {
                 errorenvoimsg:"Erreur lors de l'envoi du message :",
                 errorsltprestavide:"Erreur: selectedPrestataire, userEmail ou messageContent est vide.",
                 imgevent:"Image de l'événement",
-                enterhoraires:"veuillez remplir correctement tout les champs horaires (les heures allant de 8h à 22h et les minutes de 0 à 59) et choisir un jour",
+                enterhoraire:"veuillez remplir correctement tout les champs horaires (les heures allant de 8h à 22h et les minutes de 0 à 59) et choisir un jour",
                 errorname3caract:"Le nom doit contenir au moins 3 caractères et ne doit contenir aucun de chiffres",
                 errorprenom3caract:"Le prenom doit contenir au moins 3 caractères et ne doit contenir aucun de chiffres",
                 choiseance:"Veuillez choisir une séance",

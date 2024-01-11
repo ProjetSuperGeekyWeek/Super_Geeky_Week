@@ -231,7 +231,7 @@ export default {
                     console.log(error);
                 }
             }else{
-                alert(this.translate('enterhoraires'))
+                alert(this.translate('enterhoraire'))
             }
         },
         async removeHoraire(index){
