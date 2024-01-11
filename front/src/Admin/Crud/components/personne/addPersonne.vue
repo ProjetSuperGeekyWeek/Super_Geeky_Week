@@ -1,20 +1,20 @@
 <template>
   <div class="add">
-    <input type="text" placeholder="Nom" v-model="nom_personne">
-    <input type="text" placeholder="Prenom" v-model="prenom_personne">
-    <input type="text" placeholder="mail personne" v-model="mail_personne" id="email" name="email">
-    <input type="password" placeholder="Mot de passe" v-model="mdp_personne">
+    <input type="text" :placeholder="translate('nom')" v-model="nom_personne">
+    <input type="text" :placeholder="translate('prenom')" v-model="prenom_personne">
+    <input type="text" placeholder="email" v-model="mail_personne" id="email" name="email">
+    <input type="password" :placeholder="translate('mdp')" v-model="mdp_personne">
     <input type="text" placeholder="Image" v-model="image_personne">
     <input type="text" placeholder="Description" v-model="description_personne" maxlength="255">
     <select name="selectRole" id="selectRole" v-model="id_role">
       <option :value="role.id_role" v-for="role in listRole" :key="role.id_role">{{ role.nom_role }}</option>
     </select>
-    <input type="button" value="Valider" @click="addNewPersonne">
+    <input type="button" :value="translate('valider')" @click="addNewPersonne">
     <boutonRetourCrud/>
   </div>
 </template>
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
@@ -32,9 +32,13 @@ export default{
     correctEmail: false,
   }),
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore',['getAllRole'])
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore',['addNewPersonneStore']),
     async loadData(){
       this.listRole = this.getAllRole;

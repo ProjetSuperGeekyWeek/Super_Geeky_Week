@@ -10,13 +10,13 @@
     </select>
     <input type="text" v-model="image_personne">
     <input type="text" v-model="description_personne">
-    <button @click="updateRole">Valider</button>
+    <button @click="updateRole">{{translate('valider')}}</button>
     <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updatePersonne",
@@ -40,9 +40,13 @@ export default {
     };
   },
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore', ['getAllPersonne', 'getAllRole']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore', ['updateRowPersonne']),
     async loadData() {
       this.listRole = this.getAllRole;
@@ -63,11 +67,11 @@ export default {
     async updateRole() {
       try {
         if (this.id_personne === '' || this.nom_personne === '' || this.prenom_personne === '' || this.mail_personne === '' || this.mdp_personne === '' || this.id_role === '' || this.image_personne === '' || this.description_personne === '') {
-          alert('Veuillez remplir tous les champs')
+          alert(this.translate('remplirrouschamps'))
           return
         }
         if(await this.verifEmail() === false){
-          alert('Veuillez rentrer un email valide')
+          alert(this.translate('enteremail'))
           return
         }
         const body = { id_personne: this.id_personne, nom_personne: this.nom_personne, prenom_personne: this.prenom_personne, mail_personne: this.mail_personne, mdp_personne: this.mdp_personne, id_role: this.id_role, image_personne: this.image_personne, description_personne: this.description_personne }

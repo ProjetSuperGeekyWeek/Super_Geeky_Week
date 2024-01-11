@@ -31,7 +31,7 @@ export default {
                 nom:"Nom",
                 email:"Adresse email : ",
                 validerinfo:"Valider les informations",
-                enteremail:"Entrer une adresse email valide",
+                enteremail:"Veuillez rentrer un email valide",
                 information:"Information : ",
                 produit:"Produit",
                 panier:"Panier",
