@@ -79,8 +79,10 @@ export default {
       return this[this.lang][this.lang][prop];
     },
     selectMenu(menu) {
-      this.selectedMenu = menu;
-      this.$router.push('/admin/crud/' + menu)
+      if(this.selectedMenu !== menu){
+        this.selectedMenu = menu;
+        this.$router.push('/admin/crud/' + menu)
+      }
     }
   },
   components: {
