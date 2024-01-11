@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>Messages</h2>
-        <div v-for="message in messages" :key="message.id_contact">
+        <div class="liste-messages" v-for="message in messages" :key="message.id_contact">
             <h3>{{ message.mail_client }}</h3>
             <p>{{ message.message_client }}</p>
             <button @click="deleteMessage(message.id_contact)">{{translate('supprimer')}}</button>
@@ -45,5 +45,38 @@ export default{
 </script>
 
 <style scoped>
+
+.liste-messages {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.liste-messages h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.liste-messages p {
+    font-size: 1.2rem;
+}
+
+.liste-messages button {
+    margin: 10px;
+    padding: 10px;
+    background-color: lightsalmon;
+    color: black;
+    border: 2px solid #f84646;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.liste-messages button:hover {
+    background-color: #f84646;
+    color: #fff;
+}
 
 </style>

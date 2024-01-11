@@ -80,7 +80,7 @@ async function deleteEvenementByIdFromAPI(id_evenement){
         let result = await client.query(query);
         if(result.rows.length === 0){
             query = "INSERT INTO evenement (nom_evenement,description_evenement,nb_place,image_evenement,id_personne,id_emplacement) VALUES ('default_EVENEMENT','dE',0,'default',$1,$2)"
-            await client.query(query, [result_evenement.rows[0].id_personne, result_evenement.rows[0].id_evenement])
+            await client.query(query, [result_evenement.rows[0].id_personne, result_evenement.rows[0].id_emplacement])
             await client.query('COMMIT');
             query = "SELECT * FROM evenement WHERE nom_evenement LIKE 'default_EVENEMENT'";
             result = await client.query(query);

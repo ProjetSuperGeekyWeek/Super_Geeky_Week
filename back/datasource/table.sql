@@ -171,7 +171,7 @@ CREATE TABLE tag (
 CREATE TABLE personne_tag (
     id_personne INTEGER NOT NULL,
     id_tag INTEGER NOT NULL,
-    CONSTRAINT pk_personne_tag PRIMARY KEY (id_personne, id_tag),
+    CONSTRAINT fk_personne_tag PRIMARY KEY (id_personne, id_tag),
     CONSTRAINT fk_personne FOREIGN KEY (id_personne) REFERENCES personne(id_personne),
     CONSTRAINT fk_tag FOREIGN KEY (id_tag) REFERENCES tag(id_tag)
 );
