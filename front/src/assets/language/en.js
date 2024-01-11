@@ -129,6 +129,9 @@ export default {
                 chercher:"Search",
                 selectligne:"Please select a line",
                 dsntdeltrole:"You cannot delete this role",
+                bienvenuepage:"Welcome to the page of ",
+                vousprofitact:"You can now enjoy fantastic activities.",
+
             },
         };
     },

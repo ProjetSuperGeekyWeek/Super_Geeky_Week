@@ -129,6 +129,8 @@ export default {
                 chercher:"Chercher",
                 selectligne:"Veuillez sélectionner une ligne",
                 dsntdeltrole:"Vous ne pouvez pas supprimer ce rôle",
+                bienvenuepage:"Bienvenue sur la page de ",
+                vousprofitact:"Vous pouvez dès maintenant profiter de superbes activités",
             },
         };
     },
