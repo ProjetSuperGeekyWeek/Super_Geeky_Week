@@ -5,7 +5,7 @@
         <v-container>
           <v-card>
             <v-card-title>
-              {{translate('resource')}}
+              {{translate('ressource')}}
               <v-spacer />
               <v-btn @click="navigateToAdd" color="primary"> {{translate('ajouter')}}</v-btn>
               <v-spacer/>
