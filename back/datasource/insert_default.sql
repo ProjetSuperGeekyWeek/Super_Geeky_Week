@@ -16,9 +16,8 @@ INSERT INTO personne (nom_personne, prenom_personne, mail_personne, mdp_personne
 -- Insert data into Livre_d_or table
 INSERT INTO Livre_d_or (temoignage, pseudo, id_personne) VALUES
     ('C''était super', 'Higorami',1),
-    ('J''ai adoré le cosplay', 'Senqen',1),
-    ('C''était cool', 'Dragul',2),
-    ('Eren','Mikasa',1);
+    ('J''ai adoré le cosplay', 'Senqen',2),
+    ('Eren','Mikasa',3);
 
 -- Insert data into inscription table
 INSERT INTO inscription (nom_inscription, description_inscription, nb_place, image_inscription, id_personne) VALUES
