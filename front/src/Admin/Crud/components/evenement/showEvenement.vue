@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   name: 'crudAcheter',
@@ -63,10 +63,14 @@ export default {
     }
   }),
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore',['getAllEvenement','getAllEvenementColumn']),
     ...mapActions('crudStore',['getAllEvenementStore','getAllEvenementColumnStore']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore',['deleteRowEvenement']),
     async loadData(){
       await this.getAllEvenementStore;
