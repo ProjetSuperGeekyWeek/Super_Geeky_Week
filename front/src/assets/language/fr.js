@@ -147,6 +147,9 @@ export default {
                 dsntdeltqrcode:"Vous ne pouvez pas supprimer ce qrcode",
                 nomtag:"Nom du tag",
                 dsntdelttag:"Vous ne pouvez pas supprimer ce tag",
+                nomevent:"Nom de l'événement",
+                nbrplace:"Nombre de places",
+                dsntdeltevent:"Vous ne pouvez pas supprimer cet événement",
             },
         };
     },

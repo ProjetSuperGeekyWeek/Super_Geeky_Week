@@ -147,6 +147,9 @@ export default {
                 dsntdeltqrcode:"You cannot delete this qrcode",
                 nomtag:"Tag name",
                 dsntdelttag:"You cannot delete this tag",
+                nomevent:"Event name",
+                nbrplace:"Number of places",
+                dsntdeltevent:"You cannot delete this event",
             },
         };
     },
