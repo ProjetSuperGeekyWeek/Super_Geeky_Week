@@ -132,6 +132,11 @@ const routes = [
     path: '/admin/crud/update/:table/:id',
     name: 'admin_crud_update',
     component: () => import('@/Admin/Crud/views/updateCrudView.vue')
+  },
+  {
+    path: '*',
+    name: 'not_found',
+    component: () => import('@/NotFoundError404.vue')
   }
 
 ]
