@@ -16,3 +16,48 @@ router.delete('/deleteQrCode', qrCodeController.deleteQrCodeById);
 router.patch('/updateQrCode', qrCodeController.updateQrCode);
 
 module.exports = router;
+
+/**
+ * @swagger
+ * tags:
+ *   name: QrCode
+ *   description: API endpoints for crud operations
+ */
+
+/**
+ * @swagger
+ * /api/qrCode/getAllQrCode:
+ *   get:
+ *     summary: Get all QrCode
+ *     tags: [QrCode]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved all QrCode
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/qrCode/getAllQrCodeColumn:
+ *   get:
+ *     summary: Get columns for QrCode
+ *     tags: [QrCode]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved QrCode columns
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       '500':
+ *         description: Internal server error
+ */
