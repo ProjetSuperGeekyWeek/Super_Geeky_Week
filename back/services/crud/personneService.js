@@ -95,6 +95,7 @@ async function deletePersonneByIdFromAPI(id_personne){
         await client.query('UPDATE item SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
         await client.query('UPDATE personne_tag SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
         await client.query('UPDATE evenement SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('UPDATE contact SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
         await client.query('COMMIT');
         await client.query('DELETE FROM personne WHERE id_personne=$1', [id_personne]);
         await client.query('COMMIT');
