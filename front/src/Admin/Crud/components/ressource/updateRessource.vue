@@ -44,7 +44,7 @@ export default {
     async updateRole() {
       try {
         if (this.id_ressource === '' || this.nom_ressource === '') {
-          alert(this.translate('remplirrouschamps'))
+          alert(this.translate('remplirtouschamps'))
           return
         }
         const body = { id_ressource: this.id_ressource, nom_ressource: this.nom_ressource }

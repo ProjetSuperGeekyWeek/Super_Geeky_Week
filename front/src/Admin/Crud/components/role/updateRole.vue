@@ -41,7 +41,7 @@ export default {
     async updateRole() {
       try {
         if (this.nom_role === '') {
-          alert(this.translate('remplirrouschamps'))
+          alert(this.translate('remplirtouschamps'))
           return
         }
         const body = { id_role: this.id_role, nom_role: this.nom_role }

@@ -6,13 +6,13 @@
     </select>
     <input type="time" v-model="horaire_debut">
     <input type="time" v-model="horaire_fin">
-    <button @click="updateRole">Valider</button>
+    <button @click="updateRole">{{translate('valider')}}</button>
     <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateCalendrier",
@@ -29,9 +29,13 @@ export default {
     };
   },
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore', ['getAllCalendrier', 'getAllJour']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore', ['updateRowCalendrier','getAllJourStore']),
     async loadData() {
       await this.getAllJourStore;
@@ -46,7 +50,7 @@ export default {
     async updateRole() {
       try {
         if (this.id_jour === '' || this.horaire_debut === '' || this.horaire_fin === '') {
-          alert('Veuillez remplir tous les champs')
+          alert(this.translate('remplirtouschamps'))
           return
         }
         const body = { id_calendrier: this.id_calendrier, id_jour: this.id_jour, horaire_debut: this.horaire_debut, horaire_fin: this.horaire_fin }

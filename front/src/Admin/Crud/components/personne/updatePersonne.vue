@@ -67,7 +67,7 @@ export default {
     async updateRole() {
       try {
         if (this.id_personne === '' || this.nom_personne === '' || this.prenom_personne === '' || this.mail_personne === '' || this.mdp_personne === '' || this.id_role === '' || this.image_personne === '' || this.description_personne === '') {
-          alert(this.translate('remplirrouschamps'))
+          alert(this.translate('remplirtouschamps'))
           return
         }
         if(await this.verifEmail() === false){

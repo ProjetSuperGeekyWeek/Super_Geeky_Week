@@ -43,7 +43,7 @@ export default {
     async updateRole() {
       try {
         if (this.id_emplacement === '' || this.nom_emplacement === '') {
-          alert(this.translate('remplirrouschamps'))
+          alert(this.translate('remplirtouschamps'))
           return
         }
         const body = {

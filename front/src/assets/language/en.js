@@ -136,6 +136,8 @@ export default {
                 selectother:"Please choose another one.",
                 ressname:"Resource name",
                 dsntdeltrressource:"You cannot delete this resource",
+                hordeb:"Start time",
+                horfin:"End time",
             },
         };
     },

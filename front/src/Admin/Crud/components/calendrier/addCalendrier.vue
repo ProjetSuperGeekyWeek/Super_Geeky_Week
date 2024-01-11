@@ -3,14 +3,14 @@
     <select name="selectJour" id="selectJour" v-model="id_jour">
       <option :value="jour.id_jour" v-for="jour in listJour" :key="jour.id_jour">{{ jour.date_calendrier}}</option>
     </select>
-    <input type="time" placeholder="Horaire début" v-model="horaire_debut">
-    <input type="time" placeholder="Horaire fin" v-model="horaire_fin">
-    <input type="button" value="Valider" @click="addNewQrCode">
+    <input type="time" :placeholder="translate('hordeb')" v-model="horaire_debut">
+    <input type="time" :placeholder="translate('horfin')" v-model="horaire_fin">
+    <input type="button" :value="translate('ajouter')" @click="addNewQrCode">
     <boutonRetourCrud/>
   </div>
 </template>
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
@@ -23,9 +23,13 @@ export default{
     listJour: [],
   }),
   computed:{
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore', ['getAllJour'])
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore',['addNewCalendrierStore', 'getAllJourStore']),
     async addNewQrCode() {
       try{
