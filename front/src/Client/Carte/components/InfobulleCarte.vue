@@ -2,7 +2,7 @@
     <div id="infobulle">
         <div id="haut">
             <div id="image">
-                <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" alt="Image du tournoi">
+                <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" :alt="translate('imgtournoi')">
             </div>
             <h4 id="titre">
                 {{ nom_prestataire }} {{ prenom_prestataire }}
@@ -23,7 +23,13 @@ export default {
         return {
         }
     },
+  methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
+  },
     computed: {
+      ...mapState(['lang', 'en', 'fr']),
         ...mapState(['nom_prestataire', 'prenom_prestataire', 'nom_stand']),
     },
 }
