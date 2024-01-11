@@ -4,15 +4,16 @@
     <!-- manque correctif bug hover grande scene -->
     <div id="bandeau-container">
       <div id="bandeau-selected">
-        <div v-if="!admin" id="haut-selected">
+        <div id="haut-selected">
           <router-link id="image-selected" :to="{ name:'page_prestataire', params: { id:idPresta } }">
             <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" :alt="translate('imgtournoi')">
           </router-link>
           <h4 id="titre-selected">
             {{ nom_prestataire }}
+            {{ prenom_prestataire }}
           </h4>
           <div id="tags-selected">
-            <h6 v-for="tag in listeTags" :key="tag">
+            <h6 class="tag-list" v-for="tag in listeTags" :key="tag">
               {{ tag }}
             </h6>
           </div>
@@ -20,28 +21,15 @@
             {{ description }}
           </h6>
         </div>
-        <div v-if="admin">
-          <div id="carte-config-prestataire">
-            <router-link id="carte-config-image"  :to="{ name:'page_prestataire', params: { id:idPresta } }">
-              <img src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg" :alt="translate('imgtournoi')">
-            </router-link>
-            <div id="carte-config-nom">
-              <h4 id="titre-selected">
-                {{ nom_prestataire }} {{ prenom_prestataire }}
-              </h4>
-              <h6 id="description-selected">
-                {{ description }}
-              </h6>
-            </div>
-          </div>
+        <div v-if="admin" class="controle-carte">
           <div v-show="neutre">
-            <button v-show="!verifyTaken(idStand)" @click="ajout = true; neutre = false; modif = false">
+            <button class="carte-add-button" v-show="!verifyTaken(idStand)" @click="ajout = true; neutre = false; modif = false">
               {{translate('ajouter')}}
             </button>
-            <button v-show="verifyTaken(idStand)" @click="modif = true; neutre = false; ajout = false">
+            <button class="carte-update-button" v-show="verifyTaken(idStand)" @click="modif = true; neutre = false; ajout = false">
               {{translate('modifier')}}
             </button>
-            <button v-show="verifyTaken(idStand)" @click="deleteStand()">
+            <button class="carte-delete-button" v-show="verifyTaken(idStand)" @click="deleteStand()">
               {{translate('supprimer')}}
             </button>
           </div>
@@ -51,10 +39,10 @@
                 {{ prestataire.nom }} {{ prestataire.prenom }}
               </option>
             </select>
-            <button @click="ajout = false; neutre = true">
+            <button class="carte-delete-button" @click="ajout = false; neutre = true">
               {{translate('retour')}}
             </button>
-            <button @click="addStand()">
+            <button class="carte-add-button" @click="addStand()">
               {{translate('ajouter')}}
             </button>
           </div>
@@ -64,10 +52,10 @@
                 {{ prestataire.nom }} {{ prestataire.prenom }}
               </option>
             </select>
-            <button @click="modif = false; neutre = true">
+            <button class="carte-delete-button" @click="modif = false; neutre = true">
               {{translate('retour')}}
             </button>
-            <button @click="modifStand()">
+            <button class="carte-update-button" @click="modifStand()">
               {{translate('modifier')}}
             </button>
           </div>
@@ -333,6 +321,9 @@ export default {
           }
         }
       }
+      this.neutre = true;
+      this.ajout = false;
+      this.modif = false;
     },
     verifyNoClicked() {
       var map = document.getElementById('carte');
@@ -507,7 +498,7 @@ svg polygon {
 
 #bandeau-selected #haut-selected {
   width: 100%;
-  height: 90%;
+  height: 80%;
   border-radius: 7px 0px 0px 0px;
   border-bottom: 4px solid #000;
   overflow-y: scroll;
@@ -537,12 +528,11 @@ svg polygon {
 }
 
 #haut-selected #tags-selected {
-  width: 100%;
   height: 10%;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 #tags-selected h6 {
@@ -560,7 +550,7 @@ svg polygon {
 
 #bandeau-selected #bas-selected {
   width: 100%;
-  height: 10%;
+  height: 20%;
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
@@ -568,4 +558,74 @@ svg polygon {
   text-align: center;
   color: rgb(158, 12, 12);
   background-color: lightcoral;
-}</style>
+}
+
+.tag-list {
+  background-color: #f1975b;
+  border-radius: 5px;
+  padding: 0.5%;
+  color: #fff;
+  font-size: 0.8rem;
+  display: flex;
+}
+
+.carte-add-button{
+  font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid rgb(38, 180, 38);
+    border-radius: 10px;
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+.carte-update-button{
+  font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid rgb(231, 156, 43);
+    border-radius: 10px;
+    background-color: lightyellow;
+    cursor: pointer;
+}
+
+.carte-delete-button{
+  font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #f84646;
+    border-radius: 10px;
+    background-color: lightsalmon;
+    cursor: pointer;
+}
+
+.carte-add-button:hover{
+  background-color: rgb(38, 180, 38);
+  color: #fff;
+}
+
+.carte-update-button:hover{
+  background-color: rgb(231, 156, 43);
+  color: #fff;
+}
+
+.carte-delete-button:hover{
+  background-color: #f84646;
+  color: #fff;
+}
+
+.controle-carte{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 4px solid #000;
+}
+
+select{
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid #000;
+  border-radius: 10px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+</style>
