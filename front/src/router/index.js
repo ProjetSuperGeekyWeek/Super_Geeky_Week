@@ -64,6 +64,11 @@ const routes = [
     component: () => import('@/Admin/Carte/views/CarteAdminView.vue')
   },
   {
+    path: '/statistiques',
+    name: 'statistiques',
+    component: () => import('@/Admin/Statistiques/views/StatistiqueView.vue')
+  },
+  {
     path: '/admin/crud',
     name: 'admin_crud',
     component: () => import('@/Admin/Crud/views/ShowCrudView.vue')

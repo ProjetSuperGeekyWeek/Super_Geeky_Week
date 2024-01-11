@@ -1,6 +1,10 @@
 <template>
-    <div id="view-carte-admin">
+    <div class="section">
+      <div class="text_home texte-carte">
+      </div>
+      <div class="carte">
         <CarteInteractive/>
+      </div>
     </div>
 </template>
 
@@ -18,13 +22,31 @@ export default {
 
 <style scoped>
 
-#view-carte-admin {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 300px;
+.section{
+    margin-top: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 5%;
+  width: 95%;
+  gap: 5%;
+  background-color: var(--bg);
+  border-radius: 20px;
+}
+
+.text_home{
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carte{
+  width: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>

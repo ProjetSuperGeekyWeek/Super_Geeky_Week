@@ -25,14 +25,6 @@
       </div>
     </div>
 
-    <div class="section">
-      <GraphiqueClients/>
-    </div>
-
-    <div class="section">
-      <LivreDor/>
-    </div>
-
   </div>
 </template>
 
@@ -41,8 +33,6 @@
 import VitrinePrincipale from '@/Client/Accueil/components/VitrinePrincipale.vue'
 import PrestatairesList from '@/Client/Prestataire/components/PrestatairesList.vue'
 import CarteInteractive from '@/Client/Carte/components/CarteInteractive.vue'
-import GraphiqueClients from '@/Client/Graphique/components/GraphiqueClients.vue'
-import LivreDor from '@/Client/Prestataire/components/LivreDor.vue'
 import {mapState} from "vuex";
 
 export default {
@@ -51,8 +41,6 @@ export default {
     VitrinePrincipale,
     PrestatairesList,
     CarteInteractive,
-    GraphiqueClients,
-    LivreDor,
   },
   methods: {
     translate(prop) {

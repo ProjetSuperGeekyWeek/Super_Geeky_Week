@@ -34,9 +34,9 @@
         </div>
       </div>
       <div class="nav_droite_bas" v-if="admin">
-        <router-link to="/billets"><p class="nav_titre">Crud</p></router-link>
-        <router-link to="/exposants"><p class="nav_titre">Carte</p></router-link>
-        <router-link to="/panier"><p class="nav_titre">Statistiques</p></router-link>
+        <router-link to="/admin/crud"><p class="nav_titre">Crud</p></router-link>
+        <router-link to="/carte_admin"><p class="nav_titre">Carte</p></router-link>
+        <router-link to="/statistiques"><p class="nav_titre">Statistiques</p></router-link>
         <select name="lang" v-model="langue" @change="langSet" class="test deco_select">
           <option value="fr">Français</option>
           <option value="en">English</option>
