@@ -7,12 +7,12 @@
             <v-card-title>
               Item
               <v-spacer />
-              <v-btn @click="navigateToAdd" color="primary">Ajouter</v-btn>
+              <v-btn @click="navigateToAdd" color="primary">{{translate('ajouter')}}</v-btn>
               <v-spacer/>
               <v-text-field
                   v-model="search"
                   append-icon="mdi-magnify"
-                  label="chercher"
+                  :label="translate('chercher')"
                   single-line
                   hide-details
               >
@@ -42,15 +42,15 @@
           >
           </v-data-table>
         </v-container>
-        <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
-        <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
+        <v-btn @click="deleteRow" color="primary">{{translate('supprimer')}}</v-btn>
+        <v-btn @click="showUpdateDialog" color="primary">{{translate('modifier')}}</v-btn>
       </v-main>
     </v-app>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   name: 'crudAcheter',
@@ -63,10 +63,14 @@ export default {
     }
   }),
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore',['getAllItem','getAllItemColumn']),
     ...mapActions('crudStore',['getAllItemStore','getAllItemColumnStore']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore',['deleteRowItem']),
     async loadData(){
       this.item.headers = [];
@@ -84,11 +88,11 @@ export default {
     async deleteRow() {
       try {
         if (this.selected.length === 0) {
-          alert('Veuillez sélectionner une ligne')
+          alert(this.translate('selectligne'))
           return
         }
         if (this.selected[0].nom_item === "default_ITEM") {
-          alert("Vous ne pouvez pas supprimer cet item");
+          alert(this.translate('dsntdeltitem'));
           return;
         }
         const body = {id_item: this.selected[0].id_item, id_personne: this.selected[0].id_personne, id_calendrier: this.selected[0].id_calendrier}
@@ -100,11 +104,11 @@ export default {
     },
     showUpdateDialog() {
       if (this.selected.length === 0) {
-        alert("Veuillez sélectionner une ligne");
+        alert(this.translate('selectligne'));
         return;
       }
       if (this.selected[0].nom_item === "default_ITEM") {
-        alert("Vous ne pouvez pas supprimer cet item");
+        alert(this.translate('dsntdeltitem'));
         return;
       }
       this.$router.push('/admin/crud/update/item/' + this.selected[0].id_item);

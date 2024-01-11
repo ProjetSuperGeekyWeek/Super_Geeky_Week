@@ -140,6 +140,7 @@ export default {
                 horfin:"End time",
                 paniername:"Cart name",
                 dsntdeltpanier:"You cannot delete this cart",
+                dsntdeltitem:"You cannot delete this item",
             },
         };
     },

@@ -140,6 +140,7 @@ export default {
                 horfin:"Horaire fin",
                 paniername:"Nom du panier",
                 dsntdeltpanier:"Vous ne pouvez pas supprimer ce panier",
+                dsntdeltitem:"Vous ne pouvez pas supprimer cet item",
             },
         };
     },

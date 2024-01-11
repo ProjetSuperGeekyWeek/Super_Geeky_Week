@@ -12,13 +12,13 @@
     <select name="selectCalendrier" id="selectCalendrier" v-model="id_calendrier">
       <option :value="calendrier.id_calendrier" v-for="calendrier in listCalendrier" :key="calendrier.id_calendrier" :selected="calendrier.id_calendrier === id_calendrier">{{ calendrier.id_jour }}</option>
     </select>
-    <button @click="updateRole">Valider</button>
+    <button @click="updateRole">{{translate('valider')}}</button>
     <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateItem",
@@ -41,9 +41,13 @@ export default {
     };
   },
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore', ['getAllItem', 'getAllPersonne', 'getAllCalendrier']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore', ['updateRowItem']),
     async loadData() {
       this.listPersonne = this.getAllPersonne;
@@ -65,7 +69,7 @@ export default {
     async updateRole() {
       try {
         if (this.id_item === '' || this.nom_item === '' || this.stock_item === '' || this.prix_item === '' || this.image_item === '' || this.description_item === '' || this.id_personne === '' || this.id_calendrier === '') {
-          alert('Veuillez remplir tous les champs')
+          alert(this.translate('remplirtouschamps'))
           return
         }
         const body = { id_item: this.id_item, nom_item: this.nom_item, stock_item: this.stock_item, prix_item: this.prix_item, image_item: this.image_item, description_item: this.description_item, id_personne: this.id_personne, id_calendrier: this.id_calendrier }
