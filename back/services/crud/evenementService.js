@@ -84,7 +84,7 @@ async function deleteEvenementByIdFromAPI(id_evenement){
             await client.query('COMMIT');
             query = "SELECT * FROM evenement WHERE nom_evenement LIKE 'default_EVENEMENT'";
             result = await client.query(query);
-            const idDefault = result.rows[0].id_evenement;
+            const idDefault = result.rows[0].id_evenement;id_emplacement
             await client.query('UPDATE creneau SET id_evenement=$1 WHERE id_evenement = $2', [idDefault,id_evenement])
         }else{
             const idDefault = result.rows[0].id_evenement;

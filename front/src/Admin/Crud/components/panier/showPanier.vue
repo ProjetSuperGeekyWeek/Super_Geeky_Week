@@ -41,6 +41,8 @@
               show-group-by
           >
           </v-data-table>
+          <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
+          <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
         </v-container>
       </v-main>
     </v-app>
@@ -65,7 +67,10 @@ export default {
     ...mapActions('crudStore',['getAllPanierStore','getAllPanierColumnStore']),
   },
   methods: {
+    ...mapActions('crudStore',['deleteRowPanier']),
     async loadData(){
+      this.panier.headers = [];
+      this.panier.stats = [];
       await this.getAllPanierStore;
       await this.getAllPanierColumnStore;
       for(var i = 0; i<this.getAllPanierColumn.length; i++){
@@ -76,6 +81,34 @@ export default {
     async navigateToAdd() {
       this.$router.push('/admin/crud/panier/add');
     },
+    async deleteRow() {
+      try {
+        if (this.selected.length === 0) {
+          alert('Veuillez sélectionner une ligne')
+          return
+        }
+        if (this.selected[0].nom_panier === "default_PANIER") {
+          alert("Vous ne pouvez pas supprimer ce role");
+          return;
+        }
+        const body = {id_panier: this.selected[0].id_panier}
+        await this.deleteRowPanier(body);
+        await this.loadData();
+      } catch (e) {
+        console.log('error deleteRow', e)
+      }
+    },
+    showUpdateDialog() {
+      if (this.selected.length === 0) {
+        alert("Veuillez sélectionner une ligne");
+        return;
+      }
+      if (this.selected[0].nom_panier === "default_PANIER") {
+        alert("Vous ne pouvez pas supprimer ce role");
+        return;
+      }
+      this.$router.push('/admin/crud/update/panier/' + this.selected[0].id_panier);
+    }
   },
   async mounted() {
     await this.loadData();

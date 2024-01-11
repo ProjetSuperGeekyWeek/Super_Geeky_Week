@@ -1,19 +1,19 @@
-import {addNewAcheter, getAllAcheter, getAllAcheterColumn} from "@/axiosFunctions/acheterAxios";
-import {addNewCalendrier, getAllCalendrier, getAllCalendrierColumn} from "@/axiosFunctions/calendrierAxios";
-import {addNewRole, getAllRole, getAllRoleColumn} from "@/axiosFunctions/roleAxios";
+import {addNewAcheter, getAllAcheter, getAllAcheterColumn, deleteAcheter, updateAcheter} from "@/axiosFunctions/acheterAxios";
+import {addNewCalendrier, getAllCalendrier, getAllCalendrierColumn, deleteCalendrier, updateCalendrier} from "@/axiosFunctions/calendrierAxios";
+import {addNewRole, getAllRole, getAllRoleColumn, deleteRole, updateRole} from "@/axiosFunctions/roleAxios";
 import {getAllCreneau, getAllCreneauColumn} from "@/axiosFunctions/creneauAxios";
-import {addNewEmplacement, getAllEmplacement, getAllEmplacementColumn} from "@/axiosFunctions/emplacementAxios";
+import {addNewEmplacement, getAllEmplacement, getAllEmplacementColumn, updateEmplacement, deleteEmplacement} from "@/axiosFunctions/emplacementAxios";
 import {getAllEmplacementRessource, getAllEmplacementRessourceColumn} from "@/axiosFunctions/emplacementRessourceAxios";
-import {addNewEvenement, getAllEvenement, getAllEvenementColumn} from "@/axiosFunctions/evenementAxios";
-import {addNewItem, getAllItem, getAllItemColumn} from "@/axiosFunctions/itemAxios";
+import {addNewEvenement, getAllEvenement, getAllEvenementColumn, deleteEvenement, updateEvenement} from "@/axiosFunctions/evenementAxios";
+import {addNewItem, getAllItem, getAllItemColumn, deleteRowItem, updateRowItem} from "@/axiosFunctions/itemAxios";
 import {getAllLignePanier, getAllLignePanierColumn} from "@/axiosFunctions/lignePanierAxios";
-import {addNewPanierStore, getAllPanier, getAllPanierColumn} from "@/axiosFunctions/panierAxios";
-import {addNewPersonne, getAllPersonne, getAllPersonneColumn} from "@/axiosFunctions/personneAxios";
+import {addNewPanierStore, getAllPanier, getAllPanierColumn, deleteRowPanier, updateRowPanier} from "@/axiosFunctions/panierAxios";
+import {addNewPersonne, getAllPersonne, getAllPersonneColumn, updateRowPersonne, deleteRowPersonne} from "@/axiosFunctions/personneAxios";
 import {getAllPersonneTag, getAllPersonneTagColumn} from "@/axiosFunctions/personneTagAxios";
-import {addNewQrCode, getAllQrCode, getAllQrCodeColumn} from "@/axiosFunctions/qrCodeAxios";
-import {addNewRessource, getAllRessource, getAllRessourceColumn} from "@/axiosFunctions/ressourceAxios";
+import {addNewQrCode, getAllQrCode, getAllQrCodeColumn, deleteRowQrCode, updateRowQrCode} from "@/axiosFunctions/qrCodeAxios";
+import {addNewRessource, getAllRessource, getAllRessourceColumn, deleteRowRessource, updateRowRessource} from "@/axiosFunctions/ressourceAxios";
 import {getAllStand, getAllStandColumn} from "@/axiosFunctions/standAxios";
-import {addNewTagStore, getAllTag, getAllTagColumn} from "@/axiosFunctions/tagAxios";
+import {addNewTagStore, getAllTag, getAllTagColumn, deleteRowTag, updateRowTag} from "@/axiosFunctions/tagAxios";
 import {getAllJour, getAllJourColumn} from "@/axiosFunctions/jourAxios";
 
 export default {
@@ -21,54 +21,71 @@ export default {
     state : () => ({
         tabAllAcheters: [],
         tabAllAchetersColumn: [],
+        currentAcheter: null,
 
         tabAllCalendrier: [],
         tabAllCalendrierColumn: [],
+        currentCalendrier: null,
 
         tabAllRole: [],
         tabAllRoleColumn: [],
+        currentRole: null,
 
         tabAllCreneau: [],
         tabAllCreneauColumn: [],
+        currentCreneau: null,
 
         tabAllEmplacement: [],
         tabAllEmplacementColumn: [],
+        currentEmplacement: null,
 
         tabAllEmplacementRessource: [],
         tabAllEmplacementRessourceColumn: [],
+        currentEmplacementRessource: null,
 
         tabAllEvenement: [],
         tabAllEvenementColumn: [],
+        currentEvenement: null,
 
         tabAllItem: [],
         tabAllItemColumn: [],
+        currentItem: null,
 
         tabAllLignePanier: [],
         tabAllLignePanierColumn: [],
+        currentLignePanier: null,
 
         tabAllPanier: [],
         tabAllPanierColumn: [],
+        currentPanier: null,
 
         tabAllPersonne: [],
         tabAllPersonneColumn: [],
+        currentPersonne: null,
 
         tabAllPersonneTag: [],
         tabAllPersonneTagColumn: [],
+        currentPersonneTag: null,
 
         tabAllQrCode: [],
         tabAllQrCodeColumn: [],
+        currentQrCode: null,
 
         tabAllRessource: [],
         tabAllRessourceColumn: [],
+        currentRessource: null,
 
         tabAllStand: [],
         tabAllStandColumn: [],
+        currentStand: null,
 
         tabAllTag: [],
         tabAllTagColumn: [],
+        currentTag: null,
 
         tabAllJour: [],
         tabAllJourColumn: [],
+        currentJour: null,
 
         /*tabAll: [],
         tabAllColumn: [],*/
@@ -130,6 +147,9 @@ export default {
         },
         SET_ALL_ROLE_COLUMN(state, payload){
             state.tabAllRoleColumn = payload;
+        },
+        setCurrentRole(state, payload){
+            state.currentRole = payload;
         },
         SET_ALL_CRENEAU(state, payload){
             state.tabAllCreneau = payload;
@@ -500,7 +520,7 @@ export default {
             let result = null
             try{
               result = await addNewRole(body)
-              if (result.error === 0){
+              if (result.error !== 0){
                 commit('SET_ALL_ROLE', result.data)
               }else{
                 console.log(result.data)
@@ -513,7 +533,7 @@ export default {
             let result = null;
             try{
                 result = await addNewItem(body)
-                if (result.error === 0){
+                if (result.error !== 0){
                     commit('SET_ALL_ITEM', result.data)
                 }else{
                     console.log(result.data)
@@ -526,7 +546,7 @@ export default {
             let result = null;
             try{
                 result = await addNewAcheter(body)
-                if (result.error === 0){
+                if (result.error !== 0){
                     commit('SET_ALL_ACHETER', result.data)
                 }else{
                     console.log(result.data)
@@ -539,7 +559,7 @@ export default {
             let result = null;
             try{
                 result = await addNewPersonne(body)
-                if (result.error === 0){
+                if (result.error !== 0){
                     commit('SET_ALL_PERSONNE', result.data)
                 }else{
                     console.log(result.data)
@@ -552,7 +572,7 @@ export default {
             let result = null;
             try{
                 result = await addNewRessource(body)
-                if (result.error === 0){
+                if (result.error !== 0){
                     commit('SET_ALL_RESSOURCE', result.data)
                 }else{
                     console.log(result.data)
@@ -565,7 +585,7 @@ export default {
             let result = null;
             try{
                 result = await addNewQrCode(body)
-                if (result.error === 0){
+                if (result.error !== 0){
                     commit('SET_ALL_QR_CODE', result.data)
                 }else{
                     console.log(result.data)
@@ -578,7 +598,7 @@ export default {
             let result = null;
             try{
                 result = await addNewPanierStore(body)
-                if (result.error === 0){
+                if (result.error !== 0){
                     commit('SET_ALL_PANIER', result.data)
                 }else{
                     console.log(result.data)
@@ -591,7 +611,7 @@ export default {
             let result = null;
             try{
                 result = await addNewTagStore(body)
-                if (result.error === 0){
+                if (result.error !== 0){
                     commit('SET_ALL_TAG', result.data)
                 }else{
                     console.log(result.data)
@@ -604,7 +624,7 @@ export default {
             let result = null;
             try{
                 result = await addNewEmplacement(body)
-                if (result.error === 0){
+                if (result.error !== 0){
                     commit('SET_ALL_EMPLACEMENT', result.data)
                 }else{
                     console.log(result.data)
@@ -617,7 +637,7 @@ export default {
             let result = null;
             try{
                 result = await addNewCalendrier(body)
-                if (result.error === 0){
+                if (result.error !== 0){
                     commit('SET_ALL_CALENDRIER', result.data)
                 }else{
                     console.log(result.data)
@@ -630,7 +650,7 @@ export default {
             let result = null;
             try{
                 result = await addNewEvenement(body)
-                if (result.error === 0){
+                if (result.error !== 0){
                     commit('SET_ALL_EVENEMENT', result.data)
                 }else{
                     console.log(result.data)
@@ -639,6 +659,293 @@ export default {
                 console.log('anomalie dans addNewEvenementStore')
             }
         },
+        async deleteRowRole({commit}, body){
+            let result = null;
+            try{
+                result = await deleteRole(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_ROLE', await getAllRole())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans deleteRowRole')
+            }
+        },
+        async updateRowRole({commit}, body){
+            let result = null;
+            try{
+                result = await updateRole(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_ROLE', await getAllRole())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans updateRowRole')
+            }
+        },
+        async deleteRowAcheter({commit}, body){
+            let result = null;
+            try{
+                result = await deleteAcheter(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_ACHETER', await getAllAcheter())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans deleteRowRole')
+            }
+        },
+        async updateRowAcheter({commit}, body){
+            let result = null;
+            try{
+                result = await updateAcheter(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_ACHETER', await getAllAcheter())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans updateRowRole')
+            }
+        },
+        async deleteRowCalendrier({commit}, body){
+            let result = null;
+            try{
+                result = await deleteCalendrier(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_CALENDRIER', await getAllCalendrier())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans deleteRowRole')
+            }
+        },
+        async updateRowCalendrier({commit}, body){
+            let result = null;
+            try{
+                result = await updateCalendrier(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_CALENDRIER', await getAllCalendrier())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans updateRowRole')
+            }
+        },
+        async deleteRowEmplacement({commit}, body){
+            let result = null;
+            try{
+                result = await deleteEmplacement(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_EMPLACEMENT', await getAllEmplacement())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans deleteRowEmplacement')
+            }
+        },
+        async updateRowEmplacement({commit}, body){
+            let result = null;
+            try{
+                result = await updateEmplacement(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_EMPLACEMENT', await getAllEmplacement())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans updateRowEmplacement')
+            }
+        },
+        async deleteRowEvenement({commit}, body){
+            let result = null;
+            try{
+                result = await deleteEvenement(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_EVENEMENT', await getAllEvenement())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans deleteRowEvenement')
+            }
+        },
+        async updateRowEvenement({commit}, body){
+            let result = null;
+            try{
+                result = await updateEvenement(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_EVENEMENT', await getAllEvenement())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans updateRowEvenement')
+            }
+        },
+        async deleteRowItem({commit}, body){
+            let result = null;
+            try{
+                result = await deleteRowItem(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_ITEM', await getAllItem())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans deleteRowItem')
+            }
+        },
+        async updateRowItem({commit}, body){
+            console.log(body, 'body')
+            let result = null;
+            try{
+                result = await updateRowItem(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_ITEM', await getAllItem())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans updateRowItem')
+            }
+        },
+        async deleteRowPanier({commit}, body){
+            let result = null;
+            try{
+                result = await deleteRowPanier(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_PANIER', await getAllPanier())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans deleteRowPanier')
+            }
+        },
+        async updateRowPanier({commit}, body){
+            let result = null;
+            try{
+                result = await updateRowPanier(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_PANIER', await getAllPanier())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans updateRowPanier')
+            }
+        },
+        async updateRowPersonne({commit}, body){
+            let result = null;
+            try{
+                result = await updateRowPersonne(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_PERSONNE', await getAllPersonne())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans updateRowPersonne')
+            }
+        },
+        async deleteRowPersonne({commit}, body){
+            let result = null;
+            try{
+                result = await deleteRowPersonne(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_PERSONNE', await getAllPersonne())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans deleteRowPersonne')
+            }
+        },
+        async deleteRowQrCode({commit}, body){
+            let result = null;
+            try{
+                result = await deleteRowQrCode(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_QR_CODE', await getAllQrCode())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans deleteRowQrCode')
+            }
+        },
+        async updateRowQrCode({commit}, body){
+            let result = null;
+            try{
+                result = await updateRowQrCode(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_QR_CODE', await getAllQrCode())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans updateRowQrCode')
+            }
+        },
+        async deleteRowRessource({commit}, body){
+            let result = null;
+            try{
+                result = await deleteRowRessource(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_RESSOURCE', await getAllRessource())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans deleteRowRessource')
+            }
+        },
+        async updateRowRessource({commit}, body){
+            let result = null;
+            try{
+                result = await updateRowRessource(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_RESSOURCE', await getAllRessource())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans updateRowRessource')
+            }
+        },
+        async deleteRowTag({commit}, body){
+            let result = null;
+            try{
+                result = await deleteRowTag(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_TAG', await getAllTag())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans deleteRowTag')
+            }
+        },
+        async updateRowTag({commit}, body){
+            let result = null;
+            try{
+                result = await updateRowTag(body)
+                if (result.error !== 0){
+                    commit('SET_ALL_TAG', await getAllTag())
+                }else{
+                    console.log(result)
+                }
+            }catch (e) {
+                console.log('anomalie dans updateRowTag')
+            }
+        }
           /*async getAllStore({state,commit}, params){
             var responce;
               try{

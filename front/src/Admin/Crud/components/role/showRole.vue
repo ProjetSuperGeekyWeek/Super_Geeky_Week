@@ -36,15 +36,16 @@
               show-group-by
           >
           </v-data-table>
+          <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
+          <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
         </v-container>
       </v-main>
     </v-app>
-    <input type="button" value="supprimé">
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: 'crudRole',
@@ -54,14 +55,18 @@ export default {
     role: {
       headers: [],
       stats: []
-    }
+    },
+    showUpdate: false,
   }),
   computed: {
-    ...mapGetters('crudStore',['getAllRole','getAllRoleColumn']),
-    ...mapActions('crudStore',['getAllRoleStore','getAllRoleColumnStore']),
+    ...mapGetters('crudStore', ['getAllRole', 'getAllRoleColumn']),
+    ...mapActions('crudStore', ['getAllRoleStore', 'getAllRoleColumnStore']),
   },
   methods: {
+    ...mapActions('crudStore', ['deleteRowRole']),
     async loadData() {
+      this.role.headers = [];
+      this.role.stats = [];
       await this.getAllRoleStore;
       await this.getAllRoleColumnStore;
       for (var i = 0; i < this.getAllRoleColumn.length; i++) {
@@ -76,18 +81,40 @@ export default {
     async navigateToAdd() {
       await this.$router.push('/admin/crud/role/add');
     },
-    async deleterows(){
-
-    }
+    async deleteRow() {
+      if (this.selected.length === 0) {
+        alert("Veuillez sélectionner une ligne");
+        return;
+      }
+      if (this.selected[0].nom_role === "default_ROLE") {
+        alert("Vous ne pouvez pas supprimer ce role");
+        return;
+      }
+      const body = {
+        id_role: this.selected[0].id_role
+      }
+      await this.deleteRowRole(body)
+      await this.loadData();
+    },
+    showUpdateDialog() {
+      if (this.selected.length === 0) {
+        alert("Veuillez sélectionner une ligne");
+        return;
+      }
+      if (this.selected[0].nom_role === "default_ROLE") {
+        alert("Vous ne pouvez pas supprimer ce rôle");
+        return;
+      }
+      this.$router.push('/admin/crud/update/role/'+this.selected[0].id_role);
+    },
+  },
+  async mounted() {
+    await this.loadData();
   },
   watch: {
     selected: function (newVal) {
       console.log("Selected variable modified:", newVal);
-      // Do something with the modified selected variable
     }
-  },
-  async mounted() {
-    await this.loadData();
   },
 };
 </script>

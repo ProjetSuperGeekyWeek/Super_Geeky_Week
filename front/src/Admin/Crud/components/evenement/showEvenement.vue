@@ -42,6 +42,8 @@
           >
           </v-data-table>
         </v-container>
+        <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
+        <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
       </v-main>
     </v-app>
   </div>
@@ -65,6 +67,7 @@ export default {
     ...mapActions('crudStore',['getAllEvenementStore','getAllEvenementColumnStore']),
   },
   methods: {
+    ...mapActions('crudStore',['deleteRowEvenement']),
     async loadData(){
       await this.getAllEvenementStore;
       await this.getAllEvenementColumnStore;
@@ -76,6 +79,40 @@ export default {
     async navigateToAdd() {
       this.$router.push('/admin/crud/evenement/add');
     },
+    async deleteRow() {
+      try {
+        if (this.selected.length === 0) {
+          alert('Veuillez sélectionner une ligne')
+          return
+        }
+        if (this.selected[0].nom_evenement === "default_EVENEMENT") {
+          alert("Vous ne pouvez pas supprimer cet evenement");
+          return;
+        }
+        const body = {
+          id_evenement: this.selected[0].id_evenement
+        }
+        await this.deleteRowEvenement(body);
+        await this.loadData();
+      } catch (e) {
+        console.log('error deleteRow', e)
+      }
+    },
+    async showUpdateDialog() {
+      try {
+        if (this.selected.length === 0) {
+          alert('Veuillez sélectionner une ligne')
+          return
+        }
+        if (this.selected[0].nom_evenement === "default_EVENEMENT") {
+          alert("Vous ne pouvez pas supprimer cet evenement");
+          return;
+        }
+        this.$router.push('/admin/crud/update/evenement/' + this.selected[0].id_evenement)
+      } catch (e) {
+        console.log('error showUpdateDialog', e)
+      }
+    }
   },
   async mounted() {
     await this.loadData();

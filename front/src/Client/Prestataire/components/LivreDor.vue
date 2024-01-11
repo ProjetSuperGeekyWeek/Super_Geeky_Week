@@ -13,14 +13,14 @@
       </div>
     </div>
     <div v-if="!proprio">
-      <button v-if="!addTemoin" @click="addTemoin = true">ajouter un temoignage</button>
+      <button v-if="!addTemoin" @click="addTemoin = true">{{translate('addtemoin')}}</button>
       <div v-if="addTemoin">
         <form @submit.prevent="addTemoignage" class="formulaire-temoignage">
           <label for="pseudo">Pseudo</label>
           <input type="texte" name="pseudo" v-model="addPseudo" required>
-          <label for="temoignage">Temoignage</label>
+          <label for="temoignage">{{translate('temoignage')}}</label>
           <textarea name="temoignage" cols="30" rows="10" v-model="addCommentaire" required></textarea>
-          <button type="submit">Envoyer</button>
+          <button type="submit">{{translate('envoyer')}}</button>
         </form>
       </div>
     </div>

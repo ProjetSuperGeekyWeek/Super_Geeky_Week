@@ -41,6 +41,8 @@
               show-group-by
           >
           </v-data-table>
+          <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
+          <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
         </v-container>
       </v-main>
     </v-app>
@@ -65,7 +67,10 @@ export default {
     ...mapActions('crudStore',['getAllRessourceStore','getAllRessourceColumnStore']),
   },
   methods: {
+    ...mapActions('crudStore',['deleteRowRessource']),
     async loadData(){
+      this.ressource.headers = [];
+      this.ressource.stats = [];
       await this.getAllRessourceStore;
       await this.getAllRessourceColumnStore;
       for(var i = 0; i<this.getAllRessourceColumn.length; i++){
@@ -75,6 +80,34 @@ export default {
     },
     async navigateToAdd() {
       this.$router.push('/admin/crud/ressource/add');
+    },
+    async deleteRow() {
+      try {
+        if (this.selected.length === 0) {
+          alert('Veuillez sélectionner une ligne')
+          return
+        }
+        if (this.selected[0].nom_ressource === "default_RESSOURCE") {
+          alert("Vous ne pouvez pas supprimer cet ressource");
+          return;
+        }
+        const body = {id_ressource: this.selected[0].id_ressource}
+        await this.deleteRowRessource(body);
+        await this.loadData();
+      } catch (e) {
+        console.log('error deleteRow', e)
+      }
+    },
+    showUpdateDialog() {
+      if (this.selected.length === 0) {
+        alert("Veuillez sélectionner une ligne");
+        return;
+      }
+      if (this.selected[0].nom_ressource === "default_RESSOURCE") {
+        alert("Vous ne pouvez pas supprimer cet ressource");
+        return;
+      }
+      this.$router.push('/admin/crud/update/ressource/'+this.selected[0].id_ressource);
     },
   },
   async mounted() {

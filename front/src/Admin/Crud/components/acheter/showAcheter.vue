@@ -42,6 +42,8 @@
           >
           </v-data-table>
         </v-container>
+        <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
+        <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
       </v-main>
     </v-app>
   </div>
@@ -65,7 +67,10 @@ export default {
     ...mapActions('crudStore',['getAllAcheterStore','getAllAcheterColumnStore']),
   },
   methods: {
+    ...mapActions('crudStore',['deleteRowAcheter']),
     async loadData(){
+      this.acheter.headers = [];
+      this.acheter.stats = [];
       await this.getAllAcheterStore;
       await this.getAllAcheterColumnStore;
       for(var i = 0; i<this.getAllAchetersColumn.length; i++){
@@ -75,6 +80,24 @@ export default {
     },
     async navigateToAdd() {
       this.$router.push('/admin/crud/acheter/add');
+    },
+    async deleteRow() {
+      if (this.selected.length === 0) {
+        alert("Veuillez sélectionner une ligne");
+        return;
+      }
+      const body = {
+        id_acheter: this.selected[0].id_acheter
+      }
+      await this.deleteRowAcheter(body)
+      await this.loadData();
+    },
+    showUpdateDialog() {
+      if (this.selected.length === 0) {
+        alert("Veuillez sélectionner une ligne");
+        return;
+      }
+      this.$router.push('/admin/crud/update/acheter/'+this.selected[0].id_acheter);
     },
   },
   async mounted() {
