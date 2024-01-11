@@ -69,6 +69,11 @@ const routes = [
     component: () => import('@/Admin/Crud/views/ShowCrudView.vue')
   },
   {
+    path: '/admin/crud/:table',
+    name: 'admin_crud_table',
+    component: () => import('@/Admin/Crud/views/ShowCrudView.vue')
+  },
+  {
     path: '/admin/crud/update/:table/:id',
     name: 'admin_crud_update',
     component: () => import('@/Admin/Crud/views/updateCrudView.vue')

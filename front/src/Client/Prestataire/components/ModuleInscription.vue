@@ -2,7 +2,7 @@
     <div class="module-inscriptions">
         <div class="card-inscription" v-if="!proprio">
             <div class="card-inscription-image">
-                <img :src="image" alt="Image de l'événement">
+                <img :src="image" :alt="translate('imgevent')">
             </div>
             <div v-show="!inscription" class="card-inscription-body">
                 <h2>{{ infos.titre }}</h2>
@@ -47,7 +47,7 @@
         </div>
         <div class="card-inscription" v-else>
             <div class="card-inscription-image">
-                <img :src="image" alt="Image de l'événement">
+                <img :src="image" :alt="translate('imgevent')">
             </div>
             <div v-show="!modif" class="card-inscription-body">
                 <h2>{{ infos.titre }}</h2>
@@ -233,7 +233,7 @@ export default {
                     console.log(error);
                 }
             }else{
-                alert("veuillez remplir correctement tout les champs horaires (les heures allant de 8h à 22h et les minutes de 0 à 59) et choisir un jour")
+                alert(this.translate('enterhoraire'))
             }
         },
         async removeHoraire(index){
@@ -310,7 +310,7 @@ export default {
             let nom = document.getElementsByClassName("nom")[this.position];
             let regexNom = new RegExp("^[a-zA-Z]{3,}$");
             if(!regexNom.test(nom.value)){
-                this.turnErreur(nom, "Le nom doit contenir au moins 3 caractères et ne doit contenir aucun de chiffres");
+                this.turnErreur(nom, this.translate('errorname3caract'));
                 return false;
             }else{
                 this.turnValidate(nom);
@@ -321,7 +321,7 @@ export default {
             let prenom = document.getElementsByClassName("prenom")[this.position];
             let regexPrenom = new RegExp("^[a-zA-Z]{3,}$");
             if(!regexPrenom.test(prenom.value)){
-                this.turnErreur(prenom, "Le prenom doit contenir au moins 3 caractères et ne doit contenir aucun de chiffres");
+                this.turnErreur(prenom, this.translate('errorprenom3caract'));
                 return false;
             }else{
                 this.turnValidate(prenom);
@@ -331,7 +331,7 @@ export default {
         verifSeance(){
             let seance = document.getElementsByClassName("seance")[this.position];
             if(seance.value == null || seance.value == ""){
-                this.turnErreur(seance, "Veuillez choisir une séance");
+                this.turnErreur(seance, this.translate('choiseance'));
                 return false;
             }else{
                 this.inscritSeance = ""+this.infos.horaires[seance.value].jour+" de "+this.infos.horaires[seance.value].heure_debut+" à "+this.infos.horaires[seance.value].heure_fin;
@@ -343,7 +343,7 @@ export default {
             if(this.verifNom() && this.verifPrenom() && this.verifSeance()){
                 try{
                     if(this.inscritDescription == null || this.inscritDescription == ""){
-                        this.inscritDescription = "Aucune description";
+                        this.inscritDescription = this.translate('nodescription');
                     }
                     await postInscrit( this.infos.id_activite, this.inscritNom, this.inscritPrenom, 
                         this.inscritDescription, this.infos.horaires[this.inscritIndexSeance].id_calendrier);

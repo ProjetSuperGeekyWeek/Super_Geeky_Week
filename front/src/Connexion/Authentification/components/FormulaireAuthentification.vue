@@ -21,9 +21,7 @@ export default {
         }
     },
     methods: {
-      translate(prop) {
-        return this[this.lang][this.lang][prop];
-      },
+
         ...mapActions('authentifierStore',['getPrestataireMailPassword', 'adminVerif']),
         ...mapGetters('authentifierStore',['getPrestataireAuthentifier']),
 
@@ -38,9 +36,9 @@ export default {
                 else {
                     this.$router.push('/page_prestataire/' + this.getPrestataireAuthentifier().id_personne);
                 }
-            } else
-                alert('Email ou mot de passe incorrect');
+            }
         },
+
         async submitForm() {
             if (this.correctEmail && this.correctPassword) {
                 let emailForm = document.getElementById('email').value;
@@ -50,12 +48,15 @@ export default {
             else {
                 this.clearMdp();
                 this.$store.commit('setAuthentifier', false);
-                alert('Veuillez remplir correctement les champs');
+                alert(this.translate('remplirchamp'));
             }
         },
         clearMdp() {
             document.getElementById('password').value = '';
         },
+      translate(prop) {
+        return this[this.lang][this.lang][prop];
+      },
         verifEmail() {
             let email = document.getElementById('email').value;
             let regexEmail = new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$');
@@ -87,7 +88,7 @@ export default {
             element.style.backgroundColor = 'lightgreen';
         },
         mdpIncorrect() {
-            document.getElementById('incorrectPassword').innerHTML = 'Mot de passe incorrect ! Votre mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial';
+            document.getElementById('incorrectPassword').innerHTML = this.translate('mdpincorrect');
         },
         clearMdpIncorrect() {
             document.getElementById('incorrectPassword').innerHTML = '';

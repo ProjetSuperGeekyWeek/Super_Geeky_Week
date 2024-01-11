@@ -88,13 +88,13 @@ async function deletePersonneByIdFromAPI(id_personne){
             query = "SELECT * FROM personne WHERE nom_personne LIKE 'default_PERSONNE' AND id_role=$1";
             resultVerif = await client.query(query, [resultPersonne.rows[0].id_role]);
         }
-        console.log(resultVerif.rows[0], "test")
-        await client.query('UPDATE livre_personne SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
-        await client.query('UPDATE inscription SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
-        await client.query('UPDATE stand SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
-        await client.query('UPDATE item SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
-        await client.query('UPDATE personne_tag SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('UPDATE contact SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
         await client.query('UPDATE evenement SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('UPDATE personne_tag SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('UPDATE item SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('UPDATE stand SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('UPDATE inscription SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
+        await client.query('UPDATE Livre_d_or SET id_personne=$1 WHERE id_personne=$2', [resultVerif.rows[0].id_personne,id_personne]);
         await client.query('COMMIT');
         await client.query('DELETE FROM personne WHERE id_personne=$1', [id_personne]);
         await client.query('COMMIT');
