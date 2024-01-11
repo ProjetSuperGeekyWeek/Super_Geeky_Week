@@ -114,6 +114,7 @@ export default {
                 errorprenom3caract:"Le prenom doit contenir au moins 3 caractères et ne doit contenir aucun de chiffres",
                 choiseance:"Veuillez choisir une séance",
                 nodescription:"Aucune description",
+
             },
         };
     },

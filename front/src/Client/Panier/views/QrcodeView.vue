@@ -10,7 +10,7 @@ import Qrcode from '@/Client/Panier/components/Qrcodeg.vue';
 export default {
   name: 'QrcodeView',
   components: {
-    qrcode: Qrcode, // Utiliser 'qrcode' au lieu de 'Qrcode'
+    qrcode: Qrcode,
   },
   data() {
     return {};
