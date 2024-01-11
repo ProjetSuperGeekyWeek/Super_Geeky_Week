@@ -141,6 +141,10 @@ export default {
                 paniername:"Cart name",
                 dsntdeltpanier:"You cannot delete this cart",
                 dsntdeltitem:"You cannot delete this item",
+                nomclient:"Customer name",
+                prenomclient:"Customer first name",
+                emailclient:"Customer email",
+                dsntdeltqrcode:"You cannot delete this qrcode",
             },
         };
     },

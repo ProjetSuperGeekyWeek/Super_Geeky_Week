@@ -141,6 +141,10 @@ export default {
                 paniername:"Nom du panier",
                 dsntdeltpanier:"Vous ne pouvez pas supprimer ce panier",
                 dsntdeltitem:"Vous ne pouvez pas supprimer cet item",
+                nomclient:"Nom du client",
+                prenomclient:"Prénom du client",
+                emailclient:"Email du client",
+                dsntdeltqrcode:"Vous ne pouvez pas supprimer ce qrcode",
             },
         };
     },
