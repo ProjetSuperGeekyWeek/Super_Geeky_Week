@@ -145,6 +145,8 @@ export default {
                 prenomclient:"Prénom du client",
                 emailclient:"Email du client",
                 dsntdeltqrcode:"Vous ne pouvez pas supprimer ce qrcode",
+                nomtag:"Nom du tag",
+                dsntdelttag:"Vous ne pouvez pas supprimer ce tag",
             },
         };
     },

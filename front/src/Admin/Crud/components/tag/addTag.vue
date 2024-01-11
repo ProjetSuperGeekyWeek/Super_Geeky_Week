@@ -1,13 +1,13 @@
 <template>
   <div class="add">
-    <input type="text" placeholder="nom du tag" v-model="nom_tag">
-    <input type="button" value="Ajouter" @click="addNewTag">
+    <input type="text" :placeholder="translate('nomtag')" v-model="nom_tag">
+    <input type="button" :value="translate('ajouter')" @click="addNewTag">
     <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
@@ -16,7 +16,13 @@ export default{
   data: () => ({
     nom_tag: '',
   }),
+  computed: {
+    ...mapState(['lang', 'en', 'fr']),
+  },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore',['addNewTagStore']),
     async addNewTag() {
       try{

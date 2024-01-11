@@ -2,13 +2,13 @@
   <div class="updateCrud">
     <input type="hidden" v-model="id_tag">
     <input type="text" v-model="nom_tag">
-    <button @click="updateRole">Valider</button>
+    <button @click="updateRole">{{translate('valider')}}</button>
     <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateTag",
@@ -25,9 +25,13 @@ export default {
     };
   },
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore', ['getAllTag']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore', ['updateRowTag']),
     async loadData() {
       this.id_tag = this.$route.params.id;
@@ -40,7 +44,7 @@ export default {
     async updateRole() {
       try {
         if (this.id_tag === '' || this.nom_tag === '') {
-          alert('Veuillez remplir tous les champs')
+          alert(this.translate('remplirtouschamps'))
           return
         }
         const body = { id_tag: this.id_tag, nom_tag: this.nom_tag }
