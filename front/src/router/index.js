@@ -83,6 +83,11 @@ const routes = [
     name: 'admin_crud_add',
     component: () => import('@/Admin/Crud/views/addCrudView.vue')
   },
+  {
+    path: '*',
+    name: 'not_found',
+    component: () => import('@/NotFoundError404.vue')
+  }
 
 ]
 

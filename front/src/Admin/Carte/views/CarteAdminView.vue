@@ -1,21 +1,30 @@
 <template>
-    <div class="section">
+    <div class="section" v-if="admin">
       <div class="text_home texte-carte">
       </div>
       <div class="carte">
         <CarteInteractive/>
       </div>
     </div>
+    <div v-else>
+      <NoAdminRightView/>
+    </div>
 </template>
 
 <script>
 import CarteInteractive from '@/Client/Carte/components/CarteInteractive.vue'
+import NoAdminRightView from '@/Admin/NoAdminRightView/views/NoAdminRightView.vue';
+import {mapState} from "vuex";
 
 export default {
     name: 'CarteAdminView',
     components: {
-        CarteInteractive
-    }
+        CarteInteractive,
+        NoAdminRightView,
+    },
+    computed: {
+        ...mapState('authentifierStore', ['admin']),
+    },
 }
 
 </script>
