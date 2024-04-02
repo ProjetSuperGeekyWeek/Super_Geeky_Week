@@ -3,7 +3,7 @@
         <h4 id="nom-authentifier">{{translate('bienvenue')}}{{ nom }}</h4><br>
         <h5>{{translate('dejaconnect')}}</h5>
         <div id="btn-box">
-            <button id="change-mdp">{{translate('changemdp')}}</button>
+            <button id="change-mdp" @click="$router.push('/change_password')">{{translate('changemdp')}}</button>
             <button id="deconnect" @click="deconnect">{{translate('deconection')}}</button>
         </div>
     </div>

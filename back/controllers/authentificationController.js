@@ -24,3 +24,16 @@ exports.adminVerif = async (req, res) => {
         }
     });
 }
+
+// put
+exports.changePassword = async (req, res) => {
+    authentificationService.changePassword(req.params.id, req.params.mdp, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving prestataire."
+            });
+        } else {
+            res.send(data);
+        }
+    });
+}

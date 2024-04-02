@@ -1,5 +1,5 @@
 
-import { getPrestataireMailPassword, adminVerif } from '@/axiosFunctions/authentificationAxios';
+import { getPrestataireMailPassword, adminVerif, changePassword } from '@/axiosFunctions/authentificationAxios';
 
 export default{
     namespaced: true,
@@ -59,5 +59,17 @@ export default{
                 return false;
             }
         },
+        async changePassword({commit},payload){
+            alert("id :"+payload.id);
+            alert("mdp :"+payload.mdp);
+            try{
+                const res = await changePassword(payload.id,payload.mdp);
+                commit('setAuthentifier', true);
+                return res;
+            }catch(error){
+                console.log(error);
+                return false;
+            }
+        }
     },
 }

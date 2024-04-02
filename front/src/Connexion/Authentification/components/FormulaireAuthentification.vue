@@ -36,6 +36,9 @@ export default {
                 else {
                     this.$router.push('/page_prestataire/' + this.getPrestataireAuthentifier().id_personne);
                 }
+            } else {
+                this.clearMdp();
+                alert('Email ou mot de passe incorrect');
             }
         },
 
@@ -95,7 +98,7 @@ export default {
         }
     },
     computed: {
-      ...mapState(['lang', 'en', 'fr']),
+        ...mapState(['lang', 'en', 'fr']),
     }
 }
 </script>

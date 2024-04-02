@@ -52,8 +52,36 @@ async function adminVerifFromAPI(id){
     }
 }
 
+//put
+const changePassword = (id, mdp, callback) => {
+    changePasswordFromAPI(id, mdp).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function changePasswordFromAPI(id, mdp){
+    console.log(id, mdp);
+    const client = await pool.connect();
+    try {
+        const query = `
+        UPDATE personne
+        SET mdp_personne = $2
+        WHERE id_personne = $1
+        `;
+        const result = await client.query(query, [id, mdp]);
+        return result.rows[0];
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
 
 module.exports = {
     getPrestataireMailPassword,
-    adminVerif
+    adminVerif,
+    changePassword
 }

@@ -23,9 +23,9 @@ export default{
         idPresta: Number,
     },
     methods: {
-      translate(prop) {
-        return this[this.lang][this.lang][prop];
-      },
+        translate(prop) {
+            return this[this.lang][this.lang][prop];
+        },
         updateProps() {
             this.$emit('update:messages', true);
         },

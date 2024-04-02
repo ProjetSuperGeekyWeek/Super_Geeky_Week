@@ -9,7 +9,8 @@ INSERT INTO role (nom_role) VALUES
 INSERT INTO personne (nom_personne, prenom_personne, mail_personne, mdp_personne, image_personne, description_personne, id_role) VALUES
         ('Admin', 'Admin', 'admin@admin.com', 'Admin1234&', 'random.png','Je suis un Admin', 1),
         ('Jean', 'Pierre', 'jean@gmail.com', 'User1234&', 'random.png','Je suis un super prestataire qui dance', 2),
-        ('Bob', 'Lennon', 'bob@gmail.com', 'User1234&', 'random.png','Je suis un prestataire prestigieux qui aime l or', 3);
+        ('Bob', 'Lennon', 'bob@gmail.com', 'User1234&', 'random.png','Je suis un prestataire prestigieux qui aime l or', 3),
+        ('Microsoft', '', 'microsoft@gmail.com', 'User1234&', 'random.png','Je suis un prestataire qui préfère windows à linux', 3);
 
 -- partie services
 
@@ -18,7 +19,12 @@ INSERT INTO Livre_d_or (temoignage, pseudo, id_personne) VALUES
     ('C''était super', 'Higorami',1),
     ('J''ai adoré le cosplay', 'Senqen',1),
     ('C''était cool', 'Dragul',2),
-    ('Eren','Mikasa',1);
+    ('Eren','Mikasa',1),
+    ('Je me suis bien amusé', 'Jean', 2),
+    ('Dommage que ce soit fini', 'Pierre', 3),
+    ('Week-end inoubliable', 'Anonyme', 3),
+    ('Meilleur moment de ma vie', 'Axolot', 4),
+    ('I am Batman', 'Batman', 4);
 
 -- Insert data into inscription table
 INSERT INTO inscription (nom_inscription, description_inscription, nb_place, image_inscription, id_personne) VALUES
@@ -26,6 +32,7 @@ INSERT INTO inscription (nom_inscription, description_inscription, nb_place, ima
     ('Concours cosplay', 'Venez déguisés !', 128, 'random.png', 1),
     ('Tournoi Smash Bros Melee', 'Un tournoi smash bros sympa', 16, 'random.png', 1),
     ('Tournoi Smash Bros Ultimate', 'Un tournoi smash bros sympa', 16, 'random.png', 2),
+    ('Concours de mangeur de hot dog', 'Venez vous remplir la panse !', 128, 'random.png', 2),
     ('Concours cosplay', 'Venez déguisés !', 128, 'random.png', 3);
 
 -- fin partie services
@@ -99,26 +106,26 @@ INSERT INTO stand (id_emplacement, id_personne) VALUES
     (4, 1),
     (5, 2),
     (6, 3),
-    (7, 1),
-    (15, 1),
-    (24, 1),
-    (25, 1),
+    (7, 4),
+    (15, 2),
+    (24, 2),
+    (25, 4),
     (26, 1),
     (27, 1),
     (28, 1),
-    (29, 1),
+    (29, 4),
     (30, 1),
     (31, 1),
-    (32, 1),
+    (32, 4),
     (33, 1),
     (34, 1),
     (35, 1),
-    (36, 1),
+    (36, 3),
     (37, 1),
     (38, 1),
     (39, 1),
     (40, 1),
-    (41, 1),
+    (41, 2),
     (42, 1),
     (43, 1),
     (44, 1),
@@ -134,19 +141,23 @@ INSERT INTO jour (date_calendrier) VALUES
 
 -- Insert data into calendrier table
 INSERT INTO calendrier (id_jour,horaire_debut,horaire_fin) VALUES
-    (1, '09:00', '18:30'),
-    (2, '08:30', '18:00');
+    (1, '09:00', '10:30'),
+    (2, '08:30', '11:00'),
+    (3, '08:30', '12:00'),
+    (1, '11:00', '14:30'),
+    (2, '13:30', '15:00'),
+    (3, '17:30', '18:00');
 
 -- Insert data into inscrit table
 INSERT INTO inscrit (id_inscription, nom_inscrit, prenom_inscrit, description_inscrit, id_calendrier) VALUES
-    (1, 'visiteur 1', 'jacque', 'je suis un visiteur', 1),
-    (1, 'visiteur 2', 'jacquot', 'je suis un visiteur', 1),
-    (1, 'visiteur 3', 'jacquie', 'je suis un visiteur', 1),
-    (1, 'visiteur 4', 'du terroir', 'je suis un visiteur', 1),
-    (2, 'visiteur 1', 'jacque', 'je suis un visiteur', 2),
-    (2, 'visiteur 2', 'jacquot', 'je suis un visiteur', 2),
-    (2, 'visiteur 3', 'jacquie', 'je suis un visiteur', 2),
-    (2, 'visiteur 4', 'du terroir', 'je suis un visiteur', 2);
+    (4, 'visiteur 1', 'jacque', 'je suis un visiteur mauvais', 1),
+    (4, 'visiteur 2', 'jacquot', 'je suis un visiteur méchant', 2),
+    (5, 'visiteur 3', 'jacquie', 'je suis un visiteur amical', 1),
+    (5, 'visiteur 4', 'pierre', 'je suis un visiteur gentil', 3),
+    (6, 'visiteur 1', 'jacque', 'je suis un visiteur mauvais', 2),
+    (6, 'visiteur 2', 'jacquot', 'je suis un visiteur méchant', 2),
+    (6, 'visiteur 3', 'jacquie', 'je suis un visiteur amical', 2),
+    (6, 'visiteur 4', 'du terroir', 'je suis un visiteur gentil', 2);
 
 -- Insert data into inscription_calendrier table
 INSERT INTO inscription_calendrier (id_inscription, id_calendrier) VALUES
@@ -155,7 +166,14 @@ INSERT INTO inscription_calendrier (id_inscription, id_calendrier) VALUES
     (2,1),
     (2,2),
     (3,1),
-    (3,2);
+    (3,2),
+    (4,1),
+    (4,2),
+    (5,3),
+    (5,4),
+    (5,5),
+    (6,1),
+    (6,2);
 
 -- Insert data into panier table
 INSERT INTO panier (nom_panier) VALUES
@@ -169,8 +187,7 @@ INSERT INTO panier (nom_panier) VALUES
 INSERT INTO item (nom_item, stock_item, prix_item,image_item, description_item, id_personne, id_calendrier) VALUES
         ('Forfait Normal',50,15,'random.png','je suis un forfait normal',1,1),('Forfait Normal',50,15,'random.png','je suis un forfait normal',1,2),
         ('Forfait Priorité',50,25,'random.png','je suis un forfait prioritaire',1,1),('Forfait Priorité',50,25,'random.png','je suis un forfait prioritaire',1,2),
-        ('Forfait Handicapé',50,15,'random.png','je suis un forfait handicapé',1,1),('Forfait Handicapé',50,15,'random.png','je suis un forfait handicapé',1,2),
-        ('Super truc',100,1000000,'random.png','je suis le super truc mega cher de Bob',3,1);
+        ('Forfait Handicapé',50,10,'random.png','je suis un forfait handicapé',1,1),('Forfait Handicapé',50,15,'random.png','je suis un forfait handicapé',1,2);
 
 -- Insert data into ligne_panier table
 INSERT INTO ligne_panier (id_panier, id_item, quantite) VALUES
@@ -213,7 +230,13 @@ INSERT INTO personne_tag (id_personne, id_tag) VALUES
     (3,2),
     (3,4),
     (3,5),
-    (3,6);
+    (3,6),
+    (4,1),
+    (4,2),
+    (4,3),
+    (4,4),
+    (4,5),
+    (4,6);
 
 -- Insert data evenement tag table
 INSERT INTO evenement (nom_evenement, description_evenement, nb_place,image_evenement, id_personne, id_emplacement) VALUES
@@ -235,5 +258,6 @@ INSERT INTO creneau (id_evenement, id_calendrier,heure_debut_evenement, heure_fi
 INSERT INTO contact (mail_client, message_client, id_personne) VALUES 
         ('client@example.com', 'Contenu du message', 1), -- Assurez-vous d'ajuster l'identifiant de la personne correcte
         ('jesuis@moi.com', 'Je suis moi', 2),
-        ('jetais@moi.com', 'il etre corps moi', 2),
-        ('help@me.fr', 'to late', 3);
+        ('jean@moi.com', 'je me suis perdu', 2),
+        ('help@me.fr', 'super moment je reviendrais', 3),
+        ('linuxMaster@debian.com', 'linux is the best', 4);

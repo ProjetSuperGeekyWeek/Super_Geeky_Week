@@ -101,7 +101,6 @@ export default {
     },
     contactPrestataire(prestataire) {
       this.selectedPrestataire = prestataire;
-      console.log(this.translate('contactez')`${prestataire.nom} ${prestataire.prenom}`);
       if (this.selectedPrestataire) {
         console.log(this.selectedPrestataire);
         this.isModalOpen = true;

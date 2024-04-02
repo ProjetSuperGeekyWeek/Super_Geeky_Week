@@ -64,4 +64,7 @@ var router = express.Router();
 router.get('/admin/:id', authentificationController.adminVerif);
 router.get('/:mail/:mdp', authentificationController.getPrestataireMailPassword);
 
+// put
+router.put('/:id/:mdp', authentificationController.changePassword);
+
 module.exports = router;
