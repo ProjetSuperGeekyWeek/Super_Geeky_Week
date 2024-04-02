@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import crudStore from './storeCrud';
 import authentifierStore from './storeAuthentifier';
+import commandeStore from './storeCommande';
 
 import en from '@/assets/language/en';
 import fr from '@/assets/language/fr';
@@ -47,5 +48,6 @@ export default new Vuex.Store({
   modules: {
     crudStore,
     authentifierStore,
+    commandeStore,
   }
 })
