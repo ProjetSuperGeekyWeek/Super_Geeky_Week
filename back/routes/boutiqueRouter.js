@@ -3,6 +3,11 @@ const express = require('express');
 
 var router = express.Router();
 
+// affichage
+router.get('/getAllItems', boutiqueController.getAllItems);
+
+module.exports = router;
+
 /**
  * @swagger
  * tags:
@@ -14,7 +19,7 @@ var router = express.Router();
  * @swagger
  * /api/boutique/getAllItems:
  *   get:
- *     summary: Get all items from the boutique
+ *     summary: Get all items in the boutique
  *     tags: [Boutique]
  *     responses:
  *       '200':
@@ -28,8 +33,3 @@ var router = express.Router();
  *       '500':
  *         description: Internal server error
  */
-
-// affichage
-router.get('/getAllItems', boutiqueController.getAllItems);
-
-module.exports = router;

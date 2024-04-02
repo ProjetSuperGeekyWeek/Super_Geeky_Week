@@ -5,14 +5,14 @@
         <v-container>
           <v-card>
             <v-card-title>
-              Emplacement
+              {{translate('emplacement')}}
               <v-spacer />
-              <v-btn @click="navigateToAdd" color="primary">Ajouter</v-btn>
+              <v-btn @click="navigateToAdd" color="primary">{{translate('ajouter')}}</v-btn>
               <v-spacer/>
               <v-text-field
                   v-model="search"
                   append-icon="mdi-magnify"
-                  label="chercher"
+                  :label="translate('chercher')"
                   single-line
                   hide-details
               >
@@ -42,15 +42,15 @@
           >
           </v-data-table>
         </v-container>
-        <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
-        <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
+        <v-btn @click="deleteRow" color="primary">{{translate('supprimer')}}</v-btn>
+        <v-btn @click="showUpdateDialog" color="primary">{{translate('modifier')}}</v-btn>
       </v-main>
     </v-app>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   name: 'crudAcheter',
@@ -63,10 +63,14 @@ export default {
     }
   }),
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore',['getAllEmplacement','getAllEmplacementColumn']),
     ...mapActions('crudStore',['getAllEmplacementStore','getAllEmplacementColumnStore']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore',['deleteRowEmplacement']),
     async loadData(){
       this.emplacement.headers = [];
@@ -84,11 +88,11 @@ export default {
     async deleteRow(){
       try{
         if(this.selected.length === 0){
-          alert('Veuillez sélectionner une ligne')
+          alert(this.translate('selectligne'))
           return
         }
         if(this.selected[0].nom_emplacement === 'default_EMPLACEMENT'){
-          alert('Veuillez sélectionner une autre')
+          alert(this.translate('selectother'))
           return
         }
         const body = {id_emplacement: this.selected[0].id_emplacement}
@@ -100,11 +104,11 @@ export default {
     },
     async showUpdateDialog(){
       if(this.selected.length === 0){
-        alert('Veuillez sélectionner une ligne')
+        alert(this.translate('selectligne'))
         return
       }
       if(this.selected[0].nom_emplacement === 'default_EMPLACEMENT'){
-        alert('Veuillez sélectionner une autre')
+        alert(this.translate('selectother'))
         return
       }
       this.$router.push('/admin/crud/update/emplacement/'+this.selected[0].id_emplacement);

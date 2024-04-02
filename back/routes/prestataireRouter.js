@@ -3,6 +3,17 @@ const express = require('express');
 
 var router = express.Router();
 
+// affichage
+router.get('/', prestataireController.getAllPrestataires);
+router.get('/:id', prestataireController.getPrestataireById);
+router.get('/nom/:nom', prestataireController.getPrestataireByNom);
+router.get('/tag/:tag', prestataireController.getPrestataireByTag);
+router.get('/:id/tags', prestataireController.getPrestataireTags);
+router.post('/:id/contact', prestataireController.sendContactMessage);
+
+
+module.exports = router;
+
 /**
  * @swagger
  * tags:
@@ -12,7 +23,7 @@ var router = express.Router();
 
 /**
  * @swagger
- * /api/prestataire/:
+ * /api/prestataire:
  *   get:
  *     summary: Get all prestataires
  *     tags: [Prestataire]
@@ -38,13 +49,17 @@ var router = express.Router();
  *     parameters:
  *       - in: path
  *         name: id
- *         required: true
  *         description: ID of the prestataire to retrieve
+ *         required: true
  *         schema:
  *           type: string
  *     responses:
  *       '200':
- *         description: Successfully retrieved prestataire
+ *         description: Successfully retrieved the prestataire
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
  *       '500':
  *         description: Internal server error
  */
@@ -58,97 +73,17 @@ var router = express.Router();
  *     parameters:
  *       - in: path
  *         name: nom
- *         required: true
  *         description: Name of the prestataire to retrieve
- *         schema:
- *           type: string
- *     responses:
- *       '200':
- *         description: Successfully retrieved prestataire by name
- *       '500':
- *         description: Internal server error
- */
-
-/**
- * @swagger
- * /api/prestataire/tag/{tag}:
- *   get:
- *     summary: Get prestataires by tag
- *     tags: [Prestataire]
- *     parameters:
- *       - in: path
- *         name: tag
  *         required: true
- *         description: Tag of the prestataires to retrieve
  *         schema:
  *           type: string
  *     responses:
  *       '200':
- *         description: Successfully retrieved prestataires by tag
+ *         description: Successfully retrieved the prestataire
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
  *       '500':
  *         description: Internal server error
  */
-
-/**
- * @swagger
- * /api/prestataire/{id}/tags:
- *   get:
- *     summary: Get tags of a prestataire by ID
- *     tags: [Prestataire]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: ID of the prestataire to retrieve tags
- *         schema:
- *           type: string
- *     responses:
- *       '200':
- *         description: Successfully retrieved tags of the prestataire
- *       '500':
- *         description: Internal server error
- */
-
-/**
- * @swagger
- * /api/prestataire/{id}/contact:
- *   post:
- *     summary: Send a contact message to a prestataire
- *     tags: [Prestataire]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: ID of the prestataire to send the contact message
- *         schema:
- *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               mail_client:
- *                 type: string
- *                 description: Email of the client sending the message
- *               message_client:
- *                 type: string
- *                 description: Content of the contact message
- *     responses:
- *       '200':
- *         description: Successfully sent contact message
- *       '500':
- *         description: Internal server error
- */
-
-// affichage
-router.get('/', prestataireController.getAllPrestataires);
-router.get('/:id', prestataireController.getPrestataireById);
-router.get('/nom/:nom', prestataireController.getPrestataireByNom);
-router.get('/tag/:tag', prestataireController.getPrestataireByTag);
-router.get('/:id/tags', prestataireController.getPrestataireTags);
-router.post('/:id/contact', prestataireController.sendContactMessage);
-
-
-module.exports = router;

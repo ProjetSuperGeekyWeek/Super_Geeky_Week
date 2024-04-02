@@ -1,13 +1,13 @@
 <template>
   <div class="add">
-    <input type="text" placeholder="nom de la ressource" v-model="nom_ressource">
-    <input type="button" value="Ajouter" @click="addNewRessource">
+    <input type="text" :placeholder="translate('ressname')" v-model="nom_ressource">
+    <input type="button" :value="translate('ajouter')" @click="addNewRessource">
     <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default {
@@ -16,7 +16,13 @@ export default {
   data: () => ({
     nom_ressource: '',
   }),
+  computed: {
+    ...mapState(['lang', 'en', 'fr']),
+  },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore', ['addNewRessourceStore']),
     async addNewRessource() {
       try {

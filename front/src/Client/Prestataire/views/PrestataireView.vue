@@ -9,13 +9,13 @@
             <br>
         </template>
         <template v-else>
-            <h1 class="intro">Bienvenue sur la page de {{ prestataire.prenom_personne }} {{ prestataire.nom_personne }}</h1>
+            <h1 class="intro">{{translate('bienvenuepage')}}{{ prestataire.prenom_personne }} {{ prestataire.nom_personne }}</h1>
             <br>
             <div class="service-content">
                 <img class="imgprofile" src="@/assets/image/logo/main_logo.png" alt="image prestataire">
             </div>
             <br>
-            <h2>Vous pouvez dès maintenant profiter de superbes activités</h2>
+            <h2>{{translate('vousprofitact')}}</h2>
             <br>
         </template>
         <div class="service-content">

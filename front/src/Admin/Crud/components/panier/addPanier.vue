@@ -1,13 +1,13 @@
 <template>
   <div class="add">
-    <input type="text" placeholder="nom" v-model="nom_panier">
-    <input type="button" value="Ajouter" @click="addNewPanier">
+    <input type="text" :placeholder="translate('paniername')" v-model="nom_panier">
+    <input type="button" :value="translate('ajouter')" @click="addNewPanier">
     <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
@@ -16,7 +16,13 @@ export default{
   data: () => ({
     nom_panier: '',
   }),
+  computed:{
+    ...mapState(['lang', 'en', 'fr']),
+  },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore',['addNewPanierStore']),
     async addNewPanier() {
       try{

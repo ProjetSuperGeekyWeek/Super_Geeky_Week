@@ -1,16 +1,16 @@
 <template>
   <div class="updateCrud">
     <input type="hidden" v-model="id_qr_code">
-    <input type="text" placeholder="Nom du client" v-model="nom_client">
-    <input type="text" placeholder="Prenom du client" v-model="prenom_client">
-    <input type="text" placeholder="email du client" v-model="mail_client" id="email" name="email">
-    <button @click="updateRole">Valider</button>
+    <input type="text" :placeholder="translate('nomclient')" v-model="nom_client">
+    <input type="text" :placeholder="translate('prenomclient')" v-model="prenom_client">
+    <input type="text" :placeholder="translate('emailclient')" v-model="mail_client" id="email" name="email">
+    <button @click="updateRole">{{translate('valider')}}</button>
     <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateQrCode",
@@ -29,9 +29,13 @@ export default {
     };
   },
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore', ['getAllQrCode']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore', ['updateRowQrCode']),
     async loadData() {
       this.id_qr_code = this.$route.params.id;
@@ -46,11 +50,11 @@ export default {
     async updateRole() {
       try {
         if (this.id_qr_code === '' || this.nom_client === '' || this.prenom_client === '' || this.mail_client === '') {
-          alert('Veuillez remplir tous les champs')
+          alert(this.translate('remplirtouschamps'))
           return
         }
         if(await this.verifEmail() === false){
-          alert('Veuillez entrer un email valide')
+          alert(this.translate('enteremail'))
           return
         }
         const body = { id_qr_code: this.id_qr_code, nom_client: this.nom_client, prenom_client: this.prenom_client, mail_client: this.mail_client }

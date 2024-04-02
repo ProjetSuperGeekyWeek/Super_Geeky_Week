@@ -5,14 +5,14 @@
         <v-container>
           <v-card>
             <v-card-title>
-              Evenement
+              {{translate('event')}}
               <v-spacer />
-              <v-btn @click="navigateToAdd" color="primary">Ajouter</v-btn>
+              <v-btn @click="navigateToAdd" color="primary">{{translate('ajouter')}}</v-btn>
               <v-spacer/>
               <v-text-field
                   v-model="search"
                   append-icon="mdi-magnify"
-                  label="chercher"
+                  :label="translate('chercher')"
                   single-line
                   hide-details
               >
@@ -42,15 +42,15 @@
           >
           </v-data-table>
         </v-container>
-        <v-btn @click="deleteRow" color="primary">Supprimé</v-btn>
-        <v-btn @click="showUpdateDialog" color="primary">Modifier</v-btn>
+        <v-btn @click="deleteRow" color="primary">{{translate('supprimer')}}</v-btn>
+        <v-btn @click="showUpdateDialog" color="primary">{{translate('modifier')}}</v-btn>
       </v-main>
     </v-app>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   name: 'crudAcheter',
@@ -63,10 +63,14 @@ export default {
     }
   }),
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore',['getAllEvenement','getAllEvenementColumn']),
     ...mapActions('crudStore',['getAllEvenementStore','getAllEvenementColumnStore']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore',['deleteRowEvenement']),
     async loadData(){
       await this.getAllEvenementStore;
@@ -82,11 +86,11 @@ export default {
     async deleteRow() {
       try {
         if (this.selected.length === 0) {
-          alert('Veuillez sélectionner une ligne')
+          alert(this.translate('selectligne'))
           return
         }
         if (this.selected[0].nom_evenement === "default_EVENEMENT") {
-          alert("Vous ne pouvez pas supprimer cet evenement");
+          alert(this.translate('dsntdeltevent'));
           return;
         }
         const body = {
@@ -101,11 +105,11 @@ export default {
     async showUpdateDialog() {
       try {
         if (this.selected.length === 0) {
-          alert('Veuillez sélectionner une ligne')
+          alert(this.translate('selectligne'))
           return
         }
         if (this.selected[0].nom_evenement === "default_EVENEMENT") {
-          alert("Vous ne pouvez pas supprimer cet evenement");
+          alert(this.translate('dsntdeltevent'));
           return;
         }
         this.$router.push('/admin/crud/update/evenement/' + this.selected[0].id_evenement)

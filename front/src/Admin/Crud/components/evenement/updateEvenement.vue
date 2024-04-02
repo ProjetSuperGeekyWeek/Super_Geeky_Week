@@ -11,13 +11,13 @@
     <select name="selectEmplacement" id="selectEmplacement" v-model="id_emplacement">
       <option :value="emplacement.id_emplacement" v-for="emplacement in listEmplacement" :key="emplacement.id_emplacement" :selected="emplacement.id_emplacement === id_emplacement">{{ emplacement.nom_emplacement }}</option>
     </select>
-    <button @click="updateRole">Valider</button>
+    <button @click="updateRole">{{translate('valider')}}</button>
     <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 export default {
   name: "updateEvenement",
@@ -41,9 +41,13 @@ export default {
     };
   },
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore', ['getAllEvenement', 'getAllPersonne', 'getAllEmplacement']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore', ['updateRowEvenement']),
     async loadData() {
       this.listPersonne = this.getAllPersonne;
@@ -64,7 +68,7 @@ export default {
     async updateRole() {
       try {
         if (this.id_evenement === '' || this.nom_evenement === '' || this.description_evenement === '' || this.nb_place === '' || this.image_evenement === '') {
-          alert('Veuillez remplir tous les champs')
+          alert(this.translate('remplirtouschamps'))
           return
         }
         const body = { id_evenement: this.id_evenement, nom_evenement: this.nom_evenement, description_evenement: this.description_evenement, nb_place: this.nb_place, image_evenement: this.image_evenement, id_personne:this.id_personne, id_emplacement:this.id_emplacement }

@@ -1,8 +1,8 @@
 <template>
   <div class="add">
-    <input type="text" placeholder="Nom de l'évenement" v-model="nom_evenement">
+    <input type="text" :placeholder="translate('nomevent')" v-model="nom_evenement">
     <input type="text" placeholder="Description" v-model="description_evenement">
-    <input type="number" placeholder="nb places" v-model="nb_place">
+    <input type="number" :placeholder="translate('nbrplace')" v-model="nb_place">
     <input type="text" placeholder="Image" v-model="image_evenement">
     <select name="selectPersonne" id="selectPersonne" v-model="id_personne">
       <option v-for="personne in listPersonne" :key="personne.id_personne" :value="personne.id_personne">{{ personne.nom_personne }} - {{ personne.prenom_personne }}</option>
@@ -10,13 +10,13 @@
     <select name="selectEmplacement" id="selectEmplacement" v-model="id_emplacement">
       <option v-for="emplacement in listEmplacement" :key="emplacement.id_emplacement" :value="emplacement.id_emplacement">{{ emplacement.nom_emplacement }}</option>
     </select>
-    <input type="button" value="Ajouter" @click="addNewRole">
+    <input type="button" :value="translate('ajouter')" @click="addNewRole">
     <boutonRetourCrud/>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import boutonRetourCrud from "@/Admin/Crud/components/boutonRetourCrud.vue";
 
 export default{
@@ -33,9 +33,13 @@ export default{
     listEmplacement: []
   }),
   computed: {
+    ...mapState(['lang', 'en', 'fr']),
     ...mapGetters('crudStore',['getAllPersonne', 'getAllEmplacement'])
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     ...mapActions('crudStore',['addNewEvenementStore']),
     async loadData(){
       this.listPersonne = this.getAllPersonne;
