@@ -1,11 +1,13 @@
 <template>
-    <div id="changePasswordBox">
-        <label for="newPassword">Nouveau mot de passe</label>
-        <input type="password" name="newPassword" id="newPassword" required @change="verifNewPassword()">
-        <label for="confirmNewPassword">Confirmez le nouveau mot de passe</label>
-        <input type="password" name="confirmNewPassword" id="confirmNewPassword" required @change="verifNewConfirmPassword()">
-        <span id="incorrectNewPassword"></span>
-        <button id="valid-new-password" @click="submitForm">{{translate('soumettre')}}</button>
+    <div class="authentificationChange">
+        <div id="changePasswordBox">
+            <label for="newPassword">Nouveau mot de passe</label>
+            <input type="password" name="newPassword" id="newPassword" required @change="verifNewPassword()">
+            <label for="confirmNewPassword">Confirmez le nouveau mot de passe</label>
+            <input type="password" name="confirmNewPassword" id="confirmNewPassword" required @change="verifNewConfirmPassword()">
+            <span id="incorrectNewPassword"></span>
+            <button id="valid-new-password" @click="submitForm">{{translate('soumettre')}}</button>
+        </div>
     </div>
 </template>
 
@@ -98,11 +100,26 @@
 </script>
 
 <style scoped>
+
+.authentificationChange {
+    background-color: rgb(48, 15, 65);
+    height: 100vh;
+    width: 100vw;
+    padding-top: 25vh;
+    backdrop-filter: blur(0.5rem);
+}
+
 #changePasswordBox {
-    width: 50%;
-    height: 100%;
-    margin-left: 25%;
-    margin-top: 300px;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    width: 30%;
+    height: 45%;
+    margin-left: 35%;
+    margin-top: 200px;
+    border: solid 1px palevioletred;
+    border-radius: 10px;
+    background-color: mediumpurple;
+    filter: drop-shadow(0 0 10rem palevioletred);
 }
 
 label {
@@ -112,12 +129,12 @@ label {
 }
 
 input {
-    width: 60%;
+    width: 80%;
     height: 30px;
     border-radius: 5px;
     border: 1px solid black;
     margin-bottom: 10px;
-    margin-left: 20%;
+    margin-left: 10%;
 }
 
 input:focus {
