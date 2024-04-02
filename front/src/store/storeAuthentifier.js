@@ -60,8 +60,6 @@ export default{
             }
         },
         async changePassword({commit},payload){
-            alert("id :"+payload.id);
-            alert("mdp :"+payload.mdp);
             try{
                 const res = await changePassword(payload.id,payload.mdp);
                 commit('setAuthentifier', true);

@@ -28,9 +28,6 @@
                     let newPasswordForm = document.getElementById('newPassword').value;
                     let confirmNewPasswordForm = document.getElementById('confirmNewPassword').value;
                     if(newPasswordForm === confirmNewPasswordForm){
-                        alert("id :"+this.prestataireAuthentifier["id_personne"]);
-                        alert("newPassword :"+newPasswordForm);
-                        alert("Mot de passe changé");
                         let payload = {
                             id: this.prestataireAuthentifier["id_personne"],
                             mdp: newPasswordForm
