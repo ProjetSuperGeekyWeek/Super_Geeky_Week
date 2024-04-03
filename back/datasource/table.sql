@@ -148,7 +148,7 @@ CREATE TABLE ligne_panier (
 );
 
 CREATE TABLE qr_code (
-    id_qr_code SERIAL PRIMARY KEY,
+    id_qr_code VARCHAR(256) PRIMARY KEY,
     nom_client VARCHAR(50) NOT NULL,
     prenom_client VARCHAR(50) NOT NULL,
     mail_client VARCHAR(100) NOT NULL
@@ -157,7 +157,7 @@ CREATE TABLE qr_code (
 CREATE TABLE acheter (
     id_acheter SERIAL PRIMARY KEY,
     id_item INTEGER NOT NULL,
-    id_qr_code INTEGER NOT NULL,
+    id_qr_code VARCHAR(256) NOT NULL,
     consommer BOOLEAN NOT NULL,
     CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES item(id_item),
     CONSTRAINT fk_qr_code FOREIGN KEY (id_qr_code) REFERENCES qr_code(id_qr_code)

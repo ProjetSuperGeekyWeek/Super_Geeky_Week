@@ -1,5 +1,5 @@
 
-// import { getPrestataireMailPassword, adminVerif, changePassword } from '@/axiosFunctions/authentificationAxios';
+import { validerLigneCommande } from '@/axiosFunctions/commandeAxios';
 
 export default{
     namespaced: true,
@@ -15,19 +15,19 @@ export default{
         },
     },
     actions: {
-        // async getPrestataireMailPassword({commit}, payload){
-        //     try{
-        //         const res = await getPrestataireMailPassword(payload.mail, payload.mdp);
-        //         if(res.id_personne != undefined){
-        //             commit('setAuthentifier', true);
-        //             commit('setPrestataireAuthentifier', res);
-        //             return true;
-        //         }
-        //         return false;
-        //     }catch(error){
-        //         console.log(error);
-        //         return false;
-        //     }
-        // },
+        async validerLigneCommande({commit}, payload){
+            try{
+                const res = await validerLigneCommande(payload.mail, payload.mdp);
+                if(res.id_personne != undefined){
+                    commit('setAuthentifier', true);
+                    commit('setPrestataireAuthentifier', res);
+                    return true;
+                }
+                return false;
+            }catch(error){
+                console.log(error);
+                return false;
+            }
+        },
     },
 }

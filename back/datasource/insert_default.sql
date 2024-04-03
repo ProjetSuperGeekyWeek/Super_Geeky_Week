@@ -198,19 +198,19 @@ INSERT INTO ligne_panier (id_panier, id_item, quantite) VALUES
 
 -- Insert data into qr_code table
 INSERT INTO qr_code (nom_client, prenom_client, mail_client) VALUES
-    ('visiteur 1', 'jacque', 'jacque@gmail.com'),
-    ('visiteur 2', 'jacquot', 'jacquot@gmail.com'),
-    ('visiteur 3', 'jacquie', 'jacquie@gmail.com'),
-    ('visiteur 4', 'du terroir', 'noble@gmail.com');
+    ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11','visiteur 1', 'jacque', 'jacque@gmail.com'),
+    ('b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11','visiteur 2', 'jacquot', 'jacquot@gmail.com'),
+    ('c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11','visiteur 3', 'jacquie', 'jacquie@gmail.com'),
+    ('d0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11','visiteur 4', 'du terroir', 'noble@gmail.com');
 
 -- Insert data into acheter table
 INSERT INTO acheter (id_item, id_qr_code, consommer) VALUES
-    (1,2,false),
-    (1,2,false),
-    (1,1,false),
-    (1,1,true),
-    (2,3,false),
-    (3,3,false);
+    (1,'b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',false),
+    (1,'b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',false),
+    (1,'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',false),
+    (1,'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',true),
+    (2,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',false),
+    (3,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',false);
 
 -- Insert data into tag table
 INSERT INTO tag (nom_tag) VALUES
