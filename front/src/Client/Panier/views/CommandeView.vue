@@ -43,6 +43,7 @@ export default {
     mounted() {
         this.getCommande();
         this.getCommandePresta();
+        alert(this.$route.params.uuid_commande);
         this.setUUIDCommande(this.$route.params.uuid_commande);
     }
 }
