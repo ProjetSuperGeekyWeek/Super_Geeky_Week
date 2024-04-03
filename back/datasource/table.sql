@@ -148,10 +148,7 @@ CREATE TABLE ligne_panier (
 );
 
 CREATE TABLE qr_code (
-    id_qr_code VARCHAR(256) PRIMARY KEY,
-    nom_client VARCHAR(50) NOT NULL,
-    prenom_client VARCHAR(50) NOT NULL,
-    mail_client VARCHAR(100) NOT NULL
+    id_qr_code VARCHAR(256) PRIMARY KEY
 );
 
 CREATE TABLE acheter (
