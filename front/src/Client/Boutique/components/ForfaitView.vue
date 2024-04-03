@@ -10,7 +10,7 @@
           <p>{{ translate('description') }}{{ item.description_item }}</p>
           <p>{{ translate('prix') }}{{ item.prix_item }}€</p>
           <p>{{ translate('stock') }}{{ item.stock_item }}</p>
-          <router-link to="/panier"><input type="button" :value="translate('acheter')" class="bouton grand_moins"></router-link>
+          <v-btn @click="addInPanier(item.id_item)">{{ translate('acheter') }}</v-btn>
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
 <script>
 import {getAllItems} from '@/axiosFunctions/boutiqueAxios'
 import {getAllCalendrier} from '@/axiosFunctions/calendrierAxios'
-import {mapState} from "vuex";
+import {mapActions, mapState} from "vuex";
 export default {
   name: 'ForfaitView',
   data() {
@@ -30,6 +30,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('panierStore', ['addContentPanier']),
     translate(prop) {
       return this[this.lang][this.lang][prop];
   },
@@ -47,6 +48,15 @@ export default {
       }
       //console.log(this.listCalendrier)
     },
+    async addInPanier(id_item){
+      console.log(id_item)
+      try {
+        await this.addContentPanier(id_item);
+        await console.log(this.contentPanier,'contentPanier')
+      }catch (e) {
+        console.error(e)
+      }
+    }
   },
   created() {
     this.fillListeItems();
@@ -54,6 +64,7 @@ export default {
   },
   computed: {
     ...mapState(['lang', 'en', 'fr']),
+    ...mapState('panierStore', ['contentPanier']),
     // Propriété calculée pour filtrer les items en fonction de l'id du calendrier
     filteredItems() {
       return (idCalendrier) => {

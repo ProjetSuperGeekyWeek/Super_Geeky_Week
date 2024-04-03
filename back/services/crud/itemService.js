@@ -1,4 +1,5 @@
 const pool = require("../../database/db.js");
+const {callback} = require("pg/lib/native/query");
 
 const getAllItem = (callback) => {
     getAllItemFromAPI().then(res => {
@@ -17,6 +18,27 @@ async function getAllItemFromAPI(){
     } catch (e) {
         throw e;
     } finally {
+        client.release();
+    }
+}
+
+const getItemByIdApi = (body, callback) => {
+    getItemByIdFromApi(body).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function getItemByIdFromApi(body){
+    const client = await pool.connect();
+    try {
+        const query = `SELECT * FROM item WHERE id_item = $1`
+        const result = await client.query(query, [body])
+        return result.rows[0];
+    }catch (e) {
+        throw e;
+    }finally {
         client.release();
     }
 }
@@ -125,4 +147,5 @@ module.exports = {
     addNewItem:addNewItem,
     deleteItemById:deleteItemById,
     updateItem:updateItem,
+    getItemByIdApi:getItemByIdApi,
 };

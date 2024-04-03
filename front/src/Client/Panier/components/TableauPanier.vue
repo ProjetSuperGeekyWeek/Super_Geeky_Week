@@ -4,8 +4,8 @@
         <tr>
           <th class="th_grand">{{translate('produit')}}</th><th class="th_petit">{{translate('quantite')}}</th><th class="th_petit">{{translate('prix2')}}</th>
         </tr>
-          <tr v-for="article in Panier" :key="article.id_article">
-            <td>{{ article.nom_article }}</td><td>{{ article.quantite }}</td><td>{{ calc_prix(article.quantite, article.prix_article_seul)}}</td>
+          <tr v-for="article in Panier" :key="article.id_item">
+            <td>{{ article.nom_item }}</td><td>{{ article.quantite }}</td><td>{{ calc_prix(article.quantite, article.prix_item)}}</td>
           </tr>
         <tr>
           <td class="gras">{{translate('total')}}</td><td>{{ total_quantite() }}</td><td>{{ total_prix() }}$</td>
@@ -21,10 +21,8 @@ export default {
   name: 'TableauPanier',
   data() {
     return {
-      Panier: [{id_article: 1, nom_article: "article 1", quantite: 2, prix_article_seul: 10},{id_article: 2, nom_article: "article 2", quantite: 4, prix_article_seul: 10},{id_article: 3, nom_article: "article 3", quantite: 8, prix_article_seul: 9}]
+      Panier: null
     };
-  },
-  components: {
   },
   methods: {
     translate(prop) {
@@ -36,7 +34,7 @@ export default {
     total_prix(){
       let total = 0;
       for(let i = 0; i < this.Panier.length; i++){
-        total += this.Panier[i].quantite * this.Panier[i].prix_article_seul;
+        total += this.Panier[i].quantite * this.Panier[i].prix_item;
       }
       return total;
     },
@@ -50,6 +48,10 @@ export default {
   },
   computed: {
     ...mapState(['lang', 'en', 'fr']),
+    ...mapState('panierStore', ['contentPanier'])
+  },
+  async mounted() {
+    this.Panier = this.contentPanier
   }
 }
 </script>

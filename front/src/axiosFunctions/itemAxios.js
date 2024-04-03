@@ -18,10 +18,15 @@ async function updateRowItem(body){
     return await patchRequest("/api/item/updateItem", body, "UPDATEITEM")
 }
 
+async function getItemById(body) {
+    return await getRequest("/api/item/getItemById/"+body, "GETITEMBYID")
+}
+
 export {
     getAllItem,
     getAllItemColumn,
     addNewItem,
     deleteRowItem,
     updateRowItem,
+    getItemById,
 }
