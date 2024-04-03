@@ -57,7 +57,8 @@ export default {
     ...mapState(['lang', 'en', 'fr']),
     qrCodeValue() {
       // return `http://localhost:8080/commande/?name=${encodeURIComponent(this.name)}&familyName=${encodeURIComponent(this.familyName)}&email=${encodeURIComponent(this.email)}`;
-      return `http://localhost:8080/commande/${this.route.params.uuid_commande}`;
+      // return `http://localhost:8080/commande/${this.route.params.uuid_commande}`;
+      return `http://localhost:8080/commande`;
     },
   },
   mounted() {
@@ -80,25 +81,6 @@ export default {
   methods: {
     translate(prop) {
       return this[this.lang][this.lang][prop];
-    },
-    validateAndGenerateQRCode() {
-      const emailRegex = /@/;
-
-      if (!emailRegex.test(this.email)) {
-        this.emailError = true;
-        return;
-      }
-
-      this.emailError = false;
-      this.showQRCode = true;
-
-      const routeParams = {
-        name: encodeURIComponent(this.name),
-        familyName: encodeURIComponent(this.familyName),
-        email: encodeURIComponent(this.email),
-      };
-
-      this.$router.push({ query: routeParams });
     },
     onFormSubmit() {
     },
