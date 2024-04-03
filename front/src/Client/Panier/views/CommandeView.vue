@@ -3,16 +3,14 @@
         <div class="vue-client-commande" v-if="!authentifier">
             <span v-for="ligne in commande">
                 <span>{{ligne.nom_produit}}</span>
-                <span>{{ligne.quantite}}</span>
                 <span>{{ligne.status}}</span>
             </span>
         </div>
         <div v-else>
             <span v-for="(index,ligne) in commande_presta">
                 <span>{{ligne.nom_produit}}</span>
-                <span>{{ligne.quantite}}</span>
                 <span v-if="ligne.status">
-                    <button @click="valider(index)">valider</button>
+                    <button @click="valider(commande_presta[index].id_acheter)">valider</button>
                 </span>
                 <span v-else>
                     {{ligne.status}}
@@ -34,9 +32,9 @@ export default {
         }
     },
     methods:{
-        ...mapActions('commandeStore',['validerLigneCommande']),
-        valider(index){
-            this.validerLigneCommande(index);
+        ...mapActions('commandeStore',['validerLigneCommande','getCommande','getCommandePresta']),
+        valider(id_acheter){
+            this.validerLigneCommande(id_acheter);
         }
     },
     computed: {

@@ -32,6 +32,7 @@ const standRouter = require('./routes/standRouter')
 const jourRouter = require('./routes/jourRouter')
 const tagRouter = require('./routes/tagRouter')
 const contactRouter = require('./routes/contactRouter')
+const commandeRouter = require('./routes/commandeRouter');
 
 // Swagger configuration
 const swaggerOptions = {
@@ -80,6 +81,7 @@ app.use('/api/stand', standRouter)
 app.use('/api/jour', jourRouter)
 app.use('/api/tag', tagRouter)
 app.use('/api/contact', contactRouter)
+app.use('/api/commande', commandeRouter)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
