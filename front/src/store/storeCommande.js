@@ -4,17 +4,12 @@ import { validerLigneCommande, getCommande, getCommandePresta } from '@/axiosFun
 export default{
     namespaced: true,
     state: () => ({
-        uuid_commande: null,
         commande: null, // id_acheter, nom_produit, status, ...
         commande_presta: null,
     }),
     getters: {
-        getUUIDCommande: state => state.uuid_commande,
     },
     mutations: {
-        setUUIDCommande(state, payload){
-            state.uuid_commande = payload;
-        },
         setCommande(state, payload){
             state.commande = payload;
         },
@@ -23,20 +18,20 @@ export default{
         },
     },
     actions: {
-        async validerLigneCommande({commit}, id_acheter){
+        async validerLigneCommande({commit}, payload){
             try{
-                await validerLigneCommande(id_acheter);
-                const res = await getCommande(this.uuid_commande);
+                await validerLigneCommande(payload.id_acheter);
+                const res = await getCommande(payload.uuid_commande);
                 commit('setCommande', res);
-                const res_presta = await getCommandePresta(this.prestataireAuthentifier.id_personne, this.uuid_commande);
+                const res_presta = await getCommandePresta(payload.id_presta, payload.uuid_commande);
                 commit('setCommandePresta', res_presta);
             }catch(error){
                 console.log(error);
             }
         },
-        async getCommande({commit}){
+        async getCommande({commit},uuid_commande){
             try{
-                const res = await getCommande(this.uuid_commande);
+                const res = await getCommande(uuid_commande);
                 commit('setCommande', res);
                 return true;
             }catch(error){
@@ -44,9 +39,9 @@ export default{
                 return false;
             }
         },
-        async getCommandePresta({commit}){
+        async getCommandePresta({commit},payload){
             try{
-                const res = await getCommandePresta(this.prestataireAuthentifier.id_personne, this.uuid_commande);
+                const res = await getCommandePresta(payload.id_presta, payload.uuid_commande)
                 commit('setCommandePresta', res);
                 return true;
             }catch(error){

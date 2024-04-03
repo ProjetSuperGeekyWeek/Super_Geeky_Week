@@ -10,15 +10,17 @@ const getCommande = (uuid_commande, callback) => {
 }
 
 async function getCommandeFromAPI(uuid_commande){
+    console.log(uuid_commande);
     const client = await pool.connect();
     try {
         const query = `
-        SELECT acheter.consommer, item.nom_item FROM acheter
+        SELECT acheter.consommer, item.nom_item, acheter.id_acheter FROM acheter
         JOIN item ON acheter.id_item = item.id_item
         WHERE id_qr_code = $1
         ORDER BY acheter.consommer, item.nom_item
         `;
         const result = await client.query(query, [uuid_commande]);
+        console.log(result.rows);
         return result.rows;
     } catch (e) {
         throw e;
@@ -39,12 +41,13 @@ async function getCommandePrestaFromAPI(id_personne, uuid_commande){
     const client = await pool.connect();
     try {
         const query = `
-        SELECT acheter.consommer, item.nom_item FROM acheter
+        SELECT acheter.consommer, item.nom_item, acheter.id_acheter FROM acheter
         JOIN item ON acheter.id_item = item.id_item
         WHERE item.id_personne = $1 AND acheter.id_qr_code = $2
         ORDER BY acheter.consommer, item.nom_item
         `;
         const result = await client.query(query, [id_personne, uuid_commande]);
+        console.log(result.rows);
         return result.rows;
     } catch (e) {
         throw e;
