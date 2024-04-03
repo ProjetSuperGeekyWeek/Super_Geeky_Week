@@ -6,31 +6,55 @@
 
 <script>
 import Chart from 'chart.js/auto';
+import { getJours, getAllInscritsIdInscription } from "@/axiosFunctions/inscriptionAxios";
 
 export default {
   data() {
     return {
       graphique: null,
+      jours: [],
+      inscritsParJour: []
     };
   },
   mounted() {
     this.initialiserGraphique();
   },
   methods: {
-    initialiserGraphique() {
-      const ctx = document.getElementById('graphiqueClients').getContext('2d');
+    async initialiserGraphique() {
+      // Récupérer les jours depuis la base de données
+      try {
+        this.jours = await getJours();
+      } catch (error) {
+        console.error("Erreur lors de la récupération des jours:", error);
+        return;
+      }
 
-      const heures = ['9h', '10h', '11h', '12h', '13h', '14h', '15h'];
-      const clientsParHeure = [100, 150, 187, 206, 216, 233, 237];
+      // Récupérer le nombre d'inscrits par jour depuis la base de données
+      try {
+        const inscritsParJourPromises = this.jours.map(async jour => {
+          const inscrits = await getAllInscritsIdInscription(jour.id_jour); // Utilisez l'ID du jour pour récupérer les inscrits
+          return inscrits.length;
+        });
+        this.inscritsParJour = await Promise.all(inscritsParJourPromises);
+      } catch (error) {
+        console.error("Erreur lors de la récupération du nombre d'inscrits par jour:", error);
+        return;
+      }
+
+      // Créer le graphique une fois que toutes les données sont récupérées
+      this.creerGraphique();
+    },
+    creerGraphique() {
+      const ctx = document.getElementById('graphiqueClients').getContext('2d');
 
       this.graphique = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: heures,
+          labels: this.jours.map(jour => jour.jour), // Utilisez les jours comme labels sur l'axe des x
           datasets: [
             {
-              label: 'Nombre de clients par heure',
-              data: clientsParHeure,
+              label: 'Nombre d\'inscrits par jour',
+              data: this.inscritsParJour,
               fill: false,
               borderColor: 'rgba(158, 12, 12, 1)',  // Couleur de ligne
               borderWidth: 2,
@@ -48,14 +72,14 @@ export default {
               type: 'category',
               scaleLabel: {
                 display: true,
-                labelString: 'Heure',
+                labelString: 'Jour',
               },
             }],
             y: [{
               beginAtZero: true,
               scaleLabel: {
                 display: true,
-                labelString: 'Nombre de clients',
+                labelString: 'Nombre d\'inscrits',
               },
             }],
           },

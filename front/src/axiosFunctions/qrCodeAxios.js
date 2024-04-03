@@ -6,8 +6,8 @@ async function getAllQrCode() {
 async function getAllQrCodeColumn() {
     return await getRequest("/api/qrCode/getAllQrCodeColumn", "GETALLQRCODECOLUMN");
 }
-async function addNewQrCode(body){
-    return await postRequest("/api/qrCode/addQrCode", body, "ADDQRCODE")
+async function addNewQrCode(){
+    return await postRequest("/api/qrCode/addQrCode", {},  "ADDQRCODE")
 }
 
 async function deleteRowQrCode(body) {
