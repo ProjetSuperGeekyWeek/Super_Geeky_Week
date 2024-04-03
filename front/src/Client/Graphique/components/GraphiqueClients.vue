@@ -21,7 +21,6 @@ export default {
   },
   methods: {
     async initialiserGraphique() {
-      // Récupérer les jours depuis la base de données
       try {
         this.jours = await getJours();
       } catch (error) {
@@ -29,10 +28,9 @@ export default {
         return;
       }
 
-      // Récupérer le nombre d'inscrits par jour depuis la base de données
       try {
         const inscritsParJourPromises = this.jours.map(async jour => {
-          const inscrits = await getAllInscritsIdInscription(jour.id_jour); // Utilisez l'ID du jour pour récupérer les inscrits
+          const inscrits = await getAllInscritsIdInscription(jour.id_jour);
           return inscrits.length;
         });
         this.inscritsParJour = await Promise.all(inscritsParJourPromises);
@@ -41,7 +39,6 @@ export default {
         return;
       }
 
-      // Créer le graphique une fois que toutes les données sont récupérées
       this.creerGraphique();
     },
     creerGraphique() {
@@ -50,15 +47,15 @@ export default {
       this.graphique = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: this.jours.map(jour => jour.jour), // Utilisez les jours comme labels sur l'axe des x
+          labels: this.jours.map(jour => jour.jour),
           datasets: [
             {
               label: 'Nombre d\'inscrits par jour',
               data: this.inscritsParJour,
               fill: false,
-              borderColor: 'rgba(158, 12, 12, 1)',  // Couleur de ligne
+              borderColor: 'rgba(158, 12, 12, 1)', 
               borderWidth: 2,
-              pointBackgroundColor: 'rgba(255, 0, 0, 1)',  // Couleur des points
+              pointBackgroundColor: 'rgba(255, 0, 0, 1)', 
               pointRadius: 5,
               pointHoverRadius: 8,
             },
