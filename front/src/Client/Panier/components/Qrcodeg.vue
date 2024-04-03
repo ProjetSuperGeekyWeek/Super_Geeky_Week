@@ -1,35 +1,8 @@
 <template>
   <div id="Qrcodeg">
-    <p id="accroched">{{translate('rentrezinfo')}}</p>
-    <form v-if="!showQRCode" @submit.prevent="onFormSubmit">
-      <label id="clo" for="name">{{translate('prenom')}}</label>
-      <input type="text" id="name" v-model="name">
-      <br>
-
-      <label id="clo" for="familyName">{{translate('nom')}}</label>
-      <input type="text" id="familyName" v-model="familyName">
-      <br>
-
-      <label id="clo" for="email">{{translate('email')}}   </label>
-      <input
-          type="text"
-          id="email"
-          v-model="email"
-          :class="{ error: emailError }"
-      >
-      <br>
-      <button type="button" class="btninfoqr" @click="validateAndGenerateQRCode">{{translate('validerinfo')}}</button>
-      <br>
-      <p v-if="emailError" class="error-message">{{translate('enteremail')}}</p>
-    </form>
-
     <qrcode-vue v-if="showQRCode" :value="qrCodeValue" :size="300" level="H" />
 
     <div v-if="showQRCode" class="info-section">
-      <h3>{{translate('information')}}</h3>
-      <p><strong>{{translate('prenom')}}</strong> {{ name }}</p>
-      <p><strong>{{translate('nom')}}</strong> {{ familyName }}</p>
-      <p><strong>{{translate('email')}}</strong> {{ email }}</p>
 
       <h3>QR Code URL:</h3>
       <p>{{ qrCodeValue }}</p>
@@ -45,9 +18,7 @@ export default {
   name: 'QrcodeView',
   data() {
     return {
-      // name: '',
-      // familyName: '',
-      // email: '',
+      uuid_commande: this.$route.params.uuid_commande,
       showQRCode: true,
       emailError: false,
       dataLoaded: false,
@@ -56,32 +27,10 @@ export default {
   computed: {
     ...mapState(['lang', 'en', 'fr']),
     qrCodeValue() {
-      // return `http://localhost:8080/commande/?name=${encodeURIComponent(this.name)}&familyName=${encodeURIComponent(this.familyName)}&email=${encodeURIComponent(this.email)}`;
-      // return `http://localhost:8080/commande/${this.route.params.uuid_commande}`;
-      return `http://localhost:8080/commande`;
+      return `http://localhost:8080/commande/${this.uuid_commande}`;
     },
-  },
-  mounted() {
-    // if (!this.dataLoaded) {
-    //   const { name, familyName, email } = this.$route.query;
-    //   if (name && familyName && email) {
-    //     this.name = decodeURIComponent(name);
-    //     this.familyName = decodeURIComponent(familyName);
-    //     this.email = decodeURIComponent(email);
-
-    //     this.validateAndGenerateQRCode();
-    //   }
-    //   this.dataLoaded = true;
-    // } else {
-    //   if (!this.showQRCode) {
-    //     this.$router.replace({ path: '/' });
-    //   }
-    // }
   },
   methods: {
-    translate(prop) {
-      return this[this.lang][this.lang][prop];
-    },
     onFormSubmit() {
     },
   },
@@ -99,27 +48,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-#accroched {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--title);
-  padding-top: 15%;
-  padding-bottom: 2%;
-  filter: drop-shadow(0px 0px 20px var(--title));
-}
-
-#email.error {
-  border-color: red;
-}
-
-.error-message {
-  color: red;
-}
-
-#clo {
-  color: var(--paragraph);
+  padding-top: 300px;
 }
 
 .info-section {
@@ -136,13 +65,4 @@ export default {
   margin: 5px 0;
   color: var(--paragraph);
 }
- input {
-   border: 1px solid #ccc;
-   display: block; /* Pour que la marge automatique fonctionne */
-   margin: auto;
- }
-.btninfoqr{
-   border: 1px solid #ccc;
-   padding: 4px;
- }
 </style>
