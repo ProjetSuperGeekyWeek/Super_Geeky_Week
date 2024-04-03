@@ -197,7 +197,7 @@ INSERT INTO ligne_panier (id_panier, id_item, quantite) VALUES
     (2,1,3);
 
 -- Insert data into qr_code table
-INSERT INTO qr_code (nom_client, prenom_client, mail_client) VALUES
+INSERT INTO qr_code (id_qr_code, nom_client, prenom_client, mail_client) VALUES
     ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11','visiteur 1', 'jacque', 'jacque@gmail.com'),
     ('b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11','visiteur 2', 'jacquot', 'jacquot@gmail.com'),
     ('c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11','visiteur 3', 'jacquie', 'jacquie@gmail.com'),
