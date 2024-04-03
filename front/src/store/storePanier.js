@@ -1,4 +1,6 @@
 import {getItemById} from "@/axiosFunctions/itemAxios";
+import {addNewQrCode} from "@/axiosFunctions/qrCodeAxios";
+import {addNewAcheter} from "@/axiosFunctions/acheterAxios"
 
 export default {
     namespaced: true,
@@ -33,6 +35,27 @@ export default {
                 }
             }catch (e) {
                 console.error(e, 'erreur addContentPanier')
+            }
+        },
+        async createQrCode({state}) {
+            try {
+                const result = await addNewQrCode();
+                if(result.error !== 0) {
+                    console.error(result)
+                }
+                if(state.contentPanier.length === 0) {
+                    console.log('Le panier est vide')
+                    return
+                }
+                for (const content of state.contentPanier) {
+                    for(var i = 0; i<content.quantite; i++) {
+                        await addNewAcheter({id_item: content.id_item, id_qr_code: result.data, consommer: false})
+                    }
+                }
+                return result.data
+            }catch (e) {
+                console.error(e, 'erreur createQrCode')
+                return null
             }
         }
     }
