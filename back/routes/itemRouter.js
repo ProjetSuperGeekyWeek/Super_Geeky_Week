@@ -5,6 +5,7 @@ const router = express.Router();
 //GET
 router.get('/getAllItem', itemController.getAllItem);
 router.get('/getAllItemColumn', itemController.getAllItemColumn);
+router.get('/getItemById/:id_item', itemController.getItemById)
 
 //POST
 router.post('/addItem', itemController.addNewItem);

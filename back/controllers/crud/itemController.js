@@ -12,6 +12,18 @@ exports.getAllItem = async (req, res) => {
     });
 }
 
+exports.getItemById = async (req, res) => {
+    itemService.getItemByIdApi(req.params.id_item, (err, data) => {
+        if(err) {
+            res.status(500).send({
+                message: err.message || "pb itemController"
+            });
+        } else {
+            res.send({error: 0, data:data})
+        }
+    })
+}
+
 exports.getAllItemColumn = async (req, res) => {
     itemService.getAllItemColumn((err, data) => {
         if (err) {
