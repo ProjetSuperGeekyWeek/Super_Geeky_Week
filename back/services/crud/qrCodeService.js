@@ -1,4 +1,5 @@
 const pool = require("../../database/db.js");
+const { uuid } = require('uuidv4');
 
 const getAllQrCode = (callback) => {
     getAllQrCodeFromAPI().then(res => {
@@ -42,20 +43,22 @@ async function getAllQrCodeColumnFromAPI(){
     }
 }
 
-const addNewQrCode = (body, callback) => {
-    addNewQrCodeFromAPI(body).then(res => {
+const addNewQrCode = (callback) => {
+    addNewQrCodeFromAPI().then(res => {
         callback(null, res);
     }).catch(error => {
         callback(error, null);
     });
 }
 
-async function addNewQrCodeFromAPI(body){
+async function addNewQrCodeFromAPI(){
     const client = await pool.connect();
     try {
-        await client.query('INSERT INTO qr_code (nom_client,prenom_client,mail_client) VALUES ($1,$2,$3)', [body.nom_client,body.prenom_client,body.mail_client]);
+        const uuidQrCode= uuid()
+        await client.query('INSERT INTO qr_code (id_qr_code) VALUES ($1)', [uuidQrCode]);
         // Corrected the commit command
         await client.query('COMMIT');
+        return uuidQrCode
     } catch (e) {
         throw e;
     } finally {
