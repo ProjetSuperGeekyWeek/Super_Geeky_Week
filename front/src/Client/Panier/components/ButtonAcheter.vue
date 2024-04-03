@@ -22,7 +22,7 @@ export default {
     async createQrcode() {
       const result = await this.createQrCode()
       if(result){
-        await this.$router.push(/commande/ + result)
+        await this.$router.push(/qrcode/ + result)
       }
     }
   },
