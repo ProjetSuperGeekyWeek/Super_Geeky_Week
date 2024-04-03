@@ -123,7 +123,7 @@ export default {
                 anormalinfobulle: "Caso anormal en GetInfoBulle",
                 anormalinfopaneltake: "Caso anormal en GetInfoPanelNoTake",
                 anormalinfopanel: "Caso anormal en GetInfoPanel",
-                day: "22/23 de junio de 2024",
+                day: "21/22/23 de junio de 2024",
                 remplirtouschamps: "Por favor, complete todos los campos",
                 namerole: "Nombre del rol",
                 chercher: "Buscar",
