@@ -21,6 +21,7 @@ export default {
     },
     async createQrcode() {
       const result = await this.createQrCode()
+      alert(result)
       if(result){
         await this.$router.push(/qrcode/ + result)
       }
