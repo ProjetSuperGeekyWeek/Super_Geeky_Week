@@ -1,13 +1,13 @@
 <template>
     <div>
         <div class="vue-client-commande" v-if="!authentifier">
-            <span v-for="ligne in commande">
+            <span v-for="ligne in commande" v-bind:key="ligne">
                 <span>{{ligne.nom_produit}}</span>
                 <span>{{ligne.status}}</span>
             </span>
         </div>
         <div v-else>
-            <span v-for="(index,ligne) in commande_presta">
+            <span v-for="(index,ligne) in commande_presta" v-bind:key="ligne">
                 <span>{{ligne.nom_produit}}</span>
                 <span v-if="ligne.status">
                     <button @click="valider(commande_presta[index].id_acheter)">valider</button>
@@ -21,9 +21,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-// add store/back get commande
-// add store/back get commande_presta
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
     name: 'CommandeView',
@@ -33,6 +31,7 @@ export default {
     },
     methods:{
         ...mapActions('commandeStore',['validerLigneCommande','getCommande','getCommandePresta']),
+        ...mapMutations('commandeStore',['setUUIDCommande']),
         valider(id_acheter){
             this.validerLigneCommande(id_acheter);
         }
@@ -40,6 +39,11 @@ export default {
     computed: {
         ...mapState('authentifierStore',['authentifier']),
         ...mapState('commandeStore',['commande','commande_presta']),
+    },
+    mounted() {
+        this.getCommande();
+        this.getCommandePresta();
+        this.setUUIDCommande(this.$route.params.uuid_commande);
     }
 }
 

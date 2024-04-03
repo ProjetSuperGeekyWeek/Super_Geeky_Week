@@ -49,9 +49,14 @@ const routes = [
     component: () => import('@/Client/Panier/views/PanierView.vue')
   },
   {
-    path: '/qrcode',
+    path: '/qrcode/:uuid_commande',
     name: 'qrcode',
     component: () => import('@/Client/Panier/views/QrcodeView.vue')
+  },
+  {
+    path: '/commande/:uuid_commande',
+    name: 'commande',
+    component: () => import('@/Client/Panier/views/CommandeView.vue')
   },
   {
     path: '/market_nourriture',
