@@ -28,6 +28,20 @@
       </div>
     </div>
 
+    <div class="footer-home">
+      <div class="footer-collab">
+        <h2>Remerciements à nos collaborateurs</h2>
+        <h3>Axel JOUÉ</h3>
+        <h3>Manuel LEITAO</h3>
+        <h3>Fyléas QUAILE</h3>
+        <h3>Quentin SAUNER</h3>
+      </div>
+      <div class="footer-contact">
+        <h2>Pour rejoindre l'événement</h2>
+        <h3>mail.organisateur@superGeekyWeek.fr</h3>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -136,5 +150,45 @@ h3{
 
 .texte-carte{
   width: 35%;
+}
+
+.footer-home{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: darkslategrey;
+  border-top: black 2px solid;
+  margin-top: 5%;
+  margin-bottom: -10%;
+}
+
+.footer-collab{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0.5%;
+}
+
+.footer-contact{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-collab h3{
+  color: white;
+  font-size: 1.5em;
+  padding: 0.5%;
+}
+
+.footer-contact h3{
+  color: white;
+  font-size: 1.5em;
 }
 </style>

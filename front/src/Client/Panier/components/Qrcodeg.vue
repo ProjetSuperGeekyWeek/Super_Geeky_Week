@@ -45,10 +45,10 @@ export default {
   name: 'QrcodeView',
   data() {
     return {
-      name: '',
-      familyName: '',
-      email: '',
-      showQRCode: false,
+      // name: '',
+      // familyName: '',
+      // email: '',
+      showQRCode: true,
       emailError: false,
       dataLoaded: false,
     };
@@ -56,25 +56,26 @@ export default {
   computed: {
     ...mapState(['lang', 'en', 'fr']),
     qrCodeValue() {
-      return `http://localhost:8080/qrcode/?name=${encodeURIComponent(this.name)}&familyName=${encodeURIComponent(this.familyName)}&email=${encodeURIComponent(this.email)}`;
+      // return `http://localhost:8080/commande/?name=${encodeURIComponent(this.name)}&familyName=${encodeURIComponent(this.familyName)}&email=${encodeURIComponent(this.email)}`;
+      return `http://localhost:8080/commande/${this.route.params.uuid_commande}`;
     },
   },
   mounted() {
-    if (!this.dataLoaded) {
-      const { name, familyName, email } = this.$route.query;
-      if (name && familyName && email) {
-        this.name = decodeURIComponent(name);
-        this.familyName = decodeURIComponent(familyName);
-        this.email = decodeURIComponent(email);
+    // if (!this.dataLoaded) {
+    //   const { name, familyName, email } = this.$route.query;
+    //   if (name && familyName && email) {
+    //     this.name = decodeURIComponent(name);
+    //     this.familyName = decodeURIComponent(familyName);
+    //     this.email = decodeURIComponent(email);
 
-        this.validateAndGenerateQRCode();
-      }
-      this.dataLoaded = true;
-    } else {
-      if (!this.showQRCode) {
-        this.$router.replace({ path: '/' });
-      }
-    }
+    //     this.validateAndGenerateQRCode();
+    //   }
+    //   this.dataLoaded = true;
+    // } else {
+    //   if (!this.showQRCode) {
+    //     this.$router.replace({ path: '/' });
+    //   }
+    // }
   },
   methods: {
     translate(prop) {
