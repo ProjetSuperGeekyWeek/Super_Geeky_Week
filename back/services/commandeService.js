@@ -20,7 +20,6 @@ async function getCommandeFromAPI(uuid_commande){
         ORDER BY acheter.consommer, item.nom_item
         `;
         const result = await client.query(query, [uuid_commande]);
-        console.log(result.rows);
         return result.rows;
     } catch (e) {
         throw e;

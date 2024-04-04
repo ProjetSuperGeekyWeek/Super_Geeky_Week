@@ -7,6 +7,7 @@
       <h3>QR Code URL:</h3>
       <p>{{ qrCodeValue }}</p>
     </div>
+    <button @click="printPDF">Télécharger</button>
   </div>
 </template>
 
@@ -31,7 +32,8 @@ export default {
     },
   },
   methods: {
-    onFormSubmit() {
+    printPDF() {
+      window.print();
     },
   },
   components: {

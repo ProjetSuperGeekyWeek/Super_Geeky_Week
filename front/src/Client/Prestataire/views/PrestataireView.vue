@@ -46,6 +46,7 @@
                     />
                 </div>
             </div>
+            <router-link to="/commande/c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12">Exemple commande (num : c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12)</router-link>
         </div>
     </div>
 </template>
