@@ -21,26 +21,29 @@ export default {
   },
   methods: {
     async initialiserGraphique() {
-      try {
-        this.jours = await getJours();
-      } catch (error) {
-        console.error("Erreur lors de la récupération des jours:", error);
-        return;
-      }
+  try {
+    this.jours = await getJours();
+    console.log("Jours récupérés depuis l'API :", this.jours);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des jours:", error);
+    return;
+  }
 
-      try {
-        const inscritsParJourPromises = this.jours.map(async jour => {
-          const inscrits = await getAllInscritsIdInscription(jour.id_jour);
-          return inscrits.length;
-        });
-        this.inscritsParJour = await Promise.all(inscritsParJourPromises);
-      } catch (error) {
-        console.error("Erreur lors de la récupération du nombre d'inscrits par jour:", error);
-        return;
-      }
+  try {
+    const inscritsParJourPromises = this.jours.map(async jour => {
+      const inscrits = await getAllInscritsIdInscription(jour.id_jour);
+      return inscrits.length;
+    });
+    this.inscritsParJour = await Promise.all(inscritsParJourPromises);
+    console.log("Nombre d'inscrits par jour récupérés depuis l'API :", this.inscritsParJour);
+  } catch (error) {
+    console.error("Erreur lors de la récupération du nombre d'inscrits par jour:", error);
+    return;
+  }
 
-      this.creerGraphique();
-    },
+  this.creerGraphique();
+},
+
     creerGraphique() {
       const ctx = document.getElementById('graphiqueClients').getContext('2d');
 
