@@ -201,7 +201,8 @@ INSERT INTO qr_code (id_qr_code) VALUES
     ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'),
     ('b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'),
     ('c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'),
-    ('d0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11');
+    ('d0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'),
+    ('c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12');
 
 -- Insert data into acheter table
 INSERT INTO acheter (id_item, id_qr_code, consommer) VALUES
@@ -210,7 +211,21 @@ INSERT INTO acheter (id_item, id_qr_code, consommer) VALUES
     (1,'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',false),
     (1,'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',true),
     (2,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',false),
-    (3,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',false);
+    (3,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',false),
+    (3,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',true),
+    (2,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',false),
+    (1,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',false),
+    (1,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',false),
+    (2,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',false),
+    (3,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',false),
+    (3,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',false),
+    (2,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',true),
+    (2,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',false),
+    (3,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',false),
+    (1,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',false),
+    (1,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',false),
+    (2,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',false),
+    (3,'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12',false);
 
 -- Insert data into tag table
 INSERT INTO tag (nom_tag) VALUES

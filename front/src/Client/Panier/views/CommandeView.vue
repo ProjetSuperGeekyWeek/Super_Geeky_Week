@@ -1,26 +1,36 @@
 <template>
     <div class="box-commande">
         <div v-if="!authentifier">
-            <spanFor v-for="ligne in commande" v-bind:key="ligne">
-                <h3>{{ligne.nom_item}}</h3>
-                <h5 class="not-consommer" v-if="!ligne.consommer">
-                    Non utilisé
-                </h5>
-                <h5 class="consommer" v-else>
-                    Utilisé
-                </h5>
-            </spanFor>
+            <span v-if="commande[0]">
+                <spanFor v-for="ligne in commande" v-bind:key="ligne">
+                    <h3>{{ligne.nom_item}}</h3>
+                    <h5 class="not-consommer" v-if="!ligne.consommer">
+                        Non utilisé
+                    </h5>
+                    <h5 class="consommer" v-else>
+                        Utilisé
+                    </h5>
+                </spanFor>
+            </span>
+            <span v-else>
+                <h3>Commande vide</h3>
+            </span>
         </div>
         <div v-else>
-            <spanFor v-for="(index,ligne) in commande_presta" v-bind:key="ligne">
-                <h3>{{ligne.nom_item}}</h3>
-                <span v-if="!ligne.consommer">
-                    <button @click="valider(commande_presta[index].id_acheter)">valider</button>
-                </span>
-                <h5 class="not-consommer" v-else>
-                    Utilisé
-                </h5>
-            </spanFor>
+            <span v-if="commande_presta[0]">
+                <spanFor v-for="(ligne,index) in commande_presta" v-bind:key="ligne">
+                    <h3>{{ligne.nom_item}}</h3>
+                    <span v-if="!ligne.consommer">
+                        <button @click="valider(commande_presta[index].id_acheter)">valider</button>
+                    </span>
+                    <h5 class="not-consommer" v-else>
+                        Utilisé
+                    </h5>
+                </spanFor>
+            </span>
+            <span v-else>
+                <h3>Commande vide</h3>
+            </span>
         </div>
     </div>
 </template>
@@ -38,7 +48,7 @@ export default {
     methods:{
         ...mapActions('commandeStore',['validerLigneCommande','getCommande','getCommandePresta']),
         valider(id_acheter){
-            this.validerLigneCommande(id_acheter);
+            this.validerLigneCommande({id_acheter:id_acheter,uuid_commande:this.uuid_commande,id_presta:this.prestataireAuthentifier.id_personne});
         }
     },
     computed: {
@@ -97,6 +107,19 @@ h5, button{
 
 .not-consommer{
     color: green;
+}
+
+button{
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+button:hover{
+    background-color: darkgreen;
 }
 
 </style>
