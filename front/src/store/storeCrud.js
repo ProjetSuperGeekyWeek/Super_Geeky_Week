@@ -808,12 +808,13 @@ export default {
             try{
                 result = await updateRowItem(body)
                 if (result.error !== 0){
-                    commit('SET_ALL_ITEM', await getAllItem())
+                    const items = await  getAllItem()
+                    commit('SET_ALL_ITEM', items)
                 }else{
                     console.log(result)
                 }
             }catch (e) {
-                console.log('anomalie dans updateRowItem')
+                console.log(e, 'anomalie dans updateRowItem')
             }
         },
         async deleteRowPanier({commit}, body){

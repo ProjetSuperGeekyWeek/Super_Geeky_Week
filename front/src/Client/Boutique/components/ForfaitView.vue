@@ -10,7 +10,7 @@
           <p>{{ translate('description') }}{{ item.description_item }}</p>
           <p>{{ translate('prix') }}{{ item.prix_item }}€</p>
           <p>{{ translate('stock') }}{{ item.stock_item }}</p>
-          <v-btn @click="addInPanier(item.id_item)">{{ translate('acheter') }}</v-btn>
+          <v-btn @click="addInPanier(item)">{{ translate('acheter') }}</v-btn>
         </div>
       </div>
     </div>
@@ -48,11 +48,9 @@ export default {
       }
       //console.log(this.listCalendrier)
     },
-    async addInPanier(id_item){
-      console.log(id_item)
+    async addInPanier(body){
       try {
-        await this.addContentPanier(id_item);
-        await console.log(this.contentPanier,'contentPanier')
+        await this.addContentPanier(body);
       }catch (e) {
         console.error(e)
       }

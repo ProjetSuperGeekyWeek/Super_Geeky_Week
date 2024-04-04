@@ -1,6 +1,6 @@
-import {getItemById} from "@/axiosFunctions/itemAxios";
 import {addNewQrCode} from "@/axiosFunctions/qrCodeAxios";
 import {addNewAcheter} from "@/axiosFunctions/acheterAxios"
+import {getItemById, updateRowItem} from "@/axiosFunctions/itemAxios"
 
 export default {
     namespaced: true,
@@ -19,11 +19,16 @@ export default {
         async addContentPanier({commit, state}, body){
             var results = state.contentPanier
             try{
-                var item = await getItemById(body)
-                if(item.error !== 0) {
+                var item = await getItemById(body.id_item)
+                if(item.error !== 0 || item.stock_item === 0) {
                     return
                 }
                 item = item.data
+                console.log(body,' ddffguhbureigjugfibjurthbjnsdjo1')
+                body.stock_item = body.stock_item--
+                console.log(body, 'vrefgjhefggrge2')
+                await updateRowItem(body)
+                console.log(1)
                 var index = results.findIndex(result => result.nom_item === item.nom_item)
                 console.log(index, 'index')
                 if(index !== -1) {

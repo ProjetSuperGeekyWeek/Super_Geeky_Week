@@ -22,6 +22,7 @@
         <select name="lang" v-model="langue" @change="langSet" class="test deco_select">
           <option value="fr">Français</option>
           <option value="en">English</option>
+          <option value="es">Espagnol</option>
         </select>
         <div>
           <router-link to="/panier"><img src="./assets/image/logo/panier.png" alt="panier" class="logo"></router-link>
@@ -40,6 +41,7 @@
         <select name="lang" v-model="langue" @change="langSet" class="test deco_select">
           <option value="fr">Français</option>
           <option value="en">English</option>
+          <option value="es">Espagnol</option>
         </select>
         <div class="logo_auth">
           <router-link to="/authentification">
@@ -73,7 +75,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'es']),
     ...mapState('authentifierStore', ['authentifier', 'prestataireAuthentifier', 'admin']),
   }
 }
