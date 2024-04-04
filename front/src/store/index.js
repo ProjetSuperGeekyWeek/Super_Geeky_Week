@@ -9,6 +9,8 @@ import panierStore from './storePanier'
 import en from '@/assets/language/en';
 import fr from '@/assets/language/fr';
 import es from '@/assets/language/es';
+import ru from '@/assets/language/ru';
+import gm from '@/assets/language/gm';
 
 Vue.use(Vuex)
 
@@ -18,6 +20,8 @@ export default new Vuex.Store({
     en: en.data(),
     fr: fr.data(),
     es: es.data(),
+    ru: ru.data(),
+    gm: gm.data(),
 
     nom: 'Invité',
     idPanier: null,

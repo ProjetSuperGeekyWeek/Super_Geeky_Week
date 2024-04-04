@@ -42,6 +42,7 @@
           <option value="fr">Français</option>
           <option value="en">English</option>
           <option value="es">Espagnol</option>
+          <option value="gm">Allemand</option>
         </select>
         <div class="logo_auth">
           <router-link to="/authentification">
@@ -75,7 +76,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['lang', 'en', 'fr', 'es']),
+    ...mapState(['lang', 'en', 'fr', 'es', 'gm']),
     ...mapState('authentifierStore', ['authentifier', 'prestataireAuthentifier', 'admin']),
   }
 }

@@ -1,7 +1,7 @@
 export default {
     data(){
         return{
-            al: {
+            gm: {
                 vid_not_supported: "Ihr Browser unterstützt das Video-Tag nicht.",
                 nav_home: "Startseite",
                 nav_ticket: "Tickets",

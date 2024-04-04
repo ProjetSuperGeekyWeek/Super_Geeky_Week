@@ -24,9 +24,7 @@ export default {
                     return
                 }
                 item = item.data
-                console.log(body,' ddffguhbureigjugfibjurthbjnsdjo1')
-                body.stock_item = body.stock_item--
-                console.log(body, 'vrefgjhefggrge2')
+                body.stock_item--
                 await updateRowItem(body)
                 console.log(1)
                 var index = results.findIndex(result => result.nom_item === item.nom_item)
