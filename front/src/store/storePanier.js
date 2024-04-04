@@ -27,7 +27,7 @@ export default {
                 body.stock_item--
                 await updateRowItem(body)
                 console.log(1)
-                var index = results.findIndex(result => result.nom_item === item.nom_item)
+                var index = results.findIndex(result => result.id_item === item.id_item)
                 console.log(index, 'index')
                 if(index !== -1) {
                     results[index].quantite += 1

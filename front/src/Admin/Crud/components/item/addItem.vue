@@ -8,8 +8,8 @@
     <select name="selectPersonne" id="selectPersonne" v-model="id_personne">
       <option v-for="personne in listPersonnes" :key="personne.id_personne" :value="personne.id_personne">{{ personne.nom_personne }} - {{ personne.prenom_personne }}</option>
     </select>
-    <select name="selectCalendrier" id="selectCalendrier" v-model="id_calendrier">
-      <option v-for="calendrier in listCalendriers" :key="calendrier.id_calendrier" :value="calendrier.id_calendrier">{{ calendrier.date_calendrier }}</option>
+    <select name="selectCalendrier" id="selectCalendrier" v-model="id_jour">
+      <option v-for="jour in listjour" :key="jour.id_jour" :value="jour.id_jour">{{ jour.date_calendrier }}</option>
     </select>
     <input type="button" :value="translate('ajouter')" @click="addNewRole">
     <boutonRetourCrud/>
@@ -30,29 +30,32 @@ export default{
     image_item: '',
     description_item: '',
     id_personne: 1,
-    id_calendrier: 1,
-    listCalendriers: [],
+    id_jour: 1,
+    listjour: [],
     listPersonnes: [],
   }),
   computed: {
     ...mapState(['lang', 'en', 'fr']),
-    ...mapGetters('crudStore',['getAllPersonne', 'getAllCalendrier'])
+    ...mapGetters('crudStore',['getAllPersonne', 'getAllJour'])
   },
   methods: {
     translate(prop) {
       return this[this.lang][this.lang][prop];
     },
-    ...mapActions('crudStore',['addNewItemStore','getAllPersonneStore']),
+    ...mapActions('crudStore',['addNewItemStore','getAllPersonneStore', 'getAllJourStore']),
     async loadData(){
-      this.listCalendriers = this.getAllCalendrier;
+      await this.getAllJourStore()
+      await this.getAllPersonneStore()
+      this.listjour = this.getAllJour;
       this.listPersonnes = this.getAllPersonne;
+      console.log(this.listjour, 'liste jours add')
     },
     async addNewRole() {
       try{
-        if(this.nom_item === '' || this.stock_item === null || this.prix_item === null || this.image_item === '' || this.description_item === '' || this.id_personne === null || this.id_calendrier === null){
+        if(this.nom_item === '' || this.stock_item === null || this.prix_item === null || this.image_item === '' || this.description_item === '' || this.id_personne === null || this.id_jour === null){
           return
         }
-        const body = {nom_item:this.nom_item,stock_item:this.stock_item,prix_item:this.prix_item,image_item:this.image_item,description_item:this.description_item,id_personne:this.id_personne,id_calendrier:this.id_calendrier}
+        const body = {nom_item:this.nom_item,stock_item:this.stock_item,prix_item:this.prix_item,image_item:this.image_item,description_item:this.description_item,id_personne:this.id_personne,id_jour:this.id_jour}
         await this.addNewItemStore(body);
         this.$router.push('/admin/crud')
       }catch (e) {

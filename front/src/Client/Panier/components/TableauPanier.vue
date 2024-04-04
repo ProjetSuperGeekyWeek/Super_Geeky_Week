@@ -32,17 +32,15 @@ export default {
       return quantite * prix;
     },
     total_prix(){
+      if(this.Panier === null) return;
       let total = 0;
-      for(let i = 0; i < this.Panier.length; i++){
-        total += this.Panier[i].quantite * this.Panier[i].prix_item;
-      }
+      this.Panier.forEach(item => total += item.quantite * item.prix_item)
       return total;
     },
     total_quantite(){
+      if(this.Panier === null) return;
       let total = 0;
-      for(let i = 0; i < this.Panier.length; i++){
-        total += this.Panier[i].quantite;
-      }
+      this.Panier.forEach(item => total += item.quantite)
       return total;
     }
   },

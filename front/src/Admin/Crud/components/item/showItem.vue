@@ -95,7 +95,7 @@ export default {
           alert(this.translate('dsntdeltitem'));
           return;
         }
-        const body = {id_item: this.selected[0].id_item, id_personne: this.selected[0].id_personne, id_calendrier: this.selected[0].id_calendrier}
+        const body = {id_item: this.selected[0].id_item, id_personne: this.selected[0].id_personne, id_jour: this.selected[0].id_jour}
         await this.deleteRowItem(body);
         await this.loadData();
       } catch (e) {

@@ -2,10 +2,10 @@
   <div class="forfait">
     <p class="tres_grand gras titre">{{ translate('billet_title') }}</p>
     <p class="text_pres">{{ translate('billet_text') }}</p>
-    <div class="jour" v-for="jour in listCalendrier" :key="jour.id_calendrier">
-      <p class="grand gras titre">{{ translate('jour') }}{{ jour.id_calendrier }}{{ translate('hora') }}{{ jour.horaire_debut }}{{ translate('a') }}{{ jour.horaire_fin }}</p>
+    <div class="jour" v-for="jour in listJours" :key="jour.id_jour">
+      <p class="grand gras titre">{{ translate('jour') }}{{ jour.date_calendrier }}</p>
       <div class="forfait_jour">
-        <div class="forfait_card" v-for="item in filteredItems(jour.id_calendrier)" :key="item.id_calendrier">
+        <div class="forfait_card" v-for="item in filteredItems(jour.id_jour)" :key="item.id_item">
           <p>{{ item.nom_item }}</p>
           <p>{{ translate('description') }}{{ item.description_item }}</p>
           <p>{{ translate('prix') }}{{ item.prix_item }}€</p>
@@ -19,14 +19,14 @@
 
 <script>
 import {getAllItems} from '@/axiosFunctions/boutiqueAxios'
-import {getAllCalendrier} from '@/axiosFunctions/calendrierAxios'
+import {getAllJour} from '@/axiosFunctions/jourAxios'
 import {mapActions, mapState} from "vuex";
 export default {
   name: 'ForfaitView',
   data() {
     return {
       listItems: [],
-      listCalendrier: [],
+      listJours: [],
     }
   },
   methods: {
@@ -41,12 +41,12 @@ export default {
       }
       //console.log(this.listItems)
     },
-    async fillListCalendrier(){
-      var result = await getAllCalendrier();
+    async fillListJours(){
+      var result = await getAllJour();
       for (var i = 0; i < result.length; i++) {
-        this.listCalendrier.push(result[i]);
+        this.listJours.push(result[i]);
       }
-      //console.log(this.listCalendrier)
+      //console.log(this.listJours)
     },
     async addInPanier(body){
       try {
@@ -57,16 +57,16 @@ export default {
     }
   },
   created() {
+    this.fillListJours();
     this.fillListeItems();
-    this.fillListCalendrier();
   },
   computed: {
     ...mapState(['lang', 'en', 'fr']),
     ...mapState('panierStore', ['contentPanier']),
     // Propriété calculée pour filtrer les items en fonction de l'id du calendrier
     filteredItems() {
-      return (idCalendrier) => {
-        return this.listItems.filter(item => item.id_calendrier === idCalendrier);
+      return (id_jour) => {
+        return this.listItems.filter(item => item.id_jour === id_jour);
       };
     },
   },
