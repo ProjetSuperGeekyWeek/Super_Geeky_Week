@@ -12,6 +12,18 @@ exports.getAllAcheter = async (req, res) => {
     });
 }
 
+exports.getAllAcheterWithItemNames = async (req, res) => {
+    acheterService.getAllAcheterWithItemNames((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "pb getAllAcheterWithItemNames."
+            });
+        } else {
+            res.status(200).send(data);
+        }
+    });
+}
+
 exports.getAllAcheterColumn = async (req, res) => {
     acheterService.getAllAcheterColumn((err, data) => {
         if (err) {
