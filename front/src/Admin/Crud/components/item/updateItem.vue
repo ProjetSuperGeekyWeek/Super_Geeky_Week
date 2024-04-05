@@ -9,8 +9,8 @@
     <select name="selectPersonne" id="selectPersonne" v-model="id_personne">
       <option :value="personne.id_personne" v-for="personne in listPersonne" :key="personne.id_personne" :selected="personne.id_personne === id_personne">{{ personne.nom_personne }} - {{ personne.prenom_personne }}</option>
     </select>
-    <select name="selectCalendrier" id="selectCalendrier" v-model="id_calendrier">
-      <option :value="calendrier.id_calendrier" v-for="calendrier in listCalendrier" :key="calendrier.id_calendrier" :selected="calendrier.id_calendrier === id_calendrier">{{ calendrier.id_jour }}</option>
+    <select name="selectCalendrier" id="selectCalendrier" v-model="id_jour">
+      <option :value="jour.id_jour" v-for="jour in listJour" :key="jour.id_jour" :selected="jour.id_jour === id_jour">{{ jour.date_calendrier }}</option>
     </select>
     <button @click="updateRole">{{translate('valider')}}</button>
     <boutonRetourCrud/>
@@ -32,26 +32,28 @@ export default {
       image_item: '',
       description_item: '',
       id_personne: 0,
-      id_calendrier: 0,
+      id_jour: 0,
 
       list: [],
       listPersonne: [],
-      listCalendrier: [],
+      listJour: [],
       current: {},
     };
   },
   computed: {
     ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
-    ...mapGetters('crudStore', ['getAllItem', 'getAllPersonne', 'getAllCalendrier']),
+    ...mapGetters('crudStore', ['getAllItem', 'getAllPersonne', 'getAllJour']),
   },
   methods: {
     translate(prop) {
       return this[this.lang][this.lang][prop];
     },
-    ...mapActions('crudStore', ['updateRowItem']),
+    ...mapActions('crudStore', ['updateRowItem','getAllPersonneStore', 'getAllJourStore']),
     async loadData() {
+      await this.getAllJourStore()
+      await this.getAllPersonneStore()
       this.listPersonne = this.getAllPersonne;
-      this.listCalendrier = this.getAllCalendrier;
+      this.listJour = this.getAllJour;
 
       this.id_item = this.$route.params.id;
 
@@ -64,15 +66,15 @@ export default {
       this.image_item = this.current.image_item;
       this.description_item = this.current.description_item;
       this.id_personne = this.current.id_personne;
-      this.id_calendrier = this.current.id_calendrier;
+      this.id_jour = this.current.id_jour;
     },
     async updateRole() {
       try {
-        if (this.id_item === '' || this.nom_item === '' || this.stock_item === '' || this.prix_item === '' || this.image_item === '' || this.description_item === '' || this.id_personne === '' || this.id_calendrier === '') {
+        if (this.id_item === '' || this.nom_item === '' || this.stock_item === '' || this.prix_item === '' || this.image_item === '' || this.description_item === '' || this.id_personne === '' || this.id_jour === '') {
           alert(this.translate('remplirtouschamps'))
           return
         }
-        const body = { id_item: this.id_item, nom_item: this.nom_item, stock_item: this.stock_item, prix_item: this.prix_item, image_item: this.image_item, description_item: this.description_item, id_personne: this.id_personne, id_calendrier: this.id_calendrier }
+        const body = { id_item: this.id_item, nom_item: this.nom_item, stock_item: this.stock_item, prix_item: this.prix_item, image_item: this.image_item, description_item: this.description_item, id_personne: this.id_personne, id_jour: this.id_jour }
         await this.updateRowItem(body);
         this.$router.push('/admin/crud')
       } catch (e) {

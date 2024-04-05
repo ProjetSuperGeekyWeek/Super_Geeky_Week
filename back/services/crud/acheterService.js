@@ -21,6 +21,32 @@ async function getAllAcheterFromAPI(){
     }
 }
 
+const getAllAcheterWithItemNames = (callback) => {
+    getAllAcheterWithItemNamesFromAPI().then(res => {
+        callback(null, res);
+    }).catch(error => {
+        callback(error, null);
+    });
+}
+
+async function getAllAcheterWithItemNamesFromAPI(){
+    const client = await pool.connect();
+    try {
+        const query = `
+            SELECT acheter.*, item.nom_item
+            FROM acheter
+            INNER JOIN item ON acheter.id_item = item.id_item
+        `;
+        const result = await client.query(query);
+        return result.rows;
+    } catch (e) {
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
+
 const getAllAcheterColumn = (callback) => {
     getAllAcheterColumnFromAPI().then(res => {
         callback(null, res);
@@ -107,6 +133,7 @@ async function deleteAcheterByIdFromAPI(id_acheter){
 
 module.exports = {
     getAllAcheter:getAllAcheter,
+    getAllAcheterWithItemNames:getAllAcheterWithItemNames,
     getAllAcheterColumn:getAllAcheterColumn,
     addNewAcheter:addNewAcheter,
     deleteAcheterById:deleteAcheterById,

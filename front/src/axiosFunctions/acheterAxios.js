@@ -3,6 +3,10 @@ import {deleteRequest, getRequest, patchRequest, postRequest} from "./axios";
 async function getAllAcheter() {
     return await getRequest("/api/acheter/getAllAcheter", "GETALLACHETER");
 }
+
+async function getAllAcheterWithItemNames() {
+    return await getRequest("/api/acheter/getAllAcheterWithItemNames", "GETALLACHETERWITHITEMNAMES");
+}
 async function getAllAcheterColumn() {
     return await getRequest("/api/acheter/getAllAcheterColumn", "GETALLACHETERCOLUMN");
 }
@@ -24,4 +28,5 @@ export {
     addNewAcheter,
     deleteAcheter,
     updateAcheter,
+    getAllAcheterWithItemNames,
 }

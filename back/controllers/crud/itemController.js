@@ -51,11 +51,11 @@ exports.addNewItem = async (req, res) => {
 exports.deleteItemById = async (req, res) => {
     const id_item = req.query.id_item;
     const id_personne = req.query.id_personne;
-    const id_calendrier = req.query.id_calendrier;
+    const id_jour = req.query.id_jour;
     if(!id_item){
         return res.status(400).send("UUID Required!");
     }
-    itemService.deleteItemById(id_item,id_personne,id_calendrier, (err, data) => {
+    itemService.deleteItemById(id_item,id_personne,id_jour, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: err.message || "pb deleteItemById."

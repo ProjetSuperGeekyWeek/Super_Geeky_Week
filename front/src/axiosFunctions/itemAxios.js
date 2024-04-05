@@ -11,7 +11,7 @@ async function addNewItem(body){
 }
 
 async function deleteRowItem(body){
-    return await deleteRequest("/api/item/deleteItem?id_item="+body.id_item+'&id_personne='+body.id_personne+'&id_calendrier='+body.id_calendrier, "DELETEITEMBYID");
+    return await deleteRequest("/api/item/deleteItem?id_item="+body.id_item+'&id_personne='+body.id_personne+'&id_jour='+body.id_jour, "DELETEITEMBYID");
 }
 
 async function updateRowItem(body){

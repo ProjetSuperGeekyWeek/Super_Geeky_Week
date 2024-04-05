@@ -133,9 +133,9 @@ CREATE TABLE item (
     image_item VARCHAR(100) NOT NULL,
     description_item VARCHAR(255) NOT NULL,
     id_personne INTEGER NOT NULL,
-    id_calendrier INTEGER NOT NULL,
+    id_jour INTEGER NOT NULL,
     CONSTRAINT fk_personne FOREIGN KEY (id_personne) REFERENCES personne(id_personne),
-    CONSTRAINT fk_calendrier FOREIGN KEY (id_calendrier) REFERENCES calendrier(id_calendrier)
+    CONSTRAINT fk_jour FOREIGN KEY (id_jour) REFERENCES jour(id_jour)
 );
 
 CREATE TABLE ligne_panier (

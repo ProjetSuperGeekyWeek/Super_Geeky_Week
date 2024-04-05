@@ -184,10 +184,16 @@ INSERT INTO panier (nom_panier) VALUES
     ('panier5');
 
 -- Insert data into item table
-INSERT INTO item (nom_item, stock_item, prix_item,image_item, description_item, id_personne, id_calendrier) VALUES
-        ('Forfait Normal',50,15,'random.png','je suis un forfait normal',1,1),('Forfait Normal',50,15,'random.png','je suis un forfait normal',1,2),
-        ('Forfait Priorité',50,25,'random.png','je suis un forfait prioritaire',1,1),('Forfait Priorité',50,25,'random.png','je suis un forfait prioritaire',1,2),
-        ('Forfait Handicapé',50,10,'random.png','je suis un forfait handicapé',1,1),('Forfait Handicapé',50,15,'random.png','je suis un forfait handicapé',1,2);
+INSERT INTO item (nom_item, stock_item, prix_item,image_item, description_item, id_personne, id_jour) VALUES
+        ('Forfait Normal',50,15,'random.png','je suis un forfait normal',1,1),
+        ('Forfait Normal',50,15,'random.png','je suis un forfait normal',1,2),
+        ('Forfait Normal',50,15,'random.png','je suis un forfait normal',1,3),
+        ('Forfait Priorité',50,25,'random.png','je suis un forfait prioritaire',1,1),
+        ('Forfait Priorité',50,25,'random.png','je suis un forfait prioritaire',1,2),
+        ('Forfait Priorité',50,25,'random.png','je suis un forfait prioritaire',1,3),
+        ('Forfait Handicapé',50,10,'random.png','je suis un forfait handicapé',1,1),
+        ('Forfait Handicapé',50,15,'random.png','je suis un forfait handicapé',1,2),
+        ('Forfait Handicapé',50,15,'random.png','je suis un forfait handicapé',1,3);
 
 -- Insert data into ligne_panier table
 INSERT INTO ligne_panier (id_panier, id_item, quantite) VALUES
