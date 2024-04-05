@@ -157,7 +157,15 @@ INSERT INTO inscrit (id_inscription, nom_inscrit, prenom_inscrit, description_in
     (6, 'visiteur 1', 'jacque', 'je suis un visiteur mauvais', 2),
     (6, 'visiteur 2', 'jacquot', 'je suis un visiteur méchant', 2),
     (6, 'visiteur 3', 'jacquie', 'je suis un visiteur amical', 2),
-    (6, 'visiteur 4', 'du terroir', 'je suis un visiteur gentil', 2);
+    (6, 'visiteur 4', 'du terroir', 'je suis un visiteur gentil', 2),
+    (1, 'visiteur 1', 'jacque', 'je suis un visiteur mauvais', 1),
+    (1, 'visiteur 2', 'jacquot', 'je suis un visiteur méchant', 2),
+    (2, 'visiteur 3', 'jacquie', 'je suis un visiteur amical', 1),
+    (2, 'visiteur 4', 'pierre', 'je suis un visiteur gentil', 3),
+    (3, 'visiteur 1', 'jacque', 'je suis un visiteur mauvais', 2),
+    (3, 'visiteur 2', 'jacquot', 'je suis un visiteur méchant', 2),
+    (3, 'visiteur 3', 'jacquie', 'je suis un visiteur amical', 2),
+    (3, 'visiteur 4', 'du terroir', 'je suis un visiteur gentil', 2);
 
 -- Insert data into inscription_calendrier table
 INSERT INTO inscription_calendrier (id_inscription, id_calendrier) VALUES
