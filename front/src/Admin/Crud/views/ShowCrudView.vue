@@ -101,7 +101,6 @@ export default {
 }
 
 .menu_crud_button{
-  border: 1px red solid;
   width: 20%;
   height: 100vh;
   display: flex;
@@ -111,7 +110,6 @@ export default {
 }
 
 .menu_crud_emplacement{
-  border: 1px blue solid;
   width: 80%;
   height: 100vh;
 }
