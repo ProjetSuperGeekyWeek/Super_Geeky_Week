@@ -1,10 +1,10 @@
 <template>
   <div class="add">
     <input type="text" :placeholder="translate('nom')" v-model="nom_item">
-    <input type="number" placeholder="Stock" v-model="stock_item">
+    <input type="number" :placeholder="translate('Stock')" v-model="stock_item">
     <input type="number" :placeholder="translate('prix2')" v-model="prix_item">
     <input type="text" placeholder="Image" v-model="image_item">
-    <input type="text" placeholder="Description" v-model="description_item" maxlength="254">
+    <input type="text" :placeholder="translate('Description')" v-model="description_item" maxlength="254">
     <select name="selectPersonne" id="selectPersonne" v-model="id_personne">
       <option v-for="personne in listPersonnes" :key="personne.id_personne" :value="personne.id_personne">{{ personne.nom_personne }} - {{ personne.prenom_personne }}</option>
     </select>
@@ -35,7 +35,7 @@ export default{
     listPersonnes: [],
   }),
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     ...mapGetters('crudStore',['getAllPersonne', 'getAllCalendrier'])
   },
   methods: {

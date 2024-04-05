@@ -5,15 +5,15 @@
                 <spanFor v-for="ligne in commande" v-bind:key="ligne">
                     <h3>{{ligne.nom_item}}</h3>
                     <h5 class="not-consommer" v-if="!ligne.consommer">
-                        Non utilisé
+                        {{translate('Nonutilise')}}
                     </h5>
                     <h5 class="consommer" v-else>
-                        Utilisé
+                        {{translate('Utilise')}}
                     </h5>
                 </spanFor>
             </span>
             <span v-else>
-                <h3>Commande vide</h3>
+                <h3>{{translate('Commandevide')}}</h3>
             </span>
         </div>
         <div v-else>
@@ -21,15 +21,15 @@
                 <spanFor v-for="(ligne,index) in commande_presta" v-bind:key="ligne">
                     <h3>{{ligne.nom_item}}</h3>
                     <span v-if="!ligne.consommer">
-                        <button @click="valider(commande_presta[index].id_acheter)">valider</button>
+                        <button @click="valider(commande_presta[index].id_acheter)">{{translate('valider')}}</button>
                     </span>
                     <h5 class="not-consommer" v-else>
-                        Utilisé
+                        {{translate('Utilise')}}
                     </h5>
                 </spanFor>
             </span>
             <span v-else>
-                <h3>Commande vide</h3>
+                <h3>{{translate('Commandevide')}}</h3>
             </span>
         </div>
     </div>
@@ -49,11 +49,15 @@ export default {
         ...mapActions('commandeStore',['validerLigneCommande','getCommande','getCommandePresta']),
         valider(id_acheter){
             this.validerLigneCommande({id_acheter:id_acheter,uuid_commande:this.uuid_commande,id_presta:this.prestataireAuthentifier.id_personne});
-        }
+        },
+        translate(prop) {
+          return this[this.lang][this.lang][prop];
+        },
     },
     computed: {
         ...mapState('authentifierStore',['authentifier','prestataireAuthentifier']),
         ...mapState('commandeStore',['commande','commande_presta']),
+        ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     },
     mounted() {
         this.uuid_commande = this.$route.params.uuid_commande;

@@ -24,7 +24,7 @@
           <option value="en">English</option>
           <option value="gm">Deutsch</option>
           <option value="es">Español</option>
-          <option value="ru">русский</option>
+          <option value="ru">Русский</option>
         </select>
         <div>
           <router-link to="/panier"><img src="./assets/image/logo/panier.png" alt="panier" class="logo"></router-link>
@@ -37,15 +37,15 @@
         </div>
       </div>
       <div class="nav_droite_bas" v-if="admin">
-        <router-link to="/admin/crud"><p class="nav_titre">Crud</p></router-link>
-        <router-link to="/carte_admin"><p class="nav_titre">Carte</p></router-link>
-        <router-link to="/statistiques"><p class="nav_titre">Statistiques</p></router-link>
+        <router-link to="/admin/crud"><p class="nav_titre">{{ translate('Crud') }}</p></router-link>
+        <router-link to="/carte_admin"><p class="nav_titre">{{ translate('Carte') }}</p></router-link>
+        <router-link to="/statistiques"><p class="nav_titre">{{ translate('Statistiques') }}</p></router-link>
         <select name="lang" v-model="langue" @change="langSet" class="test deco_select">
           <option value="fr">Français</option>
           <option value="en">English</option>
           <option value="gm">Deutsch</option>
           <option value="es">Español</option>
-          <option value="ru">русский</option>
+          <option value="ru">Русский</option>
         </select>
         <div class="logo_auth">
           <router-link to="/authentification">

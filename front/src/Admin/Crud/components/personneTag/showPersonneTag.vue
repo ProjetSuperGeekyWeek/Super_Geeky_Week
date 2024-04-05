@@ -5,7 +5,7 @@
         <v-container>
           <v-card>
             <v-card-title>
-              PersonneTag
+              {{translate('PersonneTag')}}
               <v-spacer />
               <v-text-field
                   v-model="search"
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   name: 'crudAcheter',
@@ -59,10 +59,14 @@ export default {
     }
   }),
   computed: {
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     ...mapGetters('crudStore',['getAllPersonneTag','getAllPersonneTagColumn']),
     ...mapActions('crudStore',['getAllPersonneTagStore','getAllPersonneTagColumnStore']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     async loadData(){
       await this.getAllPersonneTagStore;
       await this.getAllPersonneTagColumnStore;

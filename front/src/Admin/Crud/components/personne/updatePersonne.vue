@@ -40,7 +40,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     ...mapGetters('crudStore', ['getAllPersonne', 'getAllRole']),
   },
   methods: {

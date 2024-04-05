@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Messages</h2>
+        <h2>{{translate('Messages')}}</h2>
         <div class="liste-messages" v-for="message in messages" :key="message.id_contact">
             <h3>{{ message.mail_client }}</h3>
             <p>{{ message.message_client }}</p>
@@ -39,7 +39,7 @@ export default{
         },
     },
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
   }
 }
 </script>

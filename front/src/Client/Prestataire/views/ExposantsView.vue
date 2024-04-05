@@ -19,9 +19,8 @@
             <p>{{ prestataire.description }}</p>
           </div>
           <div class="exposants-buttons">
-            <button @click="navigateToPrestataire(prestataire)" class="contact-button">{{ translate('voirprof')
-            }}</button>
-            <button @click="contactPrestataire(prestataire)" class="contact-button">Contact</button>
+            <button @click="navigateToPrestataire(prestataire)" class="contact-button">{{ translate('voirprof')}}</button>
+            <button @click="contactPrestataire(prestataire)" class="contact-button">{{ translate('Contact')}}</button>
           </div>
         </div>
       </div>
@@ -139,7 +138,7 @@ export default {
     this.fetchPrestataires();
   },
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+      ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
   }
 };
 </script>

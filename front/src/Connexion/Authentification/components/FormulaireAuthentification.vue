@@ -1,6 +1,6 @@
 <template>
     <div id="formulaire-authentification">
-        <label for="email">Email</label>
+        <label for="email">{{translate('Email')}}</label>
         <input type="email" name="email" id="email" required @change="verifEmail">
         <label for="password">{{translate('mdp')}}</label>
         <input type="password" name="password" id="password" required @change="verifPassword">
@@ -38,7 +38,7 @@ export default {
                 }
             } else {
                 this.clearMdp();
-                alert('Email ou mot de passe incorrect');
+                alert(this.translate('Emailoumdpincorrect'));
             }
         },
 
@@ -98,7 +98,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(['lang', 'en', 'fr']),
+        ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     }
 }
 </script>

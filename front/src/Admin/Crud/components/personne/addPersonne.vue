@@ -2,10 +2,10 @@
   <div class="add">
     <input type="text" :placeholder="translate('nom')" v-model="nom_personne">
     <input type="text" :placeholder="translate('prenom')" v-model="prenom_personne">
-    <input type="text" placeholder="email" v-model="mail_personne" id="email" name="email">
+    <input type="text" :placeholder="translate('Email')" v-model="mail_personne" id="email" name="email">
     <input type="password" :placeholder="translate('mdp')" v-model="mdp_personne">
     <input type="text" placeholder="Image" v-model="image_personne">
-    <input type="text" placeholder="Description" v-model="description_personne" maxlength="255">
+    <input type="text" :placeholder="translate('Description')" v-model="description_personne" maxlength="255">
     <select name="selectRole" id="selectRole" v-model="id_role">
       <option :value="role.id_role" v-for="role in listRole" :key="role.id_role">{{ role.nom_role }}</option>
     </select>
@@ -32,7 +32,7 @@ export default{
     correctEmail: false,
   }),
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     ...mapGetters('crudStore',['getAllRole'])
   },
   methods: {

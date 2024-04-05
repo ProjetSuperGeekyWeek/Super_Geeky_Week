@@ -1,7 +1,7 @@
 <template>
   <div class="add">
     <input type="text" :placeholder="translate('nomevent')" v-model="nom_evenement">
-    <input type="text" placeholder="Description" v-model="description_evenement">
+    <input type="text" :placeholder="translate('Description')" v-model="description_evenement">
     <input type="number" :placeholder="translate('nbrplace')" v-model="nb_place">
     <input type="text" placeholder="Image" v-model="image_evenement">
     <select name="selectPersonne" id="selectPersonne" v-model="id_personne">
@@ -33,7 +33,7 @@ export default{
     listEmplacement: []
   }),
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     ...mapGetters('crudStore',['getAllPersonne', 'getAllEmplacement'])
   },
   methods: {

@@ -17,7 +17,7 @@ export default{
     nom_tag: '',
   }),
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
   },
   methods: {
     translate(prop) {

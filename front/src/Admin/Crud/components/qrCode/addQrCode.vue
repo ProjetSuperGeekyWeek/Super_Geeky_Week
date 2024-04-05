@@ -20,7 +20,7 @@ export default{
     mail_client: '',
   }),
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
   },
   methods: {
     translate(prop) {
