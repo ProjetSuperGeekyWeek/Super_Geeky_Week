@@ -150,7 +150,7 @@
             },
         },
         computed: {
-            ...mapState(['lang', 'en', 'fr']),
+            ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
             ...mapState('authentifierStore', ['authentifier', 'prestataireAuthentifier']),
             // getServicePageText() {
             //     const prestataire = this.$store.state.prestataire;

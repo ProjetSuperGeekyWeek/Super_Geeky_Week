@@ -61,7 +61,7 @@ export default {
     this.fillListeItems();
   },
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     ...mapState('panierStore', ['contentPanier']),
     // Propriété calculée pour filtrer les items en fonction de l'id du calendrier
     filteredItems() {

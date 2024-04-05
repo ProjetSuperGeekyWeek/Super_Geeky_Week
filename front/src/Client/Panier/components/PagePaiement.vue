@@ -15,7 +15,7 @@
                 <span class="ligne-sous-total">{{ ligne.prix * ligne.quantite }}</span>
             </div>
             <div id="total-facture">
-                <span>Total : </span>
+                <span>{{translate('Total')}}</span>
                 <span>{{ prixTotal }}</span>
             </div>
         </div>
@@ -104,7 +104,7 @@ export default {
         },
     },
     computed: {
-      ...mapState(['lang', 'en', 'fr']),
+      ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
         ...mapState(['nom']),
 
         prixTotal : function(){

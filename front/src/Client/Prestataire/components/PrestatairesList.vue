@@ -68,7 +68,7 @@ export default {
   computed: {
     ...mapGetters('crudStore',['getAllTag']),
     ...mapActions('crudStore',['getAllTagStore']),
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
   },
   methods: {
     translate(prop) {

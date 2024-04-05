@@ -59,7 +59,7 @@ export default {
     showUpdate: false,
   }),
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     ...mapGetters('crudStore', ['getAllRole', 'getAllRoleColumn']),
     ...mapActions('crudStore', ['getAllRoleStore', 'getAllRoleColumnStore']),
   },

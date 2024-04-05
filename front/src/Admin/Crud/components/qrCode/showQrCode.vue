@@ -5,7 +5,7 @@
         <v-container>
           <v-card>
             <v-card-title>
-              QrCode
+              {{translate('QRcode')}}
               <v-spacer />
               <v-btn @click="navigateToAdd" color="primary">{{translate('ajouter')}}</v-btn>
               <v-spacer/>
@@ -63,7 +63,7 @@ export default {
     }
   }),
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     ...mapGetters('crudStore',['getAllQrCode','getAllQrCodeColumn']),
     ...mapActions('crudStore',['getAllQrCodeStore','getAllQrCodeColumnStore']),
   },

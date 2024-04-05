@@ -10,11 +10,11 @@
         <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('stand')" name="menu" id="stand" value="stand"> <label for="stand">Stand</label></div>-->
         <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('calendrier')" name="menu" id="calendrier" value="calendrier"> <label for="calendrier">{{translate('calendrier')}}</label></div>
         <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('panier')" name="menu" id="panier" value="panier"> <label for="panier">{{translate('panier')}}</label></div>
-        <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('item')" name="menu" id="item" value="item"> <label for="item">Item</label></div>
+        <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('item')" name="menu" id="item" value="item"> <label for="item">{{translate('Item')}}</label></div>
         <!--<div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('ligne_panier')" name="menu" id="ligne_panier" value="ligne_panier"> <label for="ligne_panier">{{translate('lignepanier')}}</label></div>-->
-        <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('qr_code')" name="menu" id="qr_code" value="qr_code"> <label for="qr_code">QR Code</label></div>
+        <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('qr_code')" name="menu" id="qr_code" value="qr_code"> <label for="qr_code">{{translate('QRcode')}}</label></div>
         <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('acheter')" name="menu" id="acheter" value="acheter"> <label for="acheter">{{translate('acheter')}}</label></div>
-        <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('tag')" name="menu" id="tag" value="tag"> <label for="tag">Tag</label></div>
+        <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('tag')" name="menu" id="tag" value="tag"> <label for="tag">{{translate('Tag')}}</label></div>
         <!--<div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('personne_tag')" name="menu" id="personne_tag" value="personne_tag"> <label for="personne_tag">{{translate('personnetag')}}</label></div>-->
         <div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('evenement')" name="menu" id="evenement" value="evenement"> <label for="evenement">{{translate('event')}}</label></div>
         <!--<div class="radio_menu_crud grand_moins gras"><input type="radio" @click="selectMenu('creneau')" name="menu" id="creneau" value="creneau"> <label for="creneau">{{translate('creneau')}}</label></div>-->
@@ -71,7 +71,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     ...mapState('authentifierStore', ['admin']),
   },
   methods: {

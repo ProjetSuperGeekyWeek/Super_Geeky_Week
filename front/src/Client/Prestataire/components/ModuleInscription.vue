@@ -176,10 +176,10 @@ export default {
         }
     },
     computed: {
-      ...mapState(['lang', 'en', 'fr']),
+      ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
         stringTarif(){
             if (this.infos.tarif == 0) {
-                return "Gratuit";
+                return this.translate('Gratuit');
             }
             return this.infos.tarif + "€";
         }

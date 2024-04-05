@@ -5,7 +5,7 @@
         <v-container>
           <v-card>
             <v-card-title>
-              Creneau
+              {{translate('Creneau')}}
               <v-spacer />
               <v-text-field
                   v-model="search"
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   name: 'crudCreneau',
@@ -58,10 +58,14 @@ export default {
     }
   }),
   computed: {
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     ...mapGetters('crudStore',['getAllCreneau','getAllCreneauColumn']),
     ...mapActions('crudStore',['getAllCreneauStore','getAllCreneauColumnStore']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     async loadData(){
       await this.getAllCreneauStore;
       await this.getAllCreneauColumnStore;

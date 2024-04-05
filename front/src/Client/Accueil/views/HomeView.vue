@@ -30,14 +30,14 @@
 
     <div class="footer-home">
       <div class="footer-collab">
-        <h2>Remerciements à nos collaborateurs</h2>
+        <h2>{{translate('Remerciementsanoscollaborateurs')}}</h2>
         <h3>Axel JOUÉ</h3>
         <h3>Manuel LEITAO</h3>
         <h3>Fyléas QUAILE</h3>
         <h3>Quentin SAUNER</h3>
       </div>
       <div class="footer-contact">
-        <h2>Pour rejoindre l'événement</h2>
+        <h2>{{translate('Pourrejoindrelevenement')}}</h2>
         <h3>mail.organisateur@superGeekyWeek.fr</h3>
       </div>
     </div>
@@ -65,7 +65,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
   }
 }
 </script>

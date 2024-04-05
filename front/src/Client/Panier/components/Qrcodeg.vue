@@ -4,10 +4,10 @@
 
     <div v-if="showQRCode" class="info-section">
 
-      <h3>QR Code URL:</h3>
+      <h3>{{translate('QRcodeURL')}}</h3>
       <p>{{ qrCodeValue }}</p>
     </div>
-    <button @click="printPDF">Télécharger</button>
+    <button @click="printPDF">{{translate('Telecharger')}}</button>
   </div>
 </template>
 
@@ -26,12 +26,15 @@ export default {
     };
   },
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     qrCodeValue() {
       return `http://localhost:8080/commande/${this.uuid_commande}`;
     },
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     printPDF() {
       window.print();
     },

@@ -29,7 +29,7 @@ export default {
     },
   },
     computed: {
-      ...mapState(['lang', 'en', 'fr']),
+      ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
         ...mapState(['nom_prestataire', 'prenom_prestataire', 'nom_stand']),
     },
 }

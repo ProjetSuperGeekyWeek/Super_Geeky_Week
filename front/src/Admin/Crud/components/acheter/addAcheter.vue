@@ -6,7 +6,7 @@
     <select name="selectQrCode" id="selectQrCode" v-model="id_qr_code">
       <option :value="qrcode.id_qr_code" v-for="qrcode in listQrCode" :key="qrcode.id_qr_code">{{ qrcode.nom_client }} - {{ qrcode.prenom_client }}</option>
     </select>
-    consommer :<input type="checkbox" id="consommer" v-model="consommer">
+    {{translate('consommer')}}<input type="checkbox" id="consommer" v-model="consommer">
     <input type="button" :value="translate('ajouter')" @click="addNewAcheter">
     <boutonRetourCrud/>
   </div>

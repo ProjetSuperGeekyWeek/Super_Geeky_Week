@@ -5,7 +5,7 @@
         <v-container>
           <v-card>
             <v-card-title>
-              EmplacementRessource
+              {{translate('EmplacementRessource')}}
               <v-spacer />
               <v-text-field
                   v-model="search"
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   name: 'crudAcheter',
@@ -58,10 +58,14 @@ export default {
     }
   }),
   computed: {
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     ...mapGetters('crudStore',['getAllEmplacementRessource','getAllEmplacementRessourceColumn']),
     ...mapActions('crudStore',['getAllEmplacementRessourceStore','getAllEmplacementRessourceColumnStore']),
   },
   methods: {
+    translate(prop) {
+      return this[this.lang][this.lang][prop];
+    },
     async loadData(){
       await this.getAllEmplacementRessourceStore;
       await this.getAllEmplacementRessourceColumnStore;

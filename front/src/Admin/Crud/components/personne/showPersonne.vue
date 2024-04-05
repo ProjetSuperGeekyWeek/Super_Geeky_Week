@@ -63,7 +63,7 @@ export default {
     }
   }),
   computed: {
-    ...mapState(['lang', 'en', 'fr']),
+    ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
     ...mapGetters('crudStore',['getAllPersonne','getAllPersonneColumn']),
     ...mapActions('crudStore',['getAllPersonneStore','getAllPersonneColumnStore']),
   },

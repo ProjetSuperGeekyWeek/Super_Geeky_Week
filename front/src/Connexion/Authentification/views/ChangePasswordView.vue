@@ -1,9 +1,9 @@
 <template>
     <div class="authentificationChange">
         <div id="changePasswordBox">
-            <label for="newPassword">Nouveau mot de passe</label>
+            <label for="newPassword">{{translate('nouvmotdepasse')}}</label>
             <input type="password" name="newPassword" id="newPassword" required @change="verifNewPassword()">
-            <label for="confirmNewPassword">Confirmez le nouveau mot de passe</label>
+            <label for="confirmNewPassword">{{translate('confirmnouvmotdepasse')}}</label>
             <input type="password" name="confirmNewPassword" id="confirmNewPassword" required @change="verifNewConfirmPassword()">
             <span id="incorrectNewPassword"></span>
             <button id="valid-new-password" @click="submitForm">{{translate('soumettre')}}</button>
@@ -94,7 +94,7 @@
         },
         computed: {
             ...mapState('authentifierStore',['prestataireAuthentifier']),
-            ...mapState(['lang', 'en', 'fr']),
+            ...mapState(['lang', 'en', 'fr', 'ru', 'es', 'gm']),
         },   
     }
 </script>
